@@ -1,0 +1,28 @@
+{
+  "windows_dir": "C:\\CS_4280_Project\\Code\\data\\windows_train",
+  "val_split": 0.15,
+  "n_clusters": 8,
+  "cluster_embed_dim": 32,
+  "hidden": 256,
+  "layers": 3,
+  "dropout": 0.4,
+  "epochs": 100,
+  "batch_size": 64,
+  "lr": 0.0001,
+  "weight_decay": 1e-05,
+  "pos_weight": 3.367,
+  "gradient_clip": 1.0,
+  "num_workers": 0,
+  "amp_dtype": "fp16",
+  "seed": 42,
+  "save_dir": "C:\\CS_4280_Project\\Code\\runs\\bilstm_cluster_v2",
+  "cluster_info": {
+    "n_clusters": 8,
+    "feature_cols": [
+      "period",
+      "duration",
+      "depth",
+      "bls_power"
+    ]
+  }
+}
