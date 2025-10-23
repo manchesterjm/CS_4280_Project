@@ -1,0 +1,5 @@
+TICs predicted planet after filters: 13 / 101
+Active gates: pass_base, pass_consistency
+pass_base: pass_rate=0.129
+pass_consistency: pass_rate=0.446
+TP=5 FP=8 TN=43 FN=45 | Precision=0.385 Recall=0.100 F1=0.159

@@ -1,0 +1,16 @@
+{
+  "windows_dir": "C:\\CS_4280_Project\\Code\\data\\windows_train",
+  "epochs": 40,
+  "batch_size": 256,
+  "lr": 0.0003,
+  "hidden": 128,
+  "layers": 2,
+  "dropout": 0.2,
+  "val_frac": 0.1,
+  "test_frac": 0.1,
+  "seed": 42,
+  "save_dir": "C:\\CS_4280_Project\\Code\\runs\\lstm_v2",
+  "amp_dtype": "fp16",
+  "resume": null,
+  "patience": 10
+}
