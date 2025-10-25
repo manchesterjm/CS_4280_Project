@@ -26,33 +26,55 @@ This project uses deep learning (RNN/LSTM networks) to detect exoplanets from st
 ```
 CS_4280_Project/
 ├── Code/
-│   ├── diagnose_data.py          # Data quality checker
-│   ├── investigate_data.py       # Deep data investigation
-│   ├── train_lstm_fixed.py       # Fixed LSTM trainer (doesn't work well)
+│   ├── train_bilstm_cluster.py        # Main training script (WORKING ✅)
+│   ├── inference_cluster_model.py     # Inference on new data
 │   ├── build_windows_parallel_v6.py   # Window building (latest)
-│   ├── build_windows_infer_v2.py      # Inference window building
-│   ├── inference_rnn.py               # Model inference
-│   ├── postfilter_inference_v3.py     # Post-processing (latest)
-│   ├── evaluate_pr_v2.py              # Evaluation metrics
+│   ├── download_tess_lightcurves.py   # Download real TESS data
+│   ├── process_tess_for_testing.py    # Process TESS downloads
+│   ├── convert_npy_to_csv.py          # Data format conversion
+│   ├── build_simple_windows.py        # Test window building
 │   │
 │   ├── data/
 │   │   ├── windows_train/        # Training data (655 windows)
 │   │   │   ├── X.npy             # Features (655, 2048)
 │   │   │   ├── y.npy             # Labels (655,)
 │   │   │   └── meta.csv          # Metadata
-│   │   ├── windows_infer/        # Inference data
-│   │   └── windows/              # Full dataset
+│   │   └── windows_test/         # Test data
 │   │
 │   ├── runs/
-│   │   ├── lstm_fixed/           # Latest training attempt (failed)
-│   │   └── lstm_v2/              # Previous attempt
+│   │   └── bilstm_cluster/       # Current working model ✅
+│   │       ├── best.pt           # Best checkpoint (AUC 0.6947)
+│   │       ├── last.pt           # Last epoch
+│   │       ├── config.json       # Hyperparameters
+│   │       └── cluster_ids.npy   # Cluster assignments
 │   │
 │   ├── reports/                  # Evaluation outputs
+│   │   ├── test_predictions.csv  # Per-window predictions
+│   │   ├── inference_aggregated.csv  # Per-star aggregated
+│   │   └── postfilter_summary.txt    # Post-filtering metrics
 │   │
 │   └── Archive/                  # Old versions
 │       ├── scripts/              # Deprecated scripts
-│       ├── models/               # Old models
-│       └── data/                 # Old data
+│       └── models/               # Old models
+│
+├── research_paper/               # 📄 RESEARCH PAPER MATERIALS
+│   ├── methodology.md            # Complete methods section
+│   ├── results_tables.md         # 11 publication-ready tables
+│   ├── paper_template.tex        # LaTeX paper template
+│   ├── README.md                 # Detailed usage guide
+│   ├── SUMMARY.md                # Quick reference
+│   ├── generate_visualizations.py     # 9 figure generator
+│   ├── generate_architecture_diagram.py
+│   └── figures/                  # Generated visualizations (300 DPI)
+│       ├── roc_curve.png
+│       ├── confusion_matrix.png
+│       ├── prediction_distributions.png
+│       ├── cluster_distribution.png
+│       ├── performance_by_cluster.png
+│       ├── top_predictions.png
+│       ├── precision_recall_curve.png
+│       ├── model_comparison.png
+│       └── training_curves.png
 │
 ├── Planet_LightCurve_Data/
 │   └── processed/                # 100 confirmed exoplanet light curves
@@ -194,23 +216,62 @@ Status: SUCCESS - Working model!
 
 **Key Finding**: Clustering was essential for the model to learn different stellar/noise patterns.
 
+## Research Paper Materials
+
+A complete set of research paper materials is available in `research_paper/`:
+
+### 📄 Documentation
+- **methodology.md** - Complete methods section (11 sections, publication-ready)
+- **results_tables.md** - 11 formatted tables with all metrics and comparisons
+- **paper_template.tex** - Full LaTeX paper template
+- **README.md** - Detailed usage guide
+
+### 📊 Visualization Scripts
+- **generate_visualizations.py** - Creates 9 publication-ready figures:
+  - ROC curve (AUC 0.6947)
+  - Confusion matrix heatmap
+  - Prediction distributions
+  - Cluster analysis
+  - Top TESS candidates
+  - Model comparison
+  - Training curves
+- **generate_architecture_diagram.py** - Creates:
+  - BiLSTM architecture flowchart
+  - Data pipeline diagram
+
+### 🎯 Key Results for Paper
+- **AUC**: 0.6947 (primary metric)
+- **F1 Score**: 0.34
+- **Improvement over classical ML**: +11.5% AUC
+- **Improvement from clustering**: +3% AUC
+- **Real-world validation**: TIC 307210830 (confirmed exoplanet) successfully identified
+
+### Generate All Figures
+```bash
+conda activate exo-lstm-gpu
+conda install matplotlib seaborn -y
+cd research_paper
+python generate_visualizations.py
+python generate_architecture_diagram.py
+```
+
+All materials are publication-ready and can be incorporated directly into a research paper.
+
 ## Next Steps
 
-1. **Implement Conv-LSTM Architecture** (IN PROGRESS)
-   - Add CNN layers before LSTM to extract local transit patterns
-   - Use BiLSTM for bidirectional temporal context
-   - Expected: AUC > 0.75
+1. ✅ **Research Paper Materials** (COMPLETED)
+   - Methodology documentation complete
+   - Results tables ready
+   - Visualization scripts created
+   - LaTeX template provided
 
-2. **Hyperparameter Tuning**
-   - Grid search over learning rates, hidden sizes
-   - Try different CNN kernel sizes
-   - Experiment with attention mechanisms
+2. **Future Model Improvements**
+   - Expand dataset with more TESS sectors
+   - Implement attention mechanisms
+   - Try ensemble methods
+   - Explore multi-task learning
 
-3. **Ensemble Methods**
-   - Combine multiple models for robustness
-   - Vote on final predictions
-
-4. **Production Pipeline**
+3. **Production Pipeline**
    - Automate end-to-end inference
    - Add confidence thresholds
    - Generate reports for astronomers

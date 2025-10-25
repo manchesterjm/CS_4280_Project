@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\CS_4280_Project\\Code\" /s /b)",
+      "Bash(findstr:*)",
+      "Bash(python generate_architecture_diagram.py:*)",
+      "Bash(conda activate:*)",
+      "Bash(python:*)",
+      "Bash(dir \"C:\\CS_4280_Project\\research_paper\")",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
