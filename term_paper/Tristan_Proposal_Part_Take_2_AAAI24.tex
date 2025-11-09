@@ -1,0 +1,74 @@
+\documentclass[letterpaper]{article}
+\usepackage{aaai24}  % Requires aaai24.sty in your TEXMF tree
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\urlstyle{rm}
+\def\UrlFont{\rm}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+
+\title{}
+\author{}
+\affiliations{}
+
+\begin{document}
+\maketitle
+Tristan Moffett — CNN Component
+
+Project: Machine Learning for Exoplanet Detection: Identifying Exoplanets in Light Curves
+
+Team: Tristan Moffett, Josh Manchester, Brianne Leatherman (UCCS, CS 4820: Artificial Intelligence, Dr. Adham Atyabi)
+
+\section*{Abstract}
+The discovery of exoplanets has become more dependent on machine learning as missions like Kepler and TESS generate thousands of transit signals that are too costly and time consuming to vet by hand. In this research, we plan to address this problem by comparing three different deep learning models for exoplanet classification: convolutional neural networks (CNNs), recurrent neural networks (RNNs), and transformer architecture. Each team member will be designing, training, and evaluating one of these models using a mix of observational data from an array of sources such as Kepler and Transiting Exoplanet Survey Satellite (TESS) along with simulated datasets to provide more abstract light curves, denser noise, and ground truths. Our focus is not only on simple performance metrics such as accuracy, precision, recall, and Area Under Curve (AUC), but also on understanding the strengths and weaknesses of each model in regard to classifying planets and false positives. From analyzing the results across the three architectures, we plan to identify which methods are most effective for generalizability.
+
+\section*{Introduction}
+Finding exoplanets is an important task in astronomy and will become an even more important task in the future. The issue as of current though is that missions such as Kepler and TESS are producing thousands of possible signals each month for possible planets. Most of these signals are not planets but actual false positives caused by things such as stars and instrumental noise. Astronomers normally must spend hundreds of hours vetting through these signals, which slows down the process of discoveries. Another issue is that currently, machine learning models that work well on one data set often classify poorly on another as light curves have different noise levels and metrics. Through this research we plan to solve two problems. The first problem to solve is the need to automatically classify planets vs. non-planets in light curves. The second being the need to make models that can generalize across multiple datasets. <WHAT IS OUR MOTIVATION FOR THIS? IS IT JUST TO HELP IN THE VETTING PROCESS AND THAT WHAT WE ARE DOING IS INTERESTING?>
+
+\section*{Related Work}
+Shallue and Vanderburg (2018) addressed the problem of classifying Threshold Crossing Events (TCEs) from the Kepler mission, where thousands of signals had to be examined and most turned out not to be planets. To resolve this bottleneck, they designed one of the first convolutional neural networks (CNNs) for exoplanet detection, comparing a linear model, a fully connected network, and a 1-D CNN, with the CNN proving most successful. Their final architecture called AstroNet processed two versions of each light curve: a global view covering the full orbital phase and a local view zoomed in around the transit. Each view passed through layers of one-dimensional convolutions and max pooling before being merged into fully connected layers of 512 nodes, with dropout and data augmentation used to reduce overfitting. On Kepler’s real observational test set the CNN achieved results with 96\% accuracy, 98.8\% AUC, 96\% precision, and 95\% recall. However, when evaluated on simulated datasets the model struggled, recovering 81\% of true injected planets but incorrectly labeling around 90\% of background planets and eclipsing binaries as planets, misclassifying about 65\% of eclipsing binaries, and letting through 3.18\% of false positives from inverted light curves. These outcomes demonstrated that while the model was powerful on Kepler data, it lacked generalizability, leading the authors to suggest training with simulated data and including centroid information to better handle false positives. This highlights the need for models that can work across both real and simulated datasets, a direction we plan to take in our own work.
+
+Dattilo et al. (2019) focused on the challenge of vetting the large number of planet candidates identified in K2 light curves, which are especially noisy due to pointing instabilities from the Kepler telescope. This created difficulty in classifying true planet signals from false positives such as eclipsing binaries or systematics. To address this, they extended the AstroNet CNN first built for Kepler data by Shallue and Vanderburg (2018), adapting it to the shorter and noisier K2 campaigns. Their approach used both real K2 TCEs labeled as candidates, binaries, or junk, and tested on simulated ``Kepler-lite'' data to tune their model under similar conditions. Each TCE was represented by two views of the light curve, a global view showing the full orbital phase and a local view zoomed in on the transit. These were normalized and then passed through separate convolutional and max pooling layers before being merged into fully connected layers of 512 nodes, with additional scalar features such as planet-to-star radius ratio and impact parameter included to strengthen classification. The final output gave the probability of a candidate being a true planet. Their CNN achieved high accuracy averaging 98\% on test sets and successfully uncovered two new super-Earths within the K2 dataset. This work highlights the need for both global and local inputs including additional scalar features as it improves against noisy data while also improving the classification of planets and false positives.
+
+Osborne et al. (2019) addressed the challenge of rapidly classifying the thousands of planet candidates generated monthly by TESS. To further the issue each month around 500 hours were required to select the best candidates from each month's findings. As any sane person would be able to tell this is a bottleneck as it requires too many resources and people that could be used elsewhere within the pipeline for planet discovery. To resolve this issue however, Osborne and his colleagues trained a CNN model based on Shallue and Vanderburg (2018) and Ansdell et al. (2018) work – specifically the AstroNet and ExoNet CNN models. They trained and validated their CNN strictly on high-fidelity simulated TESS light curves (the TSOP-301 dataset), which provided known ground truths for both planets and false positives. Each candidate was represented by both a local and global view of its light curve, with centroid information also included to help spot background eclipsing binaries. Alongside this during training they included balanced batch sampling to counter class imbalance (only 14\% of candidates were true planets) and applied augmentation techniques to improve generalization and reduce overfitting. When tested, their model achieved strong results on their simulated set, with a 97\% average precision in binary classification and a 92\% accuracy in identifying planets in their multi-class classification. However, when using the real TESS set, the model’s performance dropped only being able to recover 61\% TOIs (TESS Objects of Interest) as planets. Though the model was still able to flag around 200 new TCEs as possible planets. Results highlight a reduction in human workload and planet discovery but also show a gap between simulated and real data performance in CNNs. This brings a need to build a model that is more generalizable capable of handling both simulated and observational dataset together, which we plan to explore in our project.
+
+\section*{Roles \& Deliverables of Team Members}
+In this project each team member has the same job, which is to build a model for exoplanet classification. The only difference is the type of model being used since that lets us see how different methods handle the same data. One member will be working with a CNN, another with RNNs, and another with a transformer. The deliverables are the same no matter the model being created. Each of us will build a preprocessing pipeline that fits our model, train it on a mix of Kepler, TESS, and simulated data, and then test how well it performs. We will look at standard metrics like accuracy, precision, and recall but will also use more detailed metrics to show where each model is strong and where it fails. The idea is not just to see which model has the highest score but to also see how each one interprets the light curves differently and what that means for detecting planets across both real and simulated data.
+
+\section*{Data and Approach}
+\subsection*{Dataset}
+For this research, we will be using both simulated and observational data. For observational data we will be using the Kepler and TESS datasets. The purpose for choosing the above observational datasets is it provides different light curve data taken from different sources. This means the light curves will have differing noise values and metrics to train from and test on. Furthermore, using these datasets will allow us to average our models' performances with a plethora of other research papers.
+
+\subsection*{CNN Approach}
+The preprocessing pipeline will follow the work of Shallue and Vanderburg (2018) and Dattilo et al. (2019). This pipeline will include, but will not be limited to:
+
+\begin{itemize}
+    \item \textbf{Filtering}: Removing flagged or missing data points (Removal of NAs and other anomalies).
+    \item \textbf{Detrending}: Using moving averages or splines to remove long-term variations within the given data sets.
+    \item \textbf{Phase-folding}: Aligning repeated transits from the given orbital periods (light curve dips).
+    \item \textbf{View Generation}: Creating both a global (entire orbit) and local (local to the transit dip) view for input              into neural network.
+    \item \textbf{Normalization}: Compressing values so the median flux is 0 to a depth of -1. Done to better simulate and reduce noise for both global and local views.
+\end{itemize}
+
+The CNN architecture, as stated above, will be adapted from AstroNet (Shallue and Vanderburg 2018). It will consist of the same input format, being the global and local inputs of the light curve transits. We will be continuing and possibly extending this approach because it has been tested and proven. Convolutional and pooling layers will be stacked to extract the temporal features and then will be merged to a fully connected neural network, where an input and output layer will be created, including a currently unknown number of hidden layers. The output will be a two-bin approach where we will have a `possible planet' and `false positive' bin. This output format was chosen because the focus is on the classification of a planet and a false positive. The model itself will be trained using a variety of techniques some of which are outlined here: binary cross-entropy loss and Adam optimization. Performance will be evaluated using the following techniques, but not limited to them either: precision, recall, and ROC-AUC. The following metrics will help in finding the accuracy of the model and the generalizability against false positives.
+
+\section*{Expected Outcomes}
+
+\subsection*{CNN}
+From the works of Shallue and Vanderburg (2018), Dattilo et al. (2019), and Osborne et al. (2019), we can set some expectations for what the CNN model could achieve. Shallue and Vanderburg’s AstroNet model reached very high performance when training off just the Kepler dataset. Dattilo et al. extended this work to the much nosier K2 mission and still achieved a relatively high performance while also uncovering new super-earths. Osborne et al. (2019) further adapted this approach to TESS using both simulated and observational data. Though from training on simulated data, mis-classified many true planets and false positives. From these results, we can expect CNN to act as a baseline, especially on Kepler-like data. However, we anticipate drops in performance when training on a mixed dataset. This shows that CNNs should have a relatively high classification but will struggle in handling false positive when adapting to a variety of light curves from different datasets. This will however give us a good comparison metric when compared against the RNN and transformer model.
+
+\section*{Conclusion}
+In conclusion, through this research, we plan to solve two problems: (1) Automatically classifying planets vs. non-planets in light curves. (2) Building models that are more generalizable to multiple datasets to reduce the need to create a model for each dataset released. The plan of action is for each member to develop a different machine learning model – CNN, RNN, and transformer, which is trained on Kepler, TESS, and simulated data. We plan to compare these models using shared evaluation metrics, then analyzing which approach is the most adaptable for future exoplanet discovery.
+
+\section*{References}
+[1] C. J. Shallue and A. Vanderburg, ``Identifying exoplanets with deep learning: A five-planet resonant chain around Kepler-80 and an eighth planet around Kepler-90,'' \textit{The Astronomical Journal}, vol. 155, no. 2, p. 94, 2018, doi: 10.3847/1538-3881/aa9e09.
+
+[2] A. Dattilo, A. Vanderburg, C. J. Shallue, A. W. Mayo, P. Berlind, A. Bieryla, M. L. Calkins, G. A. Esquerdo, M. E. Everett, S. B. Howell, D. W. Latham, N. J. Scott, and L. Yu, ``Identifying exoplanets with deep learning. II. Two new super-Earths uncovered by a neural network in K2 data,'' \textit{The Astronomical Journal}, vol. 157, no. 5, p. 169, 2019, doi: 10.3847/1538-3881/ab0e12.
+
+[3] H. P. Osborne, M. Ansdell, Y. Ioannou, M. Sasdelli, D. Angerhausen, D. A. Caldwell, J. M. Jenkins, C. Räissi, and J. C. Smith, ``Rapid classification of TESS planet candidates with convolutional neural networks,'' \textit{Astronomy \& Astrophysics}, vol. 633, Art. no. A53, 2020, doi: 10.1051/0004-6361/201935345.
+
+\end{document}

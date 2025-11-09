@@ -4,22 +4,28 @@
 
 This project uses deep learning (RNN/LSTM networks) to detect exoplanets from stellar light curve data. The model analyzes time-series brightness measurements from NASA's TESS/Kepler missions to identify the characteristic dips caused by planetary transits.
 
-## Current Status (October 2025)
+## Current Status (November 2025)
 
-### ✅ PROJECT COMPLETE - Successfully Working Model!
+### 🔬 HYPERPARAMETER OPTIMIZATION IN PROGRESS
 
-**Final Results:**
-- ✅ BiLSTM + Clustering model achieves **AUC 0.6947**
+**Latest Updates (November 9, 2025):**
+- ✅ Baseline model benchmarked: **AUC 0.7154** (on full training data)
+- 🔄 **Optuna hyperparameter optimization running** (30 trials, 1.5-2 hours)
+- ✅ New optimization scripts created for automated tuning
+- 📊 Expected improvement: +2-5% AUC (reaching 0.73-0.76)
+
+### Previous Achievements (October 2025)
+- ✅ BiLSTM + Clustering model achieves **AUC 0.6947** (validation set)
 - ✅ Successfully tested on **7 real TESS light curves**
 - ✅ Correctly identified **TIC 307210830** (L 98-59 system with confirmed planets)
 - ✅ Full pipeline working: download → process → train → test
 
-### Key Achievements
+### Key Results
+- **Baseline (before optimization):** AUC 0.7154, F1 0.4550, Recall 0.86, Precision 0.31
 - Dataset: 655 windows (150 positive, 505 negative)
 - Model: BiLSTM with K-means clustering (5 clusters)
-- Training: AUC 0.69, F1 0.34, Accuracy 52%
-- Testing: Successfully runs inference on new TESS data
 - K-means clustering on features (period, depth, duration, BLS_power) enables learning different patterns
+- **Hyperparameter optimization:** Using Optuna TPE sampler to find optimal configuration
 
 ## Project Structure
 
@@ -33,6 +39,12 @@ CS_4280_Project/
 │   ├── process_tess_for_testing.py    # Process TESS downloads
 │   ├── convert_npy_to_csv.py          # Data format conversion
 │   ├── build_simple_windows.py        # Test window building
+│   │
+│   ├── benchmark_model.py             # 🆕 Model evaluation/benchmarking
+│   ├── optuna_optimize.py             # 🆕 Hyperparameter optimization
+│   ├── build_planet_test_windows.py   # 🆕 Process real planet data
+│   ├── generate_comparison_report.py  # 🆕 Generate comparison visualizations
+│   ├── OPTUNA_OPTIMIZATION_SUMMARY.md # 🆕 Optimization workflow guide
 │   │
 │   ├── data/
 │   │   ├── windows_train/        # Training data (655 windows)
@@ -53,9 +65,35 @@ CS_4280_Project/
 │   │   ├── inference_aggregated.csv  # Per-star aggregated
 │   │   └── postfilter_summary.txt    # Post-filtering metrics
 │   │
+│   ├── benchmarks/               # 🆕 Model benchmarking results
+│   │   └── baseline_benchmark_*.json
+│   │
+│   ├── optuna_results/           # 🆕 Hyperparameter optimization results
+│   │   ├── best_params_*.json
+│   │   ├── trials_*.csv
+│   │   └── optuna_study_*.pkl
+│   │
+│   ├── comparison_report/        # 🆕 Baseline vs optimized comparison
+│   │   ├── OPTIMIZATION_REPORT.md
+│   │   └── *.png (visualizations)
+│   │
 │   └── Archive/                  # Old versions
 │       ├── scripts/              # Deprecated scripts
 │       └── models/               # Old models
+│
+├── term_paper/                   # 📝 CS4820 TERM PAPER (Midterm Report)
+│   ├── midterm_report_RNN.tex    # Main midterm report (due Nov 13)
+│   ├── resourceFile.bib          # Bibliography (6 papers)
+│   ├── MIDTERM_REPORT_SUMMARY.md # Report documentation
+│   ├── PAPER_INVENTORY.md        # All 6 papers tracked
+│   ├── RECOMMENDED_PAPERS_MIDTERM.md # Paper selection guide
+│   └── term paper sources/       # Source PDFs (6 papers)
+│       ├── s41467-020-15293-x.pdf    # Speiser 2020 (Nature Comm)
+│       ├── s41598-024-62182-0.pdf    # Vu 2024 (Sci Reports)
+│       ├── 2410.19402v1.pdf          # Ding 2024 (MNRAS)
+│       ├── aa41068-21.pdf            # Vida 2021 (A&A)
+│       ├── stv2604.pdf               # Kügler 2016 (MNRAS)
+│       └── DuDaiTriUpa2016.pdf       # Du 2016 (KDD)
 │
 ├── research_paper/               # 📄 RESEARCH PAPER MATERIALS
 │   ├── methodology.md            # Complete methods section

@@ -1,0 +1,103 @@
+\documentclass[letterpaper]{article}
+\usepackage{aaai24}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\urlstyle{rm}
+\def\UrlFont{\rm}
+\usepackage{natbib}
+\usepackage{caption}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+
+\title{Machine Learning for Exoplanet Detection: Identifying Exoplanets in Light Curves -- RNN Component}
+\author{Josh Manchester\\
+University of Colorado Colorado Springs\\
+\texttt{jmanches@uccs.edu}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Josh Manchester — RNN Component (Revised Dataset Plan) Project: Machine Learning for Exoplanet Detection: Identifying Exoplanets in Light Curves Team: Tristan Moffett, Josh Manchester, Brianne Leatherman (UCCS, CS 4820: Artificial Intelligence, Dr. Adham Atyabi) I will build and test a Recurrent Neural Network (RNN) to spot exoplanet transits—small, regular dips in a star’s brightness—in light-curve data. To keep scope realistic for the proposal phase, I will start with a small, curated subset that contains a handful of confirmed transit examples (e.g., \textasciitilde{}10 known planets) plus matched non-transit examples. If needed, I will add simple pseudo/synthetic data by injecting transit-shaped dips into real or cleaned light curves. I will try straightforward RNN variants (LSTM (a type of RNN (long short-term memory)) and GRU (a type of RNN (gated recurrent unit))) and report precision (share of predicted positives that are correct), recall (share of actual positives the model found), F1 score (precision (share of predicted positives that are correct) and recall (share of actual positives the model found)), and ROC-AUC (How well the model ranks positives over negatives across all thresholds). Results will be compared against a basic baseline and, later, the other team models (CNN/Transformer).
+\end{abstract}
+
+\section{Introduction}
+Space telescopes record how a star’s brightness changes over time. When a planet crosses in front of the star, the brightness dips slightly. Finding these small dips is hard because real signals can be weak and noisy (light traveling to us for years distorts it). RNNs are a natural fit for time-series and can learn patterns across many time steps. My goal is to train an RNN that can tell the difference between true transits and look‑alike noise using a modest, well-labeled subset first, then expand if time allows.
+
+
+\section{Related Work}
+\textbf{RNNs for astrophysical light curves (flares)}. Vida et al.\ (2021) built a sequential model for pointwise flare detection in space-based photometry. 
+After comparing GRU and LSTM variants, their best network used \emph{three LSTM layers with 128 units} and dropout $p{=}0.2$, followed by a one-unit dense layer with a \emph{sigmoid} output; they optimized \emph{binary cross-entropy} with the \emph{NAdam} optimizer and explicitly addressed class imbalance by weighting the minority (flaring) class. 
+They also performed structured hyperparameter search and found that adding non-flaring ``astrophysical noise'' examples exposed weaknesses (many false positives) in some GRU models, while stacked LSTMs remained robust. 
+Crucially, a model trained on \emph{Kepler} generalized well to \emph{TESS} despite different sampling and noise properties, providing evidence that a carefully-regularized RNN can transfer across missions when preprocessing is consistent. 
+
+\noindent\textbf{Sequence-aware representation with ESN--Autoencoder}. 
+K\"{u}gler et al.\ (2016) proposed an \emph{ESN-coupled autoencoder} (ESN-AE) to learn low-dimensional representations of \emph{Kepler} light curves. 
+Light curves are first encoded by an Echo State Network (ESN) into readout weights $w$; an autoencoder then compresses and reconstructs $w$. 
+Unlike a ``plain'' autoencoder that minimizes $\lVert w-\tilde{w}\rVert_2^2$, ESN-AE reconstructs at the \emph{sequence level} by minimizing $\lVert y-\tilde{y}\rVert_2^2$ where $\tilde{y}$ is obtained by plugging $\tilde{w}$ back through the ESN, thus aligning optimization with time-series fidelity rather than only readout similarity. 
+The authors show this produces visualizations that cluster light curves by dynamical behavior more meaningfully than PCA or a plain autoencoder. 
+For our work, the takeaway is to prefer objectives and encoders that respect full-sequence dynamics (an argument for RNNs and sequence-aware losses) and to use sequence-space diagnostics to sanity-check learned representations. 
+
+\noindent\textbf{Recurrent Marked Temporal Point Processes (RMTPP)}. 
+Du et al.\ (2016) connect \emph{recurrent neural networks} with \emph{temporal point processes} by parameterizing the conditional intensity as a nonlinear function of event history encoded by an RNN. 
+RMTPP jointly models \emph{event timing} and \emph{marks} (types), learning a compact history embedding that improves prediction without assuming a fixed parametric form for the dynamics. 
+Although RMTPP targets general event streams (finance, healthcare, etc.), the idea is directly relevant to transit detection: we can add a light-weight \emph{timing-aware} signal---e.g., intervals between candidate ingress/egress or a rough period prior---as an auxiliary objective or feature alongside our main classifier. 
+This encourages the RNN to internalize periodic structure rather than only local dips, reducing confusion with aperiodic variability. 
+
+\noindent\textbf{What these mean for our RNN}. 
+Drawing from the above: (1) use stacked LSTMs (2--3 layers, 128--256 units) with dropout and class weighting; (2) keep preprocessing and windowing consistent to enable cross-mission tests; (3) evaluate with precision/recall and F1, and perform error checks for common false positives; (4) prefer sequence-aware objectives or diagnostics (in the spirit of ESN-AE) to avoid learning shortcuts on readout-only features; and (5) consider a small timing-aware auxiliary to encode periodicity, inspired by RMTPP. 
+These choices are grounded in published RNN results on astrophysical light curves and provide a clear path for a strong, compact baseline.
+
+\section{Datasets}
+Because the full missions are large, I will start small and focused:
+1) Curated Subset (Primary): a small group of light curves with \textasciitilde{}10 confirmed transiting planets and a set of non-planet control stars. This keeps training/evaluation fast and easy to check by hand.
+2) Pseudo/Synthetic Add‑Ons (Optional): inject clean, transit‑like dips into selected non-transit light curves to balance classes and stress‑test the model. I will document any injection rules (depth, duration, period (time between repeats) jitter) so results are reproducible.
+3) Expansion Path (Later): if time permits, scale up with more real examples or additional sectors/quarters.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{p{0.28\linewidth} p{0.28\linewidth} p{0.33\linewidth}}
+\hline
+\textbf{Dataset} & \textbf{Purpose} & \textbf{Notes/SOTA} \\ \hline
+Curated subset ($\sim$10 known transits) & Train/val & Small, hand-checkable; class balance documented (TBD IDs). \\
+Pseudo/synthetic injections & Stress tests & Inject depth/duration/period jitter; report injection policy. \\
+(If used) Kepler/TESS shards & Generalization & Add a SOTA line when datasets are finalized (TBD). \\ \hline
+\end{tabular}
+\caption{{Planned datasets for the RNN component.}}
+\label{{tab:datasets}}
+\end{table}
+
+
+\section{Methodology}
+Preprocessing: simple detrending and normalization; careful handling of gaps; no label leakage (windows only use past/current data).
+Model: start with a 2–3 layer LSTM (also test GRU (a type of RNN (gated recurrent unit))) with dropout. Compare final-state (last hidden state) vs. time‑pooled readout (output layer). Use a sigmoid (binary probability function)/softmax (multi-class probability function) head depending on sequence vs. window labels.
+Training: keep runs lightweight—small batch sizes, early stopping on validation F1. Handle class imbalance (far fewer positives than negatives) with weights or focal loss (loss that down-weights easy examples). Apply light augmentation (noise/masking (blanking spans)) to mimic real conditions.
+Evaluation: report precision (share of predicted positives that are correct), recall (share of actual positives the model found), F1, AUC. Provide a short error analysis focusing on common false positives (stellar variability) and false negatives (very shallow or short transits).
+Optional timing helper (simple feature for period (time between repeats)/spacing): add a simple feature for expected transit spacing (period (time between repeats) guess) to give the RNN more context.
+
+\section{Experimental Plan \& Milestones}
+Week 1: Assemble the small curated subset (\textasciitilde{}10 positive, matched negatives) and write a minimal data-prep notebook.
+Week 2: Train a simple baseline (e.g., logistic regression on summary stats) to set a floor; implement the first LSTM (a type of RNN (long short-term memory)).
+Week 3: Tune window length and labeling; add GRU (a type of RNN (gated recurrent unit)); pick the better recurrent variant based on validation F1/AUC.
+Week 4: Add optional pseudo/synthetic injections to balance classes; re‑evaluate and do a brief error analysis.
+Week 5–6: Polish: ablations (with/without timing helper (simple feature for period (time between repeats)/spacing)), final metrics/tables/plots, and a short write‑up for the team paper.
+
+\section{Risks \& Mitigations}
+• Too few positives: mitigate with pseudo/synthetic injections and careful cross‑validation.
+• Overfitting the small set: use validation splits, early stopping, and simple models first.
+• Data cleaning surprises: keep preprocessing minimal and documented; track all changes in the notebook.
+
+\section{Conclusion}
+Starting with a small, well‑labeled subset keeps the RNN work focused and feasible. If the initial results look good, I can scale up the dataset and compare my RNN to the team’s CNN/Transformer models on the same evaluation plan.
+
+\begin{thebibliography}{99}
+\bibitem{ref1} Kügler, S. D., Gianniotis, N., \& Polsterer, K. L. (2016). An explorative approach for inspecting Kepler data. MNRAS, 455(4), 4399–4405.
+\bibitem{ref2} Vida, K., Bódi, A., Szklenár, T., \& Seli, B. (2021). Finding flares in Kepler and TESS data with recurrent deep neural networks. A\&A, 652, A107.
+\bibitem{ref3} Du, N., Dai, H., Trivedi, R., Upadhyay, U., Gomez-Rodriguez, M., \& Song, L. (2016). Recurrent marked temporal point processes (model of when events happen): Embedding event history (past sequence of events) to vector. KDD 2016, 1555–1564.
+\end{thebibliography}
+
+\end{document}

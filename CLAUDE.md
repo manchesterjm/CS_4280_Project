@@ -337,6 +337,83 @@ All outputs saved to `research_paper/figures/` at 300 DPI, publication-ready.
 - **Improvement from Clustering**: +3% AUC vs baseline BiLSTM
 - **Real-world validation**: TIC 307210830 (L 98-59 confirmed exoplanet) detected with 0.5959 probability
 
+## Hyperparameter Optimization with Optuna (November 2025)
+
+### Baseline Performance (Before Optimization)
+Benchmarked on full training data (655 windows):
+- **AUC: 0.7154**
+- **F1 Score: 0.4550**
+- **Recall: 0.8600** (86% of planets detected)
+- **Precision: 0.3094** (high false positive rate)
+- **Parameters: ~3.9M**
+
+Results saved: `Code/benchmarks/baseline_benchmark_20251109_084547.json`
+
+### Optuna Optimization Setup
+
+**Status: In Progress (Started November 9, 2025)**
+
+Following professor's recommendation, implemented automated hyperparameter tuning using Optuna:
+
+```powershell
+conda activate exo-lstm-gpu
+cd C:\CS_4280_Project\Code
+python optuna_optimize.py --n_trials 30 --epochs_per_trial 30
+```
+
+**Search Space:**
+- Hidden size: [128, 256, 512]
+- Layers: [2, 3, 4]
+- Dropout: [0.2, 0.5]
+- Learning rate: [1e-5, 1e-3] (log scale)
+- Batch size: [32, 64, 128]
+- Clusters: [3, 5, 7, 10]
+- Cluster embed dim: [16, 32, 64]
+
+**Optimization Strategy:**
+- TPE (Tree-structured Parzen Estimator) sampler
+- MedianPruner for early stopping of unpromising trials
+- 30 trials × 30 epochs per trial
+- Early stopping: patience=10 epochs
+- Expected runtime: 1.5-2 hours on GPU
+
+**Expected Improvements:**
+- AUC: 0.7154 → 0.73-0.76 (+2-5%)
+- Better precision-recall balance
+- Optimal hyperparameter interactions discovered
+
+### New Scripts Created
+
+**Benchmarking:**
+```powershell
+python benchmark_model.py --model_path "runs/bilstm_cluster/best.pt" --output_dir "benchmarks"
+```
+
+**Optimization:**
+```powershell
+python optuna_optimize.py --windows_dir "data/windows_train" --n_trials 30 --output_dir "optuna_results"
+```
+
+**Real Planet Testing:**
+```powershell
+python build_planet_test_windows.py --data_dir "C:\CS_4280_Project\Planet_LightCurve_Data\processed" --output_dir "data/windows_planet_test"
+```
+
+**Comparison Report:**
+```powershell
+python generate_comparison_report.py --baseline_results "benchmarks/baseline_*.json" --optimized_results "benchmarks/optimized_*.json" --output_dir "comparison_report"
+```
+
+### Workflow After Optimization
+
+1. **Load Best Parameters** from `optuna_results/best_params_*.json`
+2. **Retrain Model** with optimized hyperparameters (80 epochs)
+3. **Build Test Windows** for 100 real exoplanet light curves
+4. **Run Inference** on real planets
+5. **Generate Comparison Report** with visualizations (ROC, confusion matrix, metrics)
+
+Results will be documented in `Code/comparison_report/OPTIMIZATION_REPORT.md`
+
 ## Development Notes
 
 - Always activate `exo-lstm-gpu` environment before running any scripts

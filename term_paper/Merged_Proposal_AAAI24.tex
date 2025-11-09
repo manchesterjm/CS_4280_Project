@@ -1,0 +1,255 @@
+%File: formatting-instructions-latex-2024.tex
+%release 2024.0
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage{aaai24}  % DO NOT CHANGE THIS
+\usepackage{times}  % DO NOT CHANGE THIS
+\usepackage{helvet}  % DO NOT CHANGE THIS
+\usepackage{courier}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in}  % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in}  % DO NOT CHANGE THIS
+%
+% These are recommended to typeset algorithms but not required. See the subsubsection on algorithms. Remove them if you don't have algorithms in your paper.
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%
+% These are are recommended to typeset listings but not required. See the subsubsection on listing. Remove this block if you don't have listings in your paper.
+\usepackage{newfloat}
+\usepackage{listings}
+\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off} % DO NOT CHANGE THIS
+\lstset{%
+	basicstyle={\footnotesize\ttfamily},% footnotesize acceptable for monospace
+	numbers=left,numberstyle=\footnotesize,xleftmargin=2em,% show line numbers, remove this entire line if you don't want the numbers.
+	aboveskip=0pt,belowskip=0pt,%
+	showstringspaces=false,tabsize=2,breaklines=true}
+\floatstyle{ruled}
+\newfloat{listing}{tb}{lst}{}
+\floatname{listing}{Listing}
+%
+% Keep the \pdfinfo as shown here. There's no need
+% for you to add the /Title and /Author tags.
+\pdfinfo{
+/TemplateVersion (2024.1)
+}
+
+% DISALLOWED PACKAGES
+% \usepackage{authblk} -- This package is specifically forbidden
+% \usepackage{balance} -- This package is specifically forbidden
+% \usepackage{color (if used in text)
+% \usepackage{CJK} -- This package is specifically forbidden
+% \usepackage{float} -- This package is specifically forbidden
+% \usepackage{flushend} -- This package is specifically forbidden
+% \usepackage{fontenc} -- This package is specifically forbidden
+% \usepackage{fullpage} -- This package is specifically forbidden
+% \usepackage{geometry} -- This package is specifically forbidden
+% \usepackage{grffile} -- This package is specifically forbidden
+% \usepackage{hyperref} -- This package is specifically forbidden
+% \usepackage{navigator} -- This package is specifically forbidden
+% (or any other package that embeds links such as navigator or hyperref)
+% \indentfirst} -- This package is specifically forbidden
+% \layout} -- This package is specifically forbidden
+% \multicol} -- This package is specifically forbidden
+% \nameref} -- This package is specifically forbidden
+% \usepackage{savetrees} -- This package is specifically forbidden
+% \usepackage{setspace} -- This package is specifically forbidden
+% \usepackage{stfloats} -- This package is specifically forbidden
+% \usepackage{tabu} -- This package is specifically forbidden
+% \usepackage{titlesec} -- This package is specifically forbidden
+% \usepackage{tocbibind} -- This package is specifically forbidden
+% \usepackage{ulem} -- This package is specifically forbidden
+% \usepackage{wrapfig} -- This package is specifically forbidden
+% DISALLOWED COMMANDS
+% \nocopyright -- Your paper will not be published if you use this command
+% \addtolength -- This command may not be used
+% \balance -- This command may not be used
+% \baselinestretch -- Your paper will not be published if you use this command
+% \clearpage -- No page breaks of any kind may be used for the final version of your paper
+% \columnsep -- This command may not be used
+% \newpage -- No page breaks of any kind may be used for the final version of your paper
+% \pagebreak -- No page breaks of any kind may be used for the final version of your paperr
+% \pagestyle -- This command may not be used
+% \tiny -- This is not an acceptable font size.
+% \vspace{- -- No negative value may be used in proximity of a caption, figure, table, section, subsection, subsubsection, or reference
+% \vskip{- -- No negative value may be used to alter spacing above or below a caption, figure, table, section, subsection, subsubsection, or reference
+
+\setcounter{secnumdepth}{0} %May be changed to 1 or 2 if section numbers are desired.
+
+% The file aaai24.sty is the style file for AAAI Press
+% proceedings, working notes, and technical reports.
+%
+
+\title{Machine Learning for Exoplanet Detection: Identifying Exoplanets in Light Curves}
+\author {
+    % Authors
+    Tristan Moffett\textsuperscript{\rm },
+    Josh Manchester\textsuperscript{\rm },
+    Brianne Leatherman\textsuperscript{\rm }
+}
+\affiliations {
+    % Affiliations
+    \textsuperscript{\rm }University of Colorado at Colorado Springs\\
+    %\textsuperscript{\rm 2}Affiliation 2\\
+    %firstAuthor@affiliation1.com, secondAuthor@affilation2.com, thirdAuthor@affiliation1.com
+}
+
+\begin{document}
+\maketitle
+
+\section*{Abstract}
+The discovery of exoplanets has become more dependent on machine learning as missions like Kepler and TESS generate thousands of transit signals that are too costly and time consuming to vet by hand. In this research, we plan to address this problem by comparing three different deep learning models for exoplanet classification: Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), and Transformer architecture. Each team member will be designing, training, and evaluating one of these models using a mix of observational data from an array of sources such as Kepler and the Transiting Exoplanet Survey Satellite (TESS) along with simulated datasets to provide more abstract light curves, denser noise, and ground truths. Our focus is not only on simple performance metrics such as accuracy, precision, recall, and Area Under Curve (AUC), but also on understanding the strengths and weaknesses of each model in regard to classifying planets and false positives. From analyzing the results across the three architectures, we plan to identify which methods are most effective for generalizability.
+
+\section*{Introduction \& Background}
+In the last twenty years, there have been significant increases in the number of space missions whose goal is to observe distant stars and the changes that may occur over variable lengths of time. NASA has been one of the primary drivers behind these advances, which are called transit survey missions. Of most importance to our research are two missions in particular: Kepler/K2 and TESS. Kepler was launched in 2009 with the original mission of monitoring a 116 square degree segment of sky for three and a half years, and when the satellite had a mechanical issue, the mission was changed to K2, which monitored stars and systems along the elliptic plane until it was retired in 2018 \cite{salinas2023distinguishingtransitfalsepositives}. The Transiting Exoplanet Survey Satellite (TESS) was launched in 2018, nearly ten years after Kepler, with the goal of monitoring a sector of approximately 2300 square degrees for about 27 days before moving to the next section \cite{salinas2023distinguishingtransitfalsepositives}. At the time of this writing, these two transit surveys have accounted for more than 3000 of the 6000 total confirmed exoplanets \cite{salinas2025tessfullframe}. 
+
+The most prevalent method of determining the presence of an extra-orbital planet has been through observing changes in the intensity of the brightness of a star when an object transits between the star and the observer. These transits can be found by representing the observed flux from the star in a time-series graph, also known as light curves, and then analyzing the data \cite{morvan2022dontpayattentionnoise}. This process often includes phase-folding the data by overlapping periods to determine patterns \cite{salinas2023distinguishingtransitfalsepositives}. A dip in the light curve indicates a threshold crossing event (TCE) but that alone does not mean a planet caused the obstruction of the light. The TCE can also be a false positive that was triggered by an eclipsing binary or instrumental artifact \cite{salinas2025tessfullframe}. 
+
+The similar nature of the light curve of a transiting exoplanet and that of an eclipsing binary can be difficult to differentiate. Additionally, light curves can be challenging to work with due to the continuous nature of background noise from instrumental, photon, and other interference in the transit of light, and the curves can require significant work to pre-process and then analyze the data \cite{morvan2022dontpayattentionnoise}. As deep learning continues to develop, the use of neural networks has become a common tool in this process, significantly reducing the number of light curves that need to be analyzed by hand.
+
+The Convolutional Neural Network (CNN) was introduced as a model designed to detect repeating patterns in data. For exoplanet research, this means recognizing the U-shaped dips of planetary transits and separating them from the V-shaped dips of eclipsing binaries within time-series light curve data. A challenge for CNNs is that light curves often contain a large amount of noise, which can make training more difficult. However, when handled properly, CNNs can still learn to use this noise to improve classification. \cite{Dattilo2019identifyexoplanetsII} demonstrated the value of CNNs on Kepler data by combining global and local views of a light curve to capture both the orbital view and the details of a transit. \cite{Osborn2019rapidclassificationtesscandidates} later applied a similar approach to TESS data and introduced additional features such as centroid and stellar parameters to handle noisier signals. These results show why CNNs are a strong fit for exoplanet classification, though other deep learning approaches like Recurrent Neural Networks (RNNs) and Transformers bring their own strengths for working with time-series data such as light curves.
+
+Recurrent Neural Networks (RNNs) are a natural fit for time-series data because they learn patterns across many time steps and keep context memory (history) from earlier points in the sequence. In light-curve analysis, this lets the model use both the local transit shape of the light curve and the surrounding temporal pattern (periodic repeats) at the same time. Gated variants like LSTM and GRU help with long-range dependencies and noisy sequences of data. Stacked LSTMs have shown to be a strong resource for space-mission photometry: for example, an LSTM detector trained on Kepler flares generalized well to TESS with high precision/recall when preprocessing and class balancing were handled carefully \cite{Vida2021findingflaresrecurrent}. Beyond direct classification, sequence-aware representation learning with an Echo State Network (ESN) + autoencoder reconstructs light curves in sequence space (not just a readout vector), producing more faithful time-series embeddings for future tasks \cite{kugler2016explorativeapproachkepler}. Finally, RMTPP shows how an RNN can encode event history to predict both the timing and type of the next event; adding a lightweight timing cue (intervals/slight inaccurate period) alongside the classifier can reduce aperiodic false positives in transit searches \cite{Du2016markedtemporalpoint}. In this project, we will benchmark LSTM/GRU on our curated subset, report precision, recall, F1, and ROC-AUC, and optionally include a small timing helper to capture periodicity.
+
+The Transformer architecture was introduced as a novel, simple network relying on encoder/decoder layers of self-attention mechanisms \cite{vaswani2017attentionneed}. Because attention can be calculated in parallel, this network saw an improvement in quality of results with a reduced amount of training time compared to prior RNN and CNN approaches \cite{vaswani2017attentionneed}. Although Transformers were originally designed for Natural Language Processing (NLP), their use in other fields has rapidly spread, due to both the efficiency and the ability to correlate sequential data like time series such as a light curve, where the transit of a planet can be considered a function of time \cite{salinas2023distinguishingtransitfalsepositives}. Given the rapid advancements in deep learning methods over the last decade, a direct performance comparison across RNNs, CNNs, and Transformers on light curve analysis should prove interesting. This paper will detail the methods for creating such a comparison, as well as results, by modeling multiple research processes from other papers.
+
+
+\section*{Related Work}
+\subsection{Convolutional Neural Networks (CNNs)}
+Shallue and Vanderburg (\citeyear{Shallue2018identifyexoplanetsI}) addressed the problem of classifying Threshold Crossing Events (TCEs) from the Kepler mission, where thousands of signals had to be examined and most turned out not to be planets. To resolve this bottleneck, they designed one of the first convolutional neural networks (CNNs) for exoplanet detection, comparing a linear model, a fully connected network, and a 1-D CNN, with the CNN proving most successful. Their final architecture called AstroNet processed two versions of each light curve: a global view covering the full orbital phase and a local view zoomed in around the transit. Each view passed through layers of one-dimensional convolutions and max pooling before being merged into fully connected layers of 512 nodes, with dropout and data augmentation used to reduce overfitting. On Kepler’s real observational test set the CNN achieved results with 96\% accuracy, 98.8\% AUC, 96\% precision, and 95\% recall. However, when evaluated on simulated datasets the model struggled, recovering 81\% of true injected planets but incorrectly labeling around 90\% of background planets and eclipsing binaries as planets, misclassifying about 65\% of eclipsing binaries, and letting through 3.18\% of false positives from inverted light curves. These outcomes demonstrated that while the model was powerful on Kepler data, it lacked generalizability, leading the authors to suggest training with simulated data and including centroid information to better handle false positives. This highlights the need for models that can work across both real and simulated datasets, a direction we plan to take in our own work.
+
+Dattilo et al. (\citeyear{Dattilo2019identifyexoplanetsII}) focused on the challenge of vetting the large number of planet candidates identified in K2 light curves, which are especially noisy due to pointing instabilities from the Kepler telescope. This created difficulty in classifying true planet signals from false positives such as eclipsing binaries or systematics. To address this, they extended the AstroNet CNN first built for Kepler data by Shallue and Vanderburg (2018), adapting it to the shorter and noisier K2 campaigns. Their approach used both real K2 TCEs labeled as candidates, binaries, or junk, and tested on simulated ``Kepler-lite'' data to tune their model under similar conditions. Each TCE was represented by two views of the light curve, a global view showing the full orbital phase and a local view zoomed in on the transit. These were normalized and then passed through separate convolutional and max pooling layers before being merged into fully connected layers of 512 nodes, with additional scalar features such as planet-to-star radius ratio and impact parameter included to strengthen classification. The final output gave the probability of a candidate being a true planet. Their CNN achieved high accuracy averaging 98\% on test sets and successfully uncovered two new super-Earths within the K2 dataset. This work highlights the need for both global and local inputs including additional scalar features as it improves against noisy data while also improving the classification of planets and false positives.
+
+Osborne et al. (\citeyear{Osborn2019rapidclassificationtesscandidates}) addressed the challenge of rapidly classifying the thousands of planet candidates generated monthly by TESS. To further the issue each month around 500 hours were required to select the best candidates from each month's findings. As any sane person would be able to tell, this is a bottleneck as it requires too many resources and people that could be used elsewhere. To resolve this issue however, Osborne and his colleagues trained a CNN model based on Shallue and Vanderburg (2018) and Ansdell et al. (2018) work, specifically the AstroNet and ExoNet CNN models. They trained and validated their CNN strictly on high-fidelity simulated TESS light curves (the TSOP-301 dataset), which provided known ground truths for both planets and false positives. Each candidate was represented by both a local and global view of its light curve, with centroid information also included to help spot background eclipsing binaries. Alongside this, during training, they included balanced batch sampling to counter class imbalance (only 14\% of candidates were true planets) and applied augmentation techniques to improve generalization and reduce overfitting. When tested, their model achieved strong results on their simulated set, with a 97\% average precision in binary classification and a 92\% accuracy in identifying planets in their multi-class classification. However, when using the real TESS set, the model’s performance dropped, only being able to recover 61\% TOIs (TESS Objects of Interest) as planets. Though the model was still able to flag around 200 new TCEs as possible planets. Results highlight a reduction in human workload and planet discovery but also show a gap between simulated and real data performance in CNNs. This brings a need to build a model that is more generalizable capable of handling both simulated and observational dataset together, which we plan to explore in our project.
+
+From Shallue and Vanderburg (\citeyear{Shallue2018identifyexoplanetsI}), I plan to use the idea of splitting each light curve into both a global and local view as this gives the model a view of both the orbit and a zoom of the transit event. This will provide the model with more patterns to learn from within the same data. From Dattilo et al. (\citeyear{Dattilo2019identifyexoplanetsII}), I will take the idea of adding extra scalar features, such as radius ratio and impact parameters, as they helped in improving the results from the noisy K2 light curve sequences. With CNN models, noise is a large issue, so reducing the noise or supporting the model with additional training features to combat it will give the model a better chance at accurate classification. From Osborne et al. (\citeyear{Osborn2019rapidclassificationtesscandidates}), I will use centroid information, balanced sampling, and data augmentation since these steps helped their model handle class imbalance and generalization from the small number of available true planet data based on the entire set. These ideas together will be used to create a model that can classify planets and non-planets while also being more generalizable across multiple datasets.
+
+\subsection{Recurrent Neural Networks (RNNs)}
+This section reviews how recurrent neural networks (RNNs) have been applied to space-telescope light curve data and what that means for the overall plan. This plan will focus on three works: (1) An LSTM-based flare detector that operates on Kepler and TESS data \cite{Vida2021findingflaresrecurrent}, (2) An ESN–autoencoder representation learner designed for Kepler time series \cite{kugler2016explorativeapproachkepler}, and (3) A recurrent marked temporal point process (RMTPP) model that shows how an RNN can encode event timing history \cite{Du2016markedtemporalpoint}. Together, these papers explain why sequence-aware models matter to the plan and show that different RNNs tended to work well in practice, and how basic timing signals can help separate real periodic events, the transits, from look‑alike noise.
+
+RNNs for light-curve event detection \cite{Vida2021findingflaresrecurrent}. Vida and colleagues trained and evaluated multiple RNNs for detecting stellar flares in Kepler and TESS photometry. Although flares are brightenings and transits are dimmings, both problems require learning patterns in long, noisy sequences. Their best performing network stacked several long-short-term memory layers (LSTM), used dropout for regularization or not memorizing noise, and applied a one‑unit sigmoid output for binary classification \cite{Vida2021findingflaresrecurrent}. The authors addressed class imbalance directly by weighting the minority class and tweaked the hyperparameters (ML configuration settings for training) through the system. An important takeaway was that including “hard negatives” (non‑flare astrophysical signals) during training reduced false positives and turned out to be very practical in use. Most relevant for our project, a model trained on Kepler data generalized well to TESS data even though the cadence and noise profiles differ. That result supports my plan to keep pre-processing consistent across sources and use stacked LSTMs first and then GRUs later, and report precision, recall, F1, and ROC–AUC in a way that holds to my threshold choice \cite{Vida2021findingflaresrecurrent}.
+
+Two details from \cite{Vida2021findingflaresrecurrent} feed directly into my setup. First, the authors compared gated recurrent unit (GRU) and LSTM variants and found that stacked LSTMs handled “astrophysical noise” better in their solar flare work. With that knowledge, the plan will be to start with a 2 or 3 layer LSTM and keep a GRU as a secondary baseline. Second, they used strong, simple regularization techniques, meaning dropout and early stopping, and balanced the classes explicitly. Because transit positives will be rare in my small subset (approx. 10 known systems, pseudo data), the plan will be to go along the same lines and also try focal loss as a alternative when class weighting is not be enough to control any false positives \cite{Vida2021findingflaresrecurrent}.
+
+Sequence-aware representation with ESN–autoencoders \cite{kugler2016explorativeapproachkepler}. While Vida et al. focus on supervised detection, Kügler and colleagues show how to learn lower‑dimensional representations of Kepler light curves that still respect sequence structure. They pair an Echo State Network (ESN) with an autoencoder: the ESN maps each light curve to a set of weighted readouts, and the autoencoder compresses and reconstructs those weights. Their key difference is how they evaluate the reconstructions in the original sequence space by reinserting the reconstructed weights back into the ESN to get a reconstructed light curve (feedback loop); the loss is computed on that sequence rather than only on the readout \cite{kugler2016explorativeapproachkepler}. This is an important change because it forces the model to preserve time‑dependent behavior.
+
+For this work, the ESN–autoencoder paper provides two practical observations. First, any diagnostics that are used should look at the whole sequence, not just a final embedding. The tests will need to use evaluation metrics on windows and on full sequences wherever possible and include plots that compare the original and model‑highlighted spans of time from the data. Second, if we include any representation learning step (for example, pre-training or a feature extractor), it will need to prefer objectives that score performance in the sequence space. Although building an ESN autoencoder is not planned at this time, aligning training and evaluation with the sequence will help avoid shortcuts/pitfalls and can help future error analysis \cite{kugler2016explorativeapproachkepler}.
+
+Timing-aware RNNs via RMTPP \cite{Du2016markedtemporalpoint}. Du and colleagues introduce RMTPP, which uses an RNN to search out event histories and rewrite the data as a temporal point process. Rather than predicting only labels, the model can start to guess or predict when the next event is likely to occur based on the sequence of data we have processed so far. In other words, RMTPP turns the RNN into a history-based dependent source and intensity model that, together, handles event timing and event type \cite{Du2016markedtemporalpoint}. Although RMTPP has been demonstrated in other areas like finance and healthcare, the idea can be directly applied to periodic transit detection: a light curve with a planet has a regular rhythm (ingress to egress, repeat), while many false positives are random in periodicity or quasiperiodic. A little bit of timing information can help the classifier.
+
+Knowing this, the goal will be to try to adapt the spirit of the RMTPP in a lightweight way by not replacing the classifier with a full point‑process model, but attempt to add a simple timing helper that captures intervals between candidate transit edges or captures data in a rough period guess when available. This “helper” might be an auxiliary feature or a small auxiliary loss that pushes for consistency within a periodic framework. The goal is to help the RNN learn that true transit signals repeat on a calculable schedule, which should reduce confusion with isolated dips or irregular stellar dips in brightness \cite{Du2016markedtemporalpoint}.
+
+Putting the three ideas together. \cite{Vida2021findingflaresrecurrent} show that stacked LSTMs trained with class weighting and clean pre-processed time-series data can detect rare events in long, noisy sequences and even transfer across different photogrammetry space missions; the goal will be to mirror that recipe for the greatest success. \cite{kugler2016explorativeapproachkepler} show that we need to respect full‑sequence structure when learning representations or doing diagnostics; for this the goal will be to evaluate the data based on sequences/windows and picture the model attention over time. \cite{Du2016markedtemporalpoint} have given me a blueprint for bringing timing into the loop; we will attempt to add a light timing signal to nudge the RNN toward known or apparent periodic dips in the light curves without complicating the data being fed/read. These choices should be simple and reproducible in the outlook, and should fit the scope of a small, curated dataset that is planned for use while still making a fair comparison with the CNN / Transformer models of my team.
+
+Planned evaluation and error analysis based on related work. Following \cite{Vida2021findingflaresrecurrent}, the plan will be to attempt to report precision, recall, F1 and ROC-AUC and examine confusion matrices for common failures that may, or more likely, will occur. False positives will be grouped together by likely source (e.g., variable stars, systematics, residual trends), and false negatives will be checked for very shallow or short transits, which can mean something else caused the dip in the light. From \cite{kugler2016explorativeapproachkepler}, borrowing the idea of sequence‑level diagnostics which means I will be plotting model scores across time to ensure the network’s focus lines up with actual transit starts and stops. From \cite{Du2016markedtemporalpoint}, evaluate whether the timing “helper” reduces false positives due to variability in the ingress and egress period, without hurting recall on genuine periodic signals. Together, these checks turn my related work into solid testable steps.
+
+Implications for dataset size and generalization. \cite{Vida2021findingflaresrecurrent} showed that consistent pre-processing and using a balanced set of training data matter more than other architectures for the best performance; that should be good news for using a small curated subset of data. If the results are promising, it should be possible to scale the RNN to look at more stars (larger datasets) or additional sectors/quarters and repeat the same evaluation plan. The future plan should be to track whether the timing helper still “helps”, and whether stacked LSTMs remain better than GRUs, paralleling the comparisons in \cite{Vida2021findingflaresrecurrent}. Throughout the testing it will be best to keep in mind that sequence‑based diagnostics are a key to performing my transit search in the data, from \cite{kugler2016explorativeapproachkepler} so that changes in the data are grounded in what can be gleamed from the time‑series behavior.
+
+Summary. The RNN literature that is relevant to light curves argues for (a) stacked LSTMs or GRUs with explicit class‑imbalance handling and conservative regularization \cite{Vida2021findingflaresrecurrent}, (b) representation and diagnostics that respect sequence structure \cite{kugler2016explorativeapproachkepler}, and (c) simple timing cues that help the network prefer periodic, transit‑like patterns \cite{Du2016markedtemporalpoint}. I will carry these into my RNN baseline so that it is both technically sound and scoped for our project timeline.
+
+\subsection{Transformer Architecture}
+Attention mechanisms have been found to perform very well in sequence modeling, allowing models to capture dependencies between tokens regardless of the distance between positions. Self-attention (or intra-attention) creates a relationship between different positions of the input by using an encoder-decoder structure made of stacked layers.
+
+The research paper "Attention Is All You Need" \cite{vaswani2017attentionneed}, is the first of its kind to fully implement the Transformer architecture, and demonstrates this by training the model on English-to-German and English-to-French translation. Many of the researchers on this project were concurrently working at Google Brain and Google Research. This paper is currently one of the most influential of the 21st century and is listed as the 7th most-cited piece of research in the last 25 years by Nature. Transformer architecture has been the major basis for most Natural Language Processing (NLP) projects as well as generative Large Language Models (LLMs).
+
+\citeauthor{vaswani2017attentionneed}'s design of Multi-Head Attention accomplishes this by projecting queries, keys, and values $h$ times in parallel. This allows the model to attend every token to all the other tokens in the sequence, and weights the positions with the average attention to other tokens, in each of the six layers of the encoder and decoder. Additionally, each head focuses on a different pattern/relationship in the data. The parallelization within the heads helped reduce the sequential limitations of RNNs when operating on larger data sets. 
+
+\citeauthor{vaswani2017attentionneed} made two models: a small one and a big one. When trying to test a translation from English to German, the big Transformer model achieved a new high BLEU score of 28.4, surpassing previous models by over 2.0 BLEU, and was trained on 8 NVIDIA P100 GPUs for 3.5 days. Even the small model, which was only trained for 12 hours, still beat the other models by a smaller margin. The large model also beat all other models when translating English to French, though only by 0.5 BLEU, and the smaller model preformed similarly to the others. 
+
+This experiment, though not focused on the interpretation of light curves, gives us an encouraging basis to pursue how effective an Attention-based model could be in analyzing transit data.
+
+This idea was pursued by \citeauthor{morvan2022dontpayattentionnoise} in their \citeyear{morvan2022dontpayattentionnoise} paper, "Don’t Pay Attention to the Noise: Learning Self-supervised Representations of Light Curves with a Denoising Time Series Transformer." In this paper, they designed a Transformer model named the Denoising Time Series Transformer (DTST) to try to remove noise, fill in missing data, and fine-tune the light curves to make it easier to analyze. The architecture uses real stellar light curves from TESS's first sector, showing greater adaptability than other traditional denoising techniques. \citeauthor{morvan2022dontpayattentionnoise} used the same positional embedding as \citeauthor{vaswani2017attentionneed} (\citeyear{vaswani2017attentionneed}) to keep track of the chronological sequence of points on the light curve. 
+
+After standardizing the light curve data from TESS and training the model, \citeauthor{morvan2022dontpayattentionnoise} found that results would not always denoise noisy data and might overfit quiet data, due to a lack of data normalization. The DTST research explicitly addressed the challenges of light curves, which are noted as "particularly challenging data objects." Although the results were not as consistent as desired, the experiment showed a lot of potential for the continued exploration of building a more robust Transformer model. They additionally found they could track how important the model thought different parts of the data were, by using an attention map.
+
+The work "Distinguishing a planetary transit from false positives: a Transformer-based classification for planetary transit signals," \cite{salinas2023distinguishingtransitfalsepositives}, directly continues the search for efficient, interpretable models to classify TCEs and determine the possibility of whether the TCEs were actually exoplanets or a false positive. Other models typically used CNNs with many layers, which could quickly become computationally complex. \citeauthor{salinas2023distinguishingtransitfalsepositives}'s classification system was specifically designed to use phase-folded light curves from TESS, as well as flux data and centroid pixel position information, and included extra stellar and transit parameters (like period, duration, and host star temperature). The inputs were embedded into a vector representation using a convolutional layer before going to the multihead attention layer. Much of this preprocessing was handled with the Python packages `lightkurve` and `astropy api`. \citeauthor{salinas2023distinguishingtransitfalsepositives} ended up scaling the light curves "by removing the mean and scaling to unit variance for both centroids." When training the model, they only used one decoder which performed like an activation function, and three encoders. 
+
+Once trained, the Transformer achieved competitive results as other existing CNNs applied to TESS data with a similar goal, with average recall, precision, and F1 scores of 0.88. A major benefit of Transformers is the enhanced interpretation, and that the self-attention mechanism allowed the authors to observe that parameters like transit depth and host star temperature were highly influential in the classification decision. 
+
+Due to the continued results in pursuing Transformers, Salinas came back with another group of researchers to expand upon their previous research. This time the project was "Exoplanet transit candidate identification in TESS full-frame images via a transformer-based algorithm," \cite{salinas2025tessfullframe}. The research is focused around removing the need for highly pre-processed and phase-folded light curve data before analyzing for potential exoplanet candidates. \citeauthor{salinas2025tessfullframe} wanted to identify exoplanets that only had a single transit within the data segments (monotransiters), which would remove the periodic requirement from the light curve data. Because TESS data is limited to approximately 27 days, requiring a repeating transit will only find planets with orbits that take less than 25 days. This would additionally help identify plantets with Transit Timing Variations (TTVs) which could indicate a star system with multiple planets. 
+
+This approach continues the classification properties from the previous study \cite{salinas2023distinguishingtransitfalsepositives} and takes inputs of raw flux, centroid data, and background time-series from full-frame TESS images. Test data included labeled light curves that indicated confirmed exoplanets, confirmed eclipsing binaries or other false positives, and non-transit signals. The process begins by finding local features (short-range patterns) with a convolutional embedding layer (similar to \cite{salinas2023distinguishingtransitfalsepositives}), and these tokens are then fed into the multi-headed attention encoder to learn additional patterns.
+
+Because the model can evaluate long-range dependencies, it can identify the characteristic shape of a planetary transit curve even if only a single transit is shows up in the entire 27 days of observation. This is important for detecting monotransiters and planets with longer periods.
+
+When the model was tested on brand new TESS data, it found approximately 0.1 percent of the light curves indicated an exoplanet transit. With eight layers of encoding heads, they found an average Area Under Curve (AUC) score of 0.88 and an average F1 score of 0.83. 
+
+By the end of the experiment, \citeauthor{salinas2025tessfullframe} ended up testing sectors 1-26 of TESS data, which included 4.1 million light curves. Again, the model found approximately 0.1 percent to be potential candidates for planet transits. After confirming data through other means of verification, about 25\%, or 214, of the candidates were strong exoplanet candidates, including 88 single-transit candidates, which demonstrates the model's capability to detect transit events regardless of periodicity.
+
+\section*{Datasets}
+For this research, we will be using both simulated and labeled observational data. The simulated data is available from the NASA Exoplanet Archive and includes injected on- and off-target transits, scrambled data, and false positives within K2 light curves. The labeled observational data will come from TESS datasets cross-referenced with matching labels, both from the Mikulski Archives for Space Telescopes (MAST). The purpose for choosing the above datasets is it provides a wide variety of light curve data taken from different sources. This means the light curves will have differing noise values and metrics to train from and test on. Furthermore, using these datasets will allow us to average our models' performances with a plethora of other research papers.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{p{0.28\linewidth} p{0.28\linewidth} p{0.33\linewidth}}
+\hline
+\textbf{Dataset} & \textbf{Purpose} & \textbf{Notes/SOTA} \\ \hline
+Simulated Data ($\sim$10 known transits) & Train/val & Small, hand-checkable; class balance documented. Data from NASA Exoplanet Archive. \\
+Pseudo/synthetic injections & Stress tests & Inject depth/duration/period jitter; report injection policy. Data from NASA \\
+(Final Test) Kepler/TESS subsets & Generalization and best method determination & Add a SOTA line when datasets are finalized (TBD). Data from MAST and NASA Exoplanet Archive \\ \hline
+\end{tabular}
+\caption{{Planned datasets for ML learning and testing.}}
+\label{{tab:datasets}}
+\end{table}
+
+\section*{Methodology}
+\subsection*{Convolutional Neural Networks}
+Preprocessing: Filtering, detrending, phase-folding, and normalization. Local and global views of the light curves are generated. The goal is to create consistent input representations while reducing noise.
+
+Model: 1D CNN with dual inputs. Four convolutional layers are used for the local view and eight for the global view. Max pooling follows every two convolutional layers. Outputs are combined and passed through four fully connected layers. A sigmoid head produces binary classification (planet vs. non-planet).
+
+Training: Binary cross-entropy loss with Adam optimizer. Dropout and data augmentation (Gaussian noise, phase shifts, mirroring) are applied to improve generalization. Balanced mini-batch sampling addresses class imbalance.
+
+Evaluation: F1 and AUC are the primary metrics. F1 balances precision and recall. AUC captures ranking ability across thresholds. Accuracy and precision-recall curves are also reported. Error analysis will focus on false positives (eclipsing binaries, noise artifacts) and false negatives (low SNR transits).
+
+Considerations: Layer counts, pooling depth, and fully connected units may change during testing. Additional training methods such as focal loss or weighted sampling may be introduced. Extra evaluation metrics like recall at fixed precision or confusion matrices may be added to improve model performance.
+
+\subsection{Recurrent Neural Networks}
+Preprocessing: simple detrending and normalization; careful handling of gaps; no label leakage (windows only use past/current data).
+
+Model: start with a 2–3 layer LSTM (also test GRU a type of RNN called gated recurrent unit) with dropout. Compare final-state (last hidden state) vs. time‑pooled readout (output layer). Use a sigmoid (binary probability function)/softmax (multi-class probability function) head depending on sequence vs. window labels.
+
+Training: keep runs lightweight—small batch sizes, early stopping on validation F1. Handle class imbalance (far fewer positives than negatives) with weights or focal loss (loss that down-weights easy examples). Apply light augmentation (noise/masking or blanking spans) to mimic real conditions.
+
+Evaluation: report precision (share of predicted positives that are correct), recall (share of actual positives the model found), F1, AUC. Provide a short error analysis focusing on common false positives (stellar variability) and false negatives (very shallow or short transits).
+
+Optional timing helper (simple feature for period, time between repeats/spacing): add a simple feature for expected transit spacing (period guesses) to give the RNN more context, and help to find transits that may have been missed.
+
+\subsection{Transformer Architecture}
+
+The design goal in creating a Transformer architecture will be modeled after that of \citeauthor{salinas2023distinguishingtransitfalsepositives} (\citeyear{salinas2023distinguishingtransitfalsepositives}), where I will aim to process phase-folded light curves in order to classify the data as either positive (the data indicates an exoplanet) or negative (the data does not contain a TCE or represents a false positive). 
+
+The first step will be to gather and prepare the test data. I will start with synthetic data from the K2 mission, as mentioned in the Datasets section. This is in contrast to \citeauthor{salinas2023distinguishingtransitfalsepositives}'s use of data from TESS in \citeyear{salinas2023distinguishingtransitfalsepositives}. The data from K2 includes many pre-labeled variations of possible light curves that may be encountered, which reduces the complexity of curating our data set. Because this data is minimally processed, I will need to standardize and detrend the data to help process the input, without removing or masking important trends in the data. Then I will need to use a simple CNN to embed relevant information in each token of a light curve and create an input vector that is a better representation of the event. This information will likely include temporal positional data, flux data, and centroid pixel position data, and may include transit period, duration, or host star temperature. I will explore the use of Python packages like ‘lightkurve‘ and ‘astropy api‘ to help with this standardization, normalization, and pre-processing step.
+
+When designing the Transformer model for this process, I will focus on the use of an encoder-only architecture because I want all of the data to be visible to the model, and I am only looking for the analysis to return a binary result. \citeauthor{salinas2023distinguishingtransitfalsepositives} found that three encoders, with four layers each, and four attention heads per layer provided a good balance between performance and efficiency. Each layer will likely contain a multi-head self-attention block (with four heads), an add and norm block, a position-wise feed-forward network, followed by another add and norm block, which is the original encoder structure defined by \citeauthor{vaswani2017attentionneed} (\citeyear{vaswani2017attentionneed}). 
+
+The output of each encoder block will be reduced via a max pooling layer. These pooled feature vectors are then concatenated and passed through a final linear layer with a softmax activation function to predict the binary classification label (Planet or Not Planet).
+
+When evaluating the output of the model, I will pay attention to the Recall, Precision, and F1 scores to gain an understanding of how well the model is working. Additionally, I may pursue the creation of an attention map to help visualize where the attention model is prioritizing the relationships between tokens and how it is making decisions.
+
+\section*{Experimental Plan \& Milestones}
+Week 1: Assemble the small curated subset (\textasciitilde{}10 positive, matched negatives) and write a minimal data-prep plan.
+
+Week 2: Train a simple baseline (the small curated dataset) to set a floor; implement the first Machine Learning run.
+
+Week 3: Tune individual MLs and pick the better or different variant based on validation F1/AUC.
+
+Week 4: Add optional pseudo/synthetic injections to balance classes; re‑evaluate and do a brief error analysis.
+
+Week 5–6: Polish: gather findings and start final metrics/tables/plots, and input to the write‑up for the team paper.
+
+\section*{Overall Project Risks \& Mitigations}
+• Too few positives: mitigate with pseudo/synthetic injections and careful cross‑validation.
+• Overfitting the small set: use validation splits, early stopping, and simple models first.
+• Data cleaning surprises: keep pre-processing minimal and documented; track all changes in the notebook.
+
+\section*{Conclusion}
+In conclusion, through this research, we plan to solve two problems: (1) Automatically classifying planets vs. non-planets in light curves. (2) Building models that are more generalizable to multiple datasets to reduce the need to create a model for each dataset released. The plan of action is for each member to develop a different machine learning model – CNN, RNN, and Transformer, which is trained on Kepler, TESS, and simulated data. We plan to compare these models using shared evaluation metrics, then analyze which approach is the most adaptable for future exoplanet discovery.
+
+\bibliography{resourceFile}
+
+\end{document}\n
