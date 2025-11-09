@@ -1,0 +1,17 @@
+{
+  "timestamp": "20251109_104129",
+  "best_trial": 12,
+  "best_auc": 0.7465504720406682,
+  "best_params": {
+    "hidden_size": 256,
+    "num_layers": 4,
+    "dropout": 0.3107486457249,
+    "lr": 0.00022460107744912597,
+    "batch_size": 128,
+    "n_clusters": 5,
+    "weight_decay": 7.558618306725896e-06,
+    "cluster_embed_dim": 32
+  },
+  "n_trials": 20,
+  "elapsed_time_minutes": 60.08917367855708
+}

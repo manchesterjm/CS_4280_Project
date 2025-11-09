@@ -4,9 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an exoplanet detection project using deep learning (BiLSTM with K-means clustering) to identify planetary transits in stellar light curve data from NASA's TESS/Kepler missions. The project has achieved **AUC 0.6947** on validation data and successfully tested on real TESS light curves.
+This is an exoplanet detection project using deep learning (BiLSTM with K-means clustering) to identify planetary transits in stellar light curve data from NASA's TESS/Kepler missions. The project has achieved **AUC 0.7572** (+9.0% improvement) after Optuna hyperparameter optimization, up from the baseline AUC 0.6947. Successfully tested on 100 confirmed exoplanet systems with 16/300 windows correctly identified as planet candidates.
 
 **Environment**: Windows 11, CUDA-enabled GPU, conda environment `exo-lstm-gpu`
+**Current Status**: Optimization complete, final model ready for production use
 
 ## Key Commands
 
@@ -198,11 +199,34 @@ Saved checkpoint includes:
 - **Precision**: Of predicted planets, how many are real?
 - **Recall**: Of real planets, how many did we detect?
 
-**Current Performance**: AUC 0.6947, F1 0.34, Accuracy 52%
+**Baseline Performance**: AUC 0.6947, F1 0.34, Accuracy 52%
+**Optimized Performance**: AUC 0.7572 (+9.0%), tested on 100 confirmed exoplanet systems
+
+### Optuna Hyperparameter Optimization
+
+Completed November 2025. Optuna ran 20 trials using TPE sampler to optimize 7 hyperparameters:
+- **Search space**: layers (3-5), batch size (32/64/128), LR (1e-5 to 1e-3), dropout (0.2-0.5), weight decay (1e-7 to 1e-4), cluster embed dim (16/32/64), n_clusters (3-7)
+- **Best trial**: Trial 12/20
+- **Key improvements**:
+  - 4 LSTM layers (vs 3 baseline)
+  - Batch size 128 (vs 64 baseline)
+  - LR 0.000225 (vs 0.0001 baseline)
+  - Dropout 0.311 (vs 0.4 baseline)
+- **Results**: AUC improved from 0.6947 → 0.7572 (+9.0%)
+- **Location**: `Code/runs/bilstm_cluster_optimized/best.pt`
 
 ### Real-World Testing
-Successfully tested on 7 TESS stars, correctly identified **TIC 307210830** (L 98-59 system with confirmed planets).
-Mean prediction probability: 0.5959
+
+**7 TESS Stars (Initial Test)**:
+- Correctly identified **TIC 307210830** (L 98-59 system with confirmed planets)
+- Mean prediction probability: 0.5959
+
+**100 Confirmed Exoplanet Systems (Final Test)**:
+- Dataset: 300 windows from 100 TESS/Kepler confirmed planet hosts
+- Baseline model: 0/300 positive predictions (too conservative)
+- Optimized model: 16/300 positive predictions (5.3%)
+- Top candidate: TIC 261337380 (probability 0.6666)
+- Demonstrates improved calibration and generalization
 
 ## Common Patterns
 

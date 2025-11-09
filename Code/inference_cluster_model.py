@@ -102,8 +102,9 @@ def assign_clusters(meta_df, checkpoint):
     # Recreate KMeans and assign clusters
     kmeans = KMeans(n_clusters=len(kmeans_centers), random_state=42)
     kmeans.cluster_centers_ = np.array(kmeans_centers)
+    kmeans._n_threads = 1  # Fix for sklearn compatibility
     cluster_ids = kmeans.predict(features_scaled)
-    
+
     return cluster_ids
 
 
