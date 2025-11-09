@@ -81,38 +81,37 @@ CS_4280_Project/
 │       ├── scripts/              # Deprecated scripts
 │       └── models/               # Old models
 │
-├── term_paper/                   # 📝 CS4820 TERM PAPER (Midterm Report)
-│   ├── midterm_report_RNN.tex    # Main midterm report (due Nov 13)
+├── term_paper/                   # 📝 CS4820 TERM PAPER (Midterm Report - Due Nov 13)
+│   ├── midterm_report_RNN.tex    # 📄 Main midterm report (AAAI format)
 │   ├── resourceFile.bib          # Bibliography (6 papers)
-│   ├── MIDTERM_REPORT_SUMMARY.md # Report documentation
-│   ├── PAPER_INVENTORY.md        # All 6 papers tracked
-│   ├── RECOMMENDED_PAPERS_MIDTERM.md # Paper selection guide
-│   └── term paper sources/       # Source PDFs (6 papers)
-│       ├── s41467-020-15293-x.pdf    # Speiser 2020 (Nature Comm)
-│       ├── s41598-024-62182-0.pdf    # Vu 2024 (Sci Reports)
-│       ├── 2410.19402v1.pdf          # Ding 2024 (MNRAS)
-│       ├── aa41068-21.pdf            # Vida 2021 (A&A)
-│       ├── stv2604.pdf               # Kügler 2016 (MNRAS)
-│       └── DuDaiTriUpa2016.pdf       # Du 2016 (KDD)
-│
-├── research_paper/               # 📄 RESEARCH PAPER MATERIALS
-│   ├── methodology.md            # Complete methods section
-│   ├── results_tables.md         # 11 publication-ready tables
-│   ├── paper_template.tex        # LaTeX paper template
-│   ├── README.md                 # Detailed usage guide
-│   ├── SUMMARY.md                # Quick reference
-│   ├── generate_visualizations.py     # 9 figure generator
-│   ├── generate_architecture_diagram.py
-│   └── figures/                  # Generated visualizations (300 DPI)
-│       ├── roc_curve.png
-│       ├── confusion_matrix.png
-│       ├── prediction_distributions.png
-│       ├── cluster_distribution.png
-│       ├── performance_by_cluster.png
-│       ├── top_predictions.png
-│       ├── precision_recall_curve.png
-│       ├── model_comparison.png
-│       └── training_curves.png
+│   │
+│   ├── paper_sources/            # Source PDFs (6 research papers)
+│   │   ├── s41467-020-15293-x.pdf    # Speiser 2020 (Nature Comm) - Clustering+ML
+│   │   ├── s41598-024-62182-0.pdf    # Vu 2024 (Sci Reports) - LSTM time series
+│   │   ├── 2410.19402v1.pdf          # Ding 2024 (MNRAS) - LSTM astronomy
+│   │   ├── aa41068-21.pdf            # Vida 2021 (A&A) - RNN flares
+│   │   ├── stv2604.pdf               # Kügler 2016 (MNRAS) - ESN autoencoder
+│   │   └── DuDaiTriUpa2016.pdf       # Du 2016 (KDD) - RMTPP timing
+│   │
+│   ├── materials/                # Research paper materials (tables, figures, scripts)
+│   │   ├── methodology.md        # Complete methods section
+│   │   ├── results_tables.md     # 11 publication-ready tables
+│   │   ├── README.md             # Materials usage guide
+│   │   ├── SUMMARY.md            # Quick reference
+│   │   ├── generate_visualizations.py     # 9 figure generator
+│   │   ├── generate_architecture_diagram.py
+│   │   └── figures/              # Generated visualizations (300 DPI)
+│   │       ├── roc_curve.png
+│   │       ├── confusion_matrix.png
+│   │       └── ... (9 total figures)
+│   │
+│   ├── documentation/            # Term paper documentation
+│   │   ├── MIDTERM_REPORT_SUMMARY.md  # Complete report summary
+│   │   ├── PAPER_INVENTORY.md         # All 6 papers tracked
+│   │   └── RECOMMENDED_PAPERS_MIDTERM.md  # Paper selection guide
+│   │
+│   ├── AuthorKit24-4/            # AAAI LaTeX template files
+│   └── ... (proposal files, drafts)
 │
 ├── Planet_LightCurve_Data/
 │   └── processed/                # 100 confirmed exoplanet light curves

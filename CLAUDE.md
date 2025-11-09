@@ -269,11 +269,24 @@ Key packages (conda environment `exo-lstm-gpu`):
 4. **No automated hyperparameter tuning**: Manual grid search needed
 5. **No ensemble methods**: Single model, no voting/averaging
 
-## Research Paper Materials
+## Term Paper Materials (CS4820 Midterm Report)
 
-Complete research paper materials are available in `research_paper/`:
+Complete term paper materials are organized in `term_paper/`:
 
-### Documentation Files
+### Main Report
+- **midterm_report_RNN.tex** - Main midterm report (AAAI format, due Nov 13, 2025)
+- **resourceFile.bib** - Bibliography with all 6 research papers
+
+### Paper Sources (6 PDFs)
+Located in `term_paper/paper_sources/`:
+1. **Speiser 2020** (Nature Communications) - Machine learning + clustering for large datasets
+2. **Vu 2024** (Scientific Reports) - LSTM for time series patterns
+3. **Ding 2024** (MNRAS) - LSTM for astronomical photometry
+4. **Vida 2021** (A&A) - RNN for Kepler/TESS flares (original proposal)
+5. **Kügler 2016** (MNRAS) - ESN-autoencoder (original proposal)
+6. **Du 2016** (KDD) - RMTPP timing model (original proposal)
+
+### Research Materials (`term_paper/materials/`)
 - **methodology.md** - Complete methods section (11 sections, publication-ready)
   - Data collection and preprocessing
   - BLS feature extraction
@@ -293,13 +306,7 @@ Complete research paper materials are available in `research_paper/`:
   - Real TESS testing (TIC 307210830 validated)
   - Confusion matrix (TP=5, FP=8, TN=43, FN=45)
 
-- **paper_template.tex** - Full LaTeX paper template with:
-  - Abstract, Introduction, Related Work
-  - Methodology (references methodology.md)
-  - Results (references all tables and figures)
-  - Discussion, Conclusion, Bibliography
-
-### Visualization Scripts
+### Visualization Scripts (`term_paper/materials/`)
 - **generate_visualizations.py** - Creates 9 publication-ready figures:
   1. ROC curve (AUC 0.6947)
   2. Confusion matrix heatmap
@@ -319,12 +326,17 @@ Complete research paper materials are available in `research_paper/`:
 ```bash
 conda activate exo-lstm-gpu
 conda install matplotlib seaborn -y
-cd research_paper
+cd term_paper/materials
 python generate_visualizations.py
 python generate_architecture_diagram.py
 ```
 
-All outputs saved to `research_paper/figures/` at 300 DPI, publication-ready.
+All outputs saved to `term_paper/materials/figures/` at 300 DPI, publication-ready.
+
+### Documentation (`term_paper/documentation/`)
+- **MIDTERM_REPORT_SUMMARY.md** - Complete report overview and compilation instructions
+- **PAPER_INVENTORY.md** - Detailed tracking of all 6 research papers
+- **RECOMMENDED_PAPERS_MIDTERM.md** - Paper selection rationale and H5 index verification
 
 ### Key Results for Paper
 - **AUC**: 0.6947 (primary metric, 69.47%)
