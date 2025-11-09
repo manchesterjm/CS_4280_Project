@@ -93,9 +93,10 @@ CS_4280_Project/
 │
 ├── term_paper/                   # 📝 CS4820 TERM PAPER (Midterm Report - Due Nov 13)
 │   ├── midterm_report_RNN.tex    # 📄 Main midterm report (AAAI format)
-│   ├── resourceFile.bib          # Bibliography (6 papers)
+│   ├── resourceFile.bib          # Bibliography (6 papers, need 3 more for final)
+│   ├── PROJECT_STATUS_AND_FINAL_PAPER_PLAN.md  # 🆕 Complete project status & final paper plan
 │   │
-│   ├── paper_sources/            # Source PDFs (6 research papers)
+│   ├── paper_sources/            # Source PDFs (6+ research papers)
 │   │   ├── s41467-020-15293-x.pdf    # Speiser 2020 (Nature Comm) - Clustering+ML
 │   │   ├── s41598-024-62182-0.pdf    # Vu 2024 (Sci Reports) - LSTM time series
 │   │   ├── 2410.19402v1.pdf          # Ding 2024 (MNRAS) - LSTM astronomy
