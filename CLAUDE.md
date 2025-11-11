@@ -6,8 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is an exoplanet detection project using deep learning (BiLSTM with K-means clustering) to identify planetary transits in stellar light curve data from NASA's TESS/Kepler missions. The project has achieved **AUC 0.7572** (+9.0% improvement) after Optuna hyperparameter optimization, up from the baseline AUC 0.6947. Successfully tested on 100 confirmed exoplanet systems with 16/300 windows correctly identified as planet candidates.
 
+**New Approach (November 2025)**: Switched to **balanced synthetic dataset generation** to address class imbalance issues. Using batman-package to generate realistic planetary transits with TESS-like noise, combined with stellar flares, eclipsing binaries, pure noise, and background events for a true 50/50 class balance.
+
 **Environment**: Windows 11, CUDA-enabled GPU, conda environment `exo-lstm-gpu`
-**Current Status**: Optimization complete, final model ready for production use
+**Current Status**: Balanced synthetic dataset ready (200 planets + 200 non-planets = 400 total), ready for optimization
 
 ## Key Commands
 
@@ -36,7 +38,34 @@ python train_bilstm_cluster.py `
 
 **Critical**: `--num_workers 0` must be used on Windows to avoid multiprocessing crashes
 
-### Building Training Windows
+### Generating Balanced Synthetic Dataset (Recommended Approach)
+```powershell
+# 1. Generate 400 light curves (200 planets + 200 non-planets)
+python generate_synthetic_dataset.py `
+  --output_dir "C:\CS_4280_Project\synthetic_dataset_400" `
+  --n_planets 200 `
+  --n_non_planets 200 `
+  --noise_ppm 200 `
+  --seed 42
+
+# 2. Build training windows from synthetic data
+python build_windows_from_synthetic.py `
+  --data_dir "C:\CS_4280_Project\synthetic_dataset_400" `
+  --output_dir "C:\CS_4280_Project\Code\data\windows_train_400" `
+  --seq_len 2048 `
+  --n_windows 3 `
+  --seed 42
+```
+
+**Output**:
+- 400 light curves (50/50 balance)
+- ~1,500 training windows (30% positive rate)
+- Transit detection via scipy peak finding
+- TESS-realistic noise (100-1000 ppm)
+
+**Non-planet types**: Stellar flares, eclipsing binaries, pure noise, background events
+
+### Building Training Windows (Legacy Approach)
 ```powershell
 python build_windows_parallel_v6.py `
   --processed_dir "C:\CS_4280_Project\test_dataset\simulated_dataset\processed" `

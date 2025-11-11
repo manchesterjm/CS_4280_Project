@@ -6,9 +6,29 @@ This project uses deep learning (RNN/LSTM networks) to detect exoplanets from st
 
 ## Current Status (November 2025)
 
-### ✅ OPTIMIZATION COMPLETE - FINAL RESULTS
+### 🚀 NEW APPROACH - BALANCED SYNTHETIC DATASET (November 10, 2025)
 
-**Latest Updates (November 9, 2025):**
+**Latest Development:**
+- ✅ **Balanced synthetic dataset generation** using batman-package for realistic transits
+- ✅ Generated **400 light curves** (200 planets + 200 non-planets) = **50/50 class balance**
+- ✅ Built **1,522 training windows** (30.3% positive rate)
+- ✅ TESS-realistic noise modeling (200 ppm photon noise + stellar variability)
+- ✅ Multiple non-planet types: stellar flares, eclipsing binaries, noise, background events
+- ⏳ **Ready for Optuna optimization** (estimated 3-4 hours for 15 trials)
+
+**Why this approach:**
+- Addresses class imbalance issue (previously 23% positive → now 30%+)
+- Controlled, reproducible dataset with known ground truth
+- Fast generation (<20 seconds for 400 light curves)
+- Easier to scale and iterate
+
+**New Scripts:**
+- `generate_synthetic_dataset.py` - Batman-based realistic transit generation
+- `build_windows_from_synthetic.py` - Fast window extraction with transit detection
+
+### ✅ OPTIMIZATION COMPLETE - PREVIOUS RESULTS (November 9, 2025)
+
+**Previous Achievements:**
 - ✅ **Optuna hyperparameter optimization completed successfully!**
 - ✅ **Final AUC: 0.7572** (optimized model, +9.0% improvement from baseline)
 - ✅ Tested on **100 confirmed exoplanet systems** (300 windows)
@@ -44,7 +64,10 @@ CS_4280_Project/
 ├── Code/
 │   ├── train_bilstm_cluster.py        # Main training script (WORKING ✅)
 │   ├── inference_cluster_model.py     # Inference on new data
-│   ├── build_windows_parallel_v6.py   # Window building (latest)
+│   ├── generate_synthetic_dataset.py  # 🆕 Generate balanced synthetic data
+│   ├── build_windows_from_synthetic.py # 🆕 Fast window builder for synthetic data
+│   ├── build_windows_parallel_v6.py   # Window building (legacy BLS approach)
+│   ├── optuna_optimize.py             # Hyperparameter optimization
 │   ├── download_tess_lightcurves.py   # Download real TESS data
 │   ├── process_tess_for_testing.py    # Process TESS downloads
 │   ├── convert_npy_to_csv.py          # Data format conversion

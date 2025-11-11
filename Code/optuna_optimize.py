@@ -110,6 +110,9 @@ def cluster_windows(meta_df, n_clusters=5, random_state=42):
     feature_cols = ['period', 'duration', 'depth', 'bls_power']
     features = meta_df[feature_cols].values
 
+    # Fill NaN values with 0 (for non-planet windows)
+    features = np.nan_to_num(features, nan=0.0)
+
     # Standardize features
     scaler = StandardScaler()
     features_scaled = scaler.fit_transform(features)
@@ -191,8 +194,12 @@ def validate(model, dataloader, device, amp_dtype='fp16'):
 def objective(trial, X, y, meta, device, epochs_per_trial, pos_weight, amp_dtype):
     """Optuna objective function"""
 
-    # Suggest hyperparameters
-    hidden_size = trial.suggest_categorical('hidden_size', [128, 256, 512])
+    # Clear GPU cache at start of each trial
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+    # Suggest hyperparameters (removed 512 from hidden_size to avoid GPU crash)
+    hidden_size = trial.suggest_categorical('hidden_size', [128, 256])
     num_layers = trial.suggest_int('num_layers', 2, 4)
     dropout = trial.suggest_float('dropout', 0.2, 0.5)
     lr = trial.suggest_float('lr', 1e-5, 1e-3, log=True)
@@ -262,6 +269,10 @@ def objective(trial, X, y, meta, device, epochs_per_trial, pos_weight, amp_dtype
         if trial.should_prune():
             raise optuna.TrialPruned()
 
+    # Clear GPU cache before returning
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
     return best_auc
 
 
@@ -270,9 +281,9 @@ def main():
     parser.add_argument('--windows_dir', type=str,
                        default=r'C:\CS_4280_Project\Code\data\windows_train',
                        help='Path to windows directory')
-    parser.add_argument('--n_trials', type=int, default=50,
+    parser.add_argument('--n_trials', type=int, default=20,
                        help='Number of Optuna trials')
-    parser.add_argument('--epochs_per_trial', type=int, default=40,
+    parser.add_argument('--epochs_per_trial', type=int, default=50,
                        help='Max epochs per trial (with early stopping)')
     parser.add_argument('--output_dir', type=str,
                        default=r'C:\CS_4280_Project\Code\optuna_results',
@@ -330,7 +341,8 @@ def main():
             trial, X, y, meta, device, args.epochs_per_trial, pos_weight, args.amp_dtype
         ),
         n_trials=args.n_trials,
-        show_progress_bar=True
+        show_progress_bar=True,
+        catch=(RuntimeError, torch.cuda.OutOfMemoryError)  # Continue even if CUDA errors occur
     )
 
     elapsed_time = time.time() - start_time
