@@ -1,0 +1,7 @@
+Parameter,Baseline,Optimized,Changed
+hidden_size,256.0,256.0,
+num_layers,4.0,4.0,
+dropout,0.3107486457249,0.379597545259111,✓
+lr,0.00022460107744912597,2.0513382630874486e-05,✓
+batch_size,128.0,128.0,
+n_clusters,5.0,10.0,✓
