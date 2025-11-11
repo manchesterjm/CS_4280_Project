@@ -151,8 +151,13 @@ def cluster_windows(meta_df, n_clusters=5):
     for cluster_id in unique:
         mask = cluster_ids == cluster_id
         cluster_data = meta_df[mask]
-        pos_rate = cluster_data['label'].mean()
-        
+        # Convert string labels to numeric if needed
+        if cluster_data['label'].dtype == object:
+            numeric_labels = (cluster_data['label'] == 'planet').astype(int)
+            pos_rate = numeric_labels.mean()
+        else:
+            pos_rate = cluster_data['label'].mean()
+
         print(f"  Cluster {cluster_id}:")
         print(f"    Positive rate: {pos_rate:.1%}")
         print(f"    Avg period: {cluster_data['period'].mean():.2f} days")

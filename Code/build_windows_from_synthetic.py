@@ -77,12 +77,15 @@ def process_planet_lightcurve(lc_path, label_data, seq_len, n_windows_per_curve=
             if window is not None:
                 windows.append(window)
                 labels.append(1)  # Planet
+                # Calculate duration as ~2% of period (typical for planets)
+                depth = label_data.get('depth', 0.01)
+                duration = period / 50.0 if period else 0.1
                 metadata.append({
                     'tic_id': label_data['tic_id'],
                     'label': 'planet',
                     'period': period,
-                    'depth': label_data.get('depth', np.nan),
-                    'duration': label_data.get('duration', np.nan),
+                    'depth': depth if not np.isnan(depth) else 0.01,
+                    'duration': duration,
                     't0': time[center_idx],
                     'bls_power': 1.0  # Synthetic data doesn't have BLS power
                 })
@@ -100,10 +103,10 @@ def process_planet_lightcurve(lc_path, label_data, seq_len, n_windows_per_curve=
             metadata.append({
                 'tic_id': label_data['tic_id'],
                 'label': 'non-planet',
-                'period': period if period is not None else np.nan,
-                'depth': np.nan,
-                'duration': np.nan,
-                't0': np.nan,
+                'period': period if (period is not None and not np.isnan(period)) else 5.0,
+                'depth': 0.001,  # Default small depth
+                'duration': 0.1,  # Default short duration
+                't0': time[random_idx],
                 'bls_power': 0.0
             })
 
@@ -135,10 +138,10 @@ def process_non_planet_lightcurve(lc_path, label_data, seq_len, n_windows_per_cu
             metadata.append({
                 'tic_id': label_data['tic_id'],
                 'label': label_data['label'],
-                'period': np.nan,
-                'depth': np.nan,
-                'duration': np.nan,
-                't0': np.nan,
+                'period': 5.0,  # Default period for non-planets
+                'depth': 0.001,  # Default small depth
+                'duration': 0.1,  # Default short duration
+                't0': time[random_idx],
                 'bls_power': 0.0
             })
 
