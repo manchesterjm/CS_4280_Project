@@ -6,10 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is an exoplanet detection project using deep learning (BiLSTM with K-means clustering) to identify planetary transits in stellar light curve data from NASA's TESS/Kepler missions. The project has achieved **AUC 0.7572** (+9.0% improvement) after Optuna hyperparameter optimization, up from the baseline AUC 0.6947. Successfully tested on 100 confirmed exoplanet systems with 16/300 windows correctly identified as planet candidates.
 
-**New Approach (November 2025)**: Switched to **balanced synthetic dataset generation** to address class imbalance issues. Using batman-package to generate realistic planetary transits with TESS-like noise, combined with stellar flares, eclipsing binaries, pure noise, and background events for a true 50/50 class balance.
+**UPDATE November 11, 2025**: Balanced synthetic approach **FAILED** due to domain shift. Pure synthetic training achieved AUC 1.0 in training but AUC 0.45 (worse than random!) on real TESS data. Root cause: Synthetic transit depth 8× shallower than real data.
+
+**Current Approach**: **Hybrid training** (real + synthetic mix) to combine domain fidelity with better class balance. Testing 90% real / 10% synthetic and 75% real / 25% synthetic ratios.
 
 **Environment**: Windows 11, CUDA-enabled GPU, conda environment `exo-lstm-gpu`
-**Current Status**: Balanced synthetic dataset ready (200 planets + 200 non-planets = 400 total), ready for optimization
+**Current Status**: Optimized model (real data) achieves AUC 0.805. Hybrid datasets ready for training.
 
 ## Key Commands
 
@@ -64,6 +66,46 @@ python build_windows_from_synthetic.py `
 - TESS-realistic noise (100-1000 ppm)
 
 **Non-planet types**: Stellar flares, eclipsing binaries, pure noise, background events
+
+**IMPORTANT**: Pure synthetic training failed (AUC 0.45 on real data). Use hybrid approach instead.
+
+### Hybrid Training (Real + Synthetic Mix) - RECOMMENDED
+
+```powershell
+# 1. Build hybrid dataset (90% real, 10% synthetic)
+python build_hybrid_dataset.py `
+  --real_dir "C:\CS_4280_Project\Code\data\windows_train" `
+  --synthetic_dir "C:\CS_4280_Project\Code\data\windows_train_400" `
+  --mix_ratio 0.90 `
+  --output_dir "C:\CS_4280_Project\Code\data\windows_hybrid_90"
+
+# 2. Train on hybrid dataset
+python train_bilstm_cluster.py `
+  --windows_dir "C:\CS_4280_Project\Code\data\windows_hybrid_90" `
+  --n_clusters 5 `
+  --epochs 80 `
+  --batch_size 128 `
+  --lr 0.000225 `
+  --hidden 256 `
+  --layers 4 `
+  --dropout 0.311 `
+  --save_dir "C:\CS_4280_Project\Code\runs\bilstm_cluster_hybrid_90" `
+  --amp_dtype fp16 `
+  --pos_weight 3.0 `
+  --num_workers 0
+
+# 3. Or use the batch script to train both 90% and 75% models
+.\train_hybrid_models.bat
+```
+
+**Why Hybrid?**
+- Real data provides domain fidelity (prevents domain shift)
+- Synthetic data improves class balance (22.9% → 24.2% positive)
+- More training examples (655 → 727 windows for 90% mix)
+
+**Expected Performance**:
+- Hybrid 90: AUC 0.79-0.82 (matches or beats pure real)
+- Hybrid 75: AUC 0.75-0.80 (more synthetic noise)
 
 ### Building Training Windows (Legacy Approach)
 ```powershell
