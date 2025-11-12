@@ -97,7 +97,7 @@ def download_kepler_lightcurve(hostname, output_dir):
             return False
 
         # Extract KIC/KOI ID for filename
-        target_id = search[0].target_name.replace(' ', '_')
+        target_id = str(search[0].target_name).replace(' ', '_')
 
         # Save to CSV
         output_path = output_dir / f"{target_id}_lightcurve.csv"
