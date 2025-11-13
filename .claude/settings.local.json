@@ -1,23 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:code.claude.com)",
-      "Bash(move:*)",
-      "Bash(cmd /c move \"d:\\Videos\\Captures\\CS_4280_Project - Visual Studio Code 2025-11-12 15-36-55.mp4\" \"C:\\CS_4280_Project\\term_project_files\\demo_video.mp4\")",
-      "Bash(python generate_rnn_visualizations.py:*)",
-      "Bash(python:*)",
-      "Bash(conda activate:*)",
-      "Bash(pip install:*)",
-      "Bash(dir \"C:\\CS_4280_Project\\term_project_files\\materials\\figures\\rnn_slides\")",
-      "Bash(cmd /c move \"C:\\CS_4280_Project\\term_project_files\" \"C:\\CS_4280_Project\\term_project_files\")",
-      "Bash(dir \"C:\\CS_4280_Project\")",
-      "Bash(findstr:*)",
-      "Bash(cmd /c \"ren term_project_files term_project_files\")",
-      "Bash(powershell -Command \"Rename-Item -Path ''C:\\CS_4280_Project\\term_project_files'' -NewName ''term_project_files''\")",
-      "Bash(nul)",
-      "WebSearch",
-      "WebFetch(domain:scholar.google.com)",
-      "Bash(git add:*)"
+      "Bash(dir:*)",
+      "Bash(cmd /c \"dir /s /b d:\\*.mp4 | findstr CS_4280\")",
+      "Bash(cmd /c \"dir /s /b C:\\CS_4280_Project\\*.mp4\")",
+      "Bash(cmd /c \"dir \"\"d:\\Videos\\Captures\\CS_4280_Project*.*\"\"\")",
+      "Bash(powershell -Command \"Copy-Item -Path ''d:\\Videos\\Captures\\CS_4280_Project - Visual Studio Code 2025-11-12 15-36-55.mp4'' -Destination ''C:\\CS_4280_Project\\term_project_files\\demo_video.mp4''\")",
+      "Bash(powershell -Command \"Test-Path ''C:\\CS_4280_Project\\term_project_files\\demo_video.mp4''\")",
+      "Bash(powershell -Command \"if (Test-Path ''nul'') { Remove-Item ''nul'' -Force }\")"
     ],
     "deny": [],
     "ask": []
