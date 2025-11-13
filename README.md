@@ -114,7 +114,7 @@ CS_4280_Project/
 │       ├── scripts/              # Deprecated scripts
 │       └── models/               # Old models
 │
-├── term_paper/                   # 📝 CS4820 TERM PAPER (Midterm Report - Due Nov 13)
+├── term_project_files/                   # 📝 CS4820 TERM PAPER (Midterm Report - Due Nov 13)
 │   ├── midterm_report_RNN.tex    # 📄 Main midterm report (AAAI format)
 │   ├── resourceFile.bib          # Bibliography (6 papers, need 3 more for final)
 │   ├── PROJECT_STATUS_AND_FINAL_PAPER_PLAN.md  # 🆕 Complete project status & final paper plan

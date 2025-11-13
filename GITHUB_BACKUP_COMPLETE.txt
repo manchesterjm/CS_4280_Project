@@ -1,0 +1,107 @@
+================================================================================
+ GITHUB BACKUP COMPLETE
+================================================================================
+
+Backup Time: November 11, 2025 at 04:20 UTC
+Repository: https://github.com/manchesterjm/CS_4280_Project
+Commit: 626dd09
+
+================================================================================
+ FILES BACKED UP
+================================================================================
+
+Code & Scripts:
+✅ Code/build_windows_from_synthetic.py (fixed NaN handling)
+✅ Code/train_bilstm_cluster.py (fixed string label support)
+✅ Code/monitor_and_complete_pipeline.py (automated pipeline)
+
+Documentation:
+✅ AUTOMATION_STATUS.txt
+✅ CURRENT_RUN_STATUS.md
+✅ FINAL_STATUS_REPORT.md
+✅ OVERNIGHT_RUN_SUMMARY.md
+✅ READ_ME_FIRST.txt
+✅ URGENT_UPDATE.txt
+
+Term Paper Materials:
+✅ term_project_files/MIDTERM_SLIDES.md
+✅ term_project_files/MIDTERM_SLIDES_APA.md
+✅ term_project_files/Merged_Proposal_AAAI24_11.9.2025.1046.tex
+✅ term_project_files/convert_slides_to_pptx.py
+✅ term_project_files/convert_slides_to_pptx_v2.py
+
+Total: 14 files changed, 3,364 insertions
+
+================================================================================
+ WHAT'S NOT BACKED UP (Too Large for GitHub)
+================================================================================
+
+Data Files (Local Only):
+- synthetic_dataset_400/ (400 light curves, ~200 MB)
+- Code/data/windows_train_400/ (1,522 windows)
+- Code/data/windows_planet_test/ (100 TESS planets)
+- Code/runs/bilstm_cluster_balanced/ (model checkpoints)
+- synthetic_balanced_dataset/ (older version)
+
+These are safe on your local machine and can be regenerated with the scripts.
+
+================================================================================
+ VERIFICATION
+================================================================================
+
+Repository Status: ✅ Up to date with origin/main
+Last Commit: 626dd09
+Branch: main
+Remote: origin (https://github.com/manchesterjm/CS_4280_Project.git)
+
+View your backup online:
+https://github.com/manchesterjm/CS_4280_Project/commit/626dd09
+
+================================================================================
+ RECOVERY INSTRUCTIONS (If Needed)
+================================================================================
+
+To restore this exact state:
+
+1. Clone repository:
+   git clone https://github.com/manchesterjm/CS_4280_Project.git
+
+2. Checkout this commit:
+   git checkout 626dd09
+
+3. Regenerate data:
+   python Code/generate_synthetic_dataset.py --output_dir synthetic_dataset_400 --n_planets 200 --n_non_planets 200 --seed 42
+   python Code/build_windows_from_synthetic.py --data_dir synthetic_dataset_400 --output_dir Code/data/windows_train_400 --seed 42
+
+4. Continue with automated pipeline:
+   python Code/monitor_and_complete_pipeline.py
+
+================================================================================
+ CURRENT ACTIVE PROCESSES (Still Running)
+================================================================================
+
+Process 488495: Optuna optimization on balanced dataset
+Process 75e4d6: Automated monitor and pipeline executor
+
+These will complete overnight and create additional files (not yet backed up):
+- optuna_results_balanced/best_params_*.json
+- runs/bilstm_cluster_balanced_final/best.pt
+- reports/balanced_model_planet_predictions.csv
+- COMPARISON_REPORT.md
+
+You can back these up tomorrow after completion!
+
+================================================================================
+ ALL CRITICAL WORK IS SAFE
+================================================================================
+
+✅ All code is on GitHub
+✅ All documentation is on GitHub
+✅ All scripts can regenerate data
+✅ Overnight pipeline will complete automatically
+
+EVERYTHING IS PROTECTED!
+
+Sleep well!
+
+================================================================================

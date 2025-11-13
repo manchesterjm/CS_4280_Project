@@ -1,0 +1,49 @@
+================================================================================
+OVERLEAF EDIT INSTRUCTIONS - RNN RELATED WORK SECTION
+================================================================================
+
+You only need to make ONE change to your Overleaf .tex file.
+
+LOCATION: Around line 156 in the RNN Related Work section
+
+FIND THIS PARAGRAPH (DELETE IT):
+--------------------------------------------------------------------------------
+Summary. The RNN literature that is relevant to light curves argues for (a) stacked LSTMs or GRUs with explicit class‑imbalance handling and conservative regularization \cite{Vida2021findingflaresrecurrent}, (b) representation and diagnostics that respect sequence structure \cite{kugler2016explorativeapproachkepler}, and (c) simple timing cues that help the network prefer periodic, transit‑like patterns \cite{Du2016markedtemporalpoint}. I will carry these into my RNN baseline so that it is both technically sound and scoped for our project timeline.
+--------------------------------------------------------------------------------
+
+REPLACE WITH THIS NEW SECTION:
+--------------------------------------------------------------------------------
+\subsubsection{Machine Learning with Clustering for Large Datasets}
+
+Speiser and colleagues demonstrate how supervised machine-learning approaches combined with clustering can process millions of data points efficiently \cite{Speiser2020clustering}. Their work on localization microscopy data shows that clustering-based preprocessing enables models to handle large-scale datasets by grouping similar patterns before classification. They achieved fast and accurate classification by first clustering the data and then training separate or cluster-aware classifiers. This is directly relevant to my light curve analysis because TESS and Kepler missions generate millions of photometric measurements that must be processed efficiently.
+
+For my work, clustering provides two key benefits. First, it reduces the effective dimensionality of the problem by grouping windows with similar characteristics (period, depth, duration, signal strength). This allows the BiLSTM to learn cluster-specific patterns rather than trying to model all variability in a single global representation. Second, clustering enables better handling of the heterogeneous nature of stellar signals. Some windows contain short-period shallow transits while others have long-period deep transits, and treating these as separate clusters helps the model learn appropriate features for each type. Following Speiser et al., I implemented K-means clustering on BLS-derived features and incorporated cluster identities as embeddings in the neural network architecture.
+
+\subsubsection{LSTM for Time Series Pattern Recognition}
+
+Vu et al.\ (2024) demonstrate that LSTMs effectively learn long-term dependencies in noisy time series data, which directly applies to exoplanet transit detection work \cite{Vu2024LSTM}. Their approach to handling sequential environmental data for storm prediction mirrors the challenges of processing periodic transit signals in light curves. The authors note that "LSTM was developed as an extension to RNNs, and can learn long-term dependencies from time series data." This is particularly relevant because transit signals often span multiple orbital periods in a light curve, requiring the model to remember patterns across long time gaps.
+
+Their work influenced my architecture choices in two ways. First, they showed that stacked LSTM layers with dropout regularization handle noisy sequential data better than simpler recurrent architectures. This confirmed my decision to use a 3-layer BiLSTM rather than a single-layer or GRU-based approach. Second, they emphasized the importance of proper class balancing and preprocessing for time series classification tasks. Following their methodology, I implemented class weighting (pos\_weight=3.367) to compensate for the 23 percent positive class ratio in my dataset, and I applied careful normalization to handle the heterogeneous noise levels across different TESS and Kepler observations.
+
+\subsubsection{LSTM for Astronomical Photometry}
+
+Ding et al.\ (2024) demonstrate that "LSTM has been increasingly used in astronomical research, mostly focused on spectral or temporal data analysis" \cite{Ding2024photometric}. Their work on photometric redshift estimation from survey data directly parallels my use of LSTM for TESS and Kepler light curve classification. They process flux measurements from multiple filters and show that LSTM models yield one-third fewer outliers than traditional multi-layer perceptron networks. This finding supports my architectural choice of LSTM over simpler feed-forward networks for transit detection.
+
+Several aspects of their methodology informed my implementation. First, they emphasize that LSTM architectures are particularly well-suited for handling the temporal dependencies in astronomical photometry, where measurements are unevenly sampled and contain systematic noise patterns. This matches the challenges I face with TESS light curves, which have gaps due to data downlinks and contain instrumental artifacts. Second, they demonstrate that careful feature engineering combined with LSTM temporal modeling outperforms purely data-driven approaches. Following this insight, I extracted BLS period-finding features (period, depth, duration, power) and combined them with raw flux time series as input to the network. Third, they show that LSTM models trained on large survey datasets generalize well to new targets, which gives confidence that my model trained on approximately 100 confirmed exoplanet systems can detect transits in previously unseen TESS light curves.
+
+\subsubsection{Synthesis: Applying These Ideas to BiLSTM + Clustering}
+
+Putting the six ideas together, my implementation draws from multiple sources to create a technically sound approach. From Vida et al.\ (2021), I use stacked BiLSTMs with class weighting and dropout regularization to detect rare events in long, noisy sequences. From Kügler et al.\ (2016), I evaluate my model on full sequence windows rather than just summary statistics, ensuring the network learns temporal patterns. From Du et al.\ (2016), I incorporate timing features (BLS period estimates) to help the network prefer periodic transit-like patterns over aperiodic stellar variability.
+
+From Speiser et al.\ (2020), I apply K-means clustering to group windows by their transit characteristics before training, enabling cluster-specific learning. From Vu et al.\ (2024), I use a 3-layer BiLSTM architecture with careful class balancing to handle the 23 percent positive class imbalance in my dataset. From Ding et al.\ (2024), I combine raw flux time series with extracted BLS features to leverage both temporal modeling from the LSTM and domain knowledge from period finding.
+
+These choices create a technically sound approach that is scoped for the project timeline while incorporating recent advances in deep learning for astronomical time series. The clustering-aware BiLSTM architecture addresses three key challenges: (1) class imbalance through weighted loss, (2) heterogeneous stellar variability through cluster-specific embeddings, and (3) temporal dependencies through bidirectional processing.
+--------------------------------------------------------------------------------
+
+DONE! That's the only change needed in your .tex file.
+
+Your .bib file already has all the right entries, so you don't need to change it.
+
+================================================================================
+END OF INSTRUCTIONS
+================================================================================

@@ -366,14 +366,14 @@ Key packages (conda environment `exo-lstm-gpu`):
 
 ## Term Paper Materials (CS4820 Midterm Report)
 
-Complete term paper materials are organized in `term_paper/`:
+Complete term paper materials are organized in `term_project_files/`:
 
 ### Main Report
 - **midterm_report_RNN.tex** - Main midterm report (AAAI format, due Nov 13, 2025)
 - **resourceFile.bib** - Bibliography with all 6 research papers
 
 ### Paper Sources (6 PDFs)
-Located in `term_paper/paper_sources/`:
+Located in `term_project_files/paper_sources/`:
 1. **Speiser 2020** (Nature Communications) - Machine learning + clustering for large datasets
 2. **Vu 2024** (Scientific Reports) - LSTM for time series patterns
 3. **Ding 2024** (MNRAS) - LSTM for astronomical photometry
@@ -381,7 +381,7 @@ Located in `term_paper/paper_sources/`:
 5. **Kügler 2016** (MNRAS) - ESN-autoencoder (original proposal)
 6. **Du 2016** (KDD) - RMTPP timing model (original proposal)
 
-### Research Materials (`term_paper/materials/`)
+### Research Materials (`term_project_files/materials/`)
 - **methodology.md** - Complete methods section (11 sections, publication-ready)
   - Data collection and preprocessing
   - BLS feature extraction
@@ -401,7 +401,7 @@ Located in `term_paper/paper_sources/`:
   - Real TESS testing (TIC 307210830 validated)
   - Confusion matrix (TP=5, FP=8, TN=43, FN=45)
 
-### Visualization Scripts (`term_paper/materials/`)
+### Visualization Scripts (`term_project_files/materials/`)
 - **generate_visualizations.py** - Creates 9 publication-ready figures:
   1. ROC curve (AUC 0.6947)
   2. Confusion matrix heatmap
@@ -421,14 +421,14 @@ Located in `term_paper/paper_sources/`:
 ```bash
 conda activate exo-lstm-gpu
 conda install matplotlib seaborn -y
-cd term_paper/materials
+cd term_project_files/materials
 python generate_visualizations.py
 python generate_architecture_diagram.py
 ```
 
-All outputs saved to `term_paper/materials/figures/` at 300 DPI, publication-ready.
+All outputs saved to `term_project_files/materials/figures/` at 300 DPI, publication-ready.
 
-### Documentation (`term_paper/documentation/`)
+### Documentation (`term_project_files/documentation/`)
 - **MIDTERM_REPORT_SUMMARY.md** - Complete report overview and compilation instructions
 - **PAPER_INVENTORY.md** - Detailed tracking of all 6 research papers
 - **RECOMMENDED_PAPERS_MIDTERM.md** - Paper selection rationale and H5 index verification
