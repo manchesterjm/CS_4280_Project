@@ -123,29 +123,61 @@ class ClusterBiLSTM(nn.Module):
 def cluster_windows(meta_df, n_clusters=5):
     """
     Cluster windows based on features
-    Uses: period, duration, depth, bls_power
+    Uses: period, duration, depth, bls_power (if available)
+    Or: category field (if BLS features not available)
     """
     print(f"\n[clustering] Creating {n_clusters} clusters based on features")
-    
-    # Extract features for clustering
-    feature_cols = ['period', 'duration', 'depth', 'bls_power']
-    features = meta_df[feature_cols].values
-    
-    # Standardize features
-    feature_scaler = StandardScaler()
-    features_scaled = feature_scaler.fit_transform(features)
-    
-    # K-means clustering
-    kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
-    cluster_ids = kmeans.fit_predict(features_scaled)
-    
+
+    # Check if BLS features are available
+    bls_feature_cols = ['period', 'duration', 'depth', 'bls_power']
+    has_bls_features = all(col in meta_df.columns for col in bls_feature_cols)
+
+    # Check if statistical features are available
+    stat_feature_cols = ['mean', 'std', 'var', 'skew', 'range', 'median', 'mad', 'peak_to_peak']
+    has_stat_features = all(col in meta_df.columns for col in stat_feature_cols)
+
+    if has_bls_features:
+        # Original approach: use BLS features for k-means clustering
+        print("[clustering] Using BLS features (period, duration, depth, bls_power)")
+        feature_cols = bls_feature_cols
+        features = meta_df[feature_cols].values
+
+        # Standardize features
+        feature_scaler = StandardScaler()
+        features_scaled = feature_scaler.fit_transform(features)
+
+        # K-means clustering
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+        cluster_ids = kmeans.fit_predict(features_scaled)
+
+    elif has_stat_features:
+        # Use statistical features from light curve data
+        print("[clustering] Using statistical features (mean, std, var, skew, range, median, mad, peak_to_peak)")
+        feature_cols = stat_feature_cols
+        features = meta_df[feature_cols].values
+
+        # Standardize features
+        feature_scaler = StandardScaler()
+        features_scaled = feature_scaler.fit_transform(features)
+
+        # K-means clustering
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+        cluster_ids = kmeans.fit_predict(features_scaled)
+
+    else:
+        # Last resort: assign all to cluster 0
+        print("[clustering] Warning: No clustering features available, assigning all to cluster 0")
+        cluster_ids = np.zeros(len(meta_df), dtype=int)
+        feature_scaler = None
+        kmeans = None
+
     # Print cluster distribution
     print("[clustering] Cluster distribution:")
     unique, counts = np.unique(cluster_ids, return_counts=True)
     for cluster_id, count in zip(unique, counts):
         pct = 100 * count / len(cluster_ids)
         print(f"  Cluster {cluster_id}: {count} windows ({pct:.1f}%)")
-    
+
     # Print cluster characteristics
     print("\n[clustering] Cluster characteristics:")
     for cluster_id in unique:
@@ -160,10 +192,22 @@ def cluster_windows(meta_df, n_clusters=5):
 
         print(f"  Cluster {cluster_id}:")
         print(f"    Positive rate: {pos_rate:.1%}")
-        print(f"    Avg period: {cluster_data['period'].mean():.2f} days")
-        print(f"    Avg depth: {cluster_data['depth'].mean():.4f}")
-        print(f"    Avg BLS power: {cluster_data['bls_power'].mean():.4f}")
-    
+
+        # Print category if available
+        if 'category' in cluster_data.columns:
+            category_counts = cluster_data['category'].value_counts()
+            print(f"    Categories: {dict(category_counts)}")
+
+        # Print feature statistics
+        if has_bls_features:
+            print(f"    Avg period: {cluster_data['period'].mean():.2f} days")
+            print(f"    Avg depth: {cluster_data['depth'].mean():.4f}")
+            print(f"    Avg BLS power: {cluster_data['bls_power'].mean():.4f}")
+        elif has_stat_features:
+            print(f"    Avg std: {cluster_data['std'].mean():.4f}")
+            print(f"    Avg var: {cluster_data['var'].mean():.4f}")
+            print(f"    Avg range: {cluster_data['range'].mean():.4f}")
+
     return cluster_ids, feature_scaler, kmeans
 
 
@@ -349,7 +393,11 @@ def main():
     
     # Cluster windows
     cluster_ids, feature_scaler, kmeans = cluster_windows(meta, args.n_clusters)
-    
+
+    # Determine actual number of clusters (may differ from args.n_clusters if using categories)
+    actual_n_clusters = len(np.unique(cluster_ids))
+    print(f"[clustering] Actual clusters used: {actual_n_clusters}")
+
     # Split data
     X_train, y_train, clusters_train, X_val, y_val, clusters_val = split_data(
         X, y, cluster_ids, args.val_split, args.seed
@@ -387,13 +435,13 @@ def main():
         hidden_size=args.hidden,
         num_layers=args.layers,
         dropout=args.dropout,
-        n_clusters=args.n_clusters,
+        n_clusters=actual_n_clusters,
         cluster_embed_dim=args.cluster_embed_dim
     ).to(device)
-    
+
     n_params = sum(p.numel() for p in model.parameters())
     print(f"\n[model] params={n_params:,}")
-    print(f"[model] hidden={args.hidden} layers={args.layers} clusters={args.n_clusters}")
+    print(f"[model] hidden={args.hidden} layers={args.layers} clusters={actual_n_clusters}")
     
     # Loss and optimizer
     pos_weight = torch.tensor([args.pos_weight]).to(device)
@@ -454,16 +502,23 @@ def main():
             best_f1 = val_metrics['f1']
             patience_counter = 0
             
-            torch.save({
+            # Build checkpoint dict
+            checkpoint = {
                 'epoch': epoch,
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
                 'scheduler_state_dict': scheduler.state_dict(),
                 'val_metrics': val_metrics,
-                'config': config,
-                'scaler_params': {'mean': feature_scaler.mean_.tolist(), 'scale': feature_scaler.scale_.tolist()},
-                'kmeans_centers': kmeans.cluster_centers_.tolist()
-            }, os.path.join(args.save_dir, 'best.pt'))
+                'config': config
+            }
+
+            # Add clustering info if available
+            if feature_scaler is not None:
+                checkpoint['scaler_params'] = {'mean': feature_scaler.mean_.tolist(), 'scale': feature_scaler.scale_.tolist()}
+            if kmeans is not None:
+                checkpoint['kmeans_centers'] = kmeans.cluster_centers_.tolist()
+
+            torch.save(checkpoint, os.path.join(args.save_dir, 'best.pt'))
             
             print(f"[best] auc={best_auc:.4f} f1={best_f1:.4f}; saved")
         else:

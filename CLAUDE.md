@@ -8,10 +8,17 @@ This is an exoplanet detection project using deep learning (BiLSTM with K-means 
 
 **UPDATE November 11, 2025**: Balanced synthetic approach **FAILED** due to domain shift. Pure synthetic training achieved AUC 1.0 in training but AUC 0.45 (worse than random!) on real TESS data. Root cause: Synthetic transit depth 8× shallower than real data.
 
-**Current Approach**: **Hybrid training** (real + synthetic mix) to combine domain fidelity with better class balance. Testing 90% real / 10% synthetic and 75% real / 25% synthetic ratios.
+**UPDATE November 14, 2025 (5:28 AM)**: **MAJOR PIVOT** - Transitioning to TESS Sector 1 Ground Truth Dataset
+- Team alignment: All partners using same Sector 1 ground truth data
+- Dataset: 13,541 light curves → **40,623 training windows** (62× larger!)
+- Categories: 3,146 planets + 8,624 stars + 900 EBs + 871 BackEBs
+- Class balance: 23.2% positive (9,438 planets vs 31,185 non-planets)
+- **STATUS**: Dataset rebuild required with statistical features for clustering
+- Location: `E:\lilith4_sector-1_groundtruth\sector-1\ground-truth`
+- See `PROGRESS_LOG_NOV_14_2025.md` for full details
 
 **Environment**: Windows 11, CUDA-enabled GPU, conda environment `exo-lstm-gpu`
-**Current Status**: Optimized model (real data) achieves AUC 0.805. Hybrid datasets ready for training.
+**Current Status**: Preparing Sector 1 dataset - resuming Saturday Nov 16, 2025
 
 ## Key Commands
 
@@ -21,7 +28,70 @@ conda activate exo-lstm-gpu
 cd C:\CS_4280_Project\Code
 ```
 
-### Training the BiLSTM+Clustering Model (Current Working Model)
+### TESS Sector 1 Ground Truth Dataset (CURRENT PRIORITY - November 14, 2025)
+
+**Dataset Location**: `E:\lilith4_sector-1_groundtruth\sector-1\ground-truth`
+
+#### Step 1: Build Sector 1 Training Windows
+```powershell
+# Process ground truth data into training windows with statistical features
+python build_windows_from_groundtruth.py `
+  --data_dir "E:\lilith4_sector-1_groundtruth\sector-1\ground-truth" `
+  --output_dir "data\windows_sector1_full" `
+  --seq_len 2048 `
+  --n_windows 3 `
+  --seed 42
+
+# Or use batch script
+.\build_sector1_dataset.bat
+```
+
+**Output**:
+- 40,623 training windows (3 per light curve × 13,541 files)
+- Class distribution: 9,438 planets (23.2%) vs 31,185 non-planets (76.8%)
+- Metadata with statistical features for clustering: mean, std, var, skew, range, median, mad, peak_to_peak
+- Processing time: ~5-10 minutes
+
+**Verify statistical features**:
+```python
+import pandas as pd
+meta = pd.read_csv('data/windows_sector1_full/meta.csv')
+print(meta.columns)  # Should include: mean, std, var, skew, range, median, mad, peak_to_peak
+```
+
+#### Step 2: Train on Sector 1 Dataset
+```powershell
+python train_bilstm_cluster.py `
+  --windows_dir "data\windows_sector1_full" `
+  --n_clusters 5 `
+  --epochs 80 `
+  --batch_size 128 `
+  --lr 0.000225 `
+  --hidden 256 `
+  --layers 4 `
+  --dropout 0.311 `
+  --save_dir "runs\bilstm_cluster_sector1" `
+  --amp_dtype fp16 `
+  --pos_weight 3.367 `
+  --num_workers 0 `
+  --seed 42
+
+# Or use batch script
+.\train_sector1.bat
+```
+
+**Expected Training Time**: ~45-60 minutes (80 epochs, 40K windows, GPU FP16)
+**Expected Performance**: AUC 0.70-0.75 (larger, more diverse dataset)
+
+**Key Improvements**:
+- 62× more training data than previous approach (655 → 40,623 windows)
+- Real TESS ground truth data (no synthetic domain shift)
+- Better class diversity (4 categories: planets, stars, EBs, BackEBs)
+- Statistical features prevent data leakage in clustering
+
+---
+
+### Training the BiLSTM+Clustering Model (Legacy - 655 Windows)
 ```powershell
 python train_bilstm_cluster.py `
   --windows_dir "C:\CS_4280_Project\Code\data\windows_train" `
