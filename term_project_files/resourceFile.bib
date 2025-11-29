@@ -1,10 +1,12 @@
 % =============================================================================
 % BIBLIOGRAPHY - CS 4280 Exoplanet Detection Project
 % Shared by all 3 team members: RNN, CNN, and Transformer sections
+% Synced from Overleaf (Nov 28, 2025) + Becker2021 added for RNN
+% Total: 21 papers (target: 27 by final = 9 per person)
 % =============================================================================
 
 % -----------------------------------------------------------------------------
-% TRANSFORMER PAPERS (Partner's section)
+% TRANSFORMER PAPERS (7 papers)
 % -----------------------------------------------------------------------------
 
 @misc{morvan2022dontpayattentionnoise,
@@ -14,7 +16,7 @@
       eprint={2207.02777},
       archivePrefix={arXiv},
       primaryClass={astro-ph.IM},
-      url={https://arxiv.org/abs/2207.02777}
+      url={https://arxiv.org/abs/2207.02777},
 }
 
 @misc{vaswani2017attentionneed,
@@ -24,7 +26,7 @@
       eprint={1706.03762},
       archivePrefix={arXiv},
       primaryClass={cs.CL},
-      url={https://arxiv.org/abs/1706.03762}
+      url={https://arxiv.org/abs/1706.03762},
 }
 
 @article{salinas2025tessfullframe,
@@ -38,11 +40,12 @@
     month = {02},
     issn = {0035-8711},
     doi = {10.1093/mnras/staf347},
-    url = {https://doi.org/10.1093/mnras/staf347}
+    url = {https://doi.org/10.1093/mnras/staf347},
+    eprint = {https://academic.oup.com/mnras/article-pdf/538/3/2031/62178740/staf347.pdf},
 }
 
 @article{salinas2023distinguishingtransitfalsepositives,
-    author = {Salinas, Helem and Pichara, Karim and Brahm, Rafael and P{\'e}rez-Galarce, Francisco and Mery, Domingo},
+    author = {Salinas, Helem and Pichara, Karim and Brahm, Rafael and Pérez-Galarce, Francisco and Mery, Domingo},
     title = {Distinguishing a planetary transit from false positives: a Transformer-based classification for planetary transit signals},
     journal = {Monthly Notices of the Royal Astronomical Society},
     volume = {522},
@@ -52,11 +55,50 @@
     month = {04},
     issn = {0035-8711},
     doi = {10.1093/mnras/stad1173},
-    url = {https://doi.org/10.1093/mnras/stad1173}
+    url = {https://doi.org/10.1093/mnras/stad1173},
+    eprint = {https://academic.oup.com/mnras/article-pdf/522/3/3201/50171554/stad1173.pdf},
+}
+
+@misc{wen2023transformerstimeseriessurvey,
+      title={Transformers in Time Series: A Survey},
+      author={Qingsong Wen and Tian Zhou and Chaoli Zhang and Weiqi Chen and Ziqing Ma and Junchi Yan and Liang Sun},
+      year={2023},
+      eprint={2202.07125},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2202.07125},
+}
+
+@article{pan2024astroconformer,
+    author = {Pan, Jia-Shu and Ting, Yuan-Sen and Yu, Jie},
+    title = {Astroconformer: The prospects of analysing stellar light curves with transformer-based deep learning models},
+    journal = {Monthly Notices of the Royal Astronomical Society},
+    volume = {528},
+    number = {4},
+    pages = {5890-5903},
+    year = {2024},
+    month = {01},
+    issn = {0035-8711},
+    doi = {10.1093/mnras/stae068},
+    url = {https://doi.org/10.1093/mnras/stae068},
+    eprint = {https://academic.oup.com/mnras/article-pdf/528/4/5890/56707271/stae068.pdf},
+}
+
+@article{chen2025graphbased,
+title = {Toward Transformer-compatible multivariate time series learning via visibility graph-based structural encoding},
+journal = {Knowledge-Based Systems},
+volume = {329},
+pages = {114389},
+year = {2025},
+issn = {0950-7051},
+doi = {https://doi.org/10.1016/j.knosys.2025.114389},
+url = {https://www.sciencedirect.com/science/article/pii/S0950705125014285},
+author = {Ting Chen and Xinyue Ren and Jinzhou Lai and Hongming Tan and Fangming Liu and Wai Kin Victor Chan},
+keywords = {Multivariate time series, Visibility graph, Temporal structure, Transformer, Representation learning, Task-general model}
 }
 
 % -----------------------------------------------------------------------------
-% CNN PAPERS (Partner's section)
+% CNN PAPERS (6 papers)
 % -----------------------------------------------------------------------------
 
 @article{Shallue2018identifyexoplanetsI,
@@ -70,9 +112,7 @@
    publisher={American Astronomical Society},
    author={Shallue, Christopher J. and Vanderburg, Andrew},
    year={2018},
-   month=jan,
-   pages={94}
-}
+   month=jan, pages={94} }
 
 @article{Dattilo2019identifyexoplanetsII,
    title={Identifying Exoplanets with Deep Learning. II. Two New Super-Earths Uncovered by a Neural Network in K2 Data},
@@ -85,9 +125,7 @@
    publisher={American Astronomical Society},
    author={Dattilo, Anne and Vanderburg, Andrew and Shallue, Christopher J. and Mayo, Andrew W. and Berlind, Perry and Bieryla, Allyson and Calkins, Michael L. and Esquerdo, Gilbert A. and Everett, Mark E. and Howell, Steve B. and Latham, David W. and Scott, Nicholas J. and Yu, Liang},
    year={2019},
-   month=apr,
-   pages={169}
-}
+   month=apr, pages={169} }
 
 @article{Osborn2019rapidclassificationtesscandidates,
    title={Rapid classification of TESS planet candidates with convolutional neural networks},
@@ -97,34 +135,56 @@
    DOI={10.1051/0004-6361/201935345},
    journal={Astronomy \& Astrophysics},
    publisher={EDP Sciences},
-   author={Osborn, H. P. and Ansdell, M. and Ioannou, Y. and Sasdelli, M. and Angerhausen, D. and Caldwell, D. and Jenkins, J. M. and R{\"a}issi, C. and Smith, J. C.},
+   author={Osborn, H. P. and Ansdell, M. and Ioannou, Y. and Sasdelli, M. and Angerhausen, D. and Caldwell, D. and Jenkins, J. M. and Räissi, C. and Smith, J. C.},
    year={2019},
+   month=jan, pages={A53} }
+
+@article{Wang2024gpfc,
+   title={The GPU Phase Folding and Deep Learning Method for Detecting Exoplanet Transits},
+   journal={Monthly Notices of the Royal Astronomical Society},
+   publisher={Oxford University Press},
+   author={Wang, Kaitlyn and Ge, Jian and Willis, Kevin and Wang, Kevin and Zhao, Yinan},
+   year={2024},
    month=jan,
-   pages={A53}
+   note={arXiv:2312.02063v2}
+}
+
+@article{Feinstein2020stella,
+   title={Flare Statistics for Young Stars from a Convolutional Neural Network Analysis of TESS Data},
+   volume={160},
+   ISSN={1538-3881},
+   url={http://dx.doi.org/10.3847/1538-3881/abac0a},
+   DOI={10.3847/1538-3881/abac0a},
+   number={5},
+   journal={The Astronomical Journal},
+   publisher={American Astronomical Society},
+   author={Feinstein, Adina D. and Montet, Benjamin T. and Ansdell, Megan and Nord, Brian and Bean, Jacob L. and Günther, Maximilian N. and Gully-Santiago, Michael A. and Schlieder, Joshua E.},
+   year={2020},
+   month=nov,
+   pages={219}
+}
+
+@article{Chaushev2019ngts,
+   title={Classifying exoplanet candidates with convolutional neural networks: application to the Next Generation Transit Survey},
+   volume={488},
+   ISSN={1365-2966},
+   url={http://dx.doi.org/10.1093/mnras/stz2058},
+   DOI={10.1093/mnras/stz2058},
+   number={4},
+   journal={Monthly Notices of the Royal Astronomical Society},
+   publisher={Oxford University Press},
+   author={Chaushev, Alexander and Raynard, Liam and Goad, Michael R. and Eigmüller, Philipp and Armstrong, David J. and Briegal, Joshua T. and Burleigh, Matthew R. and Casewell, Sarah L. and Gill, Samuel and Jenkins, James S. and Nielsen, Louise D. and Watson, Christopher A. and West, Richard G. and Wheatley, Peter J. and Udry, Stéphane and Vines, Jose I.},
+   year={2019},
+   month=sep,
+   pages={5232--5250}
 }
 
 % -----------------------------------------------------------------------------
-% RNN PAPERS (Josh's 9 papers)
+% RNN PAPERS - Josh's section (7 papers)
 % -----------------------------------------------------------------------------
 
-% RNN Paper 1: Vida et al. (2021) - RNNs for Kepler/TESS flare detection
-@article{Vida2021findingflaresrecurrent,
-   title={Finding flares in Kepler and TESS data with recurrent deep neural networks},
-   volume={652},
-   ISSN={1432-0746},
-   url={http://dx.doi.org/10.1051/0004-6361/202141068},
-   DOI={10.1051/0004-6361/202141068},
-   journal={Astronomy \& Astrophysics},
-   publisher={EDP Sciences},
-   author={Vida, Kriszti{\'a}n and B{\'o}di, Attila and Szklen{\'a}r, Tam{\'a}s and Seli, B{\'a}lint},
-   year={2021},
-   month=aug,
-   pages={A107}
-}
-
-% RNN Paper 2: Kugler et al. (2016) - ESN-autoencoder for Kepler
 @article{kugler2016explorativeapproachkepler,
-    author = {K{\"u}gler, S. D. and Gianniotis, N. and Polsterer, K. L.},
+    author = {Kügler, S. D. and Gianniotis, N. and Polsterer, K. L.},
     title = {An explorative approach for inspecting Kepler data},
     journal = {Monthly Notices of the Royal Astronomical Society},
     volume = {455},
@@ -134,30 +194,41 @@
     month = {12},
     issn = {0035-8711},
     doi = {10.1093/mnras/stv2604},
-    url = {https://doi.org/10.1093/mnras/stv2604}
+    url = {https://doi.org/10.1093/mnras/stv2604},
+    eprint = {https://academic.oup.com/mnras/article-pdf/455/4/4399/13772449/stv2604.pdf},
 }
 
-% RNN Paper 3: Du et al. (2016) - RMTPP timing model
+@article{Vida2021findingflaresrecurrent,
+   title={Finding flares in Kepler and TESS data with recurrent deep neural networks},
+   volume={652},
+   ISSN={1432-0746},
+   url={http://dx.doi.org/10.1051/0004-6361/202141068},
+   DOI={10.1051/0004-6361/202141068},
+   journal={Astronomy \& Astrophysics},
+   publisher={EDP Sciences},
+   author={Vida, Krisztián and Bódi, Attila and Szklenár, Tamás and Seli, Bálint},
+   year={2021},
+   month=aug, pages={A107} }
+
 @inproceedings{Du2016markedtemporalpoint,
-    author = {Du, Nan and Dai, Hanjun and Trivedi, Rakshit and Upadhyay, Utkarsh and Gomez-Rodriguez, Manuel and Song, Le},
-    title = {Recurrent Marked Temporal Point Processes: Embedding Event History to Vector},
-    year = {2016},
-    isbn = {9781450342322},
-    publisher = {Association for Computing Machinery},
-    address = {New York, NY, USA},
-    url = {https://doi.org/10.1145/2939672.2939875},
-    doi = {10.1145/2939672.2939875},
-    booktitle = {Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
-    pages = {1555--1564},
-    numpages = {10},
-    keywords = {stochastic process, recurrent neural network, marked temporal point process},
-    location = {San Francisco, California, USA},
-    series = {KDD '16}
+author = {Du, Nan and Dai, Hanjun and Trivedi, Rakshit and Upadhyay, Utkarsh and Gomez-Rodriguez, Manuel and Song, Le},
+title = {Recurrent Marked Temporal Point Processes: Embedding Event History to Vector},
+year = {2016},
+isbn = {9781450342322},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2939672.2939875},
+doi = {10.1145/2939672.2939875},
+booktitle = {Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+pages = {1555–1564},
+numpages = {10},
+keywords = {stochastic process, recurrent neural network, marked temporal point process},
+location = {San Francisco, California, USA},
+series = {KDD '16}
 }
 
-% RNN Paper 4: Speiser et al. (2020) - Clustering + ML
 @article{Speiser2020clustering,
-  author  = {Speiser, Artur and M{\"u}ller, Lukas-Raphael and Matti, Ulf and Obholzer, Niklas and Legant, Wesley R. and Kreshuk, Anna and Macke, Jakob H. and Ries, Jonas and Hufnagel, Lars},
+  author  = {Speiser, Artur and Müller, Lukas-Raphael and Matti, Ulf and Obholzer, Niklas and Legant, Wesley R. and Kreshuk, Anna and Macke, Jakob H. and Ries, Jonas and Hufnagel, Lars},
   title   = {Machine learning for cluster analysis of localization microscopy data},
   journal = {Nature Communications},
   year    = {2020},
@@ -168,7 +239,6 @@
   url     = {https://doi.org/10.1038/s41467-020-15293-x}
 }
 
-% RNN Paper 5: Vu et al. (2024) - LSTM for time series
 @article{Vu2024LSTM,
   author  = {Vu, Minh Tuan and Vo, Ngoc Duong and Ngo, Thanh Duc and Pham, Trinh Dong and Huynh, Thi Thanh My and Nguyen, Ngoc Than and Nguyen, Quang Huu and Duong, Thu Ha and Nguyen, Phuong Ba and Ly, Hai-Bang},
   title   = {Harnessing LSTM and XGBoost algorithms for storm prediction},
@@ -181,7 +251,6 @@
   url     = {https://doi.org/10.1038/s41598-024-62182-0}
 }
 
-% RNN Paper 6: Ding et al. (2024) - LSTM for astronomical photometry
 @article{Ding2024photometric,
   author  = {Ding, Yi and Ji, Kaiwen and Xiao, Ming and Zheng, Xiaoran and Chen, Yue and Liang, Jian and Liu, Chenxin and Peng, Bo and Fan, Zehao and Qi, Yongkui},
   title   = {Photometric redshift estimation for CSST survey with LSTM neural networks},
@@ -196,9 +265,9 @@
   archivePrefix = {arXiv}
 }
 
-% RNN Paper 7: Becker et al. (2021) - LSTM for Variable Star Classification
+% RNN Paper 7: Becker et al. (2021) - LSTM for Variable Star Classification (NEW - added Nov 28)
 @article{Becker2021variablestars,
-  author  = {Becker, Leander and Zinn, Joel C. and Tominaga, Naohisa and Ishida, Emille E. O. and de Souza, Rafael S.},
+  author  = {Becker, Ivo and Pichara, Karim and Catelan, Márcio and Protopapas, Pavlos and Aguirre, Carlos and Nikzat, Fatemeh},
   title   = {Classification of Variable Stars Light Curves Using Long Short Term Memory Network},
   journal = {Frontiers in Astronomy and Space Sciences},
   year    = {2021},
@@ -209,12 +278,11 @@
 }
 
 % -----------------------------------------------------------------------------
-% SHARED/VALIDATION REFERENCES
+% SHARED/VALIDATION REFERENCES (1 paper)
 % -----------------------------------------------------------------------------
 
-% L 98-59 System (validation reference for real exoplanet detection)
 @article{Kossakowski2019exoplanets,
-  author  = {Kossakowski, Diana and Espinoza, N{\'e}stor and Brahm, Rafael and others},
+  author  = {Kossakowski, Diana and Espinoza, Néstor and Brahm, Rafael and others},
   title   = {The L 98-59 system: three transiting, terrestrial-size planets orbiting a nearby M dwarf},
   journal = {Astronomy \& Astrophysics},
   year    = {2019},
@@ -224,74 +292,15 @@
   url     = {https://doi.org/10.1051/0004-6361/201935750}
 }
 
-% -----------------------------------------------------------------------------
-% ADDITIONAL CNN PAPERS (cited in text but were missing from bib)
-% -----------------------------------------------------------------------------
-
-% CNN Paper 4: Chaushev et al. (2019) - PlaNET for NGTS
-@article{Chaushev2019ngts,
-  author  = {Chaushev, Alexander and Raynard, Liam and Guenther, Maximilian N. and others},
-  title   = {Classifying exoplanet candidates with convolutional neural networks: application to the Next Generation Transit Survey},
-  journal = {Monthly Notices of the Royal Astronomical Society},
-  year    = {2019},
-  volume  = {488},
-  number  = {4},
-  pages   = {5232--5244},
-  doi     = {10.1093/mnras/stz2058},
-  url     = {https://doi.org/10.1093/mnras/stz2058}
-}
-
-% CNN Paper 5: Feinstein et al. (2020) - Stella flare classifier
-@article{Feinstein2020stella,
-  author  = {Feinstein, Adina D. and Montet, Benjamin T. and Ansdell, Megan and others},
-  title   = {Flare Statistics for Young Stars from a Convolutional Neural Network Analysis of TESS Data},
-  journal = {The Astronomical Journal},
-  year    = {2020},
-  volume  = {160},
-  number  = {5},
-  pages   = {219},
-  doi     = {10.3847/1538-3881/abac0a},
-  url     = {https://doi.org/10.3847/1538-3881/abac0a}
-}
-
-% CNN Paper 6: Wang et al. (2024) - GPU-accelerated phase folding
-@article{Wang2024gpfc,
-  author  = {Wang, Kaitlin and others},
-  title   = {GPFC: A GPU-Accelerated Phase Folding and Convolutional Neural Network Pipeline for Detecting Ultra-Short-Period Planets},
-  journal = {The Astronomical Journal},
-  year    = {2024},
-  note    = {GPU-accelerated transit detection pipeline}
-}
-
-% -----------------------------------------------------------------------------
-% ADDITIONAL TRANSFORMER PAPERS (cited in text but were missing from bib)
-% -----------------------------------------------------------------------------
-
-% Transformer Paper 5: Wen et al. (2023) - Transformer survey
-@article{wen2023transformerstimeseriessurvey,
-  author  = {Wen, Qingsong and Zhou, Tian and Zhang, Chaoli and Chen, Weiqi and Ma, Ziqing and Yan, Junchi and Sun, Liang},
-  title   = {Transformers in Time Series: A Survey},
-  journal = {International Joint Conference on Artificial Intelligence (IJCAI)},
-  year    = {2023},
-  doi     = {10.24963/ijcai.2023/759},
-  url     = {https://doi.org/10.24963/ijcai.2023/759}
-}
-
-% Transformer Paper 6: Chen et al. (2025) - MVGFormer
-@article{chen2025graphbased,
-  author  = {Chen, Yuxuan and others},
-  title   = {MVGFormer: A Graph-Based Visibility-Guided Attention Mechanism for Time Series Classification},
-  journal = {arXiv preprint},
-  year    = {2025},
-  note    = {Multivariate time series classification with visibility graph attention}
-}
-
-% Transformer Paper 7: Pan et al. (2024) - Astroconformer
-@article{pan2024astroconformer,
-  author  = {Pan, Jiajun and others},
-  title   = {Astroconformer: Capturing Long-range and Local Dependencies in Stellar Light Curves Using Transformer Architecture},
-  journal = {Monthly Notices of the Royal Astronomical Society},
-  year    = {2024},
-  note    = {Hybrid CNN-Transformer for stellar parameter estimation}
-}
-
+% =============================================================================
+% PAPER COUNT SUMMARY
+% =============================================================================
+% Transformer: 7 papers (morvan, vaswani, salinas2025, salinas2023, wen, pan, chen)
+% CNN: 6 papers (Shallue, Dattilo, Osborn, Wang, Feinstein, Chaushev)
+% RNN (Josh): 7 papers (kugler, Vida, Du, Speiser, Vu, Ding, Becker)
+% Shared: 1 paper (Kossakowski)
+% TOTAL: 21 papers
+%
+% Target for final: 27 papers (9 per person)
+% Still needed: Transformer +2, CNN +3, RNN +2
+% =============================================================================
