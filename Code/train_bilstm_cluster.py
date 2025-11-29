@@ -10,8 +10,16 @@ Usage:
     python train_bilstm_cluster.py --windows_dir "C:\CS_4280_Project\Code\data\windows_train" --n_clusters 5 --epochs 80 --batch_size 64 --lr 1e-4 --hidden 256 --layers 3 --dropout 0.4 --save_dir "C:\CS_4280_Project\Code\runs\bilstm_cluster" --amp_dtype fp16 --pos_weight 3.367 --num_workers 0
 """
 
-import argparse
 import os
+
+# Limit CPU threads BEFORE importing numpy/torch to prevent system overload
+# Using 11 threads (12 cores - 1 reserved for system)
+os.environ['OMP_NUM_THREADS'] = '11'
+os.environ['MKL_NUM_THREADS'] = '11'
+os.environ['NUMEXPR_NUM_THREADS'] = '11'
+os.environ['OPENBLAS_NUM_THREADS'] = '11'
+
+import argparse
 import json
 import time
 import warnings
@@ -129,6 +137,10 @@ def cluster_windows(meta_df, n_clusters=5):
     print(f"\n[clustering] Creating {n_clusters} clusters based on features")
 
     # Check if BLS features are available
+    # Check for ground truth features (BEST - actual injected parameters)
+    gt_feature_cols = ['log_period', 'log_depth', 'duration', 'teff']
+    has_gt_features = all(col in meta_df.columns for col in gt_feature_cols)
+
     bls_feature_cols = ['period', 'duration', 'depth', 'bls_power']
     has_bls_features = all(col in meta_df.columns for col in bls_feature_cols)
 
@@ -136,7 +148,28 @@ def cluster_windows(meta_df, n_clusters=5):
     stat_feature_cols = ['mean', 'std', 'var', 'skew', 'range', 'median', 'mad', 'peak_to_peak']
     has_stat_features = all(col in meta_df.columns for col in stat_feature_cols)
 
-    if has_bls_features:
+    if has_gt_features:
+        # BEST: Use ground truth parameters from LILITH-4
+        print("[clustering] Using GROUND TRUTH features (log_period, log_depth, duration, teff)")
+        feature_cols = gt_feature_cols
+        features = meta_df[feature_cols].values.copy()
+
+        # Clip outliers
+        print("[clustering] Applying robust preprocessing (clipping outliers to 1-99 percentile)")
+        for i in range(features.shape[1]):
+            col = features[:, i]
+            p1, p99 = np.percentile(col, [1, 99])
+            features[:, i] = np.clip(col, p1, p99)
+
+        # Standardize features
+        feature_scaler = StandardScaler()
+        features_scaled = feature_scaler.fit_transform(features)
+
+        # K-means clustering
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+        cluster_ids = kmeans.fit_predict(features_scaled)
+
+    elif has_bls_features:
         # Original approach: use BLS features for k-means clustering
         print("[clustering] Using BLS features (period, duration, depth, bls_power)")
         feature_cols = bls_feature_cols
@@ -154,7 +187,14 @@ def cluster_windows(meta_df, n_clusters=5):
         # Use statistical features from light curve data
         print("[clustering] Using statistical features (mean, std, var, skew, range, median, mad, peak_to_peak)")
         feature_cols = stat_feature_cols
-        features = meta_df[feature_cols].values
+        features = meta_df[feature_cols].values.copy()
+
+        # Robust preprocessing: clip outliers to 1st-99th percentile
+        print("[clustering] Applying robust preprocessing (clipping outliers to 1-99 percentile)")
+        for i in range(features.shape[1]):
+            col = features[:, i]
+            p1, p99 = np.percentile(col, [1, 99])
+            features[:, i] = np.clip(col, p1, p99)
 
         # Standardize features
         feature_scaler = StandardScaler()
@@ -344,7 +384,12 @@ def main():
     parser.add_argument('--dropout', type=float, default=0.4)
     
     # Training
-    parser.add_argument('--epochs', type=int, default=80)
+    parser.add_argument('--epochs', type=int, default=80,
+                       help='Total epochs to reach (used when NOT resuming)')
+    parser.add_argument('--epochs_to_train', type=int, default=None,
+                       help='Number of epochs to train in THIS session (overrides --epochs when set)')
+    parser.add_argument('--resume', type=str, default=None,
+                       help='Path to checkpoint to resume from (e.g., runs/experiment/last.pt)')
     parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--lr', type=float, default=1e-4)
     parser.add_argument('--weight_decay', type=float, default=1e-5)
@@ -356,6 +401,8 @@ def main():
     parser.add_argument('--amp_dtype', type=str, default='fp16',
                        choices=['fp16', 'bf16', 'fp32'])
     parser.add_argument('--seed', type=int, default=42)
+    parser.add_argument('--gpu_mem_fraction', type=float, default=None,
+                       help='Limit GPU memory to this fraction (0.0-1.0). E.g., 0.2 for 20%')
     
     # Output
     parser.add_argument('--save_dir', type=str, required=True)
@@ -367,7 +414,12 @@ def main():
     np.random.seed(args.seed)
     
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    
+
+    # GPU memory limiting
+    if args.gpu_mem_fraction is not None and torch.cuda.is_available():
+        torch.cuda.set_per_process_memory_fraction(args.gpu_mem_fraction, device=0)
+        print(f"[gpu] Memory limited to {args.gpu_mem_fraction*100:.0f}% of GPU")
+
     # AMP setup
     amp_flag = args.amp_dtype != 'fp32'
     if args.amp_dtype == 'fp16':
@@ -448,10 +500,53 @@ def main():
     criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
     print(f"[loss] BCEWithLogitsLoss pos_weight={args.pos_weight:.3f}")
     
+    # Determine epoch range
+    start_epoch = 1
+
+    # Calculate total epochs and end epoch
+    if args.epochs_to_train is not None:
+        # epochs_to_train mode: train for N more epochs from current position
+        total_epochs_for_scheduler = args.epochs_to_train + 100  # Large enough for scheduler
+    else:
+        total_epochs_for_scheduler = args.epochs
+
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
-    scheduler = CosineAnnealingLR(optimizer, T_max=args.epochs, eta_min=args.lr * 0.01)
+    scheduler = CosineAnnealingLR(optimizer, T_max=total_epochs_for_scheduler, eta_min=args.lr * 0.01)
     scaler = torch.amp.GradScaler('cuda', enabled=amp_flag)
-    
+
+    # Resume from checkpoint if specified
+    best_auc = 0.0
+    best_f1 = 0.0
+
+    if args.resume:
+        if os.path.exists(args.resume):
+            print(f"\n[resume] Loading checkpoint from {args.resume}")
+            checkpoint = torch.load(args.resume, map_location=device)
+
+            model.load_state_dict(checkpoint['model_state_dict'])
+            optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+            if 'scheduler_state_dict' in checkpoint:
+                scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+
+            start_epoch = checkpoint.get('epoch', 0) + 1
+
+            # Restore best metrics if available
+            if 'val_metrics' in checkpoint:
+                best_auc = checkpoint['val_metrics'].get('auc', 0.0)
+                best_f1 = checkpoint['val_metrics'].get('f1', 0.0)
+
+            print(f"[resume] Resuming from epoch {start_epoch}, best_auc={best_auc:.4f}")
+        else:
+            print(f"[warning] Checkpoint not found: {args.resume}, starting fresh")
+
+    # Calculate end epoch
+    if args.epochs_to_train is not None:
+        end_epoch = start_epoch + args.epochs_to_train - 1
+        print(f"[epochs] Training epochs {start_epoch} to {end_epoch} ({args.epochs_to_train} epochs this session)")
+    else:
+        end_epoch = args.epochs
+        print(f"[epochs] Training epochs {start_epoch} to {end_epoch}")
+
     # Save config and clustering info
     config = vars(args)
     config['cluster_info'] = {
@@ -465,21 +560,27 @@ def main():
     # Save clustering artifacts
     np.save(os.path.join(args.save_dir, 'cluster_ids.npy'), cluster_ids)
     
-    # Initial validation
-    print("\n[validation before training]")
-    val_metrics = evaluate(model, val_loader, device, autocast_dtype)
-    print(f"[val0] {val_metrics}")
-    
+    # Initial validation (skip if resuming to save time)
+    if start_epoch == 1:
+        print("\n[validation before training]")
+        val_metrics = evaluate(model, val_loader, device, autocast_dtype)
+        print(f"[val0] {val_metrics}")
+    else:
+        print(f"\n[skipping initial validation - resuming from epoch {start_epoch}]")
+
     # Training loop
-    best_auc = 0.0
-    best_f1 = 0.0
     patience = 15
     patience_counter = 0
-    
-    print(f"\n[training for {args.epochs} epochs]")
+
+    n_epochs_this_session = end_epoch - start_epoch + 1
+    print(f"\n[training for {n_epochs_this_session} epochs (epoch {start_epoch} to {end_epoch})]")
     print(f"[early stopping] patience={patience} epochs")
-    
-    for epoch in range(1, args.epochs + 1):
+
+    # Timing tracking
+    epoch_times = []
+    session_start = time.time()
+
+    for epoch in range(start_epoch, end_epoch + 1):
         t0 = time.time()
         
         train_loss = train_epoch(
@@ -491,11 +592,15 @@ def main():
         scheduler.step()
         
         dt = time.time() - t0
+        epoch_times.append(dt)
         lr = optimizer.param_groups[0]['lr']
-        
-        print(f"[epoch {epoch:2d}/{args.epochs}] loss={train_loss:.4f} "
+
+        # Format time nicely
+        dt_min, dt_sec = divmod(int(dt), 60)
+
+        print(f"[epoch {epoch:2d}/{end_epoch}] loss={train_loss:.4f} "
               f"auc={val_metrics['auc']:.4f} f1={val_metrics['f1']:.4f} "
-              f"acc={val_metrics['acc']:.4f} dt={dt:.1f}s lr={lr:.3e}")
+              f"acc={val_metrics['acc']:.4f} time={dt_min}m{dt_sec:02d}s lr={lr:.3e}")
         
         if val_metrics['auc'] > best_auc:
             best_auc = val_metrics['auc']
@@ -536,9 +641,26 @@ def main():
             'config': config
         }, os.path.join(args.save_dir, 'last.pt'))
     
+    # Training summary
+    total_time = time.time() - session_start
+    total_min, total_sec = divmod(int(total_time), 60)
+    total_hr, total_min = divmod(total_min, 60)
+
     print(f"\n[training complete]")
     print(f"[best] AUC={best_auc:.4f} F1={best_f1:.4f}")
     print(f"[saved to] {args.save_dir}")
+
+    # Timing summary
+    print(f"\n[timing summary]")
+    if epoch_times:
+        avg_time = sum(epoch_times) / len(epoch_times)
+        avg_min, avg_sec = divmod(int(avg_time), 60)
+        print(f"  Epochs trained: {len(epoch_times)}")
+        print(f"  Avg per epoch:  {avg_min}m{avg_sec:02d}s")
+        if total_hr > 0:
+            print(f"  Total time:     {total_hr}h{total_min:02d}m{total_sec:02d}s")
+        else:
+            print(f"  Total time:     {total_min}m{total_sec:02d}s")
 
 
 if __name__ == '__main__':

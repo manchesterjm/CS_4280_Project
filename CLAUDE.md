@@ -13,12 +13,19 @@ This is an exoplanet detection project using deep learning (BiLSTM with K-means 
 - Dataset: 13,541 light curves → **40,623 training windows** (62× larger!)
 - Categories: 3,146 planets + 8,624 stars + 900 EBs + 871 BackEBs
 - Class balance: 23.2% positive (9,438 planets vs 31,185 non-planets)
-- **STATUS**: Dataset rebuild required with statistical features for clustering
 - Location: `E:\lilith4_sector-1_groundtruth\sector-1\ground-truth`
 - See `PROGRESS_LOG_NOV_14_2025.md` for full details
 
+**UPDATE November 27, 2025**: **DATASET BUILT & TRAINING IN PROGRESS**
+- Dataset successfully built: 26,472 training + 6,579 test windows (80/20 split)
+- Training running in background with corrected hyperparameters
+- **pos_weight corrected**: 7.41 (was 3.367, now based on actual ratio 23325/3147)
+- **Clustering fix applied**: Percentile clipping to handle outliers (for future runs)
+- **CPU limits added**: Prevents system crash during parallel processing
+- See `PROGRESS_LOG_NOV_27_2025.md` for full session details
+
 **Environment**: Windows 11, CUDA-enabled GPU, conda environment `exo-lstm-gpu`
-**Current Status**: Preparing Sector 1 dataset - resuming Saturday Nov 16, 2025
+**Current Status**: Training in progress - baseline model with corrected pos_weight
 
 ## Key Commands
 
@@ -62,26 +69,27 @@ print(meta.columns)  # Should include: mean, std, var, skew, range, median, mad,
 #### Step 2: Train on Sector 1 Dataset
 ```powershell
 python train_bilstm_cluster.py `
-  --windows_dir "data\windows_sector1_full" `
+  --windows_dir "data\windows_sector1_full\train" `
   --n_clusters 5 `
-  --epochs 80 `
+  --epochs 60 `
   --batch_size 128 `
   --lr 0.000225 `
   --hidden 256 `
   --layers 4 `
   --dropout 0.311 `
-  --save_dir "runs\bilstm_cluster_sector1" `
+  --save_dir "runs\sector1_experiments\baseline_corrected_posweight" `
   --amp_dtype fp16 `
-  --pos_weight 3.367 `
+  --pos_weight 7.41 `
   --num_workers 0 `
   --seed 42
-
-# Or use batch script
-.\train_sector1.bat
 ```
 
-**Expected Training Time**: ~45-60 minutes (80 epochs, 40K windows, GPU FP16)
-**Expected Performance**: AUC 0.70-0.75 (larger, more diverse dataset)
+**IMPORTANT**:
+- Use `data\windows_sector1_full\train` (not just `data\windows_sector1_full`) - dataset has train/test split
+- pos_weight should be **7.41** (calculated from 23325/3147 = actual class ratio)
+
+**Expected Training Time**: ~20 hours (60 epochs, 26K windows, GPU FP16, ~7 sec/batch)
+**Expected Performance**: AUC 0.65-0.75 (target: >0.70)
 
 **Key Improvements**:
 - 62× more training data than previous approach (655 → 40,623 windows)

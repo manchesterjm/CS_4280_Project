@@ -118,7 +118,7 @@ def train_epoch(model, loader, criterion, optimizer, scaler, device, autocast_dt
     model.train()
     total_loss = 0
 
-    for x_batch, y_batch in loader:
+    for x_batch, y_batch in tqdm(loader, desc="Training", leave=False):
         x_batch = x_batch.to(device)
         y_batch = y_batch.to(device)
 
