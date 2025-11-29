@@ -1,13 +1,113 @@
 % =============================================================================
 % BIBLIOGRAPHY - CS 4280 Exoplanet Detection Project
-% 9 Core RNN Papers + Supporting References
+% Shared by all 3 team members: RNN, CNN, and Transformer sections
 % =============================================================================
 
 % -----------------------------------------------------------------------------
-% CORE RNN PAPERS (9 total)
+% TRANSFORMER PAPERS (Partner's section)
 % -----------------------------------------------------------------------------
 
-% Paper 1: Vida et al. (2021) - RNNs for Kepler/TESS flare detection
+@misc{morvan2022dontpayattentionnoise,
+      title={Don't Pay Attention to the Noise: Learning Self-supervised Representations of Light Curves with a Denoising Time Series Transformer},
+      author={Mario Morvan and Nikolaos Nikolaou and Kai Hou Yip and Ingo Waldmann},
+      year={2022},
+      eprint={2207.02777},
+      archivePrefix={arXiv},
+      primaryClass={astro-ph.IM},
+      url={https://arxiv.org/abs/2207.02777}
+}
+
+@misc{vaswani2017attentionneed,
+      title={Attention Is All You Need},
+      author={Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},
+      year={2017},
+      eprint={1706.03762},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/1706.03762}
+}
+
+@article{salinas2025tessfullframe,
+    author = {Salinas, Helem and Brahm, Rafael and Olmschenk, Greg and Barry, Richard K and Pichara, Karim and Ishitani Silva, Stela and Araujo, Vladimir},
+    title = {Exoplanet transit candidate identification in TESS full-frame images via a transformer-based algorithm},
+    journal = {Monthly Notices of the Royal Astronomical Society},
+    volume = {538},
+    number = {3},
+    pages = {2031-2049},
+    year = {2025},
+    month = {02},
+    issn = {0035-8711},
+    doi = {10.1093/mnras/staf347},
+    url = {https://doi.org/10.1093/mnras/staf347}
+}
+
+@article{salinas2023distinguishingtransitfalsepositives,
+    author = {Salinas, Helem and Pichara, Karim and Brahm, Rafael and P{\'e}rez-Galarce, Francisco and Mery, Domingo},
+    title = {Distinguishing a planetary transit from false positives: a Transformer-based classification for planetary transit signals},
+    journal = {Monthly Notices of the Royal Astronomical Society},
+    volume = {522},
+    number = {3},
+    pages = {3201-3216},
+    year = {2023},
+    month = {04},
+    issn = {0035-8711},
+    doi = {10.1093/mnras/stad1173},
+    url = {https://doi.org/10.1093/mnras/stad1173}
+}
+
+% -----------------------------------------------------------------------------
+% CNN PAPERS (Partner's section)
+% -----------------------------------------------------------------------------
+
+@article{Shallue2018identifyexoplanetsI,
+   title={Identifying Exoplanets with Deep Learning: A Five-planet Resonant Chain around Kepler-80 and an Eighth Planet around Kepler-90},
+   volume={155},
+   ISSN={1538-3881},
+   url={http://dx.doi.org/10.3847/1538-3881/aa9e09},
+   DOI={10.3847/1538-3881/aa9e09},
+   number={2},
+   journal={The Astronomical Journal},
+   publisher={American Astronomical Society},
+   author={Shallue, Christopher J. and Vanderburg, Andrew},
+   year={2018},
+   month=jan,
+   pages={94}
+}
+
+@article{Dattilo2019identifyexoplanetsII,
+   title={Identifying Exoplanets with Deep Learning. II. Two New Super-Earths Uncovered by a Neural Network in K2 Data},
+   volume={157},
+   ISSN={1538-3881},
+   url={http://dx.doi.org/10.3847/1538-3881/ab0e12},
+   DOI={10.3847/1538-3881/ab0e12},
+   number={5},
+   journal={The Astronomical Journal},
+   publisher={American Astronomical Society},
+   author={Dattilo, Anne and Vanderburg, Andrew and Shallue, Christopher J. and Mayo, Andrew W. and Berlind, Perry and Bieryla, Allyson and Calkins, Michael L. and Esquerdo, Gilbert A. and Everett, Mark E. and Howell, Steve B. and Latham, David W. and Scott, Nicholas J. and Yu, Liang},
+   year={2019},
+   month=apr,
+   pages={169}
+}
+
+@article{Osborn2019rapidclassificationtesscandidates,
+   title={Rapid classification of TESS planet candidates with convolutional neural networks},
+   volume={633},
+   ISSN={1432-0746},
+   url={http://dx.doi.org/10.1051/0004-6361/201935345},
+   DOI={10.1051/0004-6361/201935345},
+   journal={Astronomy \& Astrophysics},
+   publisher={EDP Sciences},
+   author={Osborn, H. P. and Ansdell, M. and Ioannou, Y. and Sasdelli, M. and Angerhausen, D. and Caldwell, D. and Jenkins, J. M. and R{\"a}issi, C. and Smith, J. C.},
+   year={2019},
+   month=jan,
+   pages={A53}
+}
+
+% -----------------------------------------------------------------------------
+% RNN PAPERS (Josh's 9 papers)
+% -----------------------------------------------------------------------------
+
+% RNN Paper 1: Vida et al. (2021) - RNNs for Kepler/TESS flare detection
 @article{Vida2021findingflaresrecurrent,
    title={Finding flares in Kepler and TESS data with recurrent deep neural networks},
    volume={652},
@@ -22,7 +122,7 @@
    pages={A107}
 }
 
-% Paper 2: Kugler et al. (2016) - ESN-autoencoder for Kepler
+% RNN Paper 2: Kugler et al. (2016) - ESN-autoencoder for Kepler
 @article{kugler2016explorativeapproachkepler,
     author = {K{\"u}gler, S. D. and Gianniotis, N. and Polsterer, K. L.},
     title = {An explorative approach for inspecting Kepler data},
@@ -37,7 +137,7 @@
     url = {https://doi.org/10.1093/mnras/stv2604}
 }
 
-% Paper 3: Du et al. (2016) - RMTPP timing model
+% RNN Paper 3: Du et al. (2016) - RMTPP timing model
 @inproceedings{Du2016markedtemporalpoint,
     author = {Du, Nan and Dai, Hanjun and Trivedi, Rakshit and Upadhyay, Utkarsh and Gomez-Rodriguez, Manuel and Song, Le},
     title = {Recurrent Marked Temporal Point Processes: Embedding Event History to Vector},
@@ -55,7 +155,7 @@
     series = {KDD '16}
 }
 
-% Paper 4: Speiser et al. (2020) - Clustering + ML
+% RNN Paper 4: Speiser et al. (2020) - Clustering + ML
 @article{Speiser2020clustering,
   author  = {Speiser, Artur and M{\"u}ller, Lukas-Raphael and Matti, Ulf and Obholzer, Niklas and Legant, Wesley R. and Kreshuk, Anna and Macke, Jakob H. and Ries, Jonas and Hufnagel, Lars},
   title   = {Machine learning for cluster analysis of localization microscopy data},
@@ -68,7 +168,7 @@
   url     = {https://doi.org/10.1038/s41467-020-15293-x}
 }
 
-% Paper 5: Vu et al. (2024) - LSTM for time series
+% RNN Paper 5: Vu et al. (2024) - LSTM for time series
 @article{Vu2024LSTM,
   author  = {Vu, Minh Tuan and Vo, Ngoc Duong and Ngo, Thanh Duc and Pham, Trinh Dong and Huynh, Thi Thanh My and Nguyen, Ngoc Than and Nguyen, Quang Huu and Duong, Thu Ha and Nguyen, Phuong Ba and Ly, Hai-Bang},
   title   = {Harnessing LSTM and XGBoost algorithms for storm prediction},
@@ -81,7 +181,7 @@
   url     = {https://doi.org/10.1038/s41598-024-62182-0}
 }
 
-% Paper 6: Ding et al. (2024) - LSTM for astronomical photometry
+% RNN Paper 6: Ding et al. (2024) - LSTM for astronomical photometry
 @article{Ding2024photometric,
   author  = {Ding, Yi and Ji, Kaiwen and Xiao, Ming and Zheng, Xiaoran and Chen, Yue and Liang, Jian and Liu, Chenxin and Peng, Bo and Fan, Zehao and Qi, Yongkui},
   title   = {Photometric redshift estimation for CSST survey with LSTM neural networks},
@@ -96,7 +196,7 @@
   archivePrefix = {arXiv}
 }
 
-% Paper 7: Becker et al. (2021) - LSTM for Variable Star Classification
+% RNN Paper 7: Becker et al. (2021) - LSTM for Variable Star Classification
 @article{Becker2021variablestars,
   author  = {Becker, Leander and Zinn, Joel C. and Tominaga, Naohisa and Ishida, Emille E. O. and de Souza, Rafael S.},
   title   = {Classification of Variable Stars Light Curves Using Long Short Term Memory Network},
@@ -108,110 +208,11 @@
   url     = {https://www.frontiersin.org/articles/10.3389/fspas.2021.718139/full}
 }
 
-% Paper 8: Vaswani et al. (2017) - Attention Is All You Need
-@misc{vaswani2017attentionneed,
-      title={Attention Is All You Need},
-      author={Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},
-      year={2017},
-      eprint={1706.03762},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/1706.03762}
-}
-
-% Paper 9: Morvan et al. (2022) - Denoising Time Series Transformer
-@misc{morvan2022dontpayattentionnoise,
-      title={Don't Pay Attention to the Noise: Learning Self-supervised Representations of Light Curves with a Denoising Time Series Transformer},
-      author={Mario Morvan and Nikolaos Nikolaou and Kai Hou Yip and Ingo Waldmann},
-      year={2022},
-      eprint={2207.02777},
-      archivePrefix={arXiv},
-      primaryClass={astro-ph.IM},
-      url={https://arxiv.org/abs/2207.02777}
-}
-
 % -----------------------------------------------------------------------------
-% SUPPORTING REFERENCES (Exoplanet Detection Papers)
+% SHARED/VALIDATION REFERENCES
 % -----------------------------------------------------------------------------
 
-% Salinas et al. (2025) - TESS Transformer
-@article{salinas2025tessfullframe,
-    author = {Salinas, Helem and Brahm, Rafael and Olmschenk, Greg and Barry, Richard K and Pichara, Karim and Ishitani Silva, Stela and Araujo, Vladimir},
-    title = {Exoplanet transit candidate identification in TESS full-frame images via a transformer-based algorithm},
-    journal = {Monthly Notices of the Royal Astronomical Society},
-    volume = {538},
-    number = {3},
-    pages = {2031-2049},
-    year = {2025},
-    month = {02},
-    issn = {0035-8711},
-    doi = {10.1093/mnras/staf347},
-    url = {https://doi.org/10.1093/mnras/staf347}
-}
-
-% Salinas et al. (2023) - Transit False Positive Classification
-@article{salinas2023distinguishingtransitfalsepositives,
-    author = {Salinas, Helem and Pichara, Karim and Brahm, Rafael and P{\'e}rez-Galarce, Francisco and Mery, Domingo},
-    title = {Distinguishing a planetary transit from false positives: a Transformer-based classification for planetary transit signals},
-    journal = {Monthly Notices of the Royal Astronomical Society},
-    volume = {522},
-    number = {3},
-    pages = {3201-3216},
-    year = {2023},
-    month = {04},
-    issn = {0035-8711},
-    doi = {10.1093/mnras/stad1173},
-    url = {https://doi.org/10.1093/mnras/stad1173}
-}
-
-% Shallue & Vanderburg (2018) - Deep Learning Exoplanets I
-@article{Shallue2018identifyexoplanetsI,
-   title={Identifying Exoplanets with Deep Learning: A Five-planet Resonant Chain around Kepler-80 and an Eighth Planet around Kepler-90},
-   volume={155},
-   ISSN={1538-3881},
-   url={http://dx.doi.org/10.3847/1538-3881/aa9e09},
-   DOI={10.3847/1538-3881/aa9e09},
-   number={2},
-   journal={The Astronomical Journal},
-   publisher={American Astronomical Society},
-   author={Shallue, Christopher J. and Vanderburg, Andrew},
-   year={2018},
-   month=jan,
-   pages={94}
-}
-
-% Dattilo et al. (2019) - Deep Learning Exoplanets II
-@article{Dattilo2019identifyexoplanetsII,
-   title={Identifying Exoplanets with Deep Learning. II. Two New Super-Earths Uncovered by a Neural Network in K2 Data},
-   volume={157},
-   ISSN={1538-3881},
-   url={http://dx.doi.org/10.3847/1538-3881/ab0e12},
-   DOI={10.3847/1538-3881/ab0e12},
-   number={5},
-   journal={The Astronomical Journal},
-   publisher={American Astronomical Society},
-   author={Dattilo, Anne and Vanderburg, Andrew and Shallue, Christopher J. and Mayo, Andrew W. and Berlind, Perry and Bieryla, Allyson and Calkins, Michael L. and Esquerdo, Gilbert A. and Everett, Mark E. and Howell, Steve B. and Latham, David W. and Scott, Nicholas J. and Yu, Liang},
-   year={2019},
-   month=apr,
-   pages={169}
-}
-
-% Osborn et al. (2019) - TESS CNN Classification
-@article{Osborn2019rapidclassificationtesscandidates,
-   title={Rapid classification of TESS planet candidates with convolutional neural networks},
-   volume={633},
-   ISSN={1432-0746},
-   url={http://dx.doi.org/10.1051/0004-6361/201935345},
-   DOI={10.1051/0004-6361/201935345},
-   journal={Astronomy \& Astrophysics},
-   publisher={EDP Sciences},
-   author={Osborn, H. P. and Ansdell, M. and Ioannou, Y. and Sasdelli, M. and Angerhausen, D. and Caldwell, D. and Jenkins, J. M. and R{\"a}issi, C. and Smith, J. C.},
-   year={2019},
-   month=jan,
-   pages={A53}
-}
-
-% Kossakowski et al. (2019) - L 98-59 System (validation reference)
+% L 98-59 System (validation reference for real exoplanet detection)
 @article{Kossakowski2019exoplanets,
   author  = {Kossakowski, Diana and Espinoza, N{\'e}stor and Brahm, Rafael and others},
   title   = {The L 98-59 system: three transiting, terrestrial-size planets orbiting a nearby M dwarf},
@@ -222,3 +223,9 @@
   doi     = {10.1051/0004-6361/201935750},
   url     = {https://doi.org/10.1051/0004-6361/201935750}
 }
+
+% =============================================================================
+% ADD YOUR PARTNERS' ADDITIONAL PAPERS BELOW
+% (CNN partner may need ~2 more, Transformer partner may need ~5 more)
+% =============================================================================
+
