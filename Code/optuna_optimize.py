@@ -107,11 +107,30 @@ class ClusterBiLSTM(nn.Module):
 
 def cluster_windows(meta_df, n_clusters=5, random_state=42):
     """Cluster windows based on features"""
-    feature_cols = ['period', 'duration', 'depth', 'bls_power']
+    # Check which features are available (Sector 1 vs legacy dataset)
+    stat_features = ['mean', 'std', 'var', 'skew', 'range', 'median', 'mad', 'peak_to_peak']
+    bls_features = ['period', 'duration', 'depth', 'bls_power']
+
+    if all(col in meta_df.columns for col in stat_features):
+        # Sector 1 dataset - use statistical features
+        feature_cols = stat_features
+    elif all(col in meta_df.columns for col in bls_features):
+        # Legacy dataset - use BLS features
+        feature_cols = bls_features
+    else:
+        # Fallback - use whatever numeric columns are available
+        available = [c for c in stat_features + bls_features if c in meta_df.columns]
+        feature_cols = available if available else ['mean', 'std']
+
     features = meta_df[feature_cols].values
 
     # Fill NaN values with 0 (for non-planet windows)
     features = np.nan_to_num(features, nan=0.0)
+
+    # Clip outliers using percentile (prevents clustering issues)
+    for i in range(features.shape[1]):
+        p1, p99 = np.percentile(features[:, i], [1, 99])
+        features[:, i] = np.clip(features[:, i], p1, p99)
 
     # Standardize features
     scaler = StandardScaler()
@@ -214,9 +233,10 @@ def objective(trial, X, y, meta, device, epochs_per_trial, pos_weight, amp_dtype
     HIGH_VRAM_GPU = True  # Set to True for RTX 5070 Ti (16 GB) or similar
 
     if HIGH_VRAM_GPU:
-        # RTX 5070 Ti / 16+ GB VRAM settings
+        # RTX 5070 Ti / 16+ GB VRAM settings (updated from benchmark Dec 2, 2025)
+        # Optimal: 136, Sweet spot: 128-144, Memory cliff at 256
         hidden_size = trial.suggest_categorical('hidden_size', [128, 256, 512])
-        batch_size = trial.suggest_categorical('batch_size', [64, 128, 192, 256])
+        batch_size = trial.suggest_categorical('batch_size', [112, 128, 136, 144])
     else:
         # RTX 3060 Ti / 8 GB VRAM settings (current)
         hidden_size = trial.suggest_categorical('hidden_size', [128, 256])

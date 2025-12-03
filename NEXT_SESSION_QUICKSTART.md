@@ -1,59 +1,50 @@
 # Next Session Quick Start Guide
 
-## Last Session: December 2, 2025 (Afternoon)
+## Last Session: December 3, 2025 (Morning)
 
-### Status: NEW SYSTEM SETUP COMPLETE
+### Status: OPTUNA INTERRUPTED - READY TO RESUME
 
-**New System**: iBuyPower RDY Y70 B01
-- **GPU**: RTX 5070 Ti (16 GB VRAM) - **VERIFIED WORKING**
-- **PyTorch**: 2.10.0.dev (nightly with CUDA 12.8 for Blackwell architecture)
-- **Conda env**: `exo-lstm-gpu` - **INSTALLED**
+**What Happened**:
+- Started Optuna overnight (30 trials × 30 epochs)
+- **Trial 0 achieved AUC 0.916** (excellent result!)
+- Stopped after ~7 hours (only 1 trial completed) - needed GPU for other work
+- Results NOT saved (Optuna saves at end)
 
----
-
-## What Was Completed
-
-1. **Miniconda installed** and ToS accepted
-2. **exo-lstm-gpu environment created** with Python 3.11
-3. **PyTorch nightly installed** (required for RTX 5070 Ti / Blackwell sm_120)
-4. **All dependencies installed**: numpy, pandas, scikit-learn, optuna, matplotlib, astropy, scipy, tqdm
-5. **GPU verified working**: CUDA available, 16 GB VRAM detected
-6. **Data located**: `D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\`
-7. **Batch size benchmark completed**:
-   - **Optimal batch size: 136** (1.75 min/epoch)
-   - 1.8× faster than old system
-8. **optuna_optimize.py updated**: `HIGH_VRAM_GPU = True`
+**Key Finding**: AUC 0.916 is achievable on Sector 1 dataset!
 
 ---
 
-## What To Do Next
+## Quick Resume Options
 
-### Step 1: Run Optuna Optimization (~10-15 hours)
+### Option A: Fast Optuna Run (~9 hours)
 
 ```powershell
 # Activate environment
-C:\Users\manch\miniconda3\Scripts\conda.exe activate exo-lstm-gpu
+conda activate exo-lstm-gpu
 
-# Navigate to code directory
+# Navigate to code
 cd D:\CS_4280_Project\Code
 
-# Run Optuna (can run overnight)
-C:\Users\manch\miniconda3\envs\exo-lstm-gpu\python.exe optuna_optimize.py `
-  --windows_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train" `
-  --n_trials 30 `
-  --epochs_per_trial 30 `
-  --output_dir "optuna_results_sector1_5070ti"
+# Run Optuna with fewer trials
+python optuna_optimize.py `
+  --windows_dir D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train `
+  --n_trials 15 `
+  --epochs_per_trial 20 `
+  --output_dir optuna_results_sector1_5070ti
 ```
 
-**Expected time**: 10-15 hours (run overnight)
+**Time**: ~15 trials × 35 min = ~9 hours
 
-### Step 2: Train Final Model with Best Hyperparameters
+### Option B: Skip Optuna, Train Final Model (~1.75 hours)
 
-After Optuna completes, check `optuna_results_sector1_5070ti/best_params_*.json` for optimal hyperparameters, then:
+Since we already saw AUC 0.916 is achievable, train with known-good hyperparameters:
 
 ```powershell
-C:\Users\manch\miniconda3\envs\exo-lstm-gpu\python.exe train_bilstm_cluster.py `
-  --windows_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train" `
+conda activate exo-lstm-gpu
+cd D:\CS_4280_Project\Code
+
+python train_bilstm_cluster.py `
+  --windows_dir D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train `
   --n_clusters 5 `
   --epochs 60 `
   --batch_size 136 `
@@ -62,106 +53,109 @@ C:\Users\manch\miniconda3\envs\exo-lstm-gpu\python.exe train_bilstm_cluster.py `
   --layers 4 `
   --dropout 0.311 `
   --pos_weight 7.41 `
-  --save_dir "runs\sector1_5070ti_final" `
+  --save_dir runs\sector1_final `
   --amp_dtype fp16 `
   --num_workers 0 `
   --seed 42
 ```
 
-**Expected time**: ~1.75 hours (60 epochs × 1.75 min/epoch)
-
-### Step 3: Evaluate on Test Set
-
-```powershell
-C:\Users\manch\miniconda3\envs\exo-lstm-gpu\python.exe inference_cluster_model.py `
-  --model_path "runs\sector1_5070ti_final\best.pt" `
-  --windows_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test" `
-  --output_file "reports\sector1_5070ti_predictions.csv"
-```
+**Time**: ~1.75 hours (60 epochs × 1.75 min/epoch)
 
 ---
 
-## Key Parameters (VERIFIED Dec 2, 2025)
+## Key Parameters (VERIFIED Dec 2-3, 2025)
 
 | Parameter | Value | Source |
 |-----------|-------|--------|
 | **batch_size** | **136** | Benchmarked (optimal for RTX 5070 Ti) |
 | lr | 0.0001 | Stable (0.000225 caused NaN crash) |
 | pos_weight | 7.41 | Calculated (23325/3147) |
-| hidden | 256 | From previous Optuna |
-| layers | 4 | From previous Optuna |
-| dropout | 0.311 | From previous Optuna |
+| hidden | 256 | Previous Optuna |
+| layers | 4 | Previous Optuna |
+| dropout | 0.311 | Previous Optuna |
 | epochs | 60 | Standard |
 
 ---
 
-## Data Locations (New System)
+## Data Locations
 
 | Data | Location |
 |------|----------|
 | Training windows | `D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train\` |
 | Test windows | `D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test\` |
-| Ground truth source | `D:\lilith4_sector-1_groundtruth\sector-1\ground-truth` |
 | Code | `D:\CS_4280_Project\Code\` |
+
+**Training set**: 26,472 windows (3,147 planets = 11.9%)
+**Test set**: 6,579 windows
 
 ---
 
-## Benchmark Results Summary
+## After Training: Evaluate & Generate Figures
 
-### RTX 5070 Ti (16 GB VRAM)
+### Step 1: Evaluate on Test Set
+
+```powershell
+python inference_cluster_model.py `
+  --model_path runs\sector1_final\best.pt `
+  --windows_dir D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test `
+  --output_file reports\sector1_final_predictions.csv
+```
+
+### Step 2: Generate Figures
+
+```powershell
+python generate_sector1_figures.py
+```
+
+This creates ROC curve and confusion matrix for the paper.
+
+---
+
+## Benchmark Reference (RTX 5070 Ti)
 
 | Batch Size | Est. Epoch Time | Notes |
 |------------|-----------------|-------|
-| 64 | 3.05 min | |
+| 112 | 2.00 min | |
 | 128 | 1.78 min | |
 | **136** | **1.75 min** | **OPTIMAL** |
 | 144 | 1.78 min | |
-| 256 | 15.02 min | Memory pressure |
-| 512 | OOM | Crash |
-
-**60 epochs = ~1.75 hours** (vs 3.14 hours on RTX 3060 Ti)
+| 256 | 15.02 min | Memory cliff - AVOID |
 
 ---
 
-## Timeline to Final Presentation (Dec 9-11)
+## Timeline to Final Presentation
 
-| Date | Task | Est. Time |
-|------|------|-----------|
-| ~~Dec 2~~ | ~~System setup + benchmark~~ | ✅ DONE |
-| **Dec 2-3** | Run Optuna overnight | 10-15 hrs |
-| **Dec 3-4** | Final model training | 1.75 hrs |
-| **Dec 4-5** | Generate figures + update paper | 4-6 hrs |
-| **Dec 5-6** | Create slides + record 20s demo | 3-4 hrs |
-| **Dec 7-8** | Practice presentation | Buffer |
+| Date | Task | Status |
+|------|------|--------|
+| ~~Dec 2~~ | System setup + benchmark | ✅ Done |
+| ~~Dec 2-3~~ | Optuna overnight | ⚠️ Interrupted |
+| **Dec 3-4** | Train final model OR resume Optuna | **NEXT** |
+| Dec 4-5 | Generate figures + update paper | Pending |
+| Dec 5-6 | Create slides + record 20s demo | Pending |
+| Dec 7-8 | Practice presentation | Buffer |
 | **Dec 9-11** | **Presentations** | |
-| **Dec 18** | **Final submission deadline** | |
+| **Dec 18** | **Final submission** | |
 
 ---
 
-## Key Files
+## Files Changed Since Last Full Session
 
-| File | Purpose |
-|------|---------|
-| `CLAUDE.md` | Project instructions |
-| `NEXT_SESSION_QUICKSTART.md` | This file - quick start guide |
-| `PROGRESS_LOG_DEC_2_2025.md` | Today's session log |
-| `Code/BATCH_SIZE_BENCHMARK_RESULTS.md` | Benchmark results (both GPUs) |
-| `Code/optuna_optimize.py` | Hyperparameter optimization (HIGH_VRAM_GPU=True) |
+| File | Change |
+|------|--------|
+| `Code/optuna_optimize.py` | Batch sizes: [64,128,192,256] → [112,128,136,144] |
+| `PROGRESS_LOG_DEC_3_2025.md` | Created - documents overnight run |
 
 ---
 
-## Python Executable Path (Important!)
+## Best Results So Far
 
-Since conda isn't in PATH, use full path:
-```
-C:\Users\manch\miniconda3\envs\exo-lstm-gpu\python.exe
-```
-
-Or activate via:
-```powershell
-C:\Users\manch\miniconda3\Scripts\conda.exe activate exo-lstm-gpu
-```
+| Dataset | Model | AUC | Notes |
+|---------|-------|-----|-------|
+| Old (655 windows) | BiLSTM+Cluster | 0.7572 | Previous best |
+| Sector 1 (trained Nov) | BiLSTM+Cluster | 0.893 | Test set eval |
+| **Sector 1 (Optuna Trial 0)** | BiLSTM+Cluster | **0.916** | New best (not saved) |
 
 ---
 
-**Last updated**: December 2, 2025 (afternoon)
+**Last Updated**: December 3, 2025, morning
+**Status**: GPU available, ready to train
