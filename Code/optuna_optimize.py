@@ -198,12 +198,33 @@ def objective(trial, X, y, meta, device, epochs_per_trial, pos_weight, amp_dtype
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
 
-    # Suggest hyperparameters (removed 512 from hidden_size to avoid GPU crash)
-    hidden_size = trial.suggest_categorical('hidden_size', [128, 256])
+    # =======================================================================
+    # GPU-SPECIFIC SEARCH SPACE
+    # =======================================================================
+    # RTX 3060 Ti (8 GB VRAM) - Current system:
+    #   hidden_size: [128, 256]        (512 causes OOM)
+    #   batch_size:  [32, 64, 128]     (128+ causes memory pressure)
+    #
+    # RTX 5070 Ti (16 GB VRAM) - New system (Dec 5, 2025):
+    #   hidden_size: [128, 256, 512]   (512 should work)
+    #   batch_size:  [64, 128, 192, 256]  (larger batches optimal)
+    # =======================================================================
+
+    # TOGGLE THIS BASED ON YOUR GPU:
+    HIGH_VRAM_GPU = True  # Set to True for RTX 5070 Ti (16 GB) or similar
+
+    if HIGH_VRAM_GPU:
+        # RTX 5070 Ti / 16+ GB VRAM settings
+        hidden_size = trial.suggest_categorical('hidden_size', [128, 256, 512])
+        batch_size = trial.suggest_categorical('batch_size', [64, 128, 192, 256])
+    else:
+        # RTX 3060 Ti / 8 GB VRAM settings (current)
+        hidden_size = trial.suggest_categorical('hidden_size', [128, 256])
+        batch_size = trial.suggest_categorical('batch_size', [32, 64, 128])
+
     num_layers = trial.suggest_int('num_layers', 2, 4)
     dropout = trial.suggest_float('dropout', 0.2, 0.5)
     lr = trial.suggest_float('lr', 1e-5, 1e-3, log=True)
-    batch_size = trial.suggest_categorical('batch_size', [32, 64, 128])
     n_clusters = trial.suggest_categorical('n_clusters', [3, 5, 7, 10])
     weight_decay = trial.suggest_float('weight_decay', 1e-6, 1e-4, log=True)
     cluster_embed_dim = trial.suggest_categorical('cluster_embed_dim', [16, 32, 64])

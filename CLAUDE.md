@@ -24,8 +24,35 @@ This is an exoplanet detection project using deep learning (BiLSTM with K-means 
 - **CPU limits added**: Prevents system crash during parallel processing
 - See `PROGRESS_LOG_NOV_27_2025.md` for full session details
 
-**Environment**: Windows 11, CUDA-enabled GPU, conda environment `exo-lstm-gpu`
-**Current Status**: Training in progress - baseline model with corrected pos_weight
+**UPDATE November 29, 2025**: **BATCH SIZE BENCHMARK COMPLETED**
+- Tested batch sizes: 8, 16, 32, 64, 128
+- **Optimal batch size: 64** (3.14 min/epoch) - 7.8× faster than batch 128
+- Batch 128 is slowest (24.46 min/epoch) due to GPU memory bottleneck
+- See `Code/BATCH_SIZE_BENCHMARK_RESULTS.md` and `PROGRESS_LOG_NOV_29_2025.md`
+
+**UPDATE December 2, 2025 (Morning)**: **NEW SYSTEM ARRIVING**
+- **Hardware**: iBuyPower RDY Y70 B01
+  - Intel i9-14900KF (24 cores)
+  - **RTX 5070 Ti (16 GB VRAM)** - 2× previous VRAM
+  - 32 GB DDR5-6000
+  - 2 TB NVMe + **Crucial T710 4 TB Gen5 NVMe** (~12,400 MB/s)
+- **Expected improvements**: 2-3× faster training, batch size 128-192 optimal
+- **Data layout**: Code on C:, Data on D: (T710)
+- **Priority**: Run Optuna on Sector 1 dataset, then final training
+- **Deadline**: Presentations Dec 9-11, Final submission Dec 18
+- See `NEXT_SESSION_QUICKSTART.md` for full setup guide
+
+**UPDATE December 2, 2025 (Afternoon)**: **FINAL PAPER PREPARATION**
+- **Code README created**: `Code/README.md` with full run instructions for TA
+- **RNN Related Work condensed**: 6,700 → 1,036 words (85% reduction per TA feedback)
+- **MiKTeX installed**: Can now compile LaTeX papers locally
+- **Paper compiled**: 18 pages (target 15-18 for team of 3)
+- **RNN Methodology updating**: Converting from 655-window to Sector 1 dataset
+- **Working paper**: `term_project_files/Merged_Proposal_CONDENSED_RNN_12.2.2025.tex`
+- **See**: `PROGRESS_LOG_DEC_2_2025.md` for detailed session log
+
+**Environment**: Windows 11, NVIDIA GeForce RTX 5070 Ti (new) / RTX 3060 Ti (old), conda environment `exo-lstm-gpu`
+**Current Status**: Updating RNN Methodology section in paper, waiting for new PC delivery
 
 ## Key Commands
 
@@ -69,15 +96,15 @@ print(meta.columns)  # Should include: mean, std, var, skew, range, median, mad,
 #### Step 2: Train on Sector 1 Dataset
 ```powershell
 python train_bilstm_cluster.py `
-  --windows_dir "data\windows_sector1_full\train" `
+  --windows_dir "E:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train" `
   --n_clusters 5 `
   --epochs 60 `
-  --batch_size 128 `
-  --lr 0.000225 `
+  --batch_size 64 `
+  --lr 0.0001 `
   --hidden 256 `
   --layers 4 `
   --dropout 0.311 `
-  --save_dir "runs\sector1_experiments\baseline_corrected_posweight" `
+  --save_dir "runs\sector1_batch64" `
   --amp_dtype fp16 `
   --pos_weight 7.41 `
   --num_workers 0 `
@@ -87,9 +114,40 @@ python train_bilstm_cluster.py `
 **IMPORTANT**:
 - Use `data\windows_sector1_full\train` (not just `data\windows_sector1_full`) - dataset has train/test split
 - pos_weight should be **7.41** (calculated from 23325/3147 = actual class ratio)
+- **Use batch_size 64** (optimal) - NOT 128 (too slow due to GPU memory)
+- **Use lr 0.0001** (stable) - NOT 0.000225 (caused NaN crash)
 
-**Expected Training Time**: ~20 hours (60 epochs, 26K windows, GPU FP16, ~7 sec/batch)
+**Expected Training Time**: ~3.14 hours (60 epochs × 3.14 min/epoch with batch size 64)
 **Expected Performance**: AUC 0.65-0.75 (target: >0.70)
+
+### Batch Size Benchmark Results (November 29, 2025)
+
+| Batch Size | Batches/Epoch | Time/Batch | Est. Epoch Time |
+|------------|---------------|------------|-----------------|
+| 8 | 3309 | 0.356 sec | 19.61 min |
+| 16 | 1655 | 0.304 sec | 8.38 min |
+| 32 | 828 | 0.362 sec | 5.00 min |
+| **64** | **414** | **0.455 sec** | **3.14 min** |
+| 128 | 207 | 7.089 sec | 24.46 min |
+
+**Key Finding**: Batch size 64 is optimal. Batch size 128 causes GPU memory pressure (7 sec/batch vs 0.455 sec).
+
+### GPU-Specific Settings (IMPORTANT)
+
+For Optuna optimization, edit `optuna_optimize.py` line 214:
+
+```python
+# RTX 3060 Ti (8 GB) - Current:
+HIGH_VRAM_GPU = False
+
+# RTX 5070 Ti (16 GB) - New system (Dec 2, 2025):
+HIGH_VRAM_GPU = True
+```
+
+| Setting | 8 GB VRAM (3060 Ti) | 16 GB VRAM (5070 Ti) |
+|---------|---------------------|----------------------|
+| hidden_size | [128, 256] | [128, 256, 512] |
+| batch_size | [32, 64, 128] | [64, 128, 192, 256] |
 
 **Key Improvements**:
 - 62× more training data than previous approach (655 → 40,623 windows)
