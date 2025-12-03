@@ -1,0 +1,55 @@
+% RNN Findings Section - Cross-Mission Generalization Analysis
+% Add this after the SMOTE section (line 751) and before the Transformer section
+
+\subsubsection{Cross-Mission Generalization Analysis}
+
+A critical question for any exoplanet detection model is whether it generalizes beyond its training domain. I trained the BiLSTM + Clustering model on TESS Sector 1 data and evaluated its performance on Kepler data to assess cross-mission transferability.
+
+\textbf{TESS vs Kepler: Fundamental Differences.} Table~\ref{tab:mission_comparison} summarizes the key observational differences between TESS and Kepler that could affect model generalization. The most significant difference is temporal sampling: TESS collects data every 2 minutes while Kepler used 30-minute cadence, a 15$\times$ difference that fundamentally changes the shape of transit signals in the time series. Additionally, TESS observes in red/near-infrared wavelengths (600--1000 nm) while Kepler observed in optical wavelengths (430--890 nm), causing different limb-darkening effects and transit depths for the same planet. Finally, TESS sectors span only 27 days versus Kepler's 4-year continuous observations, limiting the number of transits captured per target.
+
+\begin{table}[h]
+\centering
+\caption{TESS vs Kepler Observational Differences}
+\label{tab:mission_comparison}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Property} & \textbf{TESS} & \textbf{Kepler} \\
+\midrule
+Cadence & 2 minutes & 30 minutes \\
+Wavelength & 600--1000 nm (red/IR) & 430--890 nm (optical) \\
+Duration per target & 27 days (1 sector) & 4 years (continuous) \\
+Signal-to-noise & Lower (survey mode) & Higher (stare mode) \\
+Transit shape & High-resolution & Smoothed by cadence \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Cross-Mission Test Setup.} I constructed a Kepler test set of 279 windows from 93 confirmed exoplanet host stars, processing each through the same pipeline used for TESS data: detrending, normalization, 2048-point window extraction, and statistical feature computation for cluster assignment. Importantly, the cluster centers were frozen from TESS training---no re-fitting was performed on Kepler data.
+
+\textbf{Results.} Table~\ref{tab:crossmission_results} compares TESS and Kepler test performance. On TESS test data (same mission as training), the model achieved AUC 0.893 with 94.6\% recall and 41.8\% precision. On Kepler data, the model predicted all 279 windows as positive (100\% recall) with mean probability 0.9776. However, since the Kepler test set contains \textit{only} confirmed planets (no negative examples), I cannot compute precision, specificity, or AUC. The high recall suggests the model learned some generalizable transit features, but the missing precision measurement leaves open the question of false positive rates on Kepler data.
+
+\begin{table}[h]
+\centering
+\caption{Cross-Mission Generalization Results}
+\label{tab:crossmission_results}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\textbf{Metric} & \textbf{TESS Test} & \textbf{Kepler Test} \\
+\midrule
+Windows & 6,579 & 279 \\
+Unique Stars & 2,193 & 93 \\
+Positives in Dataset & 771 (11.7\%) & 279 (100\%) \\
+\midrule
+AUC & 0.893 & N/A (no negatives) \\
+Recall & 94.6\% & 100\% \\
+Precision & 41.8\% & Unknown \\
+Mean Probability & 0.872 & 0.978 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Interpretation.} The model's ability to detect Kepler planets with high confidence (mean probability 0.978) is encouraging but inconclusive. Two interpretations are possible: (1) the model learned mission-agnostic transit physics and correctly generalizes, or (2) the model has a high false positive rate and simply predicts ``planet'' for most inputs. Evidence for the second interpretation comes from the TESS test set precision of only 41.8\%---the model produces many false positives even on in-domain data. Without Kepler negative examples, I cannot distinguish these hypotheses.
+
+\textbf{Why Complete Cross-Mission Testing Was Not Achieved.} Creating a balanced Kepler test set requires downloading and processing Kepler light curves for stars \textit{without} planets, which presents technical challenges: (1) the \texttt{lightkurve} library encountered compatibility issues with Kepler target names, and (2) identifying ``true negative'' Kepler targets requires careful vetting to ensure they genuinely lack planets rather than simply lacking detections. Time constraints prevented resolving these issues.
+
+\textbf{Implications for Future Work.} The 15$\times$ cadence difference between TESS and Kepler fundamentally changes transit signal morphology. A 2-hour transit spanning 60 TESS data points appears as only 4 Kepler data points, losing the characteristic U-shaped ingress/egress signature that neural networks learn to recognize. Future work should explore domain adaptation techniques or multi-mission training to enable robust cross-mission generalization. The clustering approach may help by grouping similar stellar types across missions, but this requires further investigation with balanced cross-mission datasets.

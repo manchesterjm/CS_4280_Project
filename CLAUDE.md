@@ -63,8 +63,42 @@ This is an exoplanet detection project using deep learning (BiLSTM with K-means 
 - **Working paper**: `term_project_files/Merged_Proposal_CONDENSED_RNN_12.2.2025.tex`
 - **See**: `PROGRESS_LOG_DEC_2_2025.md` for detailed session log
 
-**Environment**: Windows 11, NVIDIA GeForce RTX 5070 Ti (new) / RTX 3060 Ti (old), conda environment `exo-lstm-gpu`
-**Current Status**: Updating RNN Methodology section in paper, waiting for new PC delivery
+**UPDATE December 3, 2025 (Morning)**: **PROFESSOR CLARIFICATION ON PAPER FORMAT**
+- **Total paper length**: 15-18 pages required (per syllabus, confirmed by professor)
+- **Team paper structure** (3 members):
+  - **Shared sections**: Intro, Abstract, Conclusion (subtract from total)
+  - **Individual sections**: Related Works, Methodology, Findings (divide remaining space EVENLY among 3 members)
+- **Related Works structure**:
+  - First 6 papers (midterm): Summarize into ONE paragraph
+  - Last 3 new papers: ~1 page of content
+  - Focus ONLY on: what researchers did, why it matters to us, our takeaway for project
+  - Do NOT pad with unnecessary detail
+- **RNN Findings section key point**: BiLSTM + Clustering model FAILED to generalize
+  - Trained on TESS Sector 1 → excellent on other TESS data
+  - Ran on Kepler data → failed completely
+  - Root cause: TESS and Kepler capture light curves fundamentally differently
+  - Need to include the specific numbers showing this failure
+- **SOFA refactoring complete**: All 5 active Python files at pylint 10.00/10
+- **Paths updated**: All references now use D: drive (new PC)
+
+**UPDATE December 3, 2025 (Afternoon)**: **PAPER FINALIZATION SESSION**
+- **RNN Related Work EXPANDED**: Added ~1,350 words to the three new paper sections (Becker, Schanche, Malik)
+  - Now fills 2 full pages as required per teammate allocation
+  - First 6 foundational papers remain summarized as brief paragraphs
+- **RNN Results condensed**: Removed verbose tables, kept key findings
+- **Paper converted from proposal to final format**:
+  - Removed "Preliminary Results" → now just "Results"
+  - Removed "Experimental Plan & Milestones" section (proposal artifact)
+  - Removed "Overall Project Risks & Mitigations" section (proposal artifact)
+  - Updated AI Use Disclosure to include both Sonnet 4.5 and Opus 4.5
+  - Added teammate names: Tristan (CNN), Bree (Transformer)
+- **Cross-mission generalization section added**: TESS→Kepler analysis showing model limitations
+- **Optuna Trial 0 result**: AUC 0.916 achieved (best so far!) but optimization was interrupted
+- **Working paper**: `term_project_files/Merged_Proposal_as_of_12.2.2025.tex`
+- **Backup created**: `D:\CS_4280_Project_Backup\Merged_Proposal_as_of_12.2.2025_BACKUP_before_RNN_expansion.tex`
+
+**Environment**: Windows 11, NVIDIA GeForce RTX 5070 Ti (16 GB VRAM), conda environment `exo-lstm-gpu`
+**Current Status**: RNN sections complete, waiting for teammates (Tristan/Bree) to update their sections
 
 ## Key Commands
 

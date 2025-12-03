@@ -1,31 +1,48 @@
 # Next Session Quick Start Guide
 
-## Last Session: December 3, 2025 (Morning)
+## Last Session: December 3, 2025 (Afternoon)
 
-### Status: OPTUNA INTERRUPTED - READY TO RESUME
+### Status: RNN PAPER SECTIONS COMPLETE - WAITING FOR TEAMMATES
 
-**What Happened**:
-- Started Optuna overnight (30 trials × 30 epochs)
-- **Trial 0 achieved AUC 0.916** (excellent result!)
-- Stopped after ~7 hours (only 1 trial completed) - needed GPU for other work
-- Results NOT saved (Optuna saves at end)
+**What Was Done Today**:
+- Expanded RNN Related Work to 2 full pages (added ~1,350 words to Becker, Schanche, Malik sections)
+- Converted paper from proposal format to final submission format
+- Removed proposal artifacts (Experimental Plan, Risks sections)
+- Added cross-mission generalization analysis (TESS → Kepler)
+- Updated AI disclosure for Opus 4.5
 
-**Key Finding**: AUC 0.916 is achievable on Sector 1 dataset!
+**Key Finding from Earlier**: Optuna Trial 0 achieved **AUC 0.916** (best ever!)
 
 ---
 
-## Quick Resume Options
+## What's Complete (RNN Component)
 
-### Option A: Fast Optuna Run (~9 hours)
+- [x] RNN Related Work - 2 full pages (6 foundational + 3 new papers)
+- [x] RNN Results section - condensed with key tables
+- [x] Cross-mission generalization analysis (TESS → Kepler)
+- [x] SOFA refactoring - all Python files at pylint 10.00/10
+- [x] Code README.md for TA
+
+## What's Waiting On
+
+- [ ] **Teammates (Tristan/Bree)** to update their CNN/Transformer sections
+- [ ] Resume Optuna optimization OR train final model
+- [ ] Generate final figures (ROC, confusion matrix)
+- [ ] Create 20-second demo video
+- [ ] Prepare presentation slides
+
+---
+
+## When You Return: Priority Options
+
+### Option A: Resume Optuna (~9 hours)
+
+If you have overnight time available:
 
 ```powershell
-# Activate environment
 conda activate exo-lstm-gpu
-
-# Navigate to code
 cd D:\CS_4280_Project\Code
 
-# Run Optuna with fewer trials
 python optuna_optimize.py `
   --windows_dir D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train `
   --n_trials 15 `
@@ -33,11 +50,9 @@ python optuna_optimize.py `
   --output_dir optuna_results_sector1_5070ti
 ```
 
-**Time**: ~15 trials × 35 min = ~9 hours
+### Option B: Train Final Model (~1.75 hours)
 
-### Option B: Skip Optuna, Train Final Model (~1.75 hours)
-
-Since we already saw AUC 0.916 is achievable, train with known-good hyperparameters:
+If you need results quickly:
 
 ```powershell
 conda activate exo-lstm-gpu
@@ -59,11 +74,13 @@ python train_bilstm_cluster.py `
   --seed 42
 ```
 
-**Time**: ~1.75 hours (60 epochs × 1.75 min/epoch)
+### Option C: Wait for Teammates
+
+If paper updates from teammates are coming soon, wait before making more changes to avoid merge conflicts.
 
 ---
 
-## Key Parameters (VERIFIED Dec 2-3, 2025)
+## Key Parameters (VERIFIED)
 
 | Parameter | Value | Source |
 |-----------|-------|--------|
@@ -84,13 +101,14 @@ python train_bilstm_cluster.py `
 | Training windows | `D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train\` |
 | Test windows | `D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test\` |
 | Code | `D:\CS_4280_Project\Code\` |
+| Working paper | `D:\CS_4280_Project\term_project_files\Merged_Proposal_as_of_12.2.2025.tex` |
 
 **Training set**: 26,472 windows (3,147 planets = 11.9%)
 **Test set**: 6,579 windows
 
 ---
 
-## After Training: Evaluate & Generate Figures
+## After Training: Generate Figures
 
 ### Step 1: Evaluate on Test Set
 
@@ -101,61 +119,53 @@ python inference_cluster_model.py `
   --output_file reports\sector1_final_predictions.csv
 ```
 
-### Step 2: Generate Figures
+### Step 2: Generate Figures for Paper
 
 ```powershell
 python generate_sector1_figures.py
 ```
 
-This creates ROC curve and confusion matrix for the paper.
-
----
-
-## Benchmark Reference (RTX 5070 Ti)
-
-| Batch Size | Est. Epoch Time | Notes |
-|------------|-----------------|-------|
-| 112 | 2.00 min | |
-| 128 | 1.78 min | |
-| **136** | **1.75 min** | **OPTIMAL** |
-| 144 | 1.78 min | |
-| 256 | 15.02 min | Memory cliff - AVOID |
-
----
-
-## Timeline to Final Presentation
-
-| Date | Task | Status |
-|------|------|--------|
-| ~~Dec 2~~ | System setup + benchmark | ✅ Done |
-| ~~Dec 2-3~~ | Optuna overnight | ⚠️ Interrupted |
-| **Dec 3-4** | Train final model OR resume Optuna | **NEXT** |
-| Dec 4-5 | Generate figures + update paper | Pending |
-| Dec 5-6 | Create slides + record 20s demo | Pending |
-| Dec 7-8 | Practice presentation | Buffer |
-| **Dec 9-11** | **Presentations** | |
-| **Dec 18** | **Final submission** | |
-
----
-
-## Files Changed Since Last Full Session
-
-| File | Change |
-|------|--------|
-| `Code/optuna_optimize.py` | Batch sizes: [64,128,192,256] → [112,128,136,144] |
-| `PROGRESS_LOG_DEC_3_2025.md` | Created - documents overnight run |
+Creates ROC curve and confusion matrix in `term_project_files/Images/RNN/`
 
 ---
 
 ## Best Results So Far
 
-| Dataset | Model | AUC | Notes |
-|---------|-------|-----|-------|
-| Old (655 windows) | BiLSTM+Cluster | 0.7572 | Previous best |
-| Sector 1 (trained Nov) | BiLSTM+Cluster | 0.893 | Test set eval |
-| **Sector 1 (Optuna Trial 0)** | BiLSTM+Cluster | **0.916** | New best (not saved) |
+| Dataset | Model | AUC | Status |
+|---------|-------|-----|--------|
+| Old (655 windows) | BiLSTM+Cluster | 0.7572 | Archived |
+| Sector 1 (trained Nov) | BiLSTM+Cluster | 0.893 | Current best saved |
+| **Sector 1 (Optuna Trial 0)** | BiLSTM+Cluster | **0.916** | Not saved (interrupted) |
 
 ---
 
-**Last Updated**: December 3, 2025, morning
-**Status**: GPU available, ready to train
+## Timeline to Final Submission
+
+| Date | Task | Status |
+|------|------|--------|
+| ~~Dec 2~~ | New PC setup + benchmark | ✅ Done |
+| ~~Dec 2-3~~ | Optuna overnight | ⚠️ Interrupted |
+| ~~Dec 3~~ | Paper finalization (RNN sections) | ✅ Done |
+| **Dec 4-5** | Resume Optuna OR train final model | **NEXT** |
+| Dec 5-6 | Generate figures + finalize paper | Pending |
+| Dec 6-7 | Create slides + record 20s demo | Pending |
+| Dec 7-8 | Practice presentation | Buffer |
+| **Dec 9-11** | **Presentations** | |
+| **Dec 18** | **Final submission deadline** | |
+
+---
+
+## Files Changed This Session
+
+| File | Change |
+|------|--------|
+| `term_project_files/Merged_Proposal_as_of_12.2.2025.tex` | Expanded RNN Related Work, removed proposal sections |
+| `CLAUDE.md` | Added Dec 3 afternoon update |
+| `PROGRESS_LOG_DEC_3_2025.md` | Added afternoon session details |
+| `NEXT_SESSION_QUICKSTART.md` | This file - updated |
+| `Code/TRAINING_STATUS.md` | Updated to reflect current state |
+
+---
+
+**Last Updated**: December 3, 2025, afternoon
+**Status**: RNN paper sections complete, waiting for teammates
