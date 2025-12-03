@@ -2,6 +2,18 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+We are software engineers with 40 years of experience.  We are professionals and strive to write the best code possible
+Even though this is a project for college, I am 50 years old and I know what I am doing.  What we present needs to reflect that
+All code will be written with these in mind
+  - SOFA principles of coding
+    -- Short: Functions should be short and do one thing. This makes them easier to read, test, and reuse.
+    -- One Thing: Each function should have a single, clear responsibility. This aligns with the Single Responsibility Principle from SOLID.
+    -- Few Arguments: Functions should have a minimal number of arguments. Functions with too many arguments can indicate a design issue and become difficult to use.
+    -- Abstraction level consistency: All functions at a given level of the system should be at the same level of abstraction. This helps maintain a clear structure and prevents mixing high-level logic with low-level implementation details
+  - If we find a problem with the code, it is not a matter for later, we should fix it now
+    -- example: if we run pylint and there are issues raised, we fix them regardless of criticality
+  
+
 ## Project Overview
 
 This is an exoplanet detection project using deep learning (BiLSTM with K-means clustering) to identify planetary transits in stellar light curve data from NASA's TESS/Kepler missions. The project has achieved **AUC 0.7572** (+9.0% improvement) after Optuna hyperparameter optimization, up from the baseline AUC 0.6947. Successfully tested on 100 confirmed exoplanet systems with 16/300 windows correctly identified as planet candidates.
@@ -13,7 +25,7 @@ This is an exoplanet detection project using deep learning (BiLSTM with K-means 
 - Dataset: 13,541 light curves → **40,623 training windows** (62× larger!)
 - Categories: 3,146 planets + 8,624 stars + 900 EBs + 871 BackEBs
 - Class balance: 23.2% positive (9,438 planets vs 31,185 non-planets)
-- Location: `E:\lilith4_sector-1_groundtruth\sector-1\ground-truth`
+- Location: `D:\CS_4280_Project_Backup\sector-1\ground-truth`
 - See `PROGRESS_LOG_NOV_14_2025.md` for full details
 
 **UPDATE November 27, 2025**: **DATASET BUILT & TRAINING IN PROGRESS**
@@ -59,18 +71,18 @@ This is an exoplanet detection project using deep learning (BiLSTM with K-means 
 ### Setup
 ```powershell
 conda activate exo-lstm-gpu
-cd C:\CS_4280_Project\Code
+cd D:\CS_4280_Project\Code
 ```
 
 ### TESS Sector 1 Ground Truth Dataset (CURRENT PRIORITY - November 14, 2025)
 
-**Dataset Location**: `E:\lilith4_sector-1_groundtruth\sector-1\ground-truth`
+**Dataset Location**: `D:\CS_4280_Project_Backup\sector-1\ground-truth`
 
 #### Step 1: Build Sector 1 Training Windows
 ```powershell
 # Process ground truth data into training windows with statistical features
 python build_windows_from_groundtruth.py `
-  --data_dir "E:\lilith4_sector-1_groundtruth\sector-1\ground-truth" `
+  --data_dir "D:\CS_4280_Project_Backup\sector-1\ground-truth" `
   --output_dir "data\windows_sector1_full" `
   --seq_len 2048 `
   --n_windows 3 `
@@ -96,7 +108,7 @@ print(meta.columns)  # Should include: mean, std, var, skew, range, median, mad,
 #### Step 2: Train on Sector 1 Dataset
 ```powershell
 python train_bilstm_cluster.py `
-  --windows_dir "E:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train" `
+  --windows_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train" `
   --n_clusters 5 `
   --epochs 60 `
   --batch_size 64 `
@@ -160,7 +172,7 @@ HIGH_VRAM_GPU = True
 ### Training the BiLSTM+Clustering Model (Legacy - 655 Windows)
 ```powershell
 python train_bilstm_cluster.py `
-  --windows_dir "C:\CS_4280_Project\Code\data\windows_train" `
+  --windows_dir "D:\CS_4280_Project\Code\data\windows_train" `
   --n_clusters 5 `
   --epochs 80 `
   --batch_size 64 `
@@ -168,7 +180,7 @@ python train_bilstm_cluster.py `
   --hidden 256 `
   --layers 3 `
   --dropout 0.4 `
-  --save_dir "C:\CS_4280_Project\Code\runs\bilstm_cluster" `
+  --save_dir "D:\CS_4280_Project\Code\runs\bilstm_cluster" `
   --amp_dtype fp16 `
   --pos_weight 3.367 `
   --num_workers 0
@@ -180,7 +192,7 @@ python train_bilstm_cluster.py `
 ```powershell
 # 1. Generate 400 light curves (200 planets + 200 non-planets)
 python generate_synthetic_dataset.py `
-  --output_dir "C:\CS_4280_Project\synthetic_dataset_400" `
+  --output_dir "D:\CS_4280_Project\synthetic_dataset_400" `
   --n_planets 200 `
   --n_non_planets 200 `
   --noise_ppm 200 `
@@ -188,8 +200,8 @@ python generate_synthetic_dataset.py `
 
 # 2. Build training windows from synthetic data
 python build_windows_from_synthetic.py `
-  --data_dir "C:\CS_4280_Project\synthetic_dataset_400" `
-  --output_dir "C:\CS_4280_Project\Code\data\windows_train_400" `
+  --data_dir "D:\CS_4280_Project\synthetic_dataset_400" `
+  --output_dir "D:\CS_4280_Project\Code\data\windows_train_400" `
   --seq_len 2048 `
   --n_windows 3 `
   --seed 42
@@ -210,14 +222,14 @@ python build_windows_from_synthetic.py `
 ```powershell
 # 1. Build hybrid dataset (90% real, 10% synthetic)
 python build_hybrid_dataset.py `
-  --real_dir "C:\CS_4280_Project\Code\data\windows_train" `
-  --synthetic_dir "C:\CS_4280_Project\Code\data\windows_train_400" `
+  --real_dir "D:\CS_4280_Project\Code\data\windows_train" `
+  --synthetic_dir "D:\CS_4280_Project\Code\data\windows_train_400" `
   --mix_ratio 0.90 `
-  --output_dir "C:\CS_4280_Project\Code\data\windows_hybrid_90"
+  --output_dir "D:\CS_4280_Project\Code\data\windows_hybrid_90"
 
 # 2. Train on hybrid dataset
 python train_bilstm_cluster.py `
-  --windows_dir "C:\CS_4280_Project\Code\data\windows_hybrid_90" `
+  --windows_dir "D:\CS_4280_Project\Code\data\windows_hybrid_90" `
   --n_clusters 5 `
   --epochs 80 `
   --batch_size 128 `
@@ -225,7 +237,7 @@ python train_bilstm_cluster.py `
   --hidden 256 `
   --layers 4 `
   --dropout 0.311 `
-  --save_dir "C:\CS_4280_Project\Code\runs\bilstm_cluster_hybrid_90" `
+  --save_dir "D:\CS_4280_Project\Code\runs\bilstm_cluster_hybrid_90" `
   --amp_dtype fp16 `
   --pos_weight 3.0 `
   --num_workers 0
@@ -246,31 +258,31 @@ python train_bilstm_cluster.py `
 ### Building Training Windows (Legacy Approach)
 ```powershell
 python build_windows_parallel_v6.py `
-  --processed_dir "C:\CS_4280_Project\test_dataset\simulated_dataset\processed" `
-  --out_dir "C:\CS_4280_Project\Code\data\windows_train" `
+  --processed_dir "D:\CS_4280_Project\test_dataset\simulated_dataset\processed" `
+  --out_dir "D:\CS_4280_Project\Code\data\windows_train" `
   --seq_len 2048 `
   --neg_per_pos 5 `
   --n_jobs -1 `
   --seed 42 `
-  --manifest "C:\CS_4280_Project\test_dataset\simulated_dataset\manifest.csv"
+  --manifest "D:\CS_4280_Project\test_dataset\simulated_dataset\manifest.csv"
 ```
 
 ### Testing on New TESS Data (Complete Pipeline)
 ```powershell
 # 1. Download TESS light curves
-python download_tess_lightcurves.py --tic_list sample_tic_ids.txt --output_dir "C:\CS_4280_Project\test_dataset_v2\raw"
+python download_tess_lightcurves.py --tic_list sample_tic_ids.txt --output_dir "D:\CS_4280_Project\test_dataset_v2\raw"
 
 # 2. Process downloaded data
-python process_tess_for_testing.py --raw_dir "C:\CS_4280_Project\test_dataset_v2\raw" --output_dir "C:\CS_4280_Project\test_dataset_v2\processed"
+python process_tess_for_testing.py --raw_dir "D:\CS_4280_Project\test_dataset_v2\raw" --output_dir "D:\CS_4280_Project\test_dataset_v2\processed"
 
 # 3. Convert to CSV format
-python convert_npy_to_csv.py --input_dir "C:\CS_4280_Project\test_dataset_v2\processed" --output_dir "C:\CS_4280_Project\test_dataset_v2\processed_csv" --max_points 50000
+python convert_npy_to_csv.py --input_dir "D:\CS_4280_Project\test_dataset_v2\processed" --output_dir "D:\CS_4280_Project\test_dataset_v2\processed_csv" --max_points 50000
 
 # 4. Build test windows
-python build_simple_windows.py --data_dir "C:\CS_4280_Project\test_dataset_v2\processed_csv" --output_dir "C:\CS_4280_Project\Code\data\windows_test"
+python build_simple_windows.py --data_dir "D:\CS_4280_Project\test_dataset_v2\processed_csv" --output_dir "D:\CS_4280_Project\Code\data\windows_test"
 
 # 5. Run inference
-python inference_cluster_model.py --model_path "C:\CS_4280_Project\Code\runs\bilstm_cluster\best.pt" --windows_dir "C:\CS_4280_Project\Code\data\windows_test" --output_file "C:\CS_4280_Project\Code\reports\test_predictions.csv"
+python inference_cluster_model.py --model_path "D:\CS_4280_Project\Code\runs\bilstm_cluster\best.pt" --windows_dir "D:\CS_4280_Project\Code\data\windows_test" --output_file "D:\CS_4280_Project\Code\reports\test_predictions.csv"
 ```
 
 ## Architecture Overview
@@ -600,7 +612,7 @@ Following professor's recommendation, implemented automated hyperparameter tunin
 
 ```powershell
 conda activate exo-lstm-gpu
-cd C:\CS_4280_Project\Code
+cd D:\CS_4280_Project\Code
 python optuna_optimize.py --n_trials 30 --epochs_per_trial 30
 ```
 
@@ -639,7 +651,7 @@ python optuna_optimize.py --windows_dir "data/windows_train" --n_trials 30 --out
 
 **Real Planet Testing:**
 ```powershell
-python build_planet_test_windows.py --data_dir "C:\CS_4280_Project\Planet_LightCurve_Data\processed" --output_dir "data/windows_planet_test"
+python build_planet_test_windows.py --data_dir "D:\CS_4280_Project\Planet_LightCurve_Data\processed" --output_dir "data/windows_planet_test"
 ```
 
 **Comparison Report:**
