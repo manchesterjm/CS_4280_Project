@@ -1,0 +1,60 @@
+Starting Autonomous Training Pipeline...
+
+
+C:\CS_4280_Project\Code>if defined INCLUDE_CONDA_NVCC_BACKUP (
+set "INCLUDE="  
+ set "INCLUDE_CONDA_NVCC_BACKUP=" 
+) 
+
+C:\CS_4280_Project\Code>(IF "_CONDA_SCRIPT" == "_CONDA_SCRIPT" (CALL "C:\Users\manch\miniconda3\etc\conda\deactivate.d\openssl_deactivate.bat" )  ELSE IF "C:\Users\manch\miniconda3\etc\conda\deactivate.d\openssl_deactivate.bat" == "" (SET "_CONDA_SCRIPT=" )  ELSE (SET "_CONDA_SCRIPT=C:\Users\manch\miniconda3\etc\conda\deactivate.d\openssl_deactivate.bat" ) ) 
+Activated environment: exo-lstm-gpu
+
+Running training with window sizes: 2048, 1024, 4096
+This will take several hours. Results will be saved to runs\sector1_experiments\
+
+
+======================================================================
+AUTONOMOUS TRAINING PIPELINE
+Started: 2025-11-27 14:18:13
+======================================================================
+GPU Available: NVIDIA GeForce RTX 3060 Ti
+GPU Memory: 8.6 GB
+
+======================================================================
+EXPERIMENT: Window Size = 2048
+======================================================================
+
+[Step 1] Building dataset with window size 2048...
+
+======================================================================
+TESS SECTOR 1 DATASET BUILDER v2
+======================================================================
+Data directory: E:\lilith4_sector-1_groundtruth\sector-1\ground-truth
+Output directory: C:\CS_4280_Project\Code\runs\sector1_experiments\data_w2048
+Window size: 2048
+Windows per curve: 3
+Train/Test split: 80/20
+Parallel workers: 12
+======================================================================
+
+Loaded master CSV: 17091 entries
+Label distribution:
+  star: 8624
+  planet: 6696
+  eb: 900
+  beb: 871
+
+Found 3146 files in planets
+
+Found 8624 files in Stars
+
+Found 900 files in EBs
+
+Found 871 files in BackEBs
+
+Total files to process: 11017
+Skipped (not in master CSV): 2524
+
+Processing with 12 workers...
+
+Training complete!

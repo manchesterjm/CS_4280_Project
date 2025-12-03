@@ -1,0 +1,65 @@
+\subsection{Recurrent Neural Networks (RNNs)}
+
+This section reviews RNN applications to astronomical time series that inform the BiLSTM + clustering approach. We first summarize six foundational papers from our midterm report, then present three new studies that establish performance benchmarks and validate key architectural decisions.
+
+\subsubsection{Foundational Work (Midterm References)}
+
+\textbf{Vida et al.\ (2021)} trained stacked LSTMs to detect stellar flares in Kepler and TESS photometry, using dropout regularization and minority class weighting \cite{Vida2021findingflaresrecurrent}. \textit{Why I used it}: Their finding that models generalize well across Kepler and TESS supports consistent preprocessing, and their comparison showing stacked LSTMs outperform GRUs for astrophysical noise informed my choice of multi-layer BiLSTM architecture.
+
+\textbf{K\"ugler et al.\ (2016)} paired Echo State Networks with autoencoders for unsupervised representation learning on Kepler light curves, evaluating reconstructions in sequence space rather than embedding space \cite{kugler2016explorativeapproachkepler}. \textit{Why I used it}: Their emphasis on sequence-level evaluation motivates evaluating my model on full windows and visualizing predictions across time to verify alignment with actual transit events.
+
+\textbf{Du et al.\ (2016)} introduced Recurrent Marked Temporal Point Processes (RMTPP), demonstrating how RNNs can encode event timing history for predicting when and what type of event occurs next \cite{Du2016markedtemporalpoint}. \textit{Why I used it}: This concept motivates incorporating periodicity information---genuine transits repeat on predictable schedules while false positives are aperiodic---through BLS period estimates as clustering features.
+
+\textbf{Speiser et al.\ (2020)} demonstrated that K-means clustering ($k$=5--20) followed by cluster-aware classification outperforms global classifiers by 8-15\% in F1 score on heterogeneous microscopy datasets \cite{Speiser2020clustering}. \textit{Why I used it}: This directly inspired my clustering approach---rather than training one BiLSTM to handle all stellar variability, I cluster windows by BLS features and let the network specialize via learned embeddings.
+
+\textbf{Vu et al.\ (2024)} validated 3-layer stacked LSTM architectures for time series forecasting, showing 23\% improvement over 2-layer variants and 62\% F1 improvement from class weighting on imbalanced data \cite{Vu2024LSTM}. \textit{Why I used it}: Their findings directly inform my hyperparameter choices: 3-4 LSTM layers, dropout 0.3-0.4, and inverse class ratio weighting (pos\_weight = 3.367).
+
+\textbf{Ding et al.\ (2024)} applied bidirectional LSTMs to photometric redshift estimation on 4.2 million SDSS galaxies, achieving 34\% outlier reduction versus MLP and demonstrating cross-survey transfer learning \cite{Ding2024photometric}. \textit{Why I used it}: Their success with BiLSTM for astronomical photometry and validation of transfer across surveys (SDSS to DES) supports my architecture choice and suggests Kepler-trained models can adapt to TESS.
+
+\subsubsection{New Reference: Variable Star Classification with CNN-LSTM}
+
+Becker et al.\ (2021) developed a hybrid CNN-LSTM architecture for classifying variable star light curves from OGLE and CRTS surveys, achieving 92-95\% accuracy across eclipsing binaries, RR Lyrae, Cepheids, and long-period variables \cite{Becker2021variablestars}.
+
+\textbf{Architecture.} The hybrid combines 1D convolutional layers (kernel sizes 3-7) with LSTM layers. CNNs extract local morphological features (transit shape, ingress/egress profiles) while LSTMs capture long-range temporal dependencies (periodicity, phase relationships). Max pooling between components reduces sequence length for computational efficiency.
+
+\textbf{Class Imbalance Handling.} Their dataset had 10-20$\times$ class imbalance between common and rare variable types. They addressed this through stratified sampling and weighted loss---the same strategy I apply with pos\_weight for the 23\% positive class ratio in transit detection.
+
+\textbf{Key Finding.} The hybrid achieved strong performance using raw photometric time series without hand-engineered features (period, amplitude, phase-folded representations). This end-to-end learning approach validates my decision to feed normalized flux windows directly into the BiLSTM.
+
+\textbf{Relevance.} Two lessons for my implementation: (1) raw time-series input works well, eliminating information loss from feature engineering; (2) weighted loss handles severe class imbalance at 92-95\% accuracy, confirming my pos\_weight approach.
+
+\subsubsection{New Reference: Machine Learning for Ground-Based Transit Surveys}
+
+Schanche et al.\ (2019) tackled automated vetting of transit candidates from the WASP ground-based survey, achieving approximately 90\% correct planet identification using ensemble classifiers \cite{Schanche2019mlexoplanet}.
+
+\textbf{Methodology.} They trained both Random Forest classifiers and CNNs on light curves containing planetary transits, eclipsing binaries, variable stars, and non-periodic signals. Individual classifiers produced significant false positives, but ensemble voting reduced errors. This finding resonates with my clustering strategy: rather than forcing one model to handle all variability, clustering enables specialization.
+
+\textbf{Distinguishing Planets from Binaries.} A major focus was separating genuine transits from eclipsing binary false positives, which produce deeper, longer dips and often show secondary eclipses. The authors emphasized transit depth and duration as key discriminating features, directly motivating my inclusion of these BLS features in clustering.
+
+\textbf{Relevance.} Ground-based surveys face much noisier conditions than TESS due to atmospheric interference. If machine learning achieves 90\% accuracy on noisy ground-based data, my BiLSTM with cluster embeddings should achieve comparable or better results on cleaner space-based photometry. The emphasis on depth and duration validates my BLS-feature clustering.
+
+\subsubsection{New Reference: Feature-Based Detection with Gradient Boosting}
+
+Malik et al.\ (2022) took a fundamentally different approach: extracting 789 statistical features using TSFRESH and feeding them into LightGBM gradient boosting, achieving AUC 0.948 and recall 0.96 on Kepler data \cite{Malik2022exoplanetdetection}.
+
+\textbf{Feature Engineering.} TSFRESH automatically extracts time series features including mean, variance, autocorrelation at various lags, spectral properties, and entropy measures. These 789 features describe shape, periodicity, and statistical properties without requiring neural networks.
+
+\textbf{Key Results.} Their feature-based approach correctly ranked planet signals above non-planets 95\% of the time and detected 96\% of real planets. This remarkably strong performance for a non-deep-learning method challenges neural network approaches to justify their added complexity.
+
+\textbf{Benchmark Implications.} Malik et al.'s 0.948 AUC establishes a concrete target. If my BiLSTM cannot match or exceed this, the complexity may not be justified. However, gradient boosting treats features independently, losing sequential information. My BiLSTM learns temporal patterns---the U-shaped transit profile, phase relationships---that feature-based methods cannot capture. The architecture combines explicit domain features (BLS period, depth, duration for clustering) with learned temporal representations.
+
+\subsubsection{Synthesis: Informing the BiLSTM + Clustering Design}
+
+These nine works collectively inform the architecture and training strategy:
+
+\begin{itemize}
+    \item \textbf{Architecture}: 3-4 layer BiLSTM with 256 hidden units (Vida, Vu, Ding, Becker)
+    \item \textbf{Clustering}: K-means ($k$=5) on BLS features before training (Speiser, Schanche)
+    \item \textbf{Class balancing}: pos\_weight = 3.367 in BCEWithLogitsLoss (Vu, Becker)
+    \item \textbf{Input}: Raw normalized flux windows (Becker)
+    \item \textbf{Regularization}: Dropout 0.3-0.4 + early stopping (Vida, Vu)
+    \item \textbf{Evaluation}: Sequence-level diagnostics (K\"ugler), timing features (Du)
+    \item \textbf{Target}: AUC $>$ 0.948 (Malik)
+\end{itemize}
+
+This design addresses class imbalance through weighted loss, heterogeneous stellar variability through cluster embeddings, and temporal dependencies through bidirectional processing.

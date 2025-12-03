@@ -1,0 +1,53 @@
+\subsection{Recurrent Neural Networks (RNNs)}
+
+This section reviews RNN applications to astronomical time series that inform the BiLSTM + clustering approach. The literature spans three themes: (1) LSTM architectures for astronomical event detection, (2) clustering-enhanced classification pipelines, and (3) benchmarks for exoplanet detection performance.
+
+\subsubsection{LSTM Architectures for Astronomical Time Series}
+
+Several works demonstrate LSTM effectiveness for light curve analysis. Vida et al.\ (2021) trained stacked LSTMs to detect stellar flares in Kepler and TESS photometry \cite{Vida2021findingflaresrecurrent}. Using dropout regularization and minority class weighting, they achieved high precision and recall on both missions. Their most important finding for this project is that models trained on Kepler generalized well to TESS despite different cadences and noise profiles, supporting the use of consistent preprocessing across data sources. They also compared LSTM and GRU variants, finding stacked LSTMs better handled astrophysical noise---informing our choice of a multi-layer BiLSTM architecture with dropout after each layer.
+
+Ding et al.\ (2024) applied bidirectional LSTMs to photometric redshift estimation using 4.2 million galaxies from SDSS \cite{Ding2024photometric}. Their architecture---2-layer BiLSTM with 256 hidden units per direction, followed by fully connected layers with dropout---achieved 34\% reduction in outliers compared to MLP baselines and 19\% reduction compared to gradient boosting. The key insight is that sequential processing of photometric bands enables LSTMs to learn physical correlations between adjacent measurements, which non-sequential architectures must discover through fully connected weights. Their cross-survey validation showed the SDSS-trained model transferred to Dark Energy Survey data with only 10\% fine-tuning samples, suggesting models trained on Kepler can adapt to TESS with appropriate preprocessing.
+
+Becker et al.\ (2021) developed a CNN-LSTM hybrid for variable star classification on OGLE and CRTS data \cite{Becker2021variablestars}. The architecture combines 1D convolutions (extracting local morphological features like transit shape) with LSTM layers (capturing long-range periodicity), achieving 92-95\% accuracy across eclipsing binaries, RR Lyrae, Cepheids, and long-period variables. Two findings directly inform our approach: first, the hybrid achieved strong performance using raw time-series input without hand-engineered features, validating end-to-end learning from normalized flux windows; second, they handled 10-20$\times$ class imbalance through stratified sampling and weighted loss---the same strategy we apply with pos\_weight for our 23\% positive class ratio.
+
+Vu et al.\ (2024) provided theoretical and empirical justification for stacked LSTM architectures in time series forecasting \cite{Vu2024LSTM}. Working with meteorological data (1,847 storm tracks), they demonstrated that 3-layer LSTMs achieve 23\% improvement over 2-layer variants, while adding a fourth layer provided diminishing returns. Their ablation studies showed dropout ($p$=0.3) prevents overfitting on modest dataset sizes, and class weighting improves F1 by 62\% on imbalanced classification tasks. These findings directly inform our hyperparameter choices: 3-4 LSTM layers, dropout 0.3-0.4, and inverse class ratio weighting.
+
+\subsubsection{Representation Learning and Timing Features}
+
+K\"ugler et al.\ (2016) paired Echo State Networks with autoencoders for unsupervised representation learning on Kepler light curves \cite{kugler2016explorativeapproachkepler}. Their innovation was evaluating reconstructions in sequence space (reinserting autoencoder outputs through the ESN to reconstruct time series) rather than just embedding space. This forces the model to preserve temporal structure, not just summary statistics. For our supervised approach, this motivates evaluating predictions on full sequence windows and visualizing model confidence across time to verify that high-probability regions align with actual transit events.
+
+Du et al.\ (2016) introduced Recurrent Marked Temporal Point Processes (RMTPP), demonstrating how RNNs can encode event timing history to predict both when and what type of event occurs next \cite{Du2016markedtemporalpoint}. For transit detection, this concept suggests incorporating periodicity information: genuine planetary transits repeat on calculable schedules (Kepler's third law), while false positives from stellar variability or instrumental artifacts are typically aperiodic or quasi-periodic. Rather than implementing a full point-process model, we capture this insight by including BLS-derived period estimates as clustering features, helping the network distinguish periodic transit signals from irregular stellar dips.
+
+\subsubsection{Clustering-Enhanced Classification}
+
+Speiser et al.\ (2020) demonstrated that clustering-based preprocessing dramatically improves classification performance on heterogeneous datasets \cite{Speiser2020clustering}. Working with millions of localization events in microscopy (a domain with similar challenges to astronomical surveys: massive scale, heterogeneous signals, severe class imbalance), they showed that K-means clustering ($k$=5--20) followed by cluster-aware classification outperforms global classifiers by 8-15\% in F1 score. Their ablation studies revealed that cluster assignment quality correlates strongly with final accuracy (Pearson $r$=0.78), and that augmenting features with cluster-derived statistics improves performance beyond using cluster labels alone.
+
+This work provides the primary motivation for our clustering approach. Rather than training a single BiLSTM to handle all stellar variability patterns (hot Jupiters with deep 1-2\% transits, super-Earths with shallow 0.1\% dips, eclipsing binaries, stellar flares, instrumental noise), we first cluster windows by their BLS-derived characteristics (period, depth, duration, signal-to-noise). The BiLSTM then learns cluster-specific patterns through learned embeddings, enabling specialization while maintaining a unified architecture. Speiser et al.'s finding that cluster embeddings outperform one-hot encoding supports our use of a learned 32-dimensional embedding layer.
+
+\subsubsection{Exoplanet Detection Benchmarks}
+
+Two papers establish performance benchmarks for machine learning approaches to exoplanet detection. Schanche et al.\ (2019) tackled automated vetting of transit candidates from the ground-based WASP survey, achieving approximately 90\% correct planet identification using ensemble classifiers (Random Forests + CNNs) \cite{Schanche2019mlexoplanet}. Ground-based surveys face much noisier conditions than space telescopes due to atmospheric interference, yet machine learning still achieved strong performance. Their emphasis on distinguishing eclipsing binaries from planets---which differ in transit depth and duration---directly motivates our inclusion of these BLS features in clustering. If ensemble methods achieve 90\% on noisy ground-based data, our BiLSTM with cluster embeddings should achieve comparable or better results on cleaner TESS photometry.
+
+Malik et al.\ (2022) established the strongest baseline using explicit feature engineering \cite{Malik2022exoplanetdetection}. They extracted 789 statistical features using TSFRESH (mean, variance, autocorrelation, spectral properties) and fed them into LightGBM gradient boosting, achieving AUC 0.948 and recall 0.96 on Kepler data. This challenges deep learning approaches to demonstrate value beyond what simpler methods achieve with hand-crafted features. Our BiLSTM addresses this by combining explicit domain features (BLS period, depth, duration used for clustering) with learned temporal representations, aiming to capture sequential patterns---like the characteristic U-shaped transit ingress/egress profile---that feature-based methods cannot represent.
+
+\subsubsection{Synthesis: Informing the BiLSTM + Clustering Design}
+
+These nine works collectively inform our architecture and training decisions:
+
+\begin{itemize}
+    \item \textbf{Architecture}: 3-4 layer BiLSTM with 256 hidden units per direction, based on Vida et al., Vu et al., and Ding et al.\ findings that this depth effectively balances capacity and overfitting for astronomical time series.
+
+    \item \textbf{Clustering}: K-means ($k$=5) on BLS features before training, following Speiser et al.'s demonstration that cluster-aware classification improves F1 by 8-15\% on heterogeneous data.
+
+    \item \textbf{Class balancing}: Positive weight equal to inverse class ratio (pos\_weight = 3.367) in BCEWithLogitsLoss, following Vu et al.'s 62\% F1 improvement and Becker et al.'s stratified approach.
+
+    \item \textbf{Input representation}: Raw normalized flux windows without extensive feature engineering, validated by Becker et al.'s 92-95\% accuracy with end-to-end learning on variable stars.
+
+    \item \textbf{Regularization}: Dropout ($p$=0.3--0.4) after each LSTM layer plus early stopping, per Vida et al.\ and Vu et al.\ recommendations for modest dataset sizes.
+
+    \item \textbf{Evaluation}: Window-level metrics (AUC, F1, precision, recall) with sequence-level diagnostics, per K\"ugler et al.'s emphasis on temporal evaluation.
+
+    \item \textbf{Performance target}: AUC $>$ 0.948 to exceed Malik et al.'s feature-based approach, demonstrating that BiLSTM's sequential modeling adds value beyond gradient boosting on extracted features.
+\end{itemize}
+
+This design addresses three key challenges in exoplanet detection: class imbalance through weighted loss, heterogeneous stellar variability through cluster-specific embeddings, and temporal dependencies through bidirectional processing.
