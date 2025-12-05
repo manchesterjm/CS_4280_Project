@@ -12,6 +12,7 @@ All code will be written with these in mind
     -- Abstraction level consistency: All functions at a given level of the system should be at the same level of abstraction. This helps maintain a clear structure and prevents mixing high-level logic with low-level implementation details
   - If we find a problem with the code, it is not a matter for later, we should fix it now
     -- example: if we run pylint and there are issues raised, we fix them regardless of criticality
+  - Disabling checks to make pylint get 10/10 is cheating, do not disable checks to make it pass, modify the code. 
   
 
 ## Project Overview
@@ -97,8 +98,24 @@ This is an exoplanet detection project using deep learning (BiLSTM with K-means 
 - **Working paper**: `term_project_files/Merged_Proposal_as_of_12.2.2025.tex`
 - **Backup created**: `D:\CS_4280_Project_Backup\Merged_Proposal_as_of_12.2.2025_BACKUP_before_RNN_expansion.tex`
 
+**UPDATE December 5, 2025**: **HIDDEN SIZE BENCHMARK + OPTUNA SEARCH SPACE OPTIMIZATION**
+- **Overnight Optuna run**: Only 1 trial completed (hidden_size=512 was catastrophically slow)
+- **Trial 0 result**: **AUC 0.9142** with hidden_size=256, 38.5 min
+- **Hidden size benchmark** (batch_size=112, 3 epochs each):
+  | Hidden Size | Parameters | Time/Epoch | Est. 20 Epochs |
+  |-------------|------------|------------|----------------|
+  | 128 | 1.4M | 0.36 min | 7.2 min |
+  | 192 | 3.1M | 1.44 min | 28.8 min |
+  | 256 | 5.4M | 2.11 min | 42.2 min |
+  | 512 | ~21M | ~10+ min | UNUSABLE |
+- **Optuna search space updated**: `hidden_size=[128, 192]`, `batch_size=[96, 112, 128]`
+- **Best hyperparameters** (from Trial 0):
+  - hidden_size: 256, batch_size: 112, num_layers: 4, dropout: 0.38, lr: 0.00026, n_clusters: 5, cluster_embed_dim: 64
+- **Files created**: `Code/benchmark_hidden_sizes.py`, `Code/hidden_size_benchmark.csv`
+- **See**: `PROGRESS_LOG_DEC_5_2025.md` for full session details
+
 **Environment**: Windows 11, NVIDIA GeForce RTX 5070 Ti (16 GB VRAM), conda environment `exo-lstm-gpu`
-**Current Status**: RNN sections complete, waiting for teammates (Tristan/Bree) to update their sections
+**Current Status**: Ready for final model training with best hyperparameters
 
 ## Key Commands
 
@@ -177,6 +194,19 @@ python train_bilstm_cluster.py `
 | 128 | 207 | 7.089 sec | 24.46 min |
 
 **Key Finding**: Batch size 64 is optimal. Batch size 128 causes GPU memory pressure (7 sec/batch vs 0.455 sec).
+
+### Hidden Size Benchmark Results (December 5, 2025)
+
+| Hidden Size | Parameters | Time/Epoch | Est. 20 Epochs |
+|-------------|------------|------------|----------------|
+| **128** | 1,370,049 | **0.36 min** | **7.2 min** |
+| 192 | 3,068,673 | 1.44 min | 28.8 min |
+| 256 | 5,443,137 | 2.11 min | 42.2 min |
+| 512 | ~21M | ~10+ min | UNUSABLE |
+
+**Key Finding**: hidden_size=128 is 6× faster than 256. hidden_size=512 is catastrophically slow and should NEVER be used.
+
+**Recommended search space for Optuna**: `hidden_size=[128, 192]`
 
 ### GPU-Specific Settings (IMPORTANT)
 

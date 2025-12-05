@@ -1,8 +1,7 @@
-# pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-locals
 """
 Optuna Hyperparameter Optimization for BiLSTM+Clustering Model.
 
-SOFA Refactored: December 3, 2025
+SOFA Refactored: December 4, 2025
 Pylint Score: 10.00/10
 
 Uses Optuna TPE (Tree-structured Parzen Estimator) sampler to find optimal hyperparameters.
@@ -16,6 +15,7 @@ import argparse
 import json
 import os
 import time
+from dataclasses import dataclass
 from datetime import datetime
 
 import numpy as np
@@ -32,6 +32,36 @@ from torch.utils.data import DataLoader, Dataset, random_split
 import optuna
 from optuna.pruners import MedianPruner
 from optuna.samplers import TPESampler
+
+
+# =============================================================================
+# Configuration Dataclasses (SOFA: reduce function arguments)
+# =============================================================================
+
+@dataclass
+class TrainingContext:
+    """Holds training state and configuration."""
+    device: torch.device
+    amp_dtype: str
+    pos_weight: float
+    epochs: int
+
+
+@dataclass
+class TrainingComponents:
+    """Holds model training components."""
+    model: nn.Module
+    criterion: nn.Module
+    optimizer: torch.optim.Optimizer
+    scheduler: torch.optim.lr_scheduler.LRScheduler
+
+
+@dataclass
+class TrialData:
+    """Holds data for an Optuna trial."""
+    flux_data: np.ndarray
+    labels: np.ndarray
+    meta: pd.DataFrame
 
 
 # =============================================================================
@@ -183,78 +213,75 @@ def _detect_feature_columns(meta_df):
 # Training Functions
 # =============================================================================
 
-def train_epoch(model, dataloader, criterion, optimizer, device, amp_dtype='fp16'):
+def train_epoch(components, dataloader, context):
     """
     Train for one epoch.
 
     Args:
-        model: model to train
+        components: TrainingComponents with model, criterion, optimizer
         dataloader: training data loader
-        criterion: loss function
-        optimizer: optimizer
-        device: torch device
-        amp_dtype: mixed precision type
+        context: TrainingContext with device and amp settings
 
     Returns:
         average loss
     """
-    model.train()
+    components.model.train()
     total_loss = 0
 
-    scaler = torch.amp.GradScaler('cuda') if amp_dtype in ['fp16', 'bf16'] else None
-    dtype = _get_amp_dtype(amp_dtype)
+    use_amp = context.amp_dtype in ['fp16', 'bf16']
+    scaler = torch.amp.GradScaler('cuda') if use_amp else None
+    dtype = _get_amp_dtype(context.amp_dtype)
 
     for flux_batch, label_batch, cluster_batch in dataloader:
-        flux_batch = flux_batch.to(device)
-        label_batch = label_batch.to(device)
-        cluster_batch = cluster_batch.to(device)
+        flux_batch = flux_batch.to(context.device)
+        label_batch = label_batch.to(context.device)
+        cluster_batch = cluster_batch.to(context.device)
 
-        optimizer.zero_grad()
+        components.optimizer.zero_grad()
 
         if scaler:
             with torch.amp.autocast('cuda', dtype=dtype):
-                logits = model(flux_batch, cluster_batch)
-                loss = criterion(logits, label_batch)
+                logits = components.model(flux_batch, cluster_batch)
+                loss = components.criterion(logits, label_batch)
             scaler.scale(loss).backward()
-            scaler.unscale_(optimizer)
-            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
-            scaler.step(optimizer)
+            scaler.unscale_(components.optimizer)
+            torch.nn.utils.clip_grad_norm_(components.model.parameters(), max_norm=1.0)
+            scaler.step(components.optimizer)
             scaler.update()
         else:
-            logits = model(flux_batch, cluster_batch)
-            loss = criterion(logits, label_batch)
+            logits = components.model(flux_batch, cluster_batch)
+            loss = components.criterion(logits, label_batch)
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
-            optimizer.step()
+            torch.nn.utils.clip_grad_norm_(components.model.parameters(), max_norm=1.0)
+            components.optimizer.step()
 
         total_loss += loss.item()
 
     return total_loss / len(dataloader)
 
 
-def validate(model, dataloader, device, amp_dtype='fp16'):
+def validate(model, dataloader, context):
     """
     Validate model.
 
     Args:
         model: model to evaluate
         dataloader: validation data loader
-        device: torch device
-        amp_dtype: mixed precision type
+        context: TrainingContext with device and amp settings
 
     Returns:
-        auc, f1 scores
+        auc, f1 scores (returns 0.0, 0.0 if NaN detected)
     """
     model.eval()
     all_probs = []
     all_labels = []
 
-    dtype = _get_amp_dtype(amp_dtype)
+    dtype = _get_amp_dtype(context.amp_dtype)
 
     with torch.no_grad():
         for flux_batch, label_batch, cluster_batch in dataloader:
-            flux_batch = flux_batch.to(device)
-            cluster_batch = cluster_batch.to(device)
+            flux_batch = flux_batch.to(context.device)
+            cluster_batch = cluster_batch.to(context.device)
 
             with torch.amp.autocast('cuda', dtype=dtype):
                 logits = model(flux_batch, cluster_batch)
@@ -265,6 +292,10 @@ def validate(model, dataloader, device, amp_dtype='fp16'):
 
     all_probs = np.array(all_probs)
     all_labels = np.array(all_labels)
+
+    # Handle NaN values - return 0 AUC if NaN detected
+    if np.any(np.isnan(all_probs)):
+        return 0.0, 0.0
 
     auc = roc_auc_score(all_labels, all_probs)
     preds = (all_probs >= 0.5).astype(int)
@@ -287,20 +318,14 @@ def _get_amp_dtype(amp_dtype):
 # Optuna Objective
 # =============================================================================
 
-def objective(trial, flux_data, labels, meta, device, epochs_per_trial,
-              pos_weight, amp_dtype):
+def objective(trial, data, context):
     """
     Optuna objective function.
 
     Args:
         trial: Optuna trial
-        flux_data: training data
-        labels: training labels
-        meta: metadata DataFrame
-        device: torch device
-        epochs_per_trial: max epochs per trial
-        pos_weight: class weight
-        amp_dtype: mixed precision type
+        data: TrialData with flux_data, labels, meta
+        context: TrainingContext with device, amp_dtype, pos_weight, epochs
 
     Returns:
         best AUC achieved
@@ -309,21 +334,16 @@ def objective(trial, flux_data, labels, meta, device, epochs_per_trial,
         torch.cuda.empty_cache()
 
     params = _suggest_hyperparameters(trial)
-    cluster_ids, _, _ = cluster_windows(meta, n_clusters=params['n_clusters'])
+    cluster_ids, _, _ = cluster_windows(data.meta, n_clusters=params['n_clusters'])
 
     train_loader, val_loader = _create_data_loaders(
-        flux_data, labels, cluster_ids, params['batch_size']
+        data.flux_data, data.labels, cluster_ids, params['batch_size']
     )
 
-    model = _create_model(params, device)
-    criterion, optimizer, scheduler = _setup_training(
-        model, params, pos_weight, epochs_per_trial, device
-    )
+    model = _create_model(params, context.device)
+    components = _setup_training(model, params, context)
 
-    best_auc = _run_training_loop(
-        model, train_loader, val_loader, criterion, optimizer,
-        scheduler, device, amp_dtype, epochs_per_trial, trial
-    )
+    best_auc = _run_training_loop(train_loader, val_loader, components, context, trial)
 
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
@@ -333,15 +353,11 @@ def objective(trial, flux_data, labels, meta, device, epochs_per_trial,
 
 def _suggest_hyperparameters(trial):
     """Suggest hyperparameters for trial."""
-    # GPU-specific search space
-    high_vram = True  # Set to True for RTX 5070 Ti (16 GB) or similar
-
-    if high_vram:
-        hidden_size = trial.suggest_categorical('hidden_size', [128, 256, 512])
-        batch_size = trial.suggest_categorical('batch_size', [112, 128, 136, 144])
-    else:
-        hidden_size = trial.suggest_categorical('hidden_size', [128, 256])
-        batch_size = trial.suggest_categorical('batch_size', [32, 64, 128])
+    # Search space optimized based on benchmarking (Dec 5, 2025)
+    # hidden_size timing: 128=0.36min, 192=1.44min, 256=2.11min per epoch
+    # Excluded 256+ to keep trials under 30 min
+    hidden_size = trial.suggest_categorical('hidden_size', [128, 192])
+    batch_size = trial.suggest_categorical('batch_size', [96, 112, 128])
 
     return {
         'hidden_size': hidden_size,
@@ -390,32 +406,43 @@ def _create_model(params, device):
     return ClusterBiLSTM(config).to(device)
 
 
-def _setup_training(model, params, pos_weight, epochs, device):
-    """Setup loss, optimizer, and scheduler."""
+def _setup_training(model, params, context):
+    """Setup loss, optimizer, and scheduler, returning TrainingComponents."""
     criterion = nn.BCEWithLogitsLoss(
-        pos_weight=torch.tensor([pos_weight]).to(device)
+        pos_weight=torch.tensor([context.pos_weight]).to(context.device)
     )
     optimizer = AdamW(
         model.parameters(),
         lr=params['lr'],
         weight_decay=params['weight_decay']
     )
-    scheduler = CosineAnnealingLR(optimizer, T_max=epochs)
+    scheduler = CosineAnnealingLR(optimizer, T_max=context.epochs)
 
-    return criterion, optimizer, scheduler
+    return TrainingComponents(model, criterion, optimizer, scheduler)
 
 
-def _run_training_loop(model, train_loader, val_loader, criterion, optimizer,
-                       scheduler, device, amp_dtype, epochs, trial):
+def _run_training_loop(train_loader, val_loader, components, context, trial):
     """Run training loop with early stopping and pruning."""
     best_auc = 0
     patience = 10
     patience_counter = 0
 
-    for epoch in range(epochs):
-        train_epoch(model, train_loader, criterion, optimizer, device, amp_dtype)
-        val_auc, _ = validate(model, val_loader, device, amp_dtype)
-        scheduler.step()
+    for epoch in range(context.epochs):
+        train_loss = train_epoch(components, train_loader, context)
+
+        # Check for NaN loss - abort trial early
+        if np.isnan(train_loss):
+            print(f"NaN loss detected at epoch {epoch}, aborting trial", flush=True)
+            return 0.0
+
+        val_auc, _ = validate(components.model, val_loader, context)
+
+        # Check for NaN AUC (indicates NaN in predictions)
+        if val_auc == 0.0:
+            print(f"NaN predictions detected at epoch {epoch}, aborting trial", flush=True)
+            return 0.0
+
+        components.scheduler.step()
 
         if val_auc > best_auc:
             best_auc = val_auc
@@ -432,6 +459,63 @@ def _run_training_loop(model, train_loader, val_loader, criterion, optimizer,
             raise optuna.TrialPruned()
 
     return best_auc
+
+
+# =============================================================================
+# Progress Callback (saves after each trial)
+# =============================================================================
+
+class TrialCallback:
+    """Callback to save progress after each trial and print with flush."""
+
+    def __init__(self, output_dir):
+        """Initialize callback with output directory."""
+        self.output_dir = output_dir
+        self.start_time = time.time()
+
+    def __call__(self, study, trial):
+        """Called after each trial completes."""
+        elapsed = self.get_elapsed_time()
+        elapsed_min = elapsed / 60
+
+        # Print progress with explicit flush
+        msg = (f"[Trial {trial.number + 1}] "
+               f"AUC: {trial.value:.4f} | "
+               f"Best: {study.best_value:.4f} (Trial {study.best_trial.number}) | "
+               f"Elapsed: {elapsed_min:.1f} min")
+        print(msg, flush=True)
+
+        # Save intermediate results after each trial
+        self._save_intermediate(study, elapsed)
+
+    def get_elapsed_time(self):
+        """Return elapsed time since callback creation."""
+        return time.time() - self.start_time
+
+    def _save_intermediate(self, study, elapsed):
+        """Save intermediate results to prevent data loss."""
+        intermediate = {
+            'last_updated': datetime.now().isoformat(),
+            'completed_trials': len(study.trials),
+            'best_trial': study.best_trial.number,
+            'best_auc': study.best_value,
+            'best_params': study.best_params,
+            'elapsed_minutes': elapsed / 60,
+            'all_trials': [
+                {
+                    'number': t.number,
+                    'value': t.value,
+                    'params': t.params,
+                    'state': str(t.state)
+                }
+                for t in study.trials if t.value is not None
+            ]
+        }
+
+        # Save to a fixed filename (overwrites each time)
+        intermediate_file = os.path.join(self.output_dir, 'intermediate_results.json')
+        with open(intermediate_file, 'w', encoding='utf-8') as f:
+            json.dump(intermediate, f, indent=2)
 
 
 # =============================================================================
@@ -530,28 +614,32 @@ def main():
     args = parse_args()
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print("\n" + "=" * 60)
-    print("OPTUNA HYPERPARAMETER OPTIMIZATION")
-    print("=" * 60)
-    print(f"Device: {device}")
-    print(f"Trials: {args.n_trials}")
-    print(f"Epochs per trial: {args.epochs_per_trial}")
-    print(f"Mixed precision: {args.amp_dtype}")
-    print("=" * 60 + "\n")
+    print("\n" + "=" * 60, flush=True)
+    print("OPTUNA HYPERPARAMETER OPTIMIZATION", flush=True)
+    print("=" * 60, flush=True)
+    print(f"Device: {device}", flush=True)
+    print(f"Trials: {args.n_trials}", flush=True)
+    print(f"Epochs per trial: {args.epochs_per_trial}", flush=True)
+    print(f"Mixed precision: {args.amp_dtype}", flush=True)
+    print("=" * 60 + "\n", flush=True)
 
     os.makedirs(args.output_dir, exist_ok=True)
 
     # Load data
-    print(f"Loading data from {args.windows_dir}...")
+    print(f"Loading data from {args.windows_dir}...", flush=True)
     flux_data = np.load(os.path.join(args.windows_dir, 'X.npy'))
     labels = np.load(os.path.join(args.windows_dir, 'y.npy'))
     meta = pd.read_csv(os.path.join(args.windows_dir, 'meta.csv'))
 
-    print(f"Loaded {len(flux_data)} windows")
-    print(f"Positive samples: {labels.sum()} ({100*labels.mean():.1f}%)")
+    print(f"Loaded {len(flux_data)} windows", flush=True)
+    print(f"Positive samples: {labels.sum()} ({100*labels.mean():.1f}%)", flush=True)
 
     pos_weight = (labels == 0).sum() / (labels == 1).sum()
-    print(f"Positive weight: {pos_weight:.3f}\n")
+    print(f"Positive weight: {pos_weight:.3f}\n", flush=True)
+
+    # Create dataclasses for cleaner function calls
+    trial_data = TrialData(flux_data, labels, meta)
+    context = TrainingContext(device, args.amp_dtype, pos_weight, args.epochs_per_trial)
 
     # Create study
     study = optuna.create_study(
@@ -561,33 +649,35 @@ def main():
         pruner=MedianPruner(n_startup_trials=5, n_warmup_steps=10)
     )
 
+    # Create callback for intermediate saving
+    callback = TrialCallback(args.output_dir)
+
     # Run optimization
-    print(f"Starting optimization with {args.n_trials} trials...\n")
+    print(f"Starting optimization with {args.n_trials} trials...", flush=True)
+    print("Results will be saved after each trial to intermediate_results.json\n", flush=True)
     start_time = time.time()
 
     study.optimize(
-        lambda trial: objective(
-            trial, flux_data, labels, meta, device,
-            args.epochs_per_trial, pos_weight, args.amp_dtype
-        ),
+        lambda trial: objective(trial, trial_data, context),
         n_trials=args.n_trials,
-        show_progress_bar=True,
+        show_progress_bar=False,  # Disabled - using callback instead
+        callbacks=[callback],
         catch=(RuntimeError, torch.cuda.OutOfMemoryError)
     )
 
     elapsed_time = time.time() - start_time
 
     # Print results
-    print("\n" + "=" * 60)
-    print("OPTIMIZATION COMPLETE")
-    print("=" * 60)
-    print(f"Total time: {elapsed_time/60:.1f} minutes")
-    print(f"Best trial: {study.best_trial.number}")
-    print(f"Best AUC: {study.best_value:.4f}")
-    print("\nBest hyperparameters:")
+    print("\n" + "=" * 60, flush=True)
+    print("OPTIMIZATION COMPLETE", flush=True)
+    print("=" * 60, flush=True)
+    print(f"Total time: {elapsed_time/60:.1f} minutes", flush=True)
+    print(f"Best trial: {study.best_trial.number}", flush=True)
+    print(f"Best AUC: {study.best_value:.4f}", flush=True)
+    print("\nBest hyperparameters:", flush=True)
     for key, value in study.best_params.items():
-        print(f"  {key}: {value}")
-    print("=" * 60 + "\n")
+        print(f"  {key}: {value}", flush=True)
+    print("=" * 60 + "\n", flush=True)
 
     # Save and compare
     save_results(study, args.output_dir, elapsed_time, args.n_trials)

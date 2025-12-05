@@ -1,96 +1,90 @@
 # Next Session Quick Start Guide
 
-## Last Session: December 3, 2025 (Afternoon)
+## Last Session: December 5, 2025 (6:00 AM)
 
-### Status: RNN PAPER SECTIONS COMPLETE - WAITING FOR TEAMMATES
+### Status: HIDDEN SIZE BENCHMARKED - READY FOR FINAL TRAINING
 
-**What Was Done Today**:
-- Expanded RNN Related Work to 2 full pages (added ~1,350 words to Becker, Schanche, Malik sections)
-- Converted paper from proposal format to final submission format
-- Removed proposal artifacts (Experimental Plan, Risks sections)
-- Added cross-mission generalization analysis (TESS → Kepler)
-- Updated AI disclosure for Opus 4.5
-
-**Key Finding from Earlier**: Optuna Trial 0 achieved **AUC 0.916** (best ever!)
-
----
-
-## What's Complete (RNN Component)
-
-- [x] RNN Related Work - 2 full pages (6 foundational + 3 new papers)
-- [x] RNN Results section - condensed with key tables
-- [x] Cross-mission generalization analysis (TESS → Kepler)
-- [x] SOFA refactoring - all Python files at pylint 10.00/10
-- [x] Code README.md for TA
-
-## What's Waiting On
-
-- [ ] **Teammates (Tristan/Bree)** to update their CNN/Transformer sections
-- [ ] Resume Optuna optimization OR train final model
-- [ ] Generate final figures (ROC, confusion matrix)
-- [ ] Create 20-second demo video
-- [ ] Prepare presentation slides
+**What Was Done**:
+- Ran overnight Optuna (only 1 trial completed due to hidden_size=512 being too slow)
+- Trial 0: **AUC 0.9142** with hidden_size=256
+- Created `benchmark_hidden_sizes.py` to test training times
+- Discovered hidden_size=512 is catastrophically slow (28× slower than 128)
+- Updated Optuna search space to [128, 192] for faster trials
+- All pylint issues fixed (10.00/10)
 
 ---
 
-## When You Return: Priority Options
+## Hidden Size Benchmark Results
 
-### Option A: Resume Optuna (~9 hours)
+| Hidden Size | Parameters | Time/Epoch | Est. 20 Epochs |
+|-------------|------------|------------|----------------|
+| **128** | 1.4M | **0.36 min** | **7.2 min** |
+| 192 | 3.1M | 1.44 min | 28.8 min |
+| 256 | 5.4M | 2.11 min | 42.2 min |
+| 512 | ~21M | ~10+ min | **UNUSABLE** |
 
-If you have overnight time available:
+**Recommendation**: Use hidden_size=128 for speed, or 256 for best AUC.
 
-```powershell
-conda activate exo-lstm-gpu
-cd D:\CS_4280_Project\Code
+---
 
-python optuna_optimize.py `
-  --windows_dir D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train `
-  --n_trials 15 `
-  --epochs_per_trial 20 `
-  --output_dir optuna_results_sector1_5070ti
+## Best Results So Far
+
+| Trial | AUC | hidden_size | Time |
+|-------|-----|-------------|------|
+| Overnight Trial 0 | **0.9142** | 256 | 38.5 min |
+
+**Best hyperparameters**:
+```python
+hidden_size = 256
+batch_size = 112
+num_layers = 4
+dropout = 0.38
+lr = 0.00026
+n_clusters = 5
+cluster_embed_dim = 64
 ```
 
-### Option B: Train Final Model (~1.75 hours)
+---
 
-If you need results quickly:
+## Priority 1: Final Model Training
+
+Train the final model using best hyperparameters:
 
 ```powershell
-conda activate exo-lstm-gpu
-cd D:\CS_4280_Project\Code
-
-python train_bilstm_cluster.py `
-  --windows_dir D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train `
-  --n_clusters 5 `
-  --epochs 60 `
-  --batch_size 136 `
-  --lr 0.0001 `
-  --hidden 256 `
-  --layers 4 `
-  --dropout 0.311 `
-  --pos_weight 7.41 `
-  --save_dir runs\sector1_final `
-  --amp_dtype fp16 `
-  --num_workers 0 `
-  --seed 42
+powershell -Command "& 'C:\Users\manch\miniconda3\envs\exo-lstm-gpu\python.exe' -u 'D:\CS_4280_Project\Code\train_bilstm_cluster.py' --windows_dir 'D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train' --n_clusters 5 --epochs 60 --batch_size 112 --lr 0.00026 --hidden 256 --layers 4 --dropout 0.38 --save_dir 'D:\CS_4280_Project\Code\runs\sector1_final' --amp_dtype fp16 --pos_weight 7.41 --num_workers 0 --seed 42"
 ```
 
-### Option C: Wait for Teammates
-
-If paper updates from teammates are coming soon, wait before making more changes to avoid merge conflicts.
+**Expected time**: ~2 hours (60 epochs × 2.11 min/epoch)
 
 ---
 
-## Key Parameters (VERIFIED)
+## Priority 2: Test Set Evaluation
 
-| Parameter | Value | Source |
-|-----------|-------|--------|
-| **batch_size** | **136** | Benchmarked (optimal for RTX 5070 Ti) |
-| lr | 0.0001 | Stable (0.000225 caused NaN crash) |
-| pos_weight | 7.41 | Calculated (23325/3147) |
-| hidden | 256 | Previous Optuna |
-| layers | 4 | Previous Optuna |
-| dropout | 0.311 | Previous Optuna |
-| epochs | 60 | Standard |
+After training, evaluate on test set:
+
+```powershell
+python inference_cluster_model.py --model_path "runs/sector1_final/best.pt" --windows_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test" --output_file "reports/sector1_test_predictions.csv"
+```
+
+---
+
+## Priority 3: Generate Figures
+
+```powershell
+python generate_bilstm_figures.py
+```
+
+---
+
+## Alternative: Fast Training with hidden_size=128
+
+If time is tight, use hidden_size=128 (6× faster):
+
+```powershell
+powershell -Command "& 'C:\Users\manch\miniconda3\envs\exo-lstm-gpu\python.exe' -u 'D:\CS_4280_Project\Code\train_bilstm_cluster.py' --windows_dir 'D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train' --n_clusters 5 --epochs 60 --batch_size 112 --lr 0.00026 --hidden 128 --layers 4 --dropout 0.38 --save_dir 'D:\CS_4280_Project\Code\runs\sector1_fast' --amp_dtype fp16 --pos_weight 7.41 --num_workers 0 --seed 42"
+```
+
+**Expected time**: ~22 min (60 epochs × 0.36 min/epoch)
 
 ---
 
@@ -101,71 +95,45 @@ If paper updates from teammates are coming soon, wait before making more changes
 | Training windows | `D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train\` |
 | Test windows | `D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test\` |
 | Code | `D:\CS_4280_Project\Code\` |
-| Working paper | `D:\CS_4280_Project\term_project_files\Merged_Proposal_as_of_12.2.2025.tex` |
-
-**Training set**: 26,472 windows (3,147 planets = 11.9%)
-**Test set**: 6,579 windows
+| Benchmark results | `D:\CS_4280_Project\Code\hidden_size_benchmark.csv` |
+| Optuna Trial 0 results | `D:\CS_4280_Project\Code\optuna_results_final2\intermediate_results.json` |
 
 ---
 
-## After Training: Generate Figures
+## Remaining Steps
 
-### Step 1: Evaluate on Test Set
-
-```powershell
-python inference_cluster_model.py `
-  --model_path runs\sector1_final\best.pt `
-  --windows_dir D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test `
-  --output_file reports\sector1_final_predictions.csv
-```
-
-### Step 2: Generate Figures for Paper
-
-```powershell
-python generate_sector1_figures.py
-```
-
-Creates ROC curve and confusion matrix in `term_project_files/Images/RNN/`
+1. **Final training** (60 epochs with best hyperparameters)
+2. **Test set evaluation** (inference on held-out data)
+3. **Generate figures** (ROC, confusion matrix, training curves)
+4. **Demo video** (20 seconds)
+5. **Presentation slides**
 
 ---
 
-## Best Results So Far
-
-| Dataset | Model | AUC | Status |
-|---------|-------|-----|--------|
-| Old (655 windows) | BiLSTM+Cluster | 0.7572 | Archived |
-| Sector 1 (trained Nov) | BiLSTM+Cluster | 0.893 | Current best saved |
-| **Sector 1 (Optuna Trial 0)** | BiLSTM+Cluster | **0.916** | Not saved (interrupted) |
-
----
-
-## Timeline to Final Submission
+## Timeline
 
 | Date | Task | Status |
 |------|------|--------|
-| ~~Dec 2~~ | New PC setup + benchmark | ✅ Done |
-| ~~Dec 2-3~~ | Optuna overnight | ⚠️ Interrupted |
-| ~~Dec 3~~ | Paper finalization (RNN sections) | ✅ Done |
-| **Dec 4-5** | Resume Optuna OR train final model | **NEXT** |
-| Dec 5-6 | Generate figures + finalize paper | Pending |
-| Dec 6-7 | Create slides + record 20s demo | Pending |
-| Dec 7-8 | Practice presentation | Buffer |
+| ~~Dec 4-5~~ | ~~Optuna optimization~~ | **DONE** (1 trial, AUC 0.9142) |
+| **Dec 5-6** | **Final training + figures** | **NEXT** |
+| Dec 6-7 | Demo video + slides | Pending |
 | **Dec 9-11** | **Presentations** | |
-| **Dec 18** | **Final submission deadline** | |
+| **Dec 18** | **Final submission** | |
 
 ---
 
-## Files Changed This Session
+## Optuna Search Space (Updated Dec 5)
 
-| File | Change |
-|------|--------|
-| `term_project_files/Merged_Proposal_as_of_12.2.2025.tex` | Expanded RNN Related Work, removed proposal sections |
-| `CLAUDE.md` | Added Dec 3 afternoon update |
-| `PROGRESS_LOG_DEC_3_2025.md` | Added afternoon session details |
-| `NEXT_SESSION_QUICKSTART.md` | This file - updated |
-| `Code/TRAINING_STATUS.md` | Updated to reflect current state |
+If you need to run more Optuna trials:
+```python
+hidden_size = [128, 192]  # Excluded 256+ for speed
+batch_size = [96, 112, 128]
+```
+
+**Expected time per trial**:
+- hidden_size=128: ~7 min
+- hidden_size=192: ~29 min
 
 ---
 
-**Last Updated**: December 3, 2025, afternoon
-**Status**: RNN paper sections complete, waiting for teammates
+**Last Updated**: December 5, 2025, 6:00 AM
