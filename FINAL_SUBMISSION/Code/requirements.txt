@@ -1,0 +1,16 @@
+# Exoplanet Detection - BiLSTM + K-means Clustering
+# CS 4280 Machine Learning Term Project
+# Author: Josh Manchester
+
+# Core dependencies
+torch>=2.0.0
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+tqdm>=4.65.0
+
+# Note: PyTorch with CUDA support should be installed via conda:
+#   conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+#
+# Then install remaining dependencies:
+#   pip install -r requirements.txt
