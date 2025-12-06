@@ -30,12 +30,37 @@ This project uses a Bidirectional LSTM neural network with K-means clustering to
 
 ---
 
+## Quick Start (Using Pre-Trained Model)
+
+**A pre-trained model is included in this submission.** To run inference without training:
+
+```powershell
+# 1. Set up environment
+conda create -n exo-lstm-gpu python=3.10
+conda activate exo-lstm-gpu
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+pip install numpy pandas scikit-learn tqdm
+
+# 2. Run inference with pre-trained model
+python inference_cluster_model.py --model_path "models/best.pt" --windows_dir "data/windows_test" --output_file "predictions.csv"
+
+# 3. Or evaluate on test set (requires test data)
+python evaluate_test.py --model_path "models/best.pt" --test_dir "data/windows_sector1_full/test"
+```
+
+**Included files:**
+- `models/best.pt` - Pre-trained model checkpoint (35 MB)
+- `models/config.json` - Hyperparameters used for training
+- `models/FINAL_RESULTS.md` - Detailed results summary
+
+---
+
 ## Requirements
 
 ### Hardware
 - NVIDIA GPU with CUDA support (tested on RTX 3060 Ti 8GB, RTX 5070 Ti 16GB)
 - Minimum 16 GB RAM
-- ~50 GB disk space for data
+- ~50 GB disk space for data (if downloading raw data)
 
 ### Software
 ```
@@ -74,8 +99,17 @@ The training data comes from the TESS Sector 1 ground truth dataset, which conta
 
 **Total**: 13,541 light curves → 33,051 training windows (after 80/20 train/test split)
 
-### Data Location
-The processed data should be placed in:
+### Obtaining the Raw Data
+
+The TESS Sector 1 ground truth data can be obtained from:
+1. **ExoFOP-TESS**: https://exofop.ipac.caltech.edu/tess/
+2. **MAST Portal**: https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html
+3. **Lightkurve Python package**: `pip install lightkurve`
+
+The ground truth labels are from the TESS Objects of Interest (TOI) catalog and community vetting efforts.
+
+### Data Directory Structure
+After processing, the data should be organized as:
 ```
 data/
 ├── windows_sector1_full/
@@ -89,13 +123,9 @@ data/
 │       └── meta.csv
 ```
 
-### Obtaining the Data
+### Building Training Windows from Raw Data
 
-**Option 1: Use pre-processed windows (recommended)**
-Contact the course instructor or TA for access to the pre-processed `windows_sector1_full/` directory.
-
-**Option 2: Build from raw ground truth data**
-If you have access to the raw TESS Sector 1 ground truth files:
+If you have the raw TESS Sector 1 ground truth files:
 ```powershell
 python build_windows_from_groundtruth.py `
   --data_dir "path/to/sector-1/ground-truth" `
@@ -105,19 +135,16 @@ python build_windows_from_groundtruth.py `
   --seed 42
 ```
 
-The raw ground truth data is available from the TESS project or can be obtained through team collaboration.
-
 ---
 
-## Quick Start
+## Training (Optional - Pre-Trained Model Included)
 
-### 1. Train the Model (Final Configuration)
+To train a new model from scratch:
 ```powershell
-cd D:\CS_4280_Project\Code
 conda activate exo-lstm-gpu
 
 python train_bilstm_cluster.py `
-  --windows_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train" `
+  --windows_dir "data/windows_sector1_full/train" `
   --n_clusters 7 `
   --cluster_embed_dim 64 `
   --epochs 60 `
@@ -138,21 +165,6 @@ python train_bilstm_cluster.py `
 - Model checkpoints saved to `runs/my_model/`
 - Best model: `runs/my_model/best.pt`
 
-### 2. Evaluate on Test Set
-```powershell
-python evaluate_test.py `
-  --model_path "runs/sector1_final_0918/best.pt" `
-  --test_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test"
-```
-
-### 3. Run Inference on New Data
-```powershell
-python inference_cluster_model.py `
-  --model_path "runs/sector1_final_0918/best.pt" `
-  --windows_dir "data/windows_test" `
-  --output_file "reports/predictions.csv"
-```
-
 ---
 
 ## Project Structure
@@ -161,21 +173,22 @@ python inference_cluster_model.py `
 Code/
 ├── README.md                          # This file
 │
-├── # ESSENTIAL SCRIPTS (Core Pipeline)
-├── build_windows_from_groundtruth.py  # Build training windows from raw data
+├── # PRE-TRAINED MODEL
+├── models/
+│   ├── best.pt                        # Trained model checkpoint (USE THIS)
+│   ├── config.json                    # Training hyperparameters
+│   └── FINAL_RESULTS.md               # Results summary
+│
+├── # CORE SCRIPTS
 ├── train_bilstm_cluster.py            # Main training script (BiLSTM + K-means)
 ├── inference_cluster_model.py         # Run inference with trained model
 ├── evaluate_test.py                   # Evaluate model on test set
+├── build_windows_from_groundtruth.py  # Build training windows from raw data
 │
-├── # OPTIONAL SCRIPTS (Optimization & Analysis)
+├── # OPTIONAL SCRIPTS
 ├── optuna_optimize.py                 # Hyperparameter optimization with Optuna
-├── benchmark_batch_sizes.py           # Find optimal batch size for your GPU
-│
-├── # DATA & OUTPUTS
-├── data/                              # Training/test windows (not in git)
-│   └── windows_sector1_full/
-├── runs/                              # Model checkpoints (not in git)
-└── reports/                           # Prediction outputs
+├── generate_final_figures.py          # Generate result visualizations
+└── simulate_training_demo.py          # Demo visualization for presentation
 ```
 
 ---
