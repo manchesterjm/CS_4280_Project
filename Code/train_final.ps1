@@ -1,0 +1,16 @@
+python -u train_bilstm_cluster.py `
+  --windows_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train" `
+  --n_clusters 7 `
+  --cluster_embed_dim 64 `
+  --epochs 60 `
+  --batch_size 128 `
+  --lr 0.0001 `
+  --hidden 192 `
+  --layers 4 `
+  --dropout 0.334 `
+  --weight_decay 0.0000154 `
+  --save_dir "runs\sector1_final_0918" `
+  --amp_dtype fp16 `
+  --pos_weight 7.41 `
+  --num_workers 0 `
+  --seed 42

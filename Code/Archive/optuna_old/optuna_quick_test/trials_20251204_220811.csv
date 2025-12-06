@@ -1,0 +1,2 @@
+number,value,datetime_start,datetime_complete,duration,params_batch_size,params_cluster_embed_dim,params_dropout,params_hidden_size,params_lr,params_n_clusters,params_num_layers,params_weight_decay,state
+0,0.9120653704383279,2025-12-04 22:02:24.246544,2025-12-04 22:08:11.586057,0 days 00:05:47.339513,112,64,0.3803345035229626,256,0.0002607024758370766,5,4,2.310201887845294e-06,COMPLETE

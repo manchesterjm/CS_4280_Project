@@ -1,0 +1,34 @@
+{
+  "last_updated": "2025-12-04T23:15:17.281147",
+  "completed_trials": 1,
+  "best_trial": 0,
+  "best_auc": 0.9142130887181461,
+  "best_params": {
+    "hidden_size": 256,
+    "batch_size": 112,
+    "num_layers": 4,
+    "dropout": 0.3803345035229626,
+    "lr": 0.0002607024758370766,
+    "n_clusters": 5,
+    "weight_decay": 2.310201887845294e-06,
+    "cluster_embed_dim": 64
+  },
+  "elapsed_minutes": 38.46465243498484,
+  "all_trials": [
+    {
+      "number": 0,
+      "value": 0.9142130887181461,
+      "params": {
+        "hidden_size": 256,
+        "batch_size": 112,
+        "num_layers": 4,
+        "dropout": 0.3803345035229626,
+        "lr": 0.0002607024758370766,
+        "n_clusters": 5,
+        "weight_decay": 2.310201887845294e-06,
+        "cluster_embed_dim": 64
+      },
+      "state": "TrialState.COMPLETE"
+    }
+  ]
+}

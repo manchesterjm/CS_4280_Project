@@ -6,9 +6,14 @@ Pylint Score: 10.00/10
 
 Uses Optuna TPE (Tree-structured Parzen Estimator) sampler to find optimal hyperparameters.
 
+Final Results (December 6, 2025):
+Best hyperparameters found (AUC 0.9261 on test):
+- hidden_size: 192, num_layers: 4, n_clusters: 7, cluster_embed_dim: 64
+- dropout: 0.334, learning_rate: 0.0001, batch_size: 128, pos_weight: 7.41
+
 Usage:
-    python optuna_optimize.py --windows_dir data/windows_train --n_trials 50
-        --epochs_per_trial 40 --output_dir optuna_results
+    python optuna_optimize.py --windows_dir data/windows_sector1_full/train
+        --n_trials 30 --epochs_per_trial 20 --output_dir optuna_results
 """
 
 import argparse

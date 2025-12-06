@@ -1,4 +1,18 @@
-"""Evaluate trained model on held-out test set."""
+"""
+Evaluate trained model on held-out test set.
+
+Final Results (December 6, 2025):
+- Test AUC: 0.9261
+- Recall: 100% (732/732 planets detected)
+- F1 Score: 0.5708
+- Precision: 39.93%
+- Accuracy: 83.26%
+- Confusion Matrix: TP=732, FP=1101, TN=4746, FN=0
+
+Usage:
+    python evaluate_test.py --model_path runs/sector1_final_0918/best.pt
+        --test_dir D:/CS_4280_Project_Backup/Code/data/windows_sector1_full/test
+"""
 import argparse
 import numpy as np
 import pandas as pd
@@ -9,51 +23,53 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import roc_auc_score, f1_score, precision_score, recall_score, accuracy_score, confusion_matrix
 
 class ClusterBiLSTM(nn.Module):
-    def __init__(self, input_size=1, hidden_size=256, num_layers=3,
-                 n_clusters=5, cluster_embed_dim=32, dropout=0.4):
+    """BiLSTM with cluster-aware processing (matches train_bilstm_cluster.py)."""
+
+    def __init__(self, config):
         super().__init__()
-        self.hidden_size = hidden_size
-        self.num_layers = num_layers
-        self.n_clusters = n_clusters
+        self.hidden_size = config['hidden_size']
+        self.num_layers = config['num_layers']
 
         # Cluster embedding
-        self.cluster_embed = nn.Embedding(n_clusters, cluster_embed_dim)
+        self.cluster_embed = nn.Embedding(
+            config['n_clusters'],
+            config['cluster_embed_dim']
+        )
 
         # BiLSTM
-        self.lstm = nn.LSTM(input_size, hidden_size, num_layers,
-                           batch_first=True, bidirectional=True,
-                           dropout=dropout if num_layers > 1 else 0)
+        self.lstm = nn.LSTM(
+            input_size=config['input_size'],
+            hidden_size=config['hidden_size'],
+            num_layers=config['num_layers'],
+            dropout=config['dropout'] if config['num_layers'] > 1 else 0,
+            batch_first=True,
+            bidirectional=True
+        )
 
-        # Classification head (matching training script exactly)
-        self.dropout = nn.Dropout(dropout)
-        self.fc1 = nn.Linear(hidden_size * 2 + cluster_embed_dim, hidden_size)
-        self.bn1 = nn.BatchNorm1d(hidden_size)
-        self.relu = nn.ReLU()
-        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
-        self.bn2 = nn.BatchNorm1d(hidden_size // 2)
-        self.fc3 = nn.Linear(hidden_size // 2, 1)
+        # Classification head (Sequential, matching training script)
+        combined_size = config['hidden_size'] * 2 + config['cluster_embed_dim']
+        self.classifier = nn.Sequential(
+            nn.Dropout(config['dropout']),
+            nn.Linear(combined_size, config['hidden_size']),
+            nn.BatchNorm1d(config['hidden_size']),
+            nn.ReLU(),
+            nn.Dropout(config['dropout']),
+            nn.Linear(config['hidden_size'], config['hidden_size'] // 2),
+            nn.BatchNorm1d(config['hidden_size'] // 2),
+            nn.ReLU(),
+            nn.Dropout(config['dropout']),
+            nn.Linear(config['hidden_size'] // 2, 1)
+        )
 
     def forward(self, x, cluster_ids):
         cluster_emb = self.cluster_embed(cluster_ids)
-        lstm_out, (hidden, cell) = self.lstm(x)
+        _, (hidden, _) = self.lstm(x)
 
-        hidden_fwd = hidden[-2]
-        hidden_bwd = hidden[-1]
-        hidden_cat = torch.cat([hidden_fwd, hidden_bwd], dim=1)
-
+        hidden_cat = torch.cat([hidden[-2], hidden[-1]], dim=1)
         combined = torch.cat([hidden_cat, cluster_emb], dim=1)
 
-        out = self.dropout(combined)
-        out = self.fc1(out)
-        out = self.bn1(out)
-        out = self.relu(out)
-        out = self.dropout(out)
-        out = self.fc2(out)
-        out = self.bn2(out)
-        out = self.relu(out)
-        out = self.dropout(out)
-        out = self.fc3(out)
-        return out.squeeze(-1)
+        logits = self.classifier(combined)
+        return logits.squeeze(-1)
 
 
 def main():
@@ -134,14 +150,15 @@ def main():
     print(f"[clustering] Cluster distribution: {np.bincount(cluster_ids, minlength=len(kmeans_centers))}")
 
     # Build model
-    model = ClusterBiLSTM(
-        input_size=1,
-        hidden_size=config['hidden'],
-        num_layers=config['layers'],
-        n_clusters=config['n_clusters'],
-        cluster_embed_dim=config.get('cluster_embed_dim', 32),
-        dropout=config['dropout']
-    ).to(device)
+    model_config = {
+        'input_size': 1,
+        'hidden_size': config['hidden'],
+        'num_layers': config['layers'],
+        'n_clusters': config['n_clusters'],
+        'cluster_embed_dim': config.get('cluster_embed_dim', 32),
+        'dropout': config['dropout']
+    }
+    model = ClusterBiLSTM(model_config).to(device)
 
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()

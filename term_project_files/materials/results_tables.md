@@ -1,5 +1,17 @@
 # Results Tables for Research Paper
 
+> **⚠️ DEPRECATED**: These tables are from October 2025 and describe the original 655-window dataset.
+> **Final Results (December 6, 2025)**: AUC 0.9261, 100% Recall, F1 0.5708 on TESS Sector 1 test set (6,579 windows)
+>
+> **See updated results in:**
+> - `Code/runs/sector1_final_0918/FINAL_RESULTS.md`
+> - `NEXT_SESSION_QUICKSTART.md`
+> - `PROGRESS_LOG_DEC_6_2025.md`
+
+---
+
+## LEGACY CONTENT BELOW (for reference only)
+
 ## Table 1: Model Performance on Validation Set
 
 | Metric | Value | Description |

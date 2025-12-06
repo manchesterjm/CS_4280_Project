@@ -2,220 +2,200 @@
 Generate publication-ready figures for final term paper.
 
 Creates:
-1. Model Progression Chart (Preliminary → Optimized → SMOTE → Combined)
-2. Preliminary vs Final Comparison Table
-3. Cross-Mission Generalization Results
+1. ROC Curve
+2. Confusion Matrix
+3. Probability Distribution
+4. Model Comparison
+
+Updated: December 6, 2025 with final test results (AUC 0.9261)
 """
 
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, auc, confusion_matrix
 import seaborn as sns
 from pathlib import Path
 
 # Set publication-quality plotting parameters
 plt.rcParams.update({
-    'font.size': 10,
+    'font.size': 12,
     'font.family': 'serif',
-    'axes.labelsize': 10,
-    'axes.titlesize': 11,
-    'xtick.labelsize': 9,
-    'ytick.labelsize': 9,
-    'legend.fontsize': 9,
+    'axes.labelsize': 12,
+    'axes.titlesize': 14,
+    'xtick.labelsize': 10,
+    'ytick.labelsize': 10,
+    'legend.fontsize': 10,
     'figure.dpi': 300,
     'savefig.dpi': 300,
     'savefig.bbox': 'tight',
     'axes.linewidth': 0.8,
 })
 
-# Create output directory
-output_dir = Path(r'C:\CS_4280_Project\term_project_files\materials\figures')
-output_dir.mkdir(parents=True, exist_ok=True)
 
-print("=" * 60)
-print("Generating Final Figures for Term Paper")
-print("=" * 60)
+def load_data():
+    """Load test predictions and ground truth."""
+    pred = pd.read_csv('reports/sector1_final_test_predictions.csv')
+    y_true = np.load('D:/CS_4280_Project_Backup/Code/data/windows_sector1_full/test/y.npy')
+    y_true = y_true[:len(pred)]
+    probs = pred['probability'].values
+    return y_true, probs
 
-# ============================================================================
-# Figure 1: Model Progression Over Development
-# ============================================================================
 
-print("\n[1/3] Creating Model Progression Chart...")
+def plot_roc_curve(y_true, probs, output_dir):
+    """Generate ROC curve figure."""
+    fpr, tpr, _ = roc_curve(y_true, probs)
+    roc_auc = auc(fpr, tpr)
 
-# Data from all development stages
-stages = ['Preliminary\n(BiLSTM)', 'Optuna\nOptimized', 'SMOTE\nBalanced', 'Combined\n(TESS+Kepler)', 'Final\nTest Set']
-auc_scores = [0.6947, 0.7572, 0.8175, 0.8721, 0.9111]
-colors = ['#E8E8E8', '#B8D4E3', '#7FB3D5', '#2E86AB', '#06A77D']
+    fig, ax = plt.subplots(figsize=(8, 8))
 
-fig, ax = plt.subplots(figsize=(8, 5))
+    ax.plot(fpr, tpr, color='#2563eb', lw=2.5,
+            label=f'BiLSTM + Clustering (AUC = {roc_auc:.4f})')
+    ax.plot([0, 1], [0, 1], color='gray', lw=1.5, linestyle='--',
+            label='Random Classifier (AUC = 0.5)')
 
-# Create bars
-bars = ax.bar(stages, auc_scores, color=colors, edgecolor='black', linewidth=0.8)
+    ax.set_xlim([0.0, 1.0])
+    ax.set_ylim([0.0, 1.05])
+    ax.set_xlabel('False Positive Rate', fontsize=14)
+    ax.set_ylabel('True Positive Rate', fontsize=14)
+    ax.set_title('ROC Curve - Exoplanet Detection\nTESS Sector 1 Test Set', fontsize=16)
+    ax.legend(loc='lower right', fontsize=12)
+    ax.grid(True, alpha=0.3)
+    ax.annotate(f'AUC = {roc_auc:.4f}', xy=(0.6, 0.3), fontsize=20,
+                fontweight='bold', color='#2563eb')
 
-# Add value labels on bars
-for bar, score in zip(bars, auc_scores):
-    height = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2., height + 0.01,
-            f'{score:.4f}', ha='center', va='bottom', fontsize=10, fontweight='bold')
+    plt.tight_layout()
+    plt.savefig(output_dir / 'roc_curve.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"[saved] {output_dir / 'roc_curve.png'}")
 
-# Add improvement arrows and percentages
-improvements = ['', '+9.0%', '+8.0%', '+6.7%', '+4.5%']
-for i in range(1, len(stages)):
-    ax.annotate('', xy=(i, auc_scores[i]), xytext=(i-1, auc_scores[i-1]),
-                arrowprops=dict(arrowstyle='->', color='gray', lw=1.5, ls='--'),
-                annotation_clip=False)
-    # Add improvement text
-    mid_x = i - 0.5
-    mid_y = (auc_scores[i] + auc_scores[i-1]) / 2 + 0.02
-    ax.text(mid_x, mid_y, improvements[i], ha='center', va='bottom',
-            fontsize=8, color='#E63946', fontweight='bold')
 
-ax.set_ylabel('AUC (Area Under ROC Curve)', fontweight='bold')
-ax.set_title('BiLSTM Model Performance Progression', fontweight='bold', pad=15)
-ax.set_ylim(0.5, 1.0)
-ax.axhline(y=0.5, color='gray', linestyle='--', alpha=0.5, label='Random Classifier')
-ax.axhline(y=0.9, color='green', linestyle=':', alpha=0.5, label='Excellent Performance')
-ax.legend(loc='lower right')
-ax.grid(axis='y', alpha=0.3, linestyle='--', linewidth=0.5)
+def plot_confusion_matrix(y_true, probs, output_dir):
+    """Generate confusion matrix figure."""
+    y_pred = (probs > 0.5).astype(int)
+    cm = confusion_matrix(y_true, y_pred)
 
-plt.tight_layout()
-progression_path = output_dir / 'bilstm_model_progression.png'
-plt.savefig(progression_path, dpi=300, bbox_inches='tight')
-print(f"[OK] Saved: {progression_path}")
-plt.close()
+    fig, ax = plt.subplots(figsize=(8, 7))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax,
+                annot_kws={'size': 20, 'fontweight': 'bold'},
+                xticklabels=['Non-Planet', 'Planet'],
+                yticklabels=['Non-Planet', 'Planet'])
 
-# ============================================================================
-# Figure 2: Preliminary vs Final Comparison (Side by Side)
-# ============================================================================
+    ax.set_xlabel('Predicted Label', fontsize=14)
+    ax.set_ylabel('True Label', fontsize=14)
+    ax.set_title('Confusion Matrix - Exoplanet Detection\nTESS Sector 1 Test Set', fontsize=16)
 
-print("\n[2/3] Creating Preliminary vs Final Comparison...")
+    tn, fp, fn, tp = cm.ravel()
+    total = tn + fp + fn + tp
+    accuracy = (tp + tn) / total
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
 
-# Data
-categories = ['AUC', 'F1 Score', 'Recall']
-preliminary = [0.6947, 0.34, 0.10]
-final = [0.9111, 0.72, 1.00]  # Best test results
+    metrics_text = (f'Accuracy: {accuracy:.2%}\n'
+                   f'Precision: {precision:.2%}\n'
+                   f'Recall: {recall:.2%}\n'
+                   f'Total: {total:,}')
+    ax.text(2.3, 0.5, metrics_text, transform=ax.transData, fontsize=12,
+            verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
 
-fig, ax = plt.subplots(figsize=(7, 5))
+    plt.tight_layout()
+    plt.savefig(output_dir / 'confusion_matrix.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"[saved] {output_dir / 'confusion_matrix.png'}")
 
-x = np.arange(len(categories))
-width = 0.35
 
-bars1 = ax.bar(x - width/2, preliminary, width, label='Preliminary (Nov 2025)',
-               color='#E8E8E8', edgecolor='black', linewidth=0.8)
-bars2 = ax.bar(x + width/2, final, width, label='Final (Nov 28, 2025)',
-               color='#06A77D', edgecolor='black', linewidth=0.8)
+def plot_probability_distribution(y_true, probs, output_dir):
+    """Generate probability distribution figure."""
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-# Add value labels
-for bar in bars1:
-    height = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2., height + 0.02,
-            f'{height:.2f}', ha='center', va='bottom', fontsize=9)
-for bar in bars2:
-    height = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2., height + 0.02,
-            f'{height:.2f}', ha='center', va='bottom', fontsize=9, fontweight='bold')
+    probs_planets = probs[y_true == 1]
+    probs_non_planets = probs[y_true == 0]
 
-# Calculate and display improvement percentages
-for i, (p, f) in enumerate(zip(preliminary, final)):
-    improvement = (f - p) / p * 100
-    ax.annotate(f'+{improvement:.0f}%',
-                xy=(i + width/2 + 0.1, (p + f) / 2),
-                fontsize=9, color='#E63946', fontweight='bold')
+    ax.hist(probs_non_planets, bins=50, alpha=0.7,
+            label=f'Non-Planets (n={len(probs_non_planets):,})',
+            color='#ef4444', density=True)
+    ax.hist(probs_planets, bins=50, alpha=0.7,
+            label=f'Planets (n={len(probs_planets):,})',
+            color='#22c55e', density=True)
+    ax.axvline(x=0.5, color='black', linestyle='--', lw=2,
+               label='Decision Threshold (0.5)')
 
-ax.set_ylabel('Score', fontweight='bold')
-ax.set_title('Preliminary vs Final Model Performance', fontweight='bold', pad=15)
-ax.set_xticks(x)
-ax.set_xticklabels(categories)
-ax.set_ylim(0, 1.15)
-ax.legend(loc='upper left')
-ax.grid(axis='y', alpha=0.3, linestyle='--', linewidth=0.5)
+    ax.set_xlabel('Predicted Probability', fontsize=14)
+    ax.set_ylabel('Density', fontsize=14)
+    ax.set_title('Prediction Probability Distribution\nTESS Sector 1 Test Set', fontsize=16)
+    ax.legend(loc='upper center', fontsize=11)
+    ax.set_xlim([0, 1])
+    ax.grid(True, alpha=0.3)
 
-plt.tight_layout()
-comparison_path = output_dir / 'preliminary_vs_final_comparison.png'
-plt.savefig(comparison_path, dpi=300, bbox_inches='tight')
-print(f"[OK] Saved: {comparison_path}")
-plt.close()
+    plt.tight_layout()
+    plt.savefig(output_dir / 'probability_distribution.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"[saved] {output_dir / 'probability_distribution.png'}")
 
-# ============================================================================
-# Figure 3: Cross-Mission Generalization Results
-# ============================================================================
 
-print("\n[3/3] Creating Cross-Mission Generalization Chart...")
+def plot_model_comparison(output_dir):
+    """Generate model comparison bar chart."""
+    models = ['Baseline\n(Oct 2025)', 'Optuna\n(Nov 2025)', 'Sector 1\n(Dec 2025)']
+    aucs = [0.6947, 0.7572, 0.9261]
+    colors = ['#94a3b8', '#60a5fa', '#22c55e']
 
-# Test results on different datasets
-datasets = ['TESS Sector 1\n(Training)', 'TESS Sector 1\n(Test)', 'Kepler\n(Cross-Mission)', 'Synthetic\n(Out-of-Domain)']
-aucs = [0.8721, 0.9111, 0.85, 0.58]  # Estimated Kepler based on combined training
-colors = ['#2E86AB', '#06A77D', '#F4A261', '#E63946']
+    fig, ax = plt.subplots(figsize=(10, 6))
+    bars = ax.bar(models, aucs, color=colors, edgecolor='black', linewidth=1.5)
 
-fig, ax = plt.subplots(figsize=(7, 5))
+    for bar, auc_val in zip(bars, aucs):
+        height = bar.get_height()
+        ax.annotate(f'{auc_val:.4f}',
+                   xy=(bar.get_x() + bar.get_width() / 2, height),
+                   xytext=(0, 5), textcoords="offset points",
+                   ha='center', va='bottom', fontsize=14, fontweight='bold')
 
-bars = ax.bar(datasets, aucs, color=colors, edgecolor='black', linewidth=0.8)
+    ax.set_ylabel('AUC Score', fontsize=14)
+    ax.set_title('Model Performance Comparison\nExoplanet Detection AUC Improvement', fontsize=16)
+    ax.set_ylim([0, 1.0])
+    ax.grid(True, alpha=0.3, axis='y')
 
-# Add value labels
-for bar, auc in zip(bars, aucs):
-    height = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2., height + 0.02,
-            f'{auc:.4f}', ha='center', va='bottom', fontsize=10, fontweight='bold')
+    ax.annotate('+9.0%', xy=(1, 0.73), fontsize=12, color='#2563eb', fontweight='bold')
+    ax.annotate('+33.3%', xy=(2, 0.88), fontsize=12, color='#16a34a', fontweight='bold')
 
-# Add horizontal lines for reference
-ax.axhline(y=0.5, color='gray', linestyle='--', alpha=0.5, label='Random (0.50)')
-ax.axhline(y=0.8, color='orange', linestyle=':', alpha=0.7, label='Good (0.80)')
-ax.axhline(y=0.9, color='green', linestyle=':', alpha=0.7, label='Excellent (0.90)')
+    plt.tight_layout()
+    plt.savefig(output_dir / 'model_comparison.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"[saved] {output_dir / 'model_comparison.png'}")
 
-ax.set_ylabel('AUC', fontweight='bold')
-ax.set_title('Cross-Dataset Generalization Performance', fontweight='bold', pad=15)
-ax.set_ylim(0.4, 1.05)
-ax.legend(loc='lower right')
-ax.grid(axis='y', alpha=0.3, linestyle='--', linewidth=0.5)
 
-# Add annotations for interpretation
-ax.annotate('Strong generalization\nto unseen TESS data', xy=(1, 0.92), fontsize=8, ha='center')
-ax.annotate('Synthetic data uses\ndifferent characteristics', xy=(3, 0.48), fontsize=8, ha='center', color='gray')
+def main():
+    """Generate all figures."""
+    print("=" * 60)
+    print("Generating Publication Figures - December 6, 2025")
+    print("=" * 60)
 
-plt.tight_layout()
-generalization_path = output_dir / 'cross_mission_generalization.png'
-plt.savefig(generalization_path, dpi=300, bbox_inches='tight')
-print(f"[OK] Saved: {generalization_path}")
-plt.close()
+    # Create output directories
+    output_dir = Path('D:/CS_4280_Project/term_project_files/Images/RNN')
+    output_dir.mkdir(parents=True, exist_ok=True)
 
-# ============================================================================
-# Print Summary
-# ============================================================================
+    runs_dir = Path('runs/sector1_final_0918/figures')
+    runs_dir.mkdir(parents=True, exist_ok=True)
 
-print("\n" + "=" * 60)
-print("Figure Generation Complete!")
-print("=" * 60)
-print(f"\nGenerated figures:")
-print(f"  1. {output_dir / 'bilstm_model_progression.png'}")
-print(f"  2. {output_dir / 'preliminary_vs_final_comparison.png'}")
-print(f"  3. {output_dir / 'cross_mission_generalization.png'}")
-print(f"\nAll figures are publication-ready at 300 DPI.")
+    # Load data
+    print("\n[loading data]")
+    y_true, probs = load_data()
+    print(f"  Samples: {len(y_true)}")
+    print(f"  Positives: {y_true.sum()}")
 
-# ============================================================================
-# Print Comparison Table for Paper
-# ============================================================================
+    # Generate figures to both directories
+    print("\n[generating figures]")
+    for out_dir in [output_dir, runs_dir]:
+        plot_roc_curve(y_true, probs, out_dir)
+        plot_confusion_matrix(y_true, probs, out_dir)
+        plot_probability_distribution(y_true, probs, out_dir)
+        plot_model_comparison(out_dir)
 
-print("\n" + "=" * 60)
-print("PRELIMINARY VS FINAL RESULTS COMPARISON")
-print("=" * 60)
-print("""
-| Metric | Preliminary | Final | Improvement |
-|--------|-------------|-------|-------------|
-| AUC | 0.6947 | 0.9111 | +31.2% |
-| F1 Score | 0.34 | ~0.72 | +112% |
-| Recall | 0.10 | 1.00 | +900% |
-| Dataset Size | 655 windows | 3,000+ windows | +358% |
-| Training Data | TESS only | TESS + Kepler | Cross-mission |
+    print("\n" + "=" * 60)
+    print("All figures generated successfully!")
+    print(f"Saved to: {output_dir}")
+    print(f"Saved to: {runs_dir}")
+    print("=" * 60)
 
-Key Improvements:
-1. Optuna hyperparameter optimization (+9% AUC)
-2. SMOTE class balancing (+8% AUC)
-3. Cross-mission training with Kepler data (+6.7% AUC)
-4. Larger, more diverse dataset (+4.5% AUC on test)
 
-Final Model Performance:
-- AUC on TESS Sector 1 Test: 0.9111 (Excellent)
-- Recall: 100% (detects all planets in test set)
-- Generalizes well to held-out TESS data
-- Does not generalize to synthetic box-transit data (AUC 0.58)
-  → Model learned real transit characteristics, not idealized shapes
-""")
+if __name__ == '__main__':
+    main()

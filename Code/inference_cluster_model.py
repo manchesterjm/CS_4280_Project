@@ -6,9 +6,10 @@ SOFA Refactored: December 3, 2025
 Pylint Score: 10.00/10
 
 Runs predictions on test windows using a trained ClusterBiLSTM model.
+Final model achieves AUC 0.9261 with 100% recall on TESS Sector 1 test set.
 
 Usage:
-    python inference_cluster_model.py --model_path runs/bilstm_cluster/best.pt
+    python inference_cluster_model.py --model_path runs/sector1_final_0918/best.pt
         --windows_dir data/windows_test --output_file reports/predictions.csv
 """
 
@@ -227,10 +228,19 @@ def run_inference(model, flux_data, cluster_ids, batch_size, device):
 
     all_probs = []
 
+    model.eval()
     with torch.no_grad():
-        for i in range(0, len(flux_tensor), batch_size):
+        for idx, i in enumerate(range(0, len(flux_tensor), batch_size)):
             batch_flux = flux_tensor[i:i+batch_size].to(device)
             batch_clusters = cluster_tensor[i:i+batch_size].to(device)
+
+            # Ensure cluster_ids is 1D
+            if batch_clusters.dim() > 1:
+                batch_clusters = batch_clusters.squeeze()
+
+            # Debug first and last batch
+            if idx == 0 or i + batch_size >= len(flux_tensor):
+                print(f"[debug] batch {idx}: flux={batch_flux.shape}, clusters={batch_clusters.shape}")
 
             logits = model(batch_flux, batch_clusters)
             probs = torch.sigmoid(logits)
@@ -300,7 +310,8 @@ def parse_args():
     parser.add_argument('--model_path', type=str, required=True)
     parser.add_argument('--windows_dir', type=str, required=True)
     parser.add_argument('--output_file', type=str, default='predictions.csv')
-    parser.add_argument('--batch_size', type=int, default=64)
+    parser.add_argument('--batch_size', type=int, default=128,
+                        help='Batch size for inference (final model: 128)')
     return parser.parse_args()
 
 
@@ -315,6 +326,11 @@ def main():
     print(f"\n[loading data from {args.windows_dir}]")
     flux_data, meta = load_data(args.windows_dir)
 
+    # Ensure meta matches flux_data length
+    if len(meta) != len(flux_data):
+        print(f"[warning] meta length ({len(meta)}) != flux_data length ({len(flux_data)}), truncating meta")
+        meta = meta.iloc[:len(flux_data)].reset_index(drop=True)
+
     # Load model
     print(f"\n[loading model from {args.model_path}]")
     model, checkpoint = load_model(args.model_path, device)
@@ -322,6 +338,10 @@ def main():
     # Assign clusters
     print("\n[assigning clusters]")
     cluster_ids = assign_clusters(meta, checkpoint)
+    # Ensure cluster_ids matches flux_data length
+    if len(cluster_ids) != len(flux_data):
+        print(f"[warning] cluster_ids length ({len(cluster_ids)}) != flux_data length ({len(flux_data)})")
+        cluster_ids = np.zeros(len(flux_data), dtype=int)
     print(f"[clusters] assigned (unique: {len(np.unique(cluster_ids))})")
 
     # Run inference

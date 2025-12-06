@@ -1,139 +1,89 @@
 # Next Session Quick Start Guide
 
-## Last Session: December 5, 2025 (6:00 AM)
+## Last Session: December 6, 2025
 
-### Status: HIDDEN SIZE BENCHMARKED - READY FOR FINAL TRAINING
+### Status: FINAL MODEL COMPLETE ✅
 
-**What Was Done**:
-- Ran overnight Optuna (only 1 trial completed due to hidden_size=512 being too slow)
-- Trial 0: **AUC 0.9142** with hidden_size=256
-- Created `benchmark_hidden_sizes.py` to test training times
-- Discovered hidden_size=512 is catastrophically slow (28× slower than 128)
-- Updated Optuna search space to [128, 192] for faster trials
-- All pylint issues fixed (10.00/10)
+## Final Test Results
 
----
+| Metric | Value |
+|--------|-------|
+| **AUC** | **0.9261** (92.61%) |
+| **F1 Score** | 0.5708 |
+| **Precision** | 39.93% |
+| **Recall** | **100%** (all planets detected) |
+| **Accuracy** | 83.26% |
 
-## Hidden Size Benchmark Results
-
-| Hidden Size | Parameters | Time/Epoch | Est. 20 Epochs |
-|-------------|------------|------------|----------------|
-| **128** | 1.4M | **0.36 min** | **7.2 min** |
-| 192 | 3.1M | 1.44 min | 28.8 min |
-| 256 | 5.4M | 2.11 min | 42.2 min |
-| 512 | ~21M | ~10+ min | **UNUSABLE** |
-
-**Recommendation**: Use hidden_size=128 for speed, or 256 for best AUC.
+### Confusion Matrix
+- **TP = 732** (all planets detected)
+- **FP = 1101** (false alarms)
+- **TN = 4746** (correct rejections)
+- **FN = 0** (no missed planets!)
 
 ---
 
-## Best Results So Far
+## Final Model Location
 
-| Trial | AUC | hidden_size | Time |
-|-------|-----|-------------|------|
-| Overnight Trial 0 | **0.9142** | 256 | 38.5 min |
-
-**Best hyperparameters**:
-```python
-hidden_size = 256
-batch_size = 112
-num_layers = 4
-dropout = 0.38
-lr = 0.00026
-n_clusters = 5
-cluster_embed_dim = 64
-```
-
----
-
-## Priority 1: Final Model Training
-
-Train the final model using best hyperparameters:
-
-```powershell
-powershell -Command "& 'C:\Users\manch\miniconda3\envs\exo-lstm-gpu\python.exe' -u 'D:\CS_4280_Project\Code\train_bilstm_cluster.py' --windows_dir 'D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train' --n_clusters 5 --epochs 60 --batch_size 112 --lr 0.00026 --hidden 256 --layers 4 --dropout 0.38 --save_dir 'D:\CS_4280_Project\Code\runs\sector1_final' --amp_dtype fp16 --pos_weight 7.41 --num_workers 0 --seed 42"
-```
-
-**Expected time**: ~2 hours (60 epochs × 2.11 min/epoch)
-
----
-
-## Priority 2: Test Set Evaluation
-
-After training, evaluate on test set:
-
-```powershell
-python inference_cluster_model.py --model_path "runs/sector1_final/best.pt" --windows_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test" --output_file "reports/sector1_test_predictions.csv"
-```
-
----
-
-## Priority 3: Generate Figures
-
-```powershell
-python generate_bilstm_figures.py
-```
-
----
-
-## Alternative: Fast Training with hidden_size=128
-
-If time is tight, use hidden_size=128 (6× faster):
-
-```powershell
-powershell -Command "& 'C:\Users\manch\miniconda3\envs\exo-lstm-gpu\python.exe' -u 'D:\CS_4280_Project\Code\train_bilstm_cluster.py' --windows_dir 'D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train' --n_clusters 5 --epochs 60 --batch_size 112 --lr 0.00026 --hidden 128 --layers 4 --dropout 0.38 --save_dir 'D:\CS_4280_Project\Code\runs\sector1_fast' --amp_dtype fp16 --pos_weight 7.41 --num_workers 0 --seed 42"
-```
-
-**Expected time**: ~22 min (60 epochs × 0.36 min/epoch)
-
----
-
-## Data Locations
-
-| Data | Location |
+| File | Location |
 |------|----------|
-| Training windows | `D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train\` |
-| Test windows | `D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test\` |
-| Code | `D:\CS_4280_Project\Code\` |
-| Benchmark results | `D:\CS_4280_Project\Code\hidden_size_benchmark.csv` |
-| Optuna Trial 0 results | `D:\CS_4280_Project\Code\optuna_results_final2\intermediate_results.json` |
+| **Best Model** | `runs/sector1_final_0918/best.pt` |
+| Full Results | `runs/sector1_final_0918/FINAL_RESULTS.md` |
+| Training Log | `runs/sector1_final_0918/training_log.txt` |
+| Test Predictions | `reports/sector1_final_test_predictions.csv` |
 
 ---
 
-## Remaining Steps
+## Hyperparameters Used
 
-1. **Final training** (60 epochs with best hyperparameters)
-2. **Test set evaluation** (inference on held-out data)
-3. **Generate figures** (ROC, confusion matrix, training curves)
-4. **Demo video** (20 seconds)
-5. **Presentation slides**
-
----
-
-## Timeline
-
-| Date | Task | Status |
-|------|------|--------|
-| ~~Dec 4-5~~ | ~~Optuna optimization~~ | **DONE** (1 trial, AUC 0.9142) |
-| **Dec 5-6** | **Final training + figures** | **NEXT** |
-| Dec 6-7 | Demo video + slides | Pending |
-| **Dec 9-11** | **Presentations** | |
-| **Dec 18** | **Final submission** | |
+| Parameter | Value |
+|-----------|-------|
+| hidden_size | 192 |
+| num_layers | 4 |
+| n_clusters | 7 |
+| cluster_embed_dim | 64 |
+| dropout | 0.334 |
+| learning_rate | 0.0001 |
+| batch_size | 128 |
+| pos_weight | 7.41 |
 
 ---
 
-## Optuna Search Space (Updated Dec 5)
+## Remaining Tasks
 
-If you need to run more Optuna trials:
-```python
-hidden_size = [128, 192]  # Excluded 256+ for speed
-batch_size = [96, 112, 128]
+| Task | Status |
+|------|--------|
+| ~~Final training~~ | ✅ DONE (AUC 0.9261) |
+| ~~Test evaluation~~ | ✅ DONE |
+| Generate figures | ✅ DONE |
+| Create 20-sec demo video | Pending |
+| Prepare presentation slides | Pending |
+| **Presentations** | Dec 9-11 |
+| **Final submission** | Dec 18 |
+
+---
+
+## Quick Commands
+
+### Run Inference on New Data
+```powershell
+python inference_cluster_model.py --model_path "runs\sector1_final_0918\best.pt" --windows_dir "PATH_TO_DATA" --output_file "reports\predictions.csv"
 ```
 
-**Expected time per trial**:
-- hidden_size=128: ~7 min
-- hidden_size=192: ~29 min
+### Evaluate Test Set
+```powershell
+python evaluate_test.py --model_path "runs\sector1_final_0918\best.pt" --test_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test"
+```
 
 ---
 
-**Last Updated**: December 5, 2025, 6:00 AM
+## Improvement Summary
+
+| Version | AUC | Improvement |
+|---------|-----|-------------|
+| Original (Oct 2025) | 0.6947 | Baseline |
+| Optuna optimized | 0.7572 | +9.0% |
+| **Sector 1 Final** | **0.9261** | **+33.3%** |
+
+---
+
+**Last Updated**: December 6, 2025

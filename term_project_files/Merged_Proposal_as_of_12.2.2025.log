@@ -1,0 +1,720 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.6)  6 DEC 2025 08:47
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./Merged_Proposal_as_of_12.2.2025.tex
+(Merged_Proposal_as_of_12.2.2025.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+(aaai24.sty
+Package: aaai24 2023/06/26 AAAI 2024 Submission format
+
+Conference Style for AAAI for LaTeX 2e -- version for submission
+\titlebox=\skip50
+) (C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\times.sty
+Package: times 2020/03/25 PSNFSS-v9.3 (SPQR) 
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\helvet.sty
+Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
+
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+))
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\courier.sty
+Package: courier 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen141
+\Gin@req@width=\dimen142
+) (C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip51
+\bibsep=\skip52
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count195
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen143
+\captionmargin=\dimen144
+\caption@leftmargin=\dimen145
+\caption@rightmargin=\dimen146
+\caption@width=\dimen147
+\caption@indent=\dimen148
+\caption@parindent=\dimen149
+\caption@hangindent=\dimen150
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count196
+\c@continuedfloat=\count197
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithm.st
+y
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+ (C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count198
+\float@exts=\toks18
+\float@box=\box51
+\@float@everytoks=\toks19
+\@floatcapt=\box52
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks20
+\c@algorithm=\count199
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithmic.
+sty
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+\c@ALC@unique=\count266
+\c@ALC@line=\count267
+\c@ALC@rem=\count268
+\c@ALC@depth=\count269
+\ALC@tlm=\skip53
+\algorithmicindent=\skip54
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen151
+\lightrulewidth=\dimen152
+\cmidrulewidth=\dimen153
+\belowrulesep=\dimen154
+\belowbottomsep=\dimen155
+\aboverulesep=\dimen156
+\abovetopsep=\dimen157
+\cmidrulesep=\dimen158
+\cmidrulekern=\dimen159
+\defaultaddspace=\dimen160
+\@cmidla=\count270
+\@cmidlb=\count271
+\@aboverulesep=\dimen161
+\@belowrulesep=\dimen162
+\@thisruleclass=\count272
+\@lastruleclass=\count273
+\@thisrulewidth=\dimen163
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/newfloat\newfloat.sty
+Package: newfloat 2023/10/01 v1.2 Defining new floating environments (AR)
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count274
+\lst@gtempboxa=\box53
+\lst@token=\toks21
+\lst@length=\count275
+\lst@currlwidth=\dimen164
+\lst@column=\count276
+\lst@pos=\count277
+\lst@lostspace=\dimen165
+\lst@width=\dimen166
+\lst@newlines=\count278
+\lst@lineno=\count279
+\lst@maxwidth=\dimen167
+
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count280
+\lst@skipnumbers=\count281
+\lst@framebox=\box54
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
+\@float@every@listing=\toks22
+\c@listing=\count282
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 1
+02.
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count283
+\l__pdf_internal_box=\box55
+) (Merged_Proposal_as_of_12.2.2025.aux)
+\openout1 = `Merged_Proposal_as_of_12.2.2025.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count284
+\scratchdimen=\dimen168
+\scratchbox=\box56
+\nofMPsegments=\count285
+\nofMParguments=\count286
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count287
+\MPscratchDim=\dimen169
+\MPnumerator=\count288
+\makeMPintoPDFobject=\count289
+\everyMPtoPDFconversion=\toks24
+)
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
+fg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package newfloat Info: `float' package detected.
+\c@lstlisting=\count290
+\c@eqfn=\count291
+\titlearea=\box57
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 103.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 103.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 103.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 103.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 103.
+\actualheight=\skip55
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
+03.
+ (C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+[1{C:/Users/manch/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/ma
+nch/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
+
+
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2]
+Underfull \hbox (badness 1297) in paragraph at lines 132--133
+ \OT1/ptm/b/n/10 CNN Clas-si-fier for Next Gen-er-a-tion Tran-sit Sur-vey
+ []
+
+
+Underfull \vbox (badness 1515) has occurred while \output is active []
+
+ [3]
+[4]
+Underfull \hbox (badness 7685) in paragraph at lines 173--174
+[]\OT1/ptm/b/n/10 Class Im-bal-ance Han-dling. \OT1/ptm/m/n/10 Their dataset ex
+-hib-
+ []
+
+
+Underfull \hbox (badness 1360) in paragraph at lines 185--186
+\OT1/ptm/m/n/10 cat-e-gories: con-firmed plan-e-tary tran-sits, eclips-ing bi-n
+a-
+ []
+
+
+Underfull \hbox (badness 1688) in paragraph at lines 191--192
+[]\OT1/ptm/b/n/10 Relevance and Per-for-mance Im-pli-ca-tions. \OT1/ptm/m/n/10 
+Ground-
+ []
+
+
+Underfull \hbox (badness 1237) in paragraph at lines 191--192
+\OT1/ptm/m/n/10 ob-serv-ing win-dows re-duce phase cov-er-age. If ma-chine
+ []
+
+[5]
+Underfull \hbox (badness 2302) in paragraph at lines 207--208
+[]\OT1/ptm/m/n/10 The ar-chi-tec-tural com-par-i-son re-veals com-ple-men-tary
+ []
+
+[6]
+Underfull \hbox (badness 1077) in paragraph at lines 248--249
+\OT1/ptm/m/n/10 of raw flux, cen-troid data, and back-ground time-series
+ []
+
+[7]
+Underfull \hbox (badness 1668) in paragraph at lines 258--259
+[]\OT1/ptm/m/n/10 Recent re-search shows that op-ti-miz-ing the at-ten-tion
+ []
+
+
+Underfull \hbox (badness 1533) in paragraph at lines 267--268
+[]\OT1/ptm/m/n/10 Convolutional Mod-ules: As-tro-con-former in-cor-po-rates
+ []
+
+[8]
+Underfull \hbox (badness 3907) in paragraph at lines 286--286
+[]\OT1/ptm/m/n/10 Simulated Data
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--286
+\OT1/ptm/m/n/10 ($\OMS/cmsy/m/n/10 ^^X$\OT1/ptm/m/n/10 10 known
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--287
+[]\OT1/ptm/m/n/10 Small, hand-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--287
+\OT1/ptm/m/n/10 checkable; class
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--287
+\OT1/ptm/m/n/10 bal-ance doc-u-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--287
+\OT1/ptm/m/n/10 NASA Ex-o-planet
+ []
+
+
+Overfull \hbox (0.749pt too wide) in paragraph at lines 287--287
+[]\OT1/ptm/m/n/10 Pseudo/synthetic
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 287--288
+[]\OT1/ptm/m/n/10 Inject depth/-du-ra-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 287--288
+\OT1/ptm/m/n/10 tion/pe-riod jit-ter;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 287--288
+\OT1/ptm/m/n/10 re-port in-jec-tion
+ []
+
+
+Underfull \hbox (badness 2680) in paragraph at lines 287--288
+\OT1/ptm/m/n/10 pol-icy. Data from
+ []
+
+
+Underfull \hbox (badness 5331) in paragraph at lines 288--288
+\OT1/ptm/m/n/10 pler/T-ESS sub-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 288--288
+[]\OT1/ptm/m/n/10 Generalization
+ []
+
+
+Underfull \hbox (badness 1117) in paragraph at lines 288--288
+[]\OT1/ptm/m/n/10 Add a SOTA line
+ []
+
+
+Underfull \hbox (badness 2245) in paragraph at lines 288--288
+\OT1/ptm/m/n/10 when datasets are
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 288--288
+\OT1/ptm/m/n/10 fi-nal-ized (TBD).
+ []
+
+
+Underfull \hbox (badness 1824) in paragraph at lines 288--288
+\OT1/ptm/m/n/10 Data from MAST
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 288--288
+\OT1/ptm/m/n/10 and NASA Ex-o-
+ []
+
+
+Overfull \hbox (9.66644pt too wide) in paragraph at lines 283--290
+ [][] 
+ []
+
+
+LaTeX Warning: File `Images/CNN/cnn_preprocess_lightcurve.png' not found on inp
+ut line 305.
+
+
+! Package pdftex.def Error: File `Images/CNN/cnn_preprocess_lightcurve.png' not
+ found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.305 ...Images/CNN/cnn_preprocess_lightcurve.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 3
+05.
+(C:\Users\manch\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+
+LaTeX Warning: File `Images/CNN/cnn_arch.png' not found on input line 315.
+
+
+! Package pdftex.def Error: File `Images/CNN/cnn_arch.png' not found: using dra
+ft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.315 ...h=0.7\linewidth]{Images/CNN/cnn_arch.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[9]
+Overfull \hbox (14.80405pt too wide) in paragraph at lines 331--347
+ [][] 
+ []
+
+
+Overfull \hbox (4.37096pt too wide) in paragraph at lines 353--363
+ [][] 
+ []
+
+
+Underfull \hbox (badness 1168) in paragraph at lines 377--378
+\OT1/ptm/m/n/10 cat-e-gories: con-firmed/-can-di-date ex-o-planet hosts (3,146)
+,
+ []
+
+[10]
+Underfull \hbox (badness 1163) in paragraph at lines 389--390
+ \OT1/ptm/b/n/10 Neu-ral Net-work Ar-chi-tec-ture BiL-STM Lay-ers. \OT1/ptm/m/n
+/10 The
+ []
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 401--402
+[]\OT1/ptm/b/n/10 Optimizer and Learn-ing Rate Sched-ule. \OT1/ptm/m/n/10 I use
+ the
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 409--410
+ \OT1/ptm/b/n/10 Data De-scrip-tion and Pre-pro-cess-ing \OT1/ptm/m/n/10 The or
+ig-i-nal
+ []
+
+
+Underfull \hbox (badness 1052) in paragraph at lines 409--410
+\OT1/ptm/m/n/10 of 70 train-ing sam-ples, 15 val-i-da-tion sam-ples, and 15
+ []
+
+
+Underfull \hbox (badness 1087) in paragraph at lines 409--410
+\OT1/ptm/m/n/10 train-ing sam-ples, 450 val-i-da-tion sam-ples, and 450 test
+ []
+
+
+Underfull \hbox (badness 5771) in paragraph at lines 415--416
+[]\OT1/ptm/b/n/10 Trend Re-moval: \OT1/ptm/m/n/10 Low-frequency stel-lar vari-a
+bil-ity
+ []
+
+
+Underfull \hbox (badness 3623) in paragraph at lines 442--443
+[]\OT1/ptm/m/n/10 Weighted cross-entropy loss aug-mented with la-bel
+ []
+
+
+Underfull \hbox (badness 1178) in paragraph at lines 446--447
+[]\OT1/ptm/m/n/10 Early stop-ping cri-te-ria with pa-tience of roughly 10
+ []
+
+[12]
+
+LaTeX Warning: File `Images/CNN/train_loss_curves.png' not found on input line 
+465.
+
+
+! Package pdftex.def Error: File `Images/CNN/train_loss_curves.png' not found: 
+using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.465 ...ewidth]{Images/CNN/train_loss_curves.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Images/CNN/f1_auc_curve.png' not found on input line 472.
+
+
+! Package pdftex.def Error: File `Images/CNN/f1_auc_curve.png' not found: using
+ draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.472 ...8\linewidth]{Images/CNN/f1_auc_curve.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 487.
+
+Overfull \hbox (24.6454pt too wide) in paragraph at lines 487--498
+ [][] 
+ []
+
+
+LaTeX Warning: File `Images/CNN/confusion_matrix.png' not found on input line 5
+06.
+
+
+! Package pdftex.def Error: File `Images/CNN/confusion_matrix.png' not found: u
+sing draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.506 ...newidth]{Images/CNN/confusion_matrix.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[13]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (12.85422pt too wide) in paragraph at lines 579--588
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 592--593
+ \OT1/ptm/b/n/10 SMOTE Class Bal-anc-ing Ex-per-i-ment \OT1/ptm/m/n/10 I com-
+ []
+
+
+Underfull \hbox (badness 2326) in paragraph at lines 592--593
+\OT1/ptm/m/n/10 pared three class im-bal-ance strate-gies: loss weight-ing
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 592--593
+\OT1/ptm/m/n/10 (pos[]weight=3.367), naive up-sampling by du-pli-ca-tion,
+ []
+
+
+Underfull \hbox (badness 3954) in paragraph at lines 592--593
+\OT1/ptm/m/n/10 du-pli-cates rather than learn-ing gen-er-al-iz-able pat-terns.
+
+ []
+
+
+Underfull \hbox (badness 2608) in paragraph at lines 592--593
+\OT1/ptm/m/n/10 syn-thetic ex-am-ples that pre-serve tran-sit char-ac-ter-is-ti
+cs
+ []
+
+
+Overfull \hbox (1.71126pt too wide) in paragraph at lines 599--605
+ [][] 
+ []
+
+
+LaTeX Warning: File `Images/RNN/bilstm_class_imbalance_comparison.png' not foun
+d on input line 609.
+
+
+! Package pdftex.def Error: File `Images/RNN/bilstm_class_imbalance_comparison.
+png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.609 ...NN/bilstm_class_imbalance_comparison.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (5.83426pt too wide) in paragraph at lines 673--684
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Images/RNN/confusion_matrix.png, id=57, 566.8377pt x 494.0859pt>
+File: Images/RNN/confusion_matrix.png Graphic file (type png)
+<use Images/RNN/confusion_matrix.png>
+Package pdftex.def Info: Images/RNN/confusion_matrix.png  used on input line 68
+9.
+(pdftex.def)             Requested size: 239.39438pt x 208.66814pt.
+
+Underfull \hbox (badness 2726) in paragraph at lines 700--701
+[]\OT1/ptm/m/n/10 The macro av-er-age (0.6314) and weighted av-er-age
+ []
+
+
+Underfull \hbox (badness 2556) in paragraph at lines 708--709
+[]\OT1/ptm/m/n/10 Increase model ca-pac-ity by ex-pand-ing $\OML/cmm/m/it/10 d[
+]$ \OT1/ptm/m/n/10 and
+ []
+
+
+Underfull \hbox (badness 1742) in paragraph at lines 722--723
+[]\OT1/ptm/b/n/10 Transformer Find-ings. \OT1/ptm/m/n/10 [TO BE COM-PLETED BY
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 730--731
+\OT1/ptm/m/n/10 Portions of this work were com-pleted with as-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 730--731
+\OT1/ptm/m/n/10 sis-tance from \OT1/ptm/b/n/10 Claude Code\OT1/ptm/m/n/10 , us-
+ing mod-els
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 730--731
+\OT1/pcr/m/n/10 claude-sonnet-4-5-20250929 \OT1/ptm/m/n/10 (Son-net 4.5)
+ []
+
+(Merged_Proposal_as_of_12.2.2025.bbl
+Underfull \hbox (badness 1888) in paragraph at lines 52--60
+[]\OT1/ptm/m/n/10 Du, N.; Dai, H.; Trivedi, R.; Upad-hyay, U.; Gomez-
+ []
+
+[16 <./Images/RNN/confusion_matrix.png>]
+Underfull \hbox (badness 1137) in paragraph at lines 107--113
+[]\OT1/ptm/m/n/10 Salinas, H.; Brahm, R.; Olm-schenk, G.; Barry, R. K.;
+ []
+
+) [17] (Merged_Proposal_as_of_12.2.2025.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 5514 strings out of 474486
+ 98093 string characters out of 5743755
+ 1946542 words of memory out of 5000000
+ 27749 multiletter control sequences out of 15000+600000
+ 580445 words of font info for 79 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 57i,11n,65p,2162b,347s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/manch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmbx10.pfb><C:/Users/manch/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmmi10.pfb><C:/Users/manch/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmmi7.pfb><C:/Users/manch/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/manch/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/manch/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/manch/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/manch/App
+Data/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/manch/A
+ppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/manch/A
+ppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/manch/A
+ppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Merged_Proposal_as_of_12.2.2025.pdf (17 pages, 368518 bytes).
+
+PDF statistics:
+ 116 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+

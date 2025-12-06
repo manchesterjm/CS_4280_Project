@@ -105,7 +105,7 @@
 \section*{Abstract}
 The discovery of exoplanets has become more dependent on machine learning as missions like Kepler and TESS generate thousands of transit signals that are too costly and time consuming to vet by hand. In this research, we address this problem by comparing three different deep learning models for exoplanet classification: Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), and Transformer architecture. Each team member designed, trained, and evaluated one of these models using observational data from Kepler and the Transiting Exoplanet Survey Satellite (TESS) along with simulated datasets. Our focus is on performance metrics such as accuracy, precision, recall, F1 score, and Area Under Curve (AUC), as well as understanding the strengths and weaknesses of each model in classifying planets versus false positives.
 
-This paper presents preliminary results from the BiLSTM + clustering approach, which achieved an AUC of 0.6947 on validation data (655 windows with 150 positive examples) and successfully identified TIC 307210830, a confirmed multi-planet system from TESS, demonstrating real-world applicability. The RNN implementation combines K-means clustering on Box Least Squares features with a 3-layer bidirectional LSTM architecture, enabling the network to learn cluster-specific patterns and distinguish different types of stellar variability from genuine planetary transits. The model uses class weighting to handle the 23 percent positive class imbalance and achieves meaningful predictive power despite the small training dataset. From analyzing results across the three architectures, we aim to identify which methods are most effective for generalizability across multiple datasets and advance automated exoplanet vetting for future missions.
+This paper presents final results from the BiLSTM + clustering approach, which achieved an AUC of 0.9261 on held-out test data (6,579 windows from TESS Sector 1 ground truth) with 100\% recall---detecting every planet in the test set with zero false negatives. The RNN implementation combines K-means clustering on statistical features with a 4-layer bidirectional LSTM architecture, enabling the network to learn cluster-specific patterns and distinguish different types of stellar variability from genuine planetary transits. The model uses class weighting (pos\_weight = 7.41) to handle the 11.9\% positive class imbalance and achieves strong predictive power on the 33,051-window dataset. From analyzing results across the three architectures, we aim to identify which methods are most effective for generalizability across multiple datasets and advance automated exoplanet vetting for future missions.
 
 \section*{Introduction \& Background}
 In the last twenty years, there have been significant increases in the number of space missions whose goal is to observe distant stars and the changes that may occur over variable lengths of time. NASA has been one of the primary drivers behind these advances, which are called transit survey missions. Of most importance to our research are two missions in particular: Kepler/K2 and TESS. Kepler was launched in 2009 with the original mission of monitoring a 116 square degree segment of sky for three and a half years, and when the satellite had a mechanical issue, the mission was changed to K2, which monitored stars and systems along the elliptic plane until it was retired in 2018 \cite{salinas2023distinguishingtransitfalsepositives}. The Transiting Exoplanet Survey Satellite (TESS) was launched in 2018, nearly ten years after Kepler, with the goal of monitoring a sector of approximately 2300 square degrees for about 27 days before moving to the next section \cite{salinas2023distinguishingtransitfalsepositives}. At the time of this writing, these two transit surveys have accounted for more than 3000 of the 6000 total confirmed exoplanets \cite{salinas2025tessfullframe}.
@@ -206,7 +206,7 @@ The 0.96 recall indicates the classifier correctly identified 96\% of genuine pl
 
 The architectural comparison reveals complementary strengths: feature-based methods excel when domain knowledge can be encoded into explicit features, while neural networks excel at discovering patterns that resist manual specification. My approach combines both philosophies: explicit BLS features (period, depth, duration) inform clustering, while the BiLSTM learns implicit temporal representations within each cluster. This hybrid strategy aims to capture the best of both worlds.
 
-\textbf{Target Setting.} Malik et al.'s 0.948 AUC establishes the benchmark my BiLSTM must approach. Current results (AUC 0.893 on TESS Sector 1 test data) fall short of this target, but several factors complicate direct comparison: different datasets (Kepler versus TESS), different class distributions (their balanced sampling versus my 11.7\% positive rate), and different evaluation protocols. Nevertheless, closing the gap to 0.948 AUC remains a concrete goal for future optimization.
+\textbf{Target Setting.} Malik et al.'s 0.948 AUC establishes the benchmark my BiLSTM must approach. Final results (AUC 0.9261 on TESS Sector 1 test data) approach this target, though several factors complicate direct comparison: different datasets (Kepler versus TESS), different class distributions (their balanced sampling versus my 11.1\% positive rate in test), and different evaluation protocols. The 0.9261 AUC represents a 33.3\% improvement over the baseline model (0.6947) and demonstrates competitive performance with feature-engineering approaches.
 
 \subsubsection{Synthesis: Informing the BiLSTM + Clustering Design}
 
@@ -215,7 +215,7 @@ These nine works collectively inform the architecture and training strategy:
 \begin{itemize}
     \item \textbf{Architecture}: 3-4 layer BiLSTM with 256 hidden units (Vida, Vu, Ding, Becker)
     \item \textbf{Clustering}: K-means ($k$=5) on BLS features before training (Speiser, Schanche)
-    \item \textbf{Class balancing}: pos\_weight = 3.367 in BCEWithLogitsLoss (Vu, Becker)
+    \item \textbf{Class balancing}: pos\_weight = 7.41 in BCEWithLogitsLoss (Vu, Becker)
     \item \textbf{Input}: Raw normalized flux windows (Becker)
     \item \textbf{Regularization}: Dropout 0.3-0.4 + early stopping (Vida, Vu)
     \item \textbf{Evaluation}: Sequence-level diagnostics (K\"ugler), timing features (Du)
@@ -512,7 +512,7 @@ Overall, the model learned to recognize transit features from the dual-view inpu
 
 \subsection{BiLSTM + Clustering Approach}
 
-I trained a 4-layer BiLSTM with K-means clustering ($k$=5) on the TESS Sector 1 ground truth dataset. Table~\ref{tab:bilstm_dataset} summarizes the data: 33,051 windows from 13,541 light curves with 11.9\% positive class ratio. The model (3.9M parameters) uses 256 hidden units per direction, dropout 0.311, and positive class weighting (7.41) to handle imbalance. Hyperparameters were optimized via Optuna over 20 trials.
+I trained a 4-layer BiLSTM with K-means clustering ($k$=7) on the TESS Sector 1 ground truth dataset. Table~\ref{tab:bilstm_dataset} summarizes the data: 33,051 windows from 13,541 light curves with 11.9\% positive class ratio. The model (3.07M parameters) uses 192 hidden units per direction, dropout 0.334, and positive class weighting (7.41) to handle imbalance. Hyperparameters were optimized via Optuna over 30 trials.
 
 \begin{table}[h]
 \centering
@@ -523,37 +523,69 @@ I trained a 4-layer BiLSTM with K-means clustering ($k$=5) on the TESS Sector 1 
 \textbf{Dataset} & \textbf{Value} & \textbf{Architecture} & \textbf{Value} \\
 \midrule
 Total Windows & 33,051 & BiLSTM Layers & 4 \\
-Positive Class & 11.9\% & Hidden Units & 256 \\
-Training Set & 26,472 & Parameters & 3.9M \\
-Test Set & 6,579 & Dropout & 0.311 \\
+Positive Class & 11.9\% & Hidden Units & 192 \\
+Training Set & 26,472 & Parameters & 3.07M \\
+Test Set & 6,579 & Dropout & 0.334 \\
 Window Length & 2048 & Pos Weight & 7.41 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsubsection{Baseline to Optimized: Progressive Improvement}
+\subsubsection{Final Test Results}
 
-The baseline model achieved AUC 0.6947 on the validation set. To improve performance, I ran Optuna hyperparameter optimization over 20 trials, testing 7 hyperparameters including layer count, batch size, learning rate, and dropout. Table~\ref{tab:optimization_results} shows the improvement: AUC increased from 0.6947 to 0.7572 (+9.0\%) by increasing layers from 3 to 4 and optimizing dropout to 0.311.
+The final model achieved strong performance on the held-out test set of 6,579 windows. Table~\ref{tab:final_test_results} shows the key metrics, and Table~\ref{tab:confusion_matrix_rnn} presents the confusion matrix.
 
 \begin{table}[h]
     \centering
-    \caption{Baseline vs Optimized Model Performance}
-    \label{tab:optimization_results}
-    \begin{tabular}{@{}lrr@{}}
+    \caption{Final Test Set Performance (6,579 windows)}
+    \label{tab:final_test_results}
+    \begin{tabular}{@{}lr@{}}
         \toprule
-        \textbf{Metric} & \textbf{Baseline} & \textbf{Optimized} \\
+        \textbf{Metric} & \textbf{Value} \\
         \midrule
-        Validation AUC & 0.6947 & \textbf{0.7572} \\
-        LSTM Layers & 3 & 4 \\
-        Dropout Rate & 0.4 & 0.311 \\
-        Real Planet Detection & 0/300 (0\%) & \textbf{16/300 (5.3\%)} \\
-        \midrule
-        \textbf{AUC Improvement} & & \textbf{+9.0\%} \\
+        AUC & \textbf{0.9261} \\
+        F1 Score & 0.5708 \\
+        Precision & 39.93\% \\
+        Recall & \textbf{100\%} \\
+        Accuracy & 83.26\% \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-To validate generalization, I tested both models on 300 windows from 100 confirmed exoplanet hosts (TESS and Kepler) never seen during training. The baseline model made zero positive predictions despite reasonable validation AUC, indicating poor calibration. The optimized model detected 16/300 windows as planets, with the top candidate TIC 261337380 scoring 0.667 probability. Early real-world testing on 7 TESS targets correctly ranked the L 98-59 system (TIC 307210830, a confirmed 4-planet system) highest at probability 0.762.
+\begin{table}[h]
+    \centering
+    \caption{Confusion Matrix - BiLSTM Test Set}
+    \label{tab:confusion_matrix_rnn}
+    \begin{tabular}{@{}lrr@{}}
+        \toprule
+         & \textbf{Pred. Positive} & \textbf{Pred. Negative} \\
+        \midrule
+        \textbf{Actual Positive} & TP = 732 & FN = 0 \\
+        \textbf{Actual Negative} & FP = 1,101 & TN = 4,746 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The 100\% recall is critical for exoplanet detection: the model detects every planet in the test set with zero false negatives. The lower precision (39.93\%) indicates some false positives, but missing a real planet is far worse than flagging a candidate for follow-up verification. The AUC of 0.9261 represents a \textbf{33.3\% improvement} over the baseline model (0.6947).
+
+\subsubsection{Progressive Improvement History}
+
+Table~\ref{tab:optimization_results} shows the progression from baseline to final model across the project timeline.
+
+\begin{table}[h]
+    \centering
+    \caption{Model Performance Progression}
+    \label{tab:optimization_results}
+    \begin{tabular}{@{}lrrr@{}}
+        \toprule
+        \textbf{Version} & \textbf{Date} & \textbf{AUC} & \textbf{Notes} \\
+        \midrule
+        Baseline (655 windows) & Oct 2025 & 0.6947 & Initial model \\
+        Optuna optimized & Nov 2025 & 0.7572 & +9.0\% \\
+        Sector 1 (33K windows) & Dec 2025 & \textbf{0.9261} & \textbf{+33.3\%} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \subsubsection{SMOTE Class Balancing Experiment}
 
@@ -591,15 +623,15 @@ To test whether the TESS-trained model generalizes to other missions, I evaluate
 \textbf{Metric} & \textbf{TESS Test} & \textbf{Kepler Test} \\
 \midrule
 Windows & 6,579 & 279 \\
-AUC & 0.893 & N/A (no negatives) \\
-Recall & 94.6\% & 100\% \\
-Precision & 41.8\% & Unknown \\
-Mean Probability & 0.872 & 0.978 \\
+AUC & \textbf{0.9261} & N/A (no negatives) \\
+Recall & \textbf{100\%} & 100\% \\
+Precision & 39.93\% & Unknown \\
+Mean Probability & --- & 0.978 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-On Kepler data, the model predicted all 279 windows as positive (100\% recall, mean probability 0.978). However, since the Kepler test set contains \textit{only} confirmed planets, I cannot compute precision or AUC. The results are \textbf{inconclusive}: either (1) the model learned generalizable transit physics, or (2) it has a high false positive rate (TESS precision was only 41.8\%). Creating a balanced Kepler test set with negative examples would require downloading non-planet Kepler targets and vetting them carefully---time constraints prevented this. Future work should explore domain adaptation or multi-mission training.
+On Kepler data, the model predicted all 279 windows as positive (100\% recall, mean probability 0.978). However, since the Kepler test set contains \textit{only} confirmed planets, I cannot compute precision or AUC. The results are \textbf{inconclusive}: either (1) the model learned generalizable transit physics, or (2) it has a high false positive rate (TESS precision was 39.93\%). Creating a balanced Kepler test set with negative examples would require downloading non-planet Kepler targets and vetting them carefully---time constraints prevented this. Future work should explore domain adaptation or multi-mission training.
 
 \subsection{Transformer Approach}
 \subsubsection*{Model Configuration}
@@ -683,7 +715,7 @@ To improve model performance:
 
 This work investigated three deep learning architectures---CNN, RNN (BiLSTM), and Transformer---for automated exoplanet transit detection in TESS light curve data. Each team member developed and optimized a distinct architecture, enabling direct comparison of their strengths and limitations on the same TESS Sector 1 ground truth dataset.
 
-\textbf{RNN Findings.} The BiLSTM architecture with K-means clustering achieved [AUC TO BE UPDATED] on the 6,579-window test set. The clustering approach proved effective for handling stellar diversity: by grouping windows with similar statistical properties (variability, noise characteristics), the model learned specialized representations for different stellar types. Hyperparameter optimization via Optuna identified optimal settings of 4 BiLSTM layers, 0.311 dropout, and batch size 64. The 50$\times$ dataset expansion from 655 to 33,051 windows enabled training deeper networks without overfitting.
+\textbf{RNN Findings.} The BiLSTM architecture with K-means clustering achieved \textbf{AUC 0.9261} on the 6,579-window test set with \textbf{100\% recall}---detecting every planet with zero false negatives. The clustering approach proved effective for handling stellar diversity: by grouping windows with similar statistical properties (variability, noise characteristics), the model learned specialized representations for different stellar types. Hyperparameter optimization via Optuna identified optimal settings of 4 BiLSTM layers, 192 hidden units, 0.334 dropout, and batch size 128. The 50$\times$ dataset expansion from 655 to 33,051 windows enabled training deeper networks without overfitting, resulting in a \textbf{33.3\% improvement} over the baseline model.
 
 \textbf{CNN Findings.} [TO BE COMPLETED BY TRISTAN]
 

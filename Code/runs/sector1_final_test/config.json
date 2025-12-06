@@ -1,0 +1,31 @@
+{
+  "windows_dir": "D:\\CS_4280_Project_Backup\\Code\\data\\windows_sector1_full\\train",
+  "val_split": 0.15,
+  "n_clusters": 7,
+  "cluster_embed_dim": 32,
+  "hidden": 192,
+  "layers": 4,
+  "dropout": 0.334,
+  "epochs": 5,
+  "epochs_to_train": null,
+  "resume": null,
+  "batch_size": 128,
+  "lr": 4.97e-05,
+  "weight_decay": 1e-05,
+  "pos_weight": 7.41,
+  "gradient_clip": 1.0,
+  "num_workers": 0,
+  "amp_dtype": "fp16",
+  "seed": 42,
+  "gpu_mem_fraction": null,
+  "save_dir": "runs\\sector1_final_test",
+  "cluster_info": {
+    "n_clusters": 7,
+    "feature_cols": [
+      "period",
+      "duration",
+      "depth",
+      "bls_power"
+    ]
+  }
+}

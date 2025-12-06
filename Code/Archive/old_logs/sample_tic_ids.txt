@@ -1,0 +1,26 @@
+# Sample TIC IDs for TESS light curve download
+# These are known TESS Objects of Interest (TOIs) - confirmed planets
+
+# Hot Jupiters (short period, large planets)
+307210830
+231663901
+178155732
+
+# Super-Earths
+270272650
+410153553
+
+# Neptune-sized
+141527605
+350937617
+
+# Earth-sized (harder to detect)
+460205581
+281408474
+
+# Multi-planet systems
+261136679
+307210830
+
+# Add more TIC IDs here (one per line)
+# Get TIC IDs from: https://exofop.ipac.caltech.edu/tess/

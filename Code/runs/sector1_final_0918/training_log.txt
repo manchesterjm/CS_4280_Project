@@ -1,0 +1,69 @@
+(exo-lstm-gpu) PS D:\CS_4280_Project\Code> .\train_final.ps1
+[runtime] device=cuda amp=True dtype=fp16
+[runtime] model=Cluster-BiLSTM (n_clusters=7)
+
+[loading data]
+[data] shape=(26472, 2048) labels=(26472,)
+[data] pos=3147 neg=23325
+
+[clustering] Creating 7 clusters based on features
+[clustering] Using GROUND TRUTH features: ['log_period', 'log_depth', 'duration', 'teff']
+[clustering] Applying robust preprocessing (1-99 percentile clipping)
+[clustering] Cluster distribution:
+  Cluster 0: 927 windows (3.4%)
+  Cluster 1: 12654 windows (46.4%)
+  Cluster 2: 3876 windows (14.2%)
+  Cluster 3: 576 windows (2.1%)
+  Cluster 4: 2448 windows (9.0%)
+  Cluster 5: 3114 windows (11.4%)
+  Cluster 6: 3681 windows (13.5%)
+
+[clustering] Cluster characteristics:
+  Cluster 0: positive rate 22.7%
+  Cluster 1: positive rate 0.0%
+  Cluster 2: positive rate 31.1%
+  Cluster 3: positive rate 30.2%
+  Cluster 4: positive rate 24.1%
+  Cluster 5: positive rate 28.0%
+  Cluster 6: positive rate 8.5%
+[clustering] Actual clusters used: 7
+
+[split] train=22502 val=3970
+[train] pos=2675 neg=19827
+[val] pos=472 neg=3498
+
+[model] params=3,068,801
+[model] hidden=192 layers=4 clusters=7
+[loss] BCEWithLogitsLoss pos_weight=7.410
+
+[validation before training]
+[val0] {'acc': 0.15944584382871538, 'precision': 0.10656413073331503, 'recall': 0.8220338983050848, 'f1': 0.1886700705081449, 'auc': 0.21843747274471614}
+
+[training for 60 epochs (epoch 1 to 60)]
+[early stopping] patience=15 epochs
+[epoch  1/60] loss=0.9718 auc=0.9131 f1=0.5792 acc=0.8295 time=1m09s lr=9.993e-05
+[best] auc=0.9131 f1=0.5792; saved
+[epoch  2/60] loss=0.6463 auc=0.9199 f1=0.5825 acc=0.8317 time=1m09s lr=9.973e-05
+[best] auc=0.9199 f1=0.5825; saved
+[epoch  3/60] loss=0.7977 auc=0.8703 f1=0.4621 acc=0.7232 time=1m09s lr=9.939e-05
+[epoch  4/60] loss=0.7557 auc=0.8784 f1=0.4605 acc=0.7214 time=1m09s lr=9.892e-05
+[epoch  5/60] loss=0.7556 auc=0.8781 f1=0.4605 acc=0.7214 time=1m09s lr=9.831e-05
+[epoch  6/60] loss=0.7521 auc=0.8788 f1=0.4605 acc=0.7214 time=1m09s lr=9.758e-05
+[epoch  7/60] loss=0.7576 auc=0.8787 f1=0.4607 acc=0.7217 time=1m09s lr=9.671e-05
+[epoch  8/60] loss=0.7511 auc=0.8776 f1=0.4605 acc=0.7214 time=1m09s lr=9.572e-05
+[epoch  9/60] loss=0.7599 auc=0.8778 f1=0.4605 acc=0.7214 time=1m09s lr=9.460e-05
+[epoch 10/60] loss=0.7583 auc=0.8788 f1=0.4605 acc=0.7214 time=1m09s lr=9.337e-05
+[epoch 11/60] loss=0.7579 auc=0.8779 f1=0.4605 acc=0.7214 time=1m09s lr=9.201e-05
+[epoch 12/60] loss=0.7548 auc=0.8785 f1=0.4607 acc=0.7217 time=1m09s lr=9.055e-05
+[epoch 13/60] loss=0.7539 auc=0.8784 f1=0.4605 acc=0.7214 time=1m09s lr=8.897e-05
+[epoch 14/60] loss=0.7558 auc=0.8783 f1=0.4605 acc=0.7214 time=1m09s lr=8.729e-05
+[error] NaN loss at epoch 15, stopping training
+
+[training complete]
+[best] AUC=0.9199 F1=0.5825
+[saved to] runs\sector1_final_0918
+
+[timing summary]
+  Epochs trained: 14
+  Avg per epoch:  1m09s
+  Total time:     17m15s

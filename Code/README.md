@@ -3,17 +3,30 @@
 **CS 4280 - Machine Learning Term Project**
 **Author:** Josh Manchester
 **Component:** RNN (BiLSTM + Clustering)
+**Status:** COMPLETE ✅ (December 6, 2025)
 
 ---
 
 ## Overview
 
-This project uses a Bidirectional LSTM neural network with K-means clustering to detect exoplanet transits in stellar light curve data from NASA's TESS mission. The model achieves **AUC 0.91+** on the TESS Sector 1 ground truth dataset.
+This project uses a Bidirectional LSTM neural network with K-means clustering to detect exoplanet transits in stellar light curve data from NASA's TESS mission.
+
+### Final Test Results (December 6, 2025)
+
+| Metric | Value |
+|--------|-------|
+| **AUC** | **0.9261** (92.61%) |
+| **Recall** | **100%** (732/732 planets) |
+| **F1 Score** | 0.5708 |
+| **Precision** | 39.93% |
+| **Accuracy** | 83.26% |
+
+**Confusion Matrix**: TP=732, FP=1,101, TN=4,746, FN=0
 
 ### Key Innovation
 - K-means clustering groups light curves by statistical features before training
 - Cluster embeddings provide context to the BiLSTM, allowing it to learn different patterns for different stellar types
-- This approach improves AUC by ~3% compared to BiLSTM without clustering
+- **100% recall** - the model detects every planet with zero false negatives
 
 ---
 
@@ -98,20 +111,21 @@ The raw ground truth data is available from the TESS project or can be obtained 
 
 ## Quick Start
 
-### 1. Train the Model
+### 1. Train the Model (Final Configuration)
 ```powershell
-cd C:\CS_4280_Project\Code
+cd D:\CS_4280_Project\Code
 conda activate exo-lstm-gpu
 
 python train_bilstm_cluster.py `
-  --windows_dir "data/windows_sector1_full/train" `
-  --n_clusters 5 `
+  --windows_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\train" `
+  --n_clusters 7 `
+  --cluster_embed_dim 64 `
   --epochs 60 `
-  --batch_size 64 `
+  --batch_size 128 `
   --lr 0.0001 `
-  --hidden 256 `
+  --hidden 192 `
   --layers 4 `
-  --dropout 0.311 `
+  --dropout 0.334 `
   --pos_weight 7.41 `
   --save_dir "runs/my_model" `
   --amp_dtype fp16 `
@@ -120,21 +134,21 @@ python train_bilstm_cluster.py `
 ```
 
 **Expected output:**
-- Training takes ~3 hours on RTX 3060 Ti (batch size 64)
+- Training takes ~30 minutes on RTX 5070 Ti (batch size 128)
 - Model checkpoints saved to `runs/my_model/`
 - Best model: `runs/my_model/best.pt`
 
 ### 2. Evaluate on Test Set
 ```powershell
 python evaluate_test.py `
-  --model_path "runs/my_model/best.pt" `
-  --test_dir "data/windows_sector1_full/test"
+  --model_path "runs/sector1_final_0918/best.pt" `
+  --test_dir "D:\CS_4280_Project_Backup\Code\data\windows_sector1_full\test"
 ```
 
 ### 3. Run Inference on New Data
 ```powershell
 python inference_cluster_model.py `
-  --model_path "runs/my_model/best.pt" `
+  --model_path "runs/sector1_final_0918/best.pt" `
   --windows_dir "data/windows_test" `
   --output_file "reports/predictions.csv"
 ```
@@ -168,7 +182,7 @@ Code/
 
 ## Model Architecture
 
-### ClusterBiLSTM
+### ClusterBiLSTM (Final Architecture)
 
 ```
 Input: (batch, 2048, 1) - Normalized flux window
@@ -176,50 +190,59 @@ Input: (batch, 2048, 1) - Normalized flux window
   ├── K-means Cluster Assignment (based on statistical features)
   │     Features: mean, std, variance, skewness, range, median, MAD, peak-to-peak
   │
-  ├── Cluster Embedding Layer (5 clusters → 32 dimensions)
+  ├── Cluster Embedding Layer (7 clusters → 64 dimensions)
   │
-  ├── BiLSTM (4 layers, 256 hidden units, bidirectional)
-  │     Output: Forward + Backward hidden states (512 total)
+  ├── BiLSTM (4 layers, 192 hidden units, bidirectional)
+  │     Output: Forward + Backward hidden states (384 total)
   │
-  ├── Concatenate [BiLSTM output (512) + Cluster embedding (32)] = 544
+  ├── Concatenate [BiLSTM output (384) + Cluster embedding (64)] = 448
   │
-  ├── FC1 (544 → 256) + BatchNorm + ReLU + Dropout
-  ├── FC2 (256 → 128) + BatchNorm + ReLU + Dropout
-  └── FC3 (128 → 1) + Sigmoid → Planet probability
+  ├── FC1 (448 → 192) + BatchNorm + ReLU + Dropout(0.334)
+  ├── FC2 (192 → 96) + BatchNorm + ReLU + Dropout(0.334)
+  └── FC3 (96 → 1) + Sigmoid → Planet probability
+
+Total Parameters: 3,068,801
 ```
 
-### Key Hyperparameters
+### Final Hyperparameters
 
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | seq_len | 2048 | Window length (flux points) |
-| hidden_size | 256 | BiLSTM hidden units |
+| hidden_size | 192 | BiLSTM hidden units |
 | num_layers | 4 | BiLSTM layers |
-| n_clusters | 5 | K-means clusters |
-| dropout | 0.311 | Dropout rate |
+| n_clusters | 7 | K-means clusters |
+| cluster_embed_dim | 64 | Cluster embedding dimension |
+| dropout | 0.334 | Dropout rate |
 | learning_rate | 0.0001 | Adam learning rate |
-| batch_size | 64 | Training batch size |
+| batch_size | 128 | Training batch size |
 | pos_weight | 7.41 | Class imbalance weight (neg/pos ratio) |
 
 ---
 
 ## Results
 
-### Performance on TESS Sector 1 Test Set
+### Final Performance on TESS Sector 1 Test Set (December 6, 2025)
 
 | Metric | Value |
 |--------|-------|
-| **AUC** | 0.91+ |
-| Accuracy | ~85% |
-| Precision | ~0.45 |
-| Recall | ~0.80 |
-| F1 Score | ~0.58 |
+| **AUC** | **0.9261** |
+| **Recall** | **100%** |
+| Accuracy | 83.26% |
+| Precision | 39.93% |
+| F1 Score | 0.5708 |
+
+### Confusion Matrix
+| | Predicted Positive | Predicted Negative |
+|--|-------------------|-------------------|
+| **Actual Positive** | TP = 732 | FN = 0 |
+| **Actual Negative** | FP = 1,101 | TN = 4,746 |
 
 ### Training Details
 - **Dataset**: 26,472 training windows, 6,579 test windows
 - **Class distribution**: 11.9% planets, 88.1% non-planets
-- **Training time**: ~3 hours (60 epochs, RTX 3060 Ti)
-- **Convergence**: Best model typically at epoch 40-50
+- **Training time**: ~30 minutes (14 epochs until NaN, best at epoch 2) on RTX 5070 Ti
+- **Best model**: `runs/sector1_final_0918/best.pt`
 
 ---
 

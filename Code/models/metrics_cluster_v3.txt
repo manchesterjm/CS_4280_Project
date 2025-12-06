@@ -1,3 +1,0 @@
-val_AP=0.579862
-test_AP=0.370682
-test_ROC_AUC=0.473481

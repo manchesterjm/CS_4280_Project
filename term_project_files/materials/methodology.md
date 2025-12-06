@@ -1,5 +1,14 @@
 # Methodology: Cluster-Enhanced BiLSTM for Exoplanet Transit Detection
 
+> **⚠️ HISTORICAL DOCUMENT**: This methodology document is from October 2025 describing the original 655-window approach.
+>
+> **Final Results (December 6, 2025)**:
+> - Dataset: TESS Sector 1 (33,051 windows, 62× larger)
+> - **AUC: 0.9261**, **100% Recall**
+> - Architecture: 4-layer BiLSTM, 192 hidden, 7 clusters, 3.07M params
+
+---
+
 ## 1. Overview
 
 This study presents a deep learning approach for detecting exoplanetary transits in stellar light curve data from NASA's TESS (Transiting Exoplanet Survey Satellite) mission. We employ a Bidirectional Long Short-Term Memory (BiLSTM) network enhanced with K-means clustering to classify time-series windows as containing planetary transits or non-planetary signals.

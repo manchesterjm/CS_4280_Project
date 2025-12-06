@@ -8,9 +8,14 @@ Pylint Score: 10.00/10
 Processes ground truth light curves into standardized training windows
 with statistical features for clustering.
 
+Dataset used for final model (December 6, 2025):
+- Total: 33,051 windows (26,472 train / 6,579 test)
+- Achieved: AUC 0.9261, 100% Recall
+
 Usage:
-    python build_windows_from_groundtruth.py --data_dir path/to/ground-truth
-        --output_dir data/windows_sector1 --seq_len 2048 --n_windows 3
+    python build_windows_from_groundtruth.py
+        --data_dir "D:/CS_4280_Project_Backup/sector-1/ground-truth"
+        --output_dir data/windows_sector1_full --seq_len 2048 --n_windows 3
 """
 
 import argparse

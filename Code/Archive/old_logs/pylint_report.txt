@@ -1,0 +1,2321 @@
+﻿************* Module analyze_false_positives
+analyze_false_positives.py:59:0: C0301: Line too long (101/100) (line-too-long)
+analyze_false_positives.py:2:0: E0401: Unable to import 'pandas' (import-error)
+analyze_false_positives.py:68:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+************* Module autonomous_experiment_runner
+autonomous_experiment_runner.py:17:0: C0413: Import "import json" should be placed at the top of the module (wrong-import-position)
+autonomous_experiment_runner.py:18:0: C0413: Import "import time" should be placed at the top of the module (wrong-import-position)
+autonomous_experiment_runner.py:19:0: C0413: Import "import subprocess" should be placed at the top of the module (wrong-import-position)
+autonomous_experiment_runner.py:20:0: C0413: Import "from datetime import datetime" should be placed at the top of the module (wrong-import-position)
+autonomous_experiment_runner.py:21:0: C0413: Import "from pathlib import Path" should be placed at the top of the module (wrong-import-position)
+autonomous_experiment_runner.py:191:11: W0718: Catching too general exception Exception (broad-exception-caught)
+autonomous_experiment_runner.py:159:17: W1510: 'subprocess.run' used without explicitly defining the value for 'check'. (subprocess-run-check)
+autonomous_experiment_runner.py:171:13: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+autonomous_experiment_runner.py:189:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+autonomous_experiment_runner.py:210:12: W0702: No exception type(s) specified (bare-except)
+autonomous_experiment_runner.py:220:12: W0702: No exception type(s) specified (bare-except)
+autonomous_experiment_runner.py:248:4: W0702: No exception type(s) specified (bare-except)
+autonomous_experiment_runner.py:240:17: W1510: 'subprocess.run' used without explicitly defining the value for 'check'. (subprocess-run-check)
+autonomous_experiment_runner.py:252:0: C0116: Missing function or method docstring (missing-function-docstring)
+autonomous_experiment_runner.py:280:13: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+autonomous_experiment_runner.py:315:18: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+************* Module autonomous_training_pipeline
+autonomous_training_pipeline.py:24:0: C0301: Line too long (116/100) (line-too-long)
+autonomous_training_pipeline.py:371:0: C0301: Line too long (109/100) (line-too-long)
+autonomous_training_pipeline.py:486:0: C0301: Line too long (114/100) (line-too-long)
+autonomous_training_pipeline.py:495:0: C0301: Line too long (102/100) (line-too-long)
+autonomous_training_pipeline.py:15:0: C0413: Import "import json" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:16:0: C0413: Import "import time" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:17:0: E0401: Unable to import 'torch' (import-error)
+autonomous_training_pipeline.py:17:0: C0413: Import "import torch" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:18:0: E0401: Unable to import 'numpy' (import-error)
+autonomous_training_pipeline.py:18:0: C0413: Import "import numpy as np" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:19:0: E0401: Unable to import 'pandas' (import-error)
+autonomous_training_pipeline.py:19:0: C0413: Import "import pandas as pd" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:20:0: C0413: Import "from pathlib import Path" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:21:0: C0413: Import "from datetime import datetime" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:22:0: E0401: Unable to import 'sklearn.cluster' (import-error)
+autonomous_training_pipeline.py:22:0: C0413: Import "from sklearn.cluster import KMeans" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:23:0: E0401: Unable to import 'sklearn.preprocessing' (import-error)
+autonomous_training_pipeline.py:23:0: C0413: Import "from sklearn.preprocessing import StandardScaler" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:24:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+autonomous_training_pipeline.py:24:0: C0413: Import "from sklearn.metrics import roc_auc_score, f1_score, precision_score, recall_score, accuracy_score, confusion_matrix" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:29:0: C0413: Import "from build_sector1_dataset_v2 import build_dataset" should be placed at the top of the module (wrong-import-position)
+autonomous_training_pipeline.py:34:4: R1705: Unnecessary "else" after "return", remove the "else" and de-indent the code inside it (no-else-return)
+autonomous_training_pipeline.py:44:0: R0914: Too many local variables (58/15) (too-many-locals)
+autonomous_training_pipeline.py:57:4: C0415: Import outside toplevel (train_bilstm_cluster.ClusterBiLSTM, train_bilstm_cluster.LightCurveDataset) (import-outside-toplevel)
+autonomous_training_pipeline.py:58:4: E0401: Unable to import 'torch.utils.data' (import-error)
+autonomous_training_pipeline.py:58:4: C0415: Import outside toplevel (torch.utils.data.DataLoader) (import-outside-toplevel)
+autonomous_training_pipeline.py:64:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+autonomous_training_pipeline.py:92:4: E0401: Unable to import 'sklearn.model_selection' (import-error)
+autonomous_training_pipeline.py:92:4: C0415: Import outside toplevel (sklearn.model_selection.train_test_split) (import-outside-toplevel)
+autonomous_training_pipeline.py:98:4: C0103: Variable name "X_train" doesn't conform to snake_case naming style (invalid-name)
+autonomous_training_pipeline.py:98:13: C0103: Variable name "X_val" doesn't conform to snake_case naming style (invalid-name)
+autonomous_training_pipeline.py:258:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+autonomous_training_pipeline.py:260:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+autonomous_training_pipeline.py:44:0: R0912: Too many branches (13/12) (too-many-branches)
+autonomous_training_pipeline.py:44:0: R0915: Too many statements (116/50) (too-many-statements)
+autonomous_training_pipeline.py:271:0: R0914: Too many local variables (35/15) (too-many-locals)
+autonomous_training_pipeline.py:350:4: W0621: Redefining name 'results' from outer scope (line 518) (redefined-outer-name)
+autonomous_training_pipeline.py:273:4: C0415: Import outside toplevel (train_bilstm_cluster.ClusterBiLSTM, train_bilstm_cluster.LightCurveDataset) (import-outside-toplevel)
+autonomous_training_pipeline.py:274:4: E0401: Unable to import 'torch.utils.data' (import-error)
+autonomous_training_pipeline.py:274:4: C0415: Import outside toplevel (torch.utils.data.DataLoader) (import-outside-toplevel)
+autonomous_training_pipeline.py:277:4: C0103: Variable name "X_test" doesn't conform to snake_case naming style (invalid-name)
+autonomous_training_pipeline.py:362:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+autonomous_training_pipeline.py:368:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+autonomous_training_pipeline.py:271:0: R0915: Too many statements (58/50) (too-many-statements)
+autonomous_training_pipeline.py:376:0: W0102: Dangerous default value [] as argument (dangerous-default-value)
+autonomous_training_pipeline.py:376:0: R0914: Too many local variables (19/15) (too-many-locals)
+autonomous_training_pipeline.py:427:15: W0718: Catching too general exception Exception (broad-exception-caught)
+autonomous_training_pipeline.py:432:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+autonomous_training_pipeline.py:443:15: W0718: Catching too general exception Exception (broad-exception-caught)
+autonomous_training_pipeline.py:445:12: C0415: Import outside toplevel (traceback) (import-outside-toplevel)
+autonomous_training_pipeline.py:450:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+autonomous_training_pipeline.py:457:15: W0718: Catching too general exception Exception (broad-exception-caught)
+autonomous_training_pipeline.py:459:12: C0415: Import outside toplevel (traceback) (import-outside-toplevel)
+autonomous_training_pipeline.py:479:13: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+autonomous_training_pipeline.py:484:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+autonomous_training_pipeline.py:514:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+autonomous_training_pipeline.py:20:0: C0411: standard import "pathlib.Path" should be placed before third party imports "torch", "numpy", "pandas" (wrong-import-order)
+autonomous_training_pipeline.py:21:0: C0411: standard import "datetime.datetime" should be placed before third party imports "torch", "numpy", "pandas" (wrong-import-order)
+************* Module balance_dataset_smote
+balance_dataset_smote.py:98:0: C0301: Line too long (111/100) (line-too-long)
+balance_dataset_smote.py:118:0: C0301: Line too long (101/100) (line-too-long)
+balance_dataset_smote.py:127:0: C0301: Line too long (101/100) (line-too-long)
+balance_dataset_smote.py:173:0: C0301: Line too long (120/100) (line-too-long)
+balance_dataset_smote.py:281:0: C0301: Line too long (101/100) (line-too-long)
+balance_dataset_smote.py:286:0: C0301: Line too long (101/100) (line-too-long)
+balance_dataset_smote.py:301:0: C0301: Line too long (103/100) (line-too-long)
+balance_dataset_smote.py:303:0: C0301: Line too long (110/100) (line-too-long)
+balance_dataset_smote.py:15:0: E0401: Unable to import 'numpy' (import-error)
+balance_dataset_smote.py:16:0: E0401: Unable to import 'pandas' (import-error)
+balance_dataset_smote.py:19:0: E0401: Unable to import 'sklearn.utils' (import-error)
+balance_dataset_smote.py:20:0: E0401: Unable to import 'imblearn.over_sampling' (import-error)
+balance_dataset_smote.py:21:0: E0401: Unable to import 'imblearn.combine' (import-error)
+balance_dataset_smote.py:29:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:33:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+balance_dataset_smote.py:41:17: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:50:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+balance_dataset_smote.py:59:18: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:59:0: R0914: Too many local variables (19/15) (too-many-locals)
+balance_dataset_smote.py:77:8: C0103: Variable name "X_features" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:81:8: C0103: Variable name "X_features" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:85:4: C0103: Variable name "X_features_resampled" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:106:8: C0103: Variable name "X_resampled" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:124:8: C0103: Variable name "X_resampled" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:142:32: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:142:0: R0914: Too many local variables (26/15) (too-many-locals)
+balance_dataset_smote.py:159:4: C0103: Variable name "X_pos" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:163:4: C0103: Variable name "X_neg" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:184:8: C0103: Variable name "X_neg_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:188:8: C0103: Variable name "X_neg_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:200:8: C0103: Variable name "X_pos_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:210:8: C0103: Variable name "X_pos_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:215:4: C0103: Variable name "X_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:221:4: C0103: Variable name "X_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:236:29: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:236:0: R0914: Too many local variables (18/15) (too-many-locals)
+balance_dataset_smote.py:253:8: C0103: Variable name "X_features" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:257:8: C0103: Variable name "X_features" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:262:4: C0103: Variable name "X_features_resampled" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:264:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+balance_dataset_smote.py:273:8: C0103: Variable name "X_resampled" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:285:8: C0103: Variable name "X_resampled" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:236:41: W0613: Unused argument 'target_ratio' (unused-argument)
+balance_dataset_smote.py:272:8: W0612: Unused variable 'n_original' (unused-variable)
+balance_dataset_smote.py:300:0: C0116: Missing function or method docstring (missing-function-docstring)
+balance_dataset_smote.py:314:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:318:8: C0103: Variable name "X_bal" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:320:8: C0103: Variable name "X_bal" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:324:8: C0103: Variable name "X_bal" doesn't conform to snake_case naming style (invalid-name)
+balance_dataset_smote.py:329:17: E0606: Possibly using variable 'X_bal' before assignment (possibly-used-before-assignment)
+balance_dataset_smote.py:329:24: E0606: Possibly using variable 'y_bal' before assignment (possibly-used-before-assignment)
+balance_dataset_smote.py:329:31: E0606: Possibly using variable 'meta_bal' before assignment (possibly-used-before-assignment)
+balance_dataset_smote.py:329:58: E0606: Possibly using variable 'config' before assignment (possibly-used-before-assignment)
+balance_dataset_smote.py:17:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+balance_dataset_smote.py:18:0: C0411: standard import "argparse" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+balance_dataset_smote.py:22:0: C0411: standard import "json" should be placed before third party imports "numpy", "pandas", "sklearn.utils.resample", "imblearn.over_sampling.SMOTE", "imblearn.combine.SMOTETomek" (wrong-import-order)
+************* Module balance_with_true_smote
+balance_with_true_smote.py:158:0: C0301: Line too long (107/100) (line-too-long)
+balance_with_true_smote.py:234:0: C0301: Line too long (105/100) (line-too-long)
+balance_with_true_smote.py:11:0: E0401: Unable to import 'numpy' (import-error)
+balance_with_true_smote.py:12:0: E0401: Unable to import 'pandas' (import-error)
+balance_with_true_smote.py:15:0: E0401: Unable to import 'imblearn.over_sampling' (import-error)
+balance_with_true_smote.py:16:0: E0401: Unable to import 'sklearn.utils' (import-error)
+balance_with_true_smote.py:23:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:27:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+balance_with_true_smote.py:35:37: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:47:4: C0103: Variable name "X_flat" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:58:4: C0103: Variable name "X_resampled_flat" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:61:4: C0103: Variable name "X_resampled" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:63:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+balance_with_true_smote.py:95:36: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:95:0: R0914: Too many local variables (35/15) (too-many-locals)
+balance_with_true_smote.py:112:4: C0103: Variable name "X_pos" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:116:4: C0103: Variable name "X_neg" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:131:8: C0103: Variable name "X_pos_flat" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:144:8: C0103: Variable name "X_combined" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:146:8: C0103: Variable name "X_combined_flat" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:148:8: C0103: Variable name "X_smote_flat" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:150:8: C0103: Variable name "X_smote" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:154:8: C0103: Variable name "X_pos_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:166:8: C0103: Variable name "X_pos_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:180:8: C0103: Variable name "X_neg_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:184:8: C0103: Variable name "X_neg_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:191:4: C0103: Variable name "X_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:197:4: C0103: Variable name "X_balanced" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:201:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+balance_with_true_smote.py:95:0: R0915: Too many statements (61/50) (too-many-statements)
+balance_with_true_smote.py:131:8: W0612: Unused variable 'X_pos_flat' (unused-variable)
+balance_with_true_smote.py:218:17: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:227:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+balance_with_true_smote.py:233:0: C0116: Missing function or method docstring (missing-function-docstring)
+balance_with_true_smote.py:247:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:251:8: C0103: Variable name "X_bal" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:255:8: C0103: Variable name "X_bal" doesn't conform to snake_case naming style (invalid-name)
+balance_with_true_smote.py:260:17: E0606: Possibly using variable 'X_bal' before assignment (possibly-used-before-assignment)
+balance_with_true_smote.py:260:24: E0606: Possibly using variable 'y_bal' before assignment (possibly-used-before-assignment)
+balance_with_true_smote.py:260:31: E0606: Possibly using variable 'meta_bal' before assignment (possibly-used-before-assignment)
+balance_with_true_smote.py:260:58: E0606: Possibly using variable 'config' before assignment (possibly-used-before-assignment)
+balance_with_true_smote.py:13:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+balance_with_true_smote.py:14:0: C0411: standard import "argparse" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+balance_with_true_smote.py:17:0: C0411: standard import "json" should be placed before third party imports "numpy", "pandas", "imblearn.over_sampling.SMOTE", "sklearn.utils.resample" (wrong-import-order)
+************* Module benchmark_batch_sizes
+benchmark_batch_sizes.py:112:0: C0301: Line too long (104/100) (line-too-long)
+benchmark_batch_sizes.py:206:0: C0301: Line too long (134/100) (line-too-long)
+benchmark_batch_sizes.py:212:0: C0301: Line too long (106/100) (line-too-long)
+benchmark_batch_sizes.py:12:0: E0401: Unable to import 'numpy' (import-error)
+benchmark_batch_sizes.py:13:0: E0401: Unable to import 'torch' (import-error)
+benchmark_batch_sizes.py:14:0: R0402: Use 'from torch import nn' instead (consider-using-from-import)
+benchmark_batch_sizes.py:14:0: E0401: Unable to import 'torch.nn' (import-error)
+benchmark_batch_sizes.py:15:0: E0401: Unable to import 'torch.utils.data' (import-error)
+benchmark_batch_sizes.py:22:0: C0115: Missing class docstring (missing-class-docstring)
+benchmark_batch_sizes.py:22:0: R0902: Too many instance attributes (10/7) (too-many-instance-attributes)
+benchmark_batch_sizes.py:23:4: R0913: Too many arguments (7/5) (too-many-arguments)
+benchmark_batch_sizes.py:23:4: R0917: Too many positional arguments (7/5) (too-many-positional-arguments)
+benchmark_batch_sizes.py:44:4: C0116: Missing function or method docstring (missing-function-docstring)
+benchmark_batch_sizes.py:46:8: W0612: Unused variable 'lstm_out' (unused-variable)
+benchmark_batch_sizes.py:22:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+benchmark_batch_sizes.py:57:37: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+benchmark_batch_sizes.py:57:0: R0913: Too many arguments (9/5) (too-many-arguments)
+benchmark_batch_sizes.py:57:0: R0917: Too many positional arguments (9/5) (too-many-positional-arguments)
+benchmark_batch_sizes.py:57:0: R0914: Too many local variables (23/15) (too-many-locals)
+benchmark_batch_sizes.py:109:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+benchmark_batch_sizes.py:124:0: C0116: Missing function or method docstring (missing-function-docstring)
+benchmark_batch_sizes.py:124:0: R0914: Too many local variables (17/15) (too-many-locals)
+benchmark_batch_sizes.py:150:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+************* Module benchmark_model
+benchmark_model.py:7:0: C0301: Line too long (146/100) (line-too-long)
+benchmark_model.py:163:0: C0301: Line too long (118/100) (line-too-long)
+benchmark_model.py:270:0: C0301: Line too long (101/100) (line-too-long)
+benchmark_model.py:15:0: E0401: Unable to import 'numpy' (import-error)
+benchmark_model.py:16:0: E0401: Unable to import 'pandas' (import-error)
+benchmark_model.py:17:0: E0401: Unable to import 'torch' (import-error)
+benchmark_model.py:18:0: R0402: Use 'from torch import nn' instead (consider-using-from-import)
+benchmark_model.py:18:0: E0401: Unable to import 'torch.nn' (import-error)
+benchmark_model.py:19:0: E0401: Unable to import 'torch.utils.data' (import-error)
+benchmark_model.py:20:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+benchmark_model.py:24:0: E0401: Unable to import 'sklearn.preprocessing' (import-error)
+benchmark_model.py:25:0: E0401: Unable to import 'sklearn.cluster' (import-error)
+benchmark_model.py:33:8: C0103: Attribute name "X" doesn't conform to snake_case naming style (invalid-name)
+benchmark_model.py:32:23: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+benchmark_model.py:47:0: R0902: Too many instance attributes (13/7) (too-many-instance-attributes)
+benchmark_model.py:50:4: R0913: Too many arguments (7/5) (too-many-arguments)
+benchmark_model.py:50:4: R0917: Too many positional arguments (7/5) (too-many-positional-arguments)
+benchmark_model.py:81:4: C0116: Missing function or method docstring (missing-function-docstring)
+benchmark_model.py:83:8: W0612: Unused variable 'lstm_out' (unused-variable)
+benchmark_model.py:83:27: W0612: Unused variable 'cell' (unused-variable)
+benchmark_model.py:47:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+benchmark_model.py:111:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+benchmark_model.py:208:0: C0116: Missing function or method docstring (missing-function-docstring)
+benchmark_model.py:208:0: R0914: Too many local variables (24/15) (too-many-locals)
+benchmark_model.py:231:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+benchmark_model.py:285:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+benchmark_model.py:307:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+benchmark_model.py:208:0: R0915: Too many statements (55/50) (too-many-statements)
+benchmark_model.py:20:0: W0611: Unused classification_report imported from sklearn.metrics (unused-import)
+benchmark_model.py:25:0: W0611: Unused KMeans imported from sklearn.cluster (unused-import)
+************* Module build_hybrid_dataset
+build_hybrid_dataset.py:9:0: C0301: Line too long (153/100) (line-too-long)
+build_hybrid_dataset.py:136:0: C0301: Line too long (101/100) (line-too-long)
+build_hybrid_dataset.py:13:0: E0401: Unable to import 'numpy' (import-error)
+build_hybrid_dataset.py:14:0: E0401: Unable to import 'pandas' (import-error)
+build_hybrid_dataset.py:16:0: E0401: Unable to import 'sklearn.utils' (import-error)
+build_hybrid_dataset.py:23:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+build_hybrid_dataset.py:30:0: R0914: Too many local variables (22/15) (too-many-locals)
+build_hybrid_dataset.py:45:4: C0103: Variable name "X_real" doesn't conform to snake_case naming style (invalid-name)
+build_hybrid_dataset.py:46:4: C0103: Variable name "X_synth" doesn't conform to snake_case naming style (invalid-name)
+build_hybrid_dataset.py:70:4: C0103: Variable name "X_synth_sample" doesn't conform to snake_case naming style (invalid-name)
+build_hybrid_dataset.py:75:4: C0103: Variable name "X_combined" doesn't conform to snake_case naming style (invalid-name)
+build_hybrid_dataset.py:86:4: C0103: Variable name "X_combined" doesn't conform to snake_case naming style (invalid-name)
+build_hybrid_dataset.py:93:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_hybrid_dataset.py:93:0: R0914: Too many local variables (17/15) (too-many-locals)
+build_hybrid_dataset.py:131:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_hybrid_dataset.py:137:4: C0103: Variable name "X_hybrid" doesn't conform to snake_case naming style (invalid-name)
+build_hybrid_dataset.py:143:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_hybrid_dataset.py:149:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_hybrid_dataset.py:176:4: C0415: Import outside toplevel (json) (import-outside-toplevel)
+build_hybrid_dataset.py:177:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+build_hybrid_dataset.py:15:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+build_hybrid_dataset.py:16:0: W0611: Unused shuffle imported from sklearn.utils (unused-import)
+************* Module build_planet_test_windows
+build_planet_test_windows.py:7:0: C0301: Line too long (168/100) (line-too-long)
+build_planet_test_windows.py:11:0: E0401: Unable to import 'numpy' (import-error)
+build_planet_test_windows.py:12:0: E0401: Unable to import 'pandas' (import-error)
+build_planet_test_windows.py:15:0: E0401: Unable to import 'astropy.timeseries' (import-error)
+build_planet_test_windows.py:30:4: W0702: No exception type(s) specified (bare-except)
+build_planet_test_windows.py:50:0: R0914: Too many local variables (17/15) (too-many-locals)
+build_planet_test_windows.py:85:11: W0718: Catching too general exception Exception (broad-exception-caught)
+build_planet_test_windows.py:61:8: W0612: Unused variable 'periods' (unused-variable)
+build_planet_test_windows.py:90:21: W0613: Unused argument 'flux' (unused-argument)
+build_planet_test_windows.py:106:4: W0612: Unused variable 'phase_sorted' (unused-variable)
+build_planet_test_windows.py:121:0: R0914: Too many local variables (16/15) (too-many-locals)
+build_planet_test_windows.py:202:11: W0718: Catching too general exception Exception (broad-exception-caught)
+build_planet_test_windows.py:143:18: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_planet_test_windows.py:141:19: W0612: Unused variable 'periodogram' (unused-variable)
+build_planet_test_windows.py:207:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_planet_test_windows.py:240:4: C0103: Variable name "all_X" doesn't conform to snake_case naming style (invalid-name)
+build_planet_test_windows.py:252:18: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_planet_test_windows.py:259:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+build_planet_test_windows.py:263:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_planet_test_windows.py:279:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_planet_test_windows.py:13:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+************* Module build_sector1_dataset_v2
+build_sector1_dataset_v2.py:250:0: C0301: Line too long (107/100) (line-too-long)
+build_sector1_dataset_v2.py:277:0: C0301: Line too long (105/100) (line-too-long)
+build_sector1_dataset_v2.py:278:0: C0301: Line too long (109/100) (line-too-long)
+build_sector1_dataset_v2.py:283:0: C0301: Line too long (102/100) (line-too-long)
+build_sector1_dataset_v2.py:284:0: C0301: Line too long (106/100) (line-too-long)
+build_sector1_dataset_v2.py:16:0: C0413: Import "import gzip" should be placed at the top of the module (wrong-import-position)
+build_sector1_dataset_v2.py:17:0: E0401: Unable to import 'numpy' (import-error)
+build_sector1_dataset_v2.py:17:0: C0413: Import "import numpy as np" should be placed at the top of the module (wrong-import-position)
+build_sector1_dataset_v2.py:18:0: E0401: Unable to import 'pandas' (import-error)
+build_sector1_dataset_v2.py:18:0: C0413: Import "import pandas as pd" should be placed at the top of the module (wrong-import-position)
+build_sector1_dataset_v2.py:19:0: C0413: Import "from pathlib import Path" should be placed at the top of the module (wrong-import-position)
+build_sector1_dataset_v2.py:20:0: C0413: Import "from tqdm import tqdm" should be placed at the top of the module (wrong-import-position)
+build_sector1_dataset_v2.py:21:0: C0413: Import "import argparse" should be placed at the top of the module (wrong-import-position)
+build_sector1_dataset_v2.py:22:0: C0413: Import "from concurrent.futures import ProcessPoolExecutor, as_completed" should be placed at the top of the module (wrong-import-position)
+build_sector1_dataset_v2.py:23:0: E0401: Unable to import 'sklearn.model_selection' (import-error)
+build_sector1_dataset_v2.py:23:0: C0413: Import "from sklearn.model_selection import train_test_split" should be placed at the top of the module (wrong-import-position)
+build_sector1_dataset_v2.py:24:0: C0413: Import "import warnings" should be placed at the top of the module (wrong-import-position)
+build_sector1_dataset_v2.py:39:4: R1705: Unnecessary "else" after "return", remove the "else" and de-indent the code inside it (no-else-return)
+build_sector1_dataset_v2.py:87:24: W0621: Redefining name 'args' from outer scope (line 321) (redefined-outer-name)
+build_sector1_dataset_v2.py:111:11: W0718: Catching too general exception Exception (broad-exception-caught)
+build_sector1_dataset_v2.py:111:4: W0612: Unused variable 'e' (unused-variable)
+build_sector1_dataset_v2.py:115:0: R0913: Too many arguments (7/5) (too-many-arguments)
+build_sector1_dataset_v2.py:115:0: R0917: Too many positional arguments (7/5) (too-many-positional-arguments)
+build_sector1_dataset_v2.py:115:0: R0914: Too many local variables (49/15) (too-many-locals)
+build_sector1_dataset_v2.py:138:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_sector1_dataset_v2.py:158:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_sector1_dataset_v2.py:226:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+build_sector1_dataset_v2.py:248:4: C0103: Variable name "X_train" doesn't conform to snake_case naming style (invalid-name)
+build_sector1_dataset_v2.py:248:13: C0103: Variable name "X_test" doesn't conform to snake_case naming style (invalid-name)
+build_sector1_dataset_v2.py:273:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_sector1_dataset_v2.py:287:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_sector1_dataset_v2.py:291:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_sector1_dataset_v2.py:115:0: R0915: Too many statements (99/50) (too-many-statements)
+build_sector1_dataset_v2.py:19:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+build_sector1_dataset_v2.py:21:0: C0411: standard import "argparse" should be placed before third party imports "numpy", "pandas", "tqdm.tqdm" (wrong-import-order)
+build_sector1_dataset_v2.py:22:0: C0411: standard import "concurrent.futures.ProcessPoolExecutor" should be placed before third party imports "numpy", "pandas", "tqdm.tqdm" (wrong-import-order)
+build_sector1_dataset_v2.py:24:0: C0411: standard import "warnings" should be placed before third party imports "numpy", "pandas", "tqdm.tqdm", "sklearn.model_selection.train_test_split" (wrong-import-order)
+************* Module build_simple_windows
+build_simple_windows.py:6:0: C0301: Line too long (186/100) (line-too-long)
+build_simple_windows.py:29:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:35:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:40:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:54:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:56:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:60:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:66:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:69:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:73:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:75:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:78:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:84:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:87:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:90:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:92:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:97:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:103:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:107:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:111:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:115:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:119:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:124:0: C0303: Trailing whitespace (trailing-whitespace)
+build_simple_windows.py:129:0: C0301: Line too long (234/100) (line-too-long)
+build_simple_windows.py:6:49: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_simple_windows.py:6:81: W1401: Anomalous backslash in string: '\p'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_simple_windows.py:6:113: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_simple_windows.py:6:129: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_simple_windows.py:6:134: W1401: Anomalous backslash in string: '\d'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_simple_windows.py:6:139: W1401: Anomalous backslash in string: '\w'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_simple_windows.py:10:0: E0401: Unable to import 'numpy' (import-error)
+build_simple_windows.py:11:0: E0401: Unable to import 'pandas' (import-error)
+build_simple_windows.py:44:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_simple_windows.py:44:0: R0914: Too many local variables (18/15) (too-many-locals)
+build_simple_windows.py:76:4: C0103: Variable name "all_X" doesn't conform to snake_case naming style (invalid-name)
+build_simple_windows.py:104:15: W0718: Catching too general exception Exception (broad-exception-caught)
+build_simple_windows.py:113:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+build_simple_windows.py:12:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+************* Module build_windows_from_groundtruth
+build_windows_from_groundtruth.py:4:0: E0401: Unable to import 'numpy' (import-error)
+build_windows_from_groundtruth.py:5:0: E0401: Unable to import 'pandas' (import-error)
+build_windows_from_groundtruth.py:9:0: E0401: Unable to import 'sklearn.preprocessing' (import-error)
+build_windows_from_groundtruth.py:58:0: R0913: Too many arguments (6/5) (too-many-arguments)
+build_windows_from_groundtruth.py:58:0: R0917: Too many positional arguments (6/5) (too-many-positional-arguments)
+build_windows_from_groundtruth.py:58:0: R0914: Too many local variables (28/15) (too-many-locals)
+build_windows_from_groundtruth.py:154:19: W0718: Catching too general exception Exception (broad-exception-caught)
+build_windows_from_groundtruth.py:159:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+build_windows_from_groundtruth.py:164:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_windows_from_groundtruth.py:170:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_windows_from_groundtruth.py:58:0: R0915: Too many statements (58/50) (too-many-statements)
+build_windows_from_groundtruth.py:6:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+build_windows_from_groundtruth.py:8:0: C0411: standard import "argparse" should be placed before third party imports "numpy", "pandas", "tqdm.tqdm" (wrong-import-order)
+build_windows_from_groundtruth.py:2:0: W0611: Unused import os (unused-import)
+build_windows_from_groundtruth.py:9:0: W0611: Unused StandardScaler imported from sklearn.preprocessing (unused-import)
+************* Module build_windows_from_kepler
+build_windows_from_kepler.py:6:0: C0301: Line too long (108/100) (line-too-long)
+build_windows_from_kepler.py:6:53: W1401: Anomalous backslash in string: '\k'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_kepler.py:6:65: W1401: Anomalous backslash in string: '\K'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_kepler.py:6:93: W1401: Anomalous backslash in string: '\w'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_kepler.py:10:0: E0401: Unable to import 'numpy' (import-error)
+build_windows_from_kepler.py:11:0: E0401: Unable to import 'pandas' (import-error)
+build_windows_from_kepler.py:14:0: E0401: Unable to import 'astropy.io' (import-error)
+build_windows_from_kepler.py:49:11: W0718: Catching too general exception Exception (broad-exception-caught)
+build_windows_from_kepler.py:90:11: W0718: Catching too general exception Exception (broad-exception-caught)
+build_windows_from_kepler.py:95:53: W0613: Unused argument 'label' (unused-argument)
+build_windows_from_kepler.py:123:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_from_kepler.py:123:0: R0914: Too many local variables (25/15) (too-many-locals)
+build_windows_from_kepler.py:218:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+build_windows_from_kepler.py:123:0: R0915: Too many statements (63/50) (too-many-statements)
+build_windows_from_kepler.py:12:0: C0411: standard import "glob.glob" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+************* Module build_windows_from_kepler_csv
+build_windows_from_kepler_csv.py:8:0: C0301: Line too long (109/100) (line-too-long)
+build_windows_from_kepler_csv.py:8:57: W1401: Anomalous backslash in string: '\k'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_kepler_csv.py:8:94: W1401: Anomalous backslash in string: '\w'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_kepler_csv.py:12:0: E0401: Unable to import 'numpy' (import-error)
+build_windows_from_kepler_csv.py:13:0: E0401: Unable to import 'pandas' (import-error)
+build_windows_from_kepler_csv.py:16:0: E0401: Unable to import 'scipy' (import-error)
+build_windows_from_kepler_csv.py:35:11: W0718: Catching too general exception Exception (broad-exception-caught)
+build_windows_from_kepler_csv.py:116:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_from_kepler_csv.py:116:0: R0914: Too many local variables (22/15) (too-many-locals)
+build_windows_from_kepler_csv.py:194:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+build_windows_from_kepler_csv.py:203:8: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+build_windows_from_kepler_csv.py:206:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_windows_from_kepler_csv.py:213:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_windows_from_kepler_csv.py:219:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_windows_from_kepler_csv.py:116:0: R0915: Too many statements (69/50) (too-many-statements)
+build_windows_from_kepler_csv.py:14:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+build_windows_from_kepler_csv.py:10:0: W0611: Unused import os (unused-import)
+************* Module build_windows_from_synthetic
+build_windows_from_synthetic.py:6:0: C0301: Line too long (183/100) (line-too-long)
+build_windows_from_synthetic.py:62:0: C0301: Line too long (113/100) (line-too-long)
+build_windows_from_synthetic.py:6:57: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_synthetic.py:6:73: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_synthetic.py:6:118: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_synthetic.py:6:134: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_synthetic.py:6:139: W1401: Anomalous backslash in string: '\d'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_synthetic.py:6:144: W1401: Anomalous backslash in string: '\w'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_from_synthetic.py:10:0: E0401: Unable to import 'numpy' (import-error)
+build_windows_from_synthetic.py:11:0: E0401: Unable to import 'pandas' (import-error)
+build_windows_from_synthetic.py:28:4: W0612: Unused variable 'window_time' (unused-variable)
+build_windows_from_synthetic.py:39:0: R0914: Too many local variables (23/15) (too-many-locals)
+build_windows_from_synthetic.py:59:8: E0401: Unable to import 'scipy.signal' (import-error)
+build_windows_from_synthetic.py:59:8: C0415: Import outside toplevel (scipy.signal.find_peaks) (import-outside-toplevel)
+build_windows_from_synthetic.py:151:0: R0914: Too many local variables (23/15) (too-many-locals)
+build_windows_from_synthetic.py:160:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+build_windows_from_synthetic.py:208:15: W0718: Catching too general exception Exception (broad-exception-caught)
+build_windows_from_synthetic.py:213:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+build_windows_from_synthetic.py:151:0: R0915: Too many statements (60/50) (too-many-statements)
+build_windows_from_synthetic.py:184:8: W0612: Unused variable 'idx' (unused-variable)
+build_windows_from_synthetic.py:246:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_from_synthetic.py:12:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+build_windows_from_synthetic.py:14:0: C0411: standard import "warnings" should be placed before third party imports "numpy", "pandas", "tqdm.tqdm" (wrong-import-order)
+************* Module build_windows_infer_v2
+build_windows_infer_v2.py:39:0: C0301: Line too long (104/100) (line-too-long)
+build_windows_infer_v2.py:40:0: C0301: Line too long (109/100) (line-too-long)
+build_windows_infer_v2.py:42:0: C0301: Line too long (101/100) (line-too-long)
+build_windows_infer_v2.py:76:0: C0301: Line too long (108/100) (line-too-long)
+build_windows_infer_v2.py:100:0: C0301: Line too long (116/100) (line-too-long)
+build_windows_infer_v2.py:113:0: C0301: Line too long (114/100) (line-too-long)
+build_windows_infer_v2.py:132:0: C0301: Line too long (114/100) (line-too-long)
+build_windows_infer_v2.py:11:7: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_infer_v2.py:11:23: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_infer_v2.py:13:23: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_infer_v2.py:13:52: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_infer_v2.py:13:70: W1401: Anomalous backslash in string: '\p'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_infer_v2.py:14:17: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_infer_v2.py:14:33: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_infer_v2.py:14:38: W1401: Anomalous backslash in string: '\d'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_infer_v2.py:14:43: W1401: Anomalous backslash in string: '\w'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+build_windows_infer_v2.py:21:0: E0401: Unable to import 'numpy' (import-error)
+build_windows_infer_v2.py:22:0: E0401: Unable to import 'pandas' (import-error)
+build_windows_infer_v2.py:23:0: E0401: Unable to import 'astropy.timeseries' (import-error)
+build_windows_infer_v2.py:24:0: E0401: Unable to import 'joblib' (import-error)
+build_windows_infer_v2.py:28:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_infer_v2.py:48:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_infer_v2.py:56:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_infer_v2.py:75:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_infer_v2.py:75:0: R0914: Too many local variables (18/15) (too-many-locals)
+build_windows_infer_v2.py:92:4: C0103: Variable name "P" doesn't conform to snake_case naming style (invalid-name)
+build_windows_infer_v2.py:92:30: C0321: More than one statement on a single line (multiple-statements)
+build_windows_infer_v2.py:99:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_infer_v2.py:99:0: R0913: Too many arguments (8/5) (too-many-arguments)
+build_windows_infer_v2.py:99:0: R0917: Too many positional arguments (8/5) (too-many-positional-arguments)
+build_windows_infer_v2.py:113:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_infer_v2.py:113:0: R0914: Too many local variables (21/15) (too-many-locals)
+build_windows_infer_v2.py:128:4: C0103: Variable name "Xs" doesn't conform to snake_case naming style (invalid-name)
+build_windows_infer_v2.py:135:24: C0321: More than one statement on a single line (multiple-statements)
+build_windows_infer_v2.py:143:28: C0321: More than one statement on a single line (multiple-statements)
+build_windows_infer_v2.py:158:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_infer_v2.py:158:0: R0914: Too many local variables (19/15) (too-many-locals)
+build_windows_infer_v2.py:165:13: R1735: Consider using '{"seq_len": args.seq_len, "neg_per_pos": args.neg_per_pos, "pos_width": args.pos_width, ... }' instead of a call to 'dict'. (use-dict-literal)
+build_windows_infer_v2.py:189:4: C0103: Variable name "Xs" doesn't conform to snake_case naming style (invalid-name)
+build_windows_infer_v2.py:189:8: C0103: Variable name "Ys" doesn't conform to snake_case naming style (invalid-name)
+build_windows_infer_v2.py:189:12: C0103: Variable name "Ms" doesn't conform to snake_case naming style (invalid-name)
+build_windows_infer_v2.py:190:12: C0321: More than one statement on a single line (multiple-statements)
+build_windows_infer_v2.py:196:12: C0103: Variable name "Xi" doesn't conform to snake_case naming style (invalid-name)
+build_windows_infer_v2.py:197:27: C0321: More than one statement on a single line (multiple-statements)
+build_windows_infer_v2.py:203:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+build_windows_infer_v2.py:203:31: C0321: More than one statement on a single line (multiple-statements)
+build_windows_infer_v2.py:25:0: C0411: standard import "typing.Optional" should be placed before third party imports "numpy", "pandas", "astropy.timeseries.BoxLeastSquares", "joblib.Parallel" (wrong-import-order)
+************* Module build_windows_parallel_v6
+build_windows_parallel_v6.py:67:0: C0301: Line too long (103/100) (line-too-long)
+build_windows_parallel_v6.py:128:0: C0301: Line too long (108/100) (line-too-long)
+build_windows_parallel_v6.py:169:0: C0301: Line too long (121/100) (line-too-long)
+build_windows_parallel_v6.py:171:0: C0301: Line too long (113/100) (line-too-long)
+build_windows_parallel_v6.py:180:0: C0301: Line too long (109/100) (line-too-long)
+build_windows_parallel_v6.py:183:0: C0301: Line too long (105/100) (line-too-long)
+build_windows_parallel_v6.py:201:0: C0301: Line too long (117/100) (line-too-long)
+build_windows_parallel_v6.py:202:0: C0301: Line too long (104/100) (line-too-long)
+build_windows_parallel_v6.py:203:0: C0301: Line too long (111/100) (line-too-long)
+build_windows_parallel_v6.py:210:0: C0301: Line too long (112/100) (line-too-long)
+build_windows_parallel_v6.py:212:0: C0301: Line too long (109/100) (line-too-long)
+build_windows_parallel_v6.py:213:0: C0301: Line too long (109/100) (line-too-long)
+build_windows_parallel_v6.py:214:0: C0301: Line too long (121/100) (line-too-long)
+build_windows_parallel_v6.py:233:0: C0301: Line too long (114/100) (line-too-long)
+build_windows_parallel_v6.py:242:0: C0301: Line too long (110/100) (line-too-long)
+build_windows_parallel_v6.py:310:0: C0301: Line too long (120/100) (line-too-long)
+build_windows_parallel_v6.py:336:0: C0301: Line too long (109/100) (line-too-long)
+build_windows_parallel_v6.py:339:0: C0301: Line too long (127/100) (line-too-long)
+build_windows_parallel_v6.py:354:0: C0301: Line too long (102/100) (line-too-long)
+build_windows_parallel_v6.py:22:0: C0410: Multiple imports on one line (argparse, os, sys, math, time) (multiple-imports)
+build_windows_parallel_v6.py:28:0: E0401: Unable to import 'numpy' (import-error)
+build_windows_parallel_v6.py:29:0: E0401: Unable to import 'pandas' (import-error)
+build_windows_parallel_v6.py:30:0: E0401: Unable to import 'astropy.timeseries' (import-error)
+build_windows_parallel_v6.py:46:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_parallel_v6.py:56:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_parallel_v6.py:61:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_parallel_v6.py:62:26: C0321: More than one statement on a single line (multiple-statements)
+build_windows_parallel_v6.py:67:0: R0914: Too many local variables (18/15) (too-many-locals)
+build_windows_parallel_v6.py:67:13: W0621: Redefining name 'time' from outer scope (line 22) (redefined-outer-name)
+build_windows_parallel_v6.py:91:4: C0103: Variable name "P" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:91:30: C0321: More than one statement on a single line (multiple-statements)
+build_windows_parallel_v6.py:98:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_parallel_v6.py:98:0: R0913: Too many arguments (8/5) (too-many-arguments)
+build_windows_parallel_v6.py:98:0: R0917: Too many positional arguments (8/5) (too-many-positional-arguments)
+build_windows_parallel_v6.py:98:43: W0621: Redefining name 'time' from outer scope (line 22) (redefined-outer-name)
+build_windows_parallel_v6.py:115:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_parallel_v6.py:118:11: W0718: Catching too general exception Exception (broad-exception-caught)
+build_windows_parallel_v6.py:124:0: R0913: Too many arguments (10/5) (too-many-arguments)
+build_windows_parallel_v6.py:124:0: R0917: Too many positional arguments (10/5) (too-many-positional-arguments)
+build_windows_parallel_v6.py:124:0: R0914: Too many local variables (32/15) (too-many-locals)
+build_windows_parallel_v6.py:195:11: W0718: Catching too general exception Exception (broad-exception-caught)
+build_windows_parallel_v6.py:160:8: C0103: Variable name "Xs" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:173:36: C0321: More than one statement on a single line (multiple-statements)
+build_windows_parallel_v6.py:185:32: C0321: More than one statement on a single line (multiple-statements)
+build_windows_parallel_v6.py:200:0: C0116: Missing function or method docstring (missing-function-docstring)
+build_windows_parallel_v6.py:200:0: R0914: Too many local variables (41/15) (too-many-locals)
+build_windows_parallel_v6.py:247:4: C0103: Variable name "X_path" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:252:4: C0103: Variable name "X_buf" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:264:8: C0103: Variable name "X_cat" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:277:12: C0103: Variable name "X_prev" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:279:12: C0103: Variable name "X_new" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:287:8: C0103: Variable name "X_buf" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:302:12: C0103: Variable name "Xi" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:303:30: C0321: More than one statement on a single line (multiple-statements)
+build_windows_parallel_v6.py:330:16: C0103: Variable name "Xi" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:331:34: C0321: More than one statement on a single line (multiple-statements)
+build_windows_parallel_v6.py:347:35: C0321: More than one statement on a single line (multiple-statements)
+build_windows_parallel_v6.py:348:4: C0103: Variable name "X_all" doesn't conform to snake_case naming style (invalid-name)
+build_windows_parallel_v6.py:200:0: R0912: Too many branches (17/12) (too-many-branches)
+build_windows_parallel_v6.py:200:0: R0915: Too many statements (119/50) (too-many-statements)
+build_windows_parallel_v6.py:22:0: W0611: Unused import sys (unused-import)
+build_windows_parallel_v6.py:22:0: W0611: Unused import math (unused-import)
+************* Module check_checkpoint
+check_checkpoint.py:4:0: C0301: Line too long (113/100) (line-too-long)
+check_checkpoint.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+check_checkpoint.py:1:0: E0401: Unable to import 'torch' (import-error)
+check_checkpoint.py:2:0: C0411: standard import "sys" should be placed before third party import "torch" (wrong-import-order)
+************* Module check_ckpt
+check_ckpt.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+check_ckpt.py:1:0: E0401: Unable to import 'torch' (import-error)
+check_ckpt.py:2:0: C0411: standard import "sys" should be placed before third party import "torch" (wrong-import-order)
+************* Module check_features
+check_features.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+check_features.py:1:0: E0401: Unable to import 'pandas' (import-error)
+check_features.py:7:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+check_features.py:9:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+************* Module combine_datasets
+combine_datasets.py:11:0: C0301: Line too long (141/100) (line-too-long)
+combine_datasets.py:15:0: E0401: Unable to import 'numpy' (import-error)
+combine_datasets.py:16:0: E0401: Unable to import 'pandas' (import-error)
+combine_datasets.py:24:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+combine_datasets.py:31:0: C0116: Missing function or method docstring (missing-function-docstring)
+combine_datasets.py:31:0: R0914: Too many local variables (20/15) (too-many-locals)
+combine_datasets.py:55:4: C0103: Variable name "X_tess" doesn't conform to snake_case naming style (invalid-name)
+combine_datasets.py:65:4: C0103: Variable name "X_kepler" doesn't conform to snake_case naming style (invalid-name)
+combine_datasets.py:74:8: C0103: Variable name "X_kepler" doesn't conform to snake_case naming style (invalid-name)
+combine_datasets.py:86:4: C0103: Variable name "X_combined" doesn't conform to snake_case naming style (invalid-name)
+combine_datasets.py:96:4: C0103: Variable name "X_combined" doesn't conform to snake_case naming style (invalid-name)
+combine_datasets.py:126:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+combine_datasets.py:127:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+combine_datasets.py:130:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+combine_datasets.py:31:0: R0915: Too many statements (68/50) (too-many-statements)
+combine_datasets.py:17:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+combine_datasets.py:13:0: W0611: Unused import os (unused-import)
+************* Module compare_balanced_vs_unbalanced
+compare_balanced_vs_unbalanced.py:116:0: C0301: Line too long (115/100) (line-too-long)
+compare_balanced_vs_unbalanced.py:119:0: C0301: Line too long (194/100) (line-too-long)
+compare_balanced_vs_unbalanced.py:8:0: E0401: Unable to import 'pandas' (import-error)
+compare_balanced_vs_unbalanced.py:10:0: E0401: Unable to import 'matplotlib.pyplot' (import-error)
+compare_balanced_vs_unbalanced.py:11:0: E0401: Unable to import 'seaborn' (import-error)
+compare_balanced_vs_unbalanced.py:23:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+compare_balanced_vs_unbalanced.py:30:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+compare_balanced_vs_unbalanced.py:75:0: C0103: Constant name "auc_change" doesn't conform to UPPER_CASE naming style (invalid-name)
+compare_balanced_vs_unbalanced.py:76:0: C0103: Constant name "f1_change" doesn't conform to UPPER_CASE naming style (invalid-name)
+compare_balanced_vs_unbalanced.py:9:0: C0411: standard import "pathlib.Path" should be placed before third party import "pandas" (wrong-import-order)
+compare_balanced_vs_unbalanced.py:10:0: W0611: Unused matplotlib.pyplot imported as plt (unused-import)
+compare_balanced_vs_unbalanced.py:11:0: W0611: Unused seaborn imported as sns (unused-import)
+************* Module compare_planet_predictions
+compare_planet_predictions.py:18:0: C0301: Line too long (114/100) (line-too-long)
+compare_planet_predictions.py:32:0: C0301: Line too long (139/100) (line-too-long)
+compare_planet_predictions.py:46:0: C0301: Line too long (143/100) (line-too-long)
+compare_planet_predictions.py:53:0: C0301: Line too long (176/100) (line-too-long)
+compare_planet_predictions.py:54:0: C0301: Line too long (137/100) (line-too-long)
+compare_planet_predictions.py:68:0: C0301: Line too long (108/100) (line-too-long)
+compare_planet_predictions.py:74:0: C0301: Line too long (102/100) (line-too-long)
+compare_planet_predictions.py:75:0: C0301: Line too long (105/100) (line-too-long)
+compare_planet_predictions.py:101:0: C0301: Line too long (106/100) (line-too-long)
+compare_planet_predictions.py:102:0: C0301: Line too long (109/100) (line-too-long)
+compare_planet_predictions.py:106:0: C0301: Line too long (102/100) (line-too-long)
+compare_planet_predictions.py:112:0: C0301: Line too long (110/100) (line-too-long)
+compare_planet_predictions.py:128:0: C0301: Line too long (102/100) (line-too-long)
+compare_planet_predictions.py:153:0: C0301: Line too long (106/100) (line-too-long)
+compare_planet_predictions.py:158:0: C0301: Line too long (110/100) (line-too-long)
+compare_planet_predictions.py:159:0: C0301: Line too long (112/100) (line-too-long)
+compare_planet_predictions.py:164:0: C0301: Line too long (118/100) (line-too-long)
+compare_planet_predictions.py:168:0: C0301: Line too long (139/100) (line-too-long)
+compare_planet_predictions.py:177:0: C0301: Line too long (101/100) (line-too-long)
+compare_planet_predictions.py:185:0: C0301: Line too long (105/100) (line-too-long)
+compare_planet_predictions.py:5:0: E0401: Unable to import 'pandas' (import-error)
+compare_planet_predictions.py:6:0: E0401: Unable to import 'numpy' (import-error)
+compare_planet_predictions.py:7:0: E0401: Unable to import 'matplotlib.pyplot' (import-error)
+compare_planet_predictions.py:138:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+compare_planet_predictions.py:178:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+compare_planet_predictions.py:183:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+compare_planet_predictions.py:184:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+compare_planet_predictions.py:187:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+compare_planet_predictions.py:188:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+compare_planet_predictions.py:8:0: C0411: standard import "pathlib.Path" should be placed before third party imports "pandas", "numpy", "matplotlib.pyplot" (wrong-import-order)
+compare_planet_predictions.py:8:0: W0611: Unused Path imported from pathlib (unused-import)
+************* Module convert_npy_to_csv
+convert_npy_to_csv.py:6:0: C0301: Line too long (174/100) (line-too-long)
+convert_npy_to_csv.py:20:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:34:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:36:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:40:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:45:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:47:53: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:49:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:51:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:55:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:60:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:62:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:65:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:68:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:74:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:78:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:80:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:84:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:87:0: C0303: Trailing whitespace (trailing-whitespace)
+convert_npy_to_csv.py:92:0: C0301: Line too long (147/100) (line-too-long)
+convert_npy_to_csv.py:6:48: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+convert_npy_to_csv.py:6:80: W1401: Anomalous backslash in string: '\p'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+convert_npy_to_csv.py:6:108: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+convert_npy_to_csv.py:6:140: W1401: Anomalous backslash in string: '\p'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+convert_npy_to_csv.py:10:0: E0401: Unable to import 'numpy' (import-error)
+convert_npy_to_csv.py:11:0: E0401: Unable to import 'pandas' (import-error)
+convert_npy_to_csv.py:26:0: C0116: Missing function or method docstring (missing-function-docstring)
+convert_npy_to_csv.py:81:15: W0718: Catching too general exception Exception (broad-exception-caught)
+convert_npy_to_csv.py:91:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+convert_npy_to_csv.py:12:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+************* Module download_kepler_planets
+download_kepler_planets.py:8:0: C0301: Line too long (107/100) (line-too-long)
+download_kepler_planets.py:8:54: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+download_kepler_planets.py:8:70: W1401: Anomalous backslash in string: '\k'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+download_kepler_planets.py:12:0: E0401: Unable to import 'pandas' (import-error)
+download_kepler_planets.py:22:4: R1722: Consider using 'sys.exit' instead (consider-using-sys-exit)
+download_kepler_planets.py:32:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+download_kepler_planets.py:35:4: E0401: Unable to import 'astroquery.nasa_exoplanet_archive' (import-error)
+download_kepler_planets.py:35:4: C0415: Import outside toplevel (astroquery.nasa_exoplanet_archive.NasaExoplanetArchive) (import-outside-toplevel)
+download_kepler_planets.py:113:11: W0718: Catching too general exception Exception (broad-exception-caught)
+download_kepler_planets.py:118:0: C0116: Missing function or method docstring (missing-function-docstring)
+download_kepler_planets.py:153:8: W0612: Unused variable 'idx' (unused-variable)
+download_kepler_planets.py:13:0: C0411: standard import "pathlib.Path" should be placed before third party import "pandas" (wrong-import-order)
+download_kepler_planets.py:15:0: C0411: standard import "warnings" should be placed before third party imports "pandas", "tqdm.tqdm" (wrong-import-order)
+************* Module download_tess_lightcurves
+download_tess_lightcurves.py:9:0: C0301: Line too long (116/100) (line-too-long)
+download_tess_lightcurves.py:46:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:54:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:58:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:60:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:63:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:67:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:70:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:73:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:76:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:79:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:83:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:87:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:90:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:100:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:102:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:104:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:112:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:122:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:124:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:128:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:131:45: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:133:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:138:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:141:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:146:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:155:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:161:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:168:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:176:0: C0303: Trailing whitespace (trailing-whitespace)
+download_tess_lightcurves.py:9:79: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+download_tess_lightcurves.py:18:0: E0401: Unable to import 'numpy' (import-error)
+download_tess_lightcurves.py:19:0: E0401: Unable to import 'pandas' (import-error)
+download_tess_lightcurves.py:30:4: R1722: Consider using 'sys.exit' instead (consider-using-sys-exit)
+download_tess_lightcurves.py:105:11: W0718: Catching too general exception Exception (broad-exception-caught)
+download_tess_lightcurves.py:110:0: C0116: Missing function or method docstring (missing-function-docstring)
+download_tess_lightcurves.py:130:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+download_tess_lightcurves.py:20:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+download_tess_lightcurves.py:22:0: C0411: standard import "warnings" should be placed before third party imports "numpy", "pandas", "tqdm.tqdm" (wrong-import-order)
+************* Module evaluate_old_data
+evaluate_old_data.py:9:0: C0301: Line too long (116/100) (line-too-long)
+evaluate_old_data.py:160:0: C0301: Line too long (106/100) (line-too-long)
+evaluate_old_data.py:3:0: E0401: Unable to import 'numpy' (import-error)
+evaluate_old_data.py:4:0: E0401: Unable to import 'pandas' (import-error)
+evaluate_old_data.py:5:0: E0401: Unable to import 'torch' (import-error)
+evaluate_old_data.py:6:0: R0402: Use 'from torch import nn' instead (consider-using-from-import)
+evaluate_old_data.py:6:0: E0401: Unable to import 'torch.nn' (import-error)
+evaluate_old_data.py:7:0: E0401: Unable to import 'sklearn.preprocessing' (import-error)
+evaluate_old_data.py:8:0: E0401: Unable to import 'sklearn.cluster' (import-error)
+evaluate_old_data.py:9:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+evaluate_old_data.py:11:0: C0115: Missing class docstring (missing-class-docstring)
+evaluate_old_data.py:11:0: R0902: Too many instance attributes (12/7) (too-many-instance-attributes)
+evaluate_old_data.py:12:4: R0913: Too many arguments (7/5) (too-many-arguments)
+evaluate_old_data.py:12:4: R0917: Too many positional arguments (7/5) (too-many-positional-arguments)
+evaluate_old_data.py:32:4: C0116: Missing function or method docstring (missing-function-docstring)
+evaluate_old_data.py:34:8: W0612: Unused variable 'lstm_out' (unused-variable)
+evaluate_old_data.py:34:27: W0612: Unused variable 'cell' (unused-variable)
+evaluate_old_data.py:11:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+evaluate_old_data.py:53:0: C0116: Missing function or method docstring (missing-function-docstring)
+evaluate_old_data.py:53:0: R0914: Too many local variables (52/15) (too-many-locals)
+evaluate_old_data.py:70:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+evaluate_old_data.py:133:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+evaluate_old_data.py:157:4: W0212: Access to a protected member _n_threads of a client class (protected-access)
+evaluate_old_data.py:179:4: C0103: Variable name "X_tensor" doesn't conform to snake_case naming style (invalid-name)
+evaluate_old_data.py:217:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+evaluate_old_data.py:225:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+evaluate_old_data.py:53:0: R0912: Too many branches (20/12) (too-many-branches)
+evaluate_old_data.py:53:0: R0915: Too many statements (132/50) (too-many-statements)
+************* Module evaluate_pr_v2
+evaluate_pr_v2.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+evaluate_pr_v2.py:3:0: C0410: Multiple imports on one line (numpy, pandas) (multiple-imports)
+evaluate_pr_v2.py:3:0: E0401: Unable to import 'numpy' (import-error)
+evaluate_pr_v2.py:3:0: E0401: Unable to import 'pandas' (import-error)
+evaluate_pr_v2.py:4:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+evaluate_pr_v2.py:9:30: C0321: More than one statement on a single line (multiple-statements)
+evaluate_pr_v2.py:13:36: C0321: More than one statement on a single line (multiple-statements)
+evaluate_pr_v2.py:27:4: E0401: Unable to import 'torch' (import-error)
+evaluate_pr_v2.py:28:4: E0401: Unable to import 'torch' (import-error)
+evaluate_pr_v2.py:29:4: C0115: Missing class docstring (missing-class-docstring)
+evaluate_pr_v2.py:39:8: C0116: Missing function or method docstring (missing-function-docstring)
+evaluate_pr_v2.py:40:34: C0321: More than one statement on a single line (multiple-statements)
+evaluate_pr_v2.py:41:31: C0321: More than one statement on a single line (multiple-statements)
+evaluate_pr_v2.py:29:4: R0903: Too few public methods (1/2) (too-few-public-methods)
+evaluate_pr_v2.py:43:4: C0103: Constant name "device" doesn't conform to UPPER_CASE naming style (invalid-name)
+evaluate_pr_v2.py:46:34: C0321: More than one statement on a single line (multiple-statements)
+evaluate_pr_v2.py:51:26: C0321: More than one statement on a single line (multiple-statements)
+************* Module evaluate_simple
+evaluate_simple.py:7:0: C0301: Line too long (116/100) (line-too-long)
+evaluate_simple.py:3:0: E0401: Unable to import 'numpy' (import-error)
+evaluate_simple.py:4:0: E0401: Unable to import 'pandas' (import-error)
+evaluate_simple.py:5:0: E0401: Unable to import 'torch' (import-error)
+evaluate_simple.py:6:0: R0402: Use 'from torch import nn' instead (consider-using-from-import)
+evaluate_simple.py:6:0: E0401: Unable to import 'torch.nn' (import-error)
+evaluate_simple.py:7:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+evaluate_simple.py:10:0: R0902: Too many instance attributes (8/7) (too-many-instance-attributes)
+evaluate_simple.py:35:4: C0116: Missing function or method docstring (missing-function-docstring)
+evaluate_simple.py:36:8: W0612: Unused variable 'lstm_out' (unused-variable)
+evaluate_simple.py:36:24: W0612: Unused variable 'c_n' (unused-variable)
+evaluate_simple.py:10:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+evaluate_simple.py:55:0: C0116: Missing function or method docstring (missing-function-docstring)
+evaluate_simple.py:55:0: R0914: Too many local variables (34/15) (too-many-locals)
+evaluate_simple.py:72:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+evaluate_simple.py:108:4: C0103: Variable name "X_tensor" doesn't conform to snake_case naming style (invalid-name)
+evaluate_simple.py:144:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+evaluate_simple.py:151:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+evaluate_simple.py:55:0: R0915: Too many statements (88/50) (too-many-statements)
+************* Module evaluate_test
+evaluate_test.py:9:0: C0301: Line too long (116/100) (line-too-long)
+evaluate_test.py:134:0: C0301: Line too long (106/100) (line-too-long)
+evaluate_test.py:3:0: E0401: Unable to import 'numpy' (import-error)
+evaluate_test.py:4:0: E0401: Unable to import 'pandas' (import-error)
+evaluate_test.py:5:0: E0401: Unable to import 'torch' (import-error)
+evaluate_test.py:6:0: R0402: Use 'from torch import nn' instead (consider-using-from-import)
+evaluate_test.py:6:0: E0401: Unable to import 'torch.nn' (import-error)
+evaluate_test.py:7:0: E0401: Unable to import 'sklearn.preprocessing' (import-error)
+evaluate_test.py:8:0: E0401: Unable to import 'sklearn.cluster' (import-error)
+evaluate_test.py:9:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+evaluate_test.py:11:0: C0115: Missing class docstring (missing-class-docstring)
+evaluate_test.py:11:0: R0902: Too many instance attributes (12/7) (too-many-instance-attributes)
+evaluate_test.py:12:4: R0913: Too many arguments (7/5) (too-many-arguments)
+evaluate_test.py:12:4: R0917: Too many positional arguments (7/5) (too-many-positional-arguments)
+evaluate_test.py:36:4: C0116: Missing function or method docstring (missing-function-docstring)
+evaluate_test.py:38:8: W0612: Unused variable 'lstm_out' (unused-variable)
+evaluate_test.py:38:27: W0612: Unused variable 'cell' (unused-variable)
+evaluate_test.py:11:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+evaluate_test.py:59:0: C0116: Missing function or method docstring (missing-function-docstring)
+evaluate_test.py:59:0: R0914: Too many local variables (40/15) (too-many-locals)
+evaluate_test.py:76:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+evaluate_test.py:93:4: W0212: Access to a protected member _n_threads of a client class (protected-access)
+evaluate_test.py:116:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+evaluate_test.py:153:4: C0103: Variable name "X_tensor" doesn't conform to snake_case naming style (invalid-name)
+evaluate_test.py:191:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+evaluate_test.py:59:0: R0915: Too many statements (88/50) (too-many-statements)
+************* Module generate_bilstm_figures
+generate_bilstm_figures.py:9:0: E0401: Unable to import 'numpy' (import-error)
+generate_bilstm_figures.py:10:0: E0401: Unable to import 'pandas' (import-error)
+generate_bilstm_figures.py:11:0: E0401: Unable to import 'matplotlib.pyplot' (import-error)
+generate_bilstm_figures.py:12:0: E0401: Unable to import 'seaborn' (import-error)
+generate_bilstm_figures.py:14:0: E0401: Unable to import 'torch' (import-error)
+generate_bilstm_figures.py:15:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+generate_bilstm_figures.py:16:0: E0401: Unable to import 'sklearn.preprocessing' (import-error)
+generate_bilstm_figures.py:17:0: E0401: Unable to import 'sklearn.cluster' (import-error)
+generate_bilstm_figures.py:61:0: C0103: Constant name "width" doesn't conform to UPPER_CASE naming style (invalid-name)
+generate_bilstm_figures.py:127:4: C0115: Missing class docstring (missing-class-docstring)
+generate_bilstm_figures.py:127:4: R0902: Too many instance attributes (12/7) (too-many-instance-attributes)
+generate_bilstm_figures.py:128:8: R0913: Too many arguments (7/5) (too-many-arguments)
+generate_bilstm_figures.py:128:8: R0917: Too many positional arguments (7/5) (too-many-positional-arguments)
+generate_bilstm_figures.py:159:8: C0116: Missing function or method docstring (missing-function-docstring)
+generate_bilstm_figures.py:159:26: W0621: Redefining name 'x' from outer scope (line 60) (redefined-outer-name)
+generate_bilstm_figures.py:127:4: R0903: Too few public methods (1/2) (too-few-public-methods)
+generate_bilstm_figures.py:208:4: E0401: Unable to import 'sklearn.model_selection' (import-error)
+generate_bilstm_figures.py:295:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_bilstm_figures.py:298:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_bilstm_figures.py:299:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_bilstm_figures.py:13:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas", "matplotlib.pyplot", "seaborn" (wrong-import-order)
+generate_bilstm_figures.py:18:0: C0411: standard import "json" should be placed before third party imports "numpy", "pandas", "matplotlib.pyplot" (...) "sklearn.metrics.roc_curve", "sklearn.preprocessing.StandardScaler", "sklearn.cluster.KMeans" (wrong-import-order)
+generate_bilstm_figures.py:12:0: W0611: Unused seaborn imported as sns (unused-import)
+generate_bilstm_figures.py:18:0: W0611: Unused import json (unused-import)
+************* Module generate_comparison_report
+generate_comparison_report.py:7:0: C0301: Line too long (259/100) (line-too-long)
+generate_comparison_report.py:47:0: C0301: Line too long (125/100) (line-too-long)
+generate_comparison_report.py:97:0: C0301: Line too long (102/100) (line-too-long)
+generate_comparison_report.py:105:0: C0301: Line too long (104/100) (line-too-long)
+generate_comparison_report.py:198:0: C0301: Line too long (150/100) (line-too-long)
+generate_comparison_report.py:206:0: C0301: Line too long (111/100) (line-too-long)
+generate_comparison_report.py:229:0: C0301: Line too long (105/100) (line-too-long)
+generate_comparison_report.py:263:0: C0301: Line too long (126/100) (line-too-long)
+generate_comparison_report.py:265:0: C0301: Line too long (101/100) (line-too-long)
+generate_comparison_report.py:267:0: C0301: Line too long (125/100) (line-too-long)
+generate_comparison_report.py:279:0: C0301: Line too long (121/100) (line-too-long)
+generate_comparison_report.py:16:0: E0401: Unable to import 'numpy' (import-error)
+generate_comparison_report.py:17:0: E0401: Unable to import 'pandas' (import-error)
+generate_comparison_report.py:18:0: E0401: Unable to import 'matplotlib.pyplot' (import-error)
+generate_comparison_report.py:19:0: E0401: Unable to import 'seaborn' (import-error)
+generate_comparison_report.py:34:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+generate_comparison_report.py:76:12: C0104: Disallowed name "bar" (disallowed-name)
+generate_comparison_report.py:58:4: W0612: Unused variable 'fig' (unused-variable)
+generate_comparison_report.py:89:4: W0612: Unused variable 'fig' (unused-variable)
+generate_comparison_report.py:114:4: W0612: Unused variable 'fig' (unused-variable)
+generate_comparison_report.py:299:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+generate_comparison_report.py:303:0: C0116: Missing function or method docstring (missing-function-docstring)
+generate_comparison_report.py:365:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_comparison_report.py:368:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_comparison_report.py:369:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_comparison_report.py:370:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_comparison_report.py:371:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_comparison_report.py:372:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_comparison_report.py:373:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_comparison_report.py:374:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+************* Module generate_final_figures
+generate_final_figures.py:45:0: C0301: Line too long (120/100) (line-too-long)
+generate_final_figures.py:145:0: C0301: Line too long (122/100) (line-too-long)
+generate_final_figures.py:172:0: C0301: Line too long (114/100) (line-too-long)
+generate_final_figures.py:10:0: E0401: Unable to import 'numpy' (import-error)
+generate_final_figures.py:11:0: E0401: Unable to import 'matplotlib.pyplot' (import-error)
+generate_final_figures.py:12:0: E0401: Unable to import 'seaborn' (import-error)
+generate_final_figures.py:64:27: R1735: Consider using '{"arrowstyle": '->', "color": 'gray', "lw": 1.5, "ls": '--'}' instead of a call to 'dict'. (use-dict-literal)
+generate_final_figures.py:100:0: C0103: Constant name "width" doesn't conform to UPPER_CASE naming style (invalid-name)
+generate_final_figures.py:187:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_final_figures.py:191:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_final_figures.py:13:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "matplotlib.pyplot", "seaborn" (wrong-import-order)
+generate_final_figures.py:12:0: W0611: Unused seaborn imported as sns (unused-import)
+************* Module generate_sector1_figures
+generate_sector1_figures.py:116:0: C0301: Line too long (106/100) (line-too-long)
+generate_sector1_figures.py:118:0: C0301: Line too long (109/100) (line-too-long)
+generate_sector1_figures.py:9:0: E0401: Unable to import 'numpy' (import-error)
+generate_sector1_figures.py:10:0: E0401: Unable to import 'pandas' (import-error)
+generate_sector1_figures.py:11:0: E0401: Unable to import 'matplotlib.pyplot' (import-error)
+generate_sector1_figures.py:12:0: E0401: Unable to import 'seaborn' (import-error)
+generate_sector1_figures.py:14:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+generate_sector1_figures.py:78:17: R1735: Consider using '{"boxstyle": 'round', "facecolor": 'white', "edgecolor": 'gray', "alpha": 0.8, ... }' instead of a call to 'dict'. (use-dict-literal)
+generate_sector1_figures.py:118:38: R1735: Consider using '{"boxstyle": 'round', "facecolor": 'white', "edgecolor": 'gray', "alpha": 0.8, ... }' instead of a call to 'dict'. (use-dict-literal)
+generate_sector1_figures.py:130:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_sector1_figures.py:131:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_sector1_figures.py:132:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_sector1_figures.py:133:6: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_sector1_figures.py:13:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas", "matplotlib.pyplot", "seaborn" (wrong-import-order)
+generate_sector1_figures.py:9:0: W0611: Unused numpy imported as np (unused-import)
+************* Module generate_synthetic_dataset
+generate_synthetic_dataset.py:7:0: C0301: Line too long (147/100) (line-too-long)
+generate_synthetic_dataset.py:361:0: C0301: Line too long (102/100) (line-too-long)
+generate_synthetic_dataset.py:432:0: C0301: Line too long (115/100) (line-too-long)
+generate_synthetic_dataset.py:434:0: C0301: Line too long (116/100) (line-too-long)
+generate_synthetic_dataset.py:7:57: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+generate_synthetic_dataset.py:7:73: W1401: Anomalous backslash in string: '\s'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+generate_synthetic_dataset.py:15:0: E0401: Unable to import 'numpy' (import-error)
+generate_synthetic_dataset.py:16:0: E0401: Unable to import 'pandas' (import-error)
+generate_synthetic_dataset.py:76:4: R0914: Too many local variables (20/15) (too-many-locals)
+generate_synthetic_dataset.py:292:0: R0913: Too many arguments (6/5) (too-many-arguments)
+generate_synthetic_dataset.py:292:0: R0917: Too many positional arguments (6/5) (too-many-positional-arguments)
+generate_synthetic_dataset.py:292:0: R0914: Too many local variables (30/15) (too-many-locals)
+generate_synthetic_dataset.py:309:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_synthetic_dataset.py:351:15: W0718: Catching too general exception Exception (broad-exception-caught)
+generate_synthetic_dataset.py:385:19: W0718: Catching too general exception Exception (broad-exception-caught)
+generate_synthetic_dataset.py:420:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+generate_synthetic_dataset.py:292:0: R0915: Too many statements (77/50) (too-many-statements)
+generate_synthetic_dataset.py:440:0: C0116: Missing function or method docstring (missing-function-docstring)
+generate_synthetic_dataset.py:17:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+generate_synthetic_dataset.py:19:0: C0411: standard import "warnings" should be placed before third party imports "numpy", "pandas", "tqdm.tqdm" (wrong-import-order)
+************* Module generate_synthetic_test
+generate_synthetic_test.py:8:0: C0301: Line too long (108/100) (line-too-long)
+generate_synthetic_test.py:91:0: C0301: Line too long (101/100) (line-too-long)
+generate_synthetic_test.py:191:0: C0301: Line too long (106/100) (line-too-long)
+generate_synthetic_test.py:12:0: E0401: Unable to import 'numpy' (import-error)
+generate_synthetic_test.py:13:0: E0401: Unable to import 'pandas' (import-error)
+generate_synthetic_test.py:18:0: R0913: Too many arguments (6/5) (too-many-arguments)
+generate_synthetic_test.py:18:0: R0917: Too many positional arguments (6/5) (too-many-positional-arguments)
+generate_synthetic_test.py:33:4: W0612: Unused variable 'time' (unused-variable)
+generate_synthetic_test.py:87:0: C0116: Missing function or method docstring (missing-function-docstring)
+generate_synthetic_test.py:87:0: R0914: Too many local variables (18/15) (too-many-locals)
+generate_synthetic_test.py:166:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+generate_synthetic_test.py:172:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+generate_synthetic_test.py:87:0: R0915: Too many statements (61/50) (too-many-statements)
+generate_synthetic_test.py:14:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+generate_synthetic_test.py:10:0: W0611: Unused import os (unused-import)
+************* Module inference_cluster_model
+inference_cluster_model.py:6:0: C0301: Line too long (231/100) (line-too-long)
+inference_cluster_model.py:24:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:25:67: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:28:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:31:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:40:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:48:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:52:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:56:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:58:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:69:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:75:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:79:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:83:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:86:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:91:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:93:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:98:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:101:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:117:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:119:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:122:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:127:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:130:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:134:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:136:0: C0301: Line too long (108/100) (line-too-long)
+inference_cluster_model.py:137:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:142:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:152:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:156:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:158:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:162:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:166:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:171:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:174:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:176:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:178:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:184:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:189:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:191:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:196:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:201:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:206:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:209:0: C0303: Trailing whitespace (trailing-whitespace)
+inference_cluster_model.py:6:54: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+inference_cluster_model.py:6:70: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+inference_cluster_model.py:6:122: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+inference_cluster_model.py:6:138: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+inference_cluster_model.py:6:143: W1401: Anomalous backslash in string: '\d'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+inference_cluster_model.py:6:148: W1401: Anomalous backslash in string: '\w'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+inference_cluster_model.py:6:180: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+inference_cluster_model.py:6:196: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+inference_cluster_model.py:11:0: E0401: Unable to import 'numpy' (import-error)
+inference_cluster_model.py:12:0: E0401: Unable to import 'pandas' (import-error)
+inference_cluster_model.py:13:0: E0401: Unable to import 'torch' (import-error)
+inference_cluster_model.py:14:0: R0402: Use 'from torch import nn' instead (consider-using-from-import)
+inference_cluster_model.py:14:0: E0401: Unable to import 'torch.nn' (import-error)
+inference_cluster_model.py:16:0: E0401: Unable to import 'sklearn.cluster' (import-error)
+inference_cluster_model.py:17:0: E0401: Unable to import 'sklearn.preprocessing' (import-error)
+inference_cluster_model.py:22:0: R0902: Too many instance attributes (10/7) (too-many-instance-attributes)
+inference_cluster_model.py:25:4: R0913: Too many arguments (7/5) (too-many-arguments)
+inference_cluster_model.py:25:4: R0917: Too many positional arguments (7/5) (too-many-positional-arguments)
+inference_cluster_model.py:49:4: C0116: Missing function or method docstring (missing-function-docstring)
+inference_cluster_model.py:51:8: W0612: Unused variable 'lstm_out' (unused-variable)
+inference_cluster_model.py:51:27: W0612: Unused variable 'cell' (unused-variable)
+inference_cluster_model.py:22:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+inference_cluster_model.py:89:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+inference_cluster_model.py:105:4: W0212: Access to a protected member _n_threads of a client class (protected-access)
+inference_cluster_model.py:111:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_cluster_model.py:111:0: R0914: Too many local variables (23/15) (too-many-locals)
+inference_cluster_model.py:125:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+inference_cluster_model.py:139:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+inference_cluster_model.py:157:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+inference_cluster_model.py:160:4: C0103: Variable name "X_tensor" doesn't conform to snake_case naming style (invalid-name)
+inference_cluster_model.py:164:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+inference_cluster_model.py:169:12: C0103: Variable name "batch_X" doesn't conform to snake_case naming style (invalid-name)
+inference_cluster_model.py:193:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+inference_cluster_model.py:208:18: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+inference_cluster_model.py:111:0: R0915: Too many statements (61/50) (too-many-statements)
+inference_cluster_model.py:15:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas", "torch", "torch.nn" (wrong-import-order)
+inference_cluster_model.py:18:0: C0411: standard import "warnings" should be placed before third party imports "numpy", "pandas", "torch", "torch.nn", "sklearn.cluster.KMeans", "sklearn.preprocessing.StandardScaler" (wrong-import-order)
+************* Module inference_rnn
+inference_rnn.py:100:0: C0301: Line too long (102/100) (line-too-long)
+inference_rnn.py:104:0: C0301: Line too long (121/100) (line-too-long)
+inference_rnn.py:178:0: C0301: Line too long (102/100) (line-too-long)
+inference_rnn.py:192:0: C0301: Line too long (110/100) (line-too-long)
+inference_rnn.py:215:0: C0301: Line too long (118/100) (line-too-long)
+inference_rnn.py:17:0: C0410: Multiple imports on one line (argparse, re, warnings) (multiple-imports)
+inference_rnn.py:19:0: E0401: Unable to import 'numpy' (import-error)
+inference_rnn.py:20:0: E0401: Unable to import 'pandas' (import-error)
+inference_rnn.py:21:0: E0401: Unable to import 'torch' (import-error)
+inference_rnn.py:22:0: R0402: Use 'from torch import nn' instead (consider-using-from-import)
+inference_rnn.py:22:0: E0401: Unable to import 'torch.nn' (import-error)
+inference_rnn.py:23:0: E0401: Unable to import 'torch.amp' (import-error)
+inference_rnn.py:42:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:51:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:60:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:68:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:83:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:99:0: C0115: Missing class docstring (missing-class-docstring)
+inference_rnn.py:100:4: R0913: Too many arguments (6/5) (too-many-arguments)
+inference_rnn.py:100:4: R0917: Too many positional arguments (6/5) (too-many-positional-arguments)
+inference_rnn.py:108:4: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:99:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+inference_rnn.py:120:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:145:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:145:0: C0103: Function name "preprocess_X" doesn't conform to snake_case naming style (invalid-name)
+inference_rnn.py:145:17: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+inference_rnn.py:148:4: C0103: Variable name "N" doesn't conform to snake_case naming style (invalid-name)
+inference_rnn.py:148:7: C0103: Variable name "T" doesn't conform to snake_case naming style (invalid-name)
+inference_rnn.py:148:10: C0103: Variable name "F" doesn't conform to snake_case naming style (invalid-name)
+inference_rnn.py:148:7: W0612: Unused variable 'T' (unused-variable)
+inference_rnn.py:161:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:161:25: C0103: Argument name "Xnp" doesn't conform to snake_case naming style (invalid-name)
+inference_rnn.py:172:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:184:0: C0116: Missing function or method docstring (missing-function-docstring)
+inference_rnn.py:184:0: R0914: Too many local variables (22/15) (too-many-locals)
+inference_rnn.py:201:4: C0103: Variable name "X_path" doesn't conform to snake_case naming style (invalid-name)
+inference_rnn.py:206:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+inference_rnn.py:212:4: C0103: Variable name "Xp" doesn't conform to snake_case naming style (invalid-name)
+************* Module inspect_kepler_and_lightkurve
+inspect_kepler_and_lightkurve.py:44:0: C0103: Constant name "kepler_dir" doesn't conform to UPPER_CASE naming style (invalid-name)
+inspect_kepler_and_lightkurve.py:83:15: W0718: Catching too general exception Exception (broad-exception-caught)
+inspect_kepler_and_lightkurve.py:61:12: E0401: Unable to import 'astropy.io' (import-error)
+inspect_kepler_and_lightkurve.py:76:34: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+inspect_kepler_and_lightkurve.py:81:32: W0702: No exception type(s) specified (bare-except)
+inspect_kepler_and_lightkurve.py:8:0: W0611: Unused import sys (unused-import)
+************* Module merge_groundtruth_params
+merge_groundtruth_params.py:126:0: C0301: Line too long (107/100) (line-too-long)
+merge_groundtruth_params.py:133:0: C0301: Line too long (127/100) (line-too-long)
+merge_groundtruth_params.py:134:0: C0301: Line too long (133/100) (line-too-long)
+merge_groundtruth_params.py:135:0: C0301: Line too long (130/100) (line-too-long)
+merge_groundtruth_params.py:189:0: C0301: Line too long (116/100) (line-too-long)
+merge_groundtruth_params.py:8:0: E0401: Unable to import 'pandas' (import-error)
+merge_groundtruth_params.py:9:0: E0401: Unable to import 'numpy' (import-error)
+merge_groundtruth_params.py:19:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+merge_groundtruth_params.py:49:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+merge_groundtruth_params.py:72:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+merge_groundtruth_params.py:92:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+merge_groundtruth_params.py:109:0: C0116: Missing function or method docstring (missing-function-docstring)
+merge_groundtruth_params.py:183:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+merge_groundtruth_params.py:186:14: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+merge_groundtruth_params.py:154:8: W0612: Unused variable 'original_cols' (unused-variable)
+merge_groundtruth_params.py:10:0: C0411: standard import "pathlib.Path" should be placed before third party imports "pandas", "numpy" (wrong-import-order)
+************* Module monitor_and_complete_pipeline
+monitor_and_complete_pipeline.py:28:13: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+monitor_and_complete_pipeline.py:64:13: W1510: 'subprocess.run' used without explicitly defining the value for 'check'. (subprocess-run-check)
+monitor_and_complete_pipeline.py:66:4: R1705: Unnecessary "else" after "return", remove the "else" and de-indent the code inside it (no-else-return)
+monitor_and_complete_pipeline.py:89:13: W1510: 'subprocess.run' used without explicitly defining the value for 'check'. (subprocess-run-check)
+monitor_and_complete_pipeline.py:91:4: R1705: Unnecessary "else" after "return", remove the "else" and de-indent the code inside it (no-else-return)
+monitor_and_complete_pipeline.py:161:8: R1723: Unnecessary "else" after "break", remove the "else" and de-indent the code inside it (no-else-break)
+monitor_and_complete_pipeline.py:195:11: W0718: Catching too general exception Exception (broad-exception-caught)
+monitor_and_complete_pipeline.py:5:0: W0611: Unused import os (unused-import)
+************* Module optuna_optimize
+optuna_optimize.py:7:0: C0301: Line too long (178/100) (line-too-long)
+optuna_optimize.py:152:0: C0301: Line too long (110/100) (line-too-long)
+optuna_optimize.py:189:0: C0301: Line too long (110/100) (line-too-long)
+optuna_optimize.py:16:0: E0401: Unable to import 'numpy' (import-error)
+optuna_optimize.py:17:0: E0401: Unable to import 'pandas' (import-error)
+optuna_optimize.py:18:0: E0401: Unable to import 'torch' (import-error)
+optuna_optimize.py:19:0: R0402: Use 'from torch import nn' instead (consider-using-from-import)
+optuna_optimize.py:19:0: E0401: Unable to import 'torch.nn' (import-error)
+optuna_optimize.py:20:0: E0401: Unable to import 'torch.utils.data' (import-error)
+optuna_optimize.py:21:0: E0401: Unable to import 'torch.optim' (import-error)
+optuna_optimize.py:22:0: E0401: Unable to import 'torch.optim.lr_scheduler' (import-error)
+optuna_optimize.py:23:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+optuna_optimize.py:24:0: E0401: Unable to import 'sklearn.cluster' (import-error)
+optuna_optimize.py:25:0: E0401: Unable to import 'sklearn.preprocessing' (import-error)
+optuna_optimize.py:27:0: E0401: Unable to import 'optuna' (import-error)
+optuna_optimize.py:28:0: E0401: Unable to import 'optuna.pruners' (import-error)
+optuna_optimize.py:29:0: E0401: Unable to import 'optuna.samplers' (import-error)
+optuna_optimize.py:36:8: C0103: Attribute name "X" doesn't conform to snake_case naming style (invalid-name)
+optuna_optimize.py:35:23: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+optuna_optimize.py:50:0: R0902: Too many instance attributes (13/7) (too-many-instance-attributes)
+optuna_optimize.py:53:4: R0913: Too many arguments (7/5) (too-many-arguments)
+optuna_optimize.py:53:4: R0917: Too many positional arguments (7/5) (too-many-positional-arguments)
+optuna_optimize.py:84:4: C0116: Missing function or method docstring (missing-function-docstring)
+optuna_optimize.py:86:8: W0612: Unused variable 'lstm_out' (unused-variable)
+optuna_optimize.py:86:27: W0612: Unused variable 'cell' (unused-variable)
+optuna_optimize.py:50:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+optuna_optimize.py:146:0: R0913: Too many arguments (6/5) (too-many-arguments)
+optuna_optimize.py:146:0: R0917: Too many positional arguments (6/5) (too-many-positional-arguments)
+optuna_optimize.py:213:21: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+optuna_optimize.py:213:0: R0913: Too many arguments (8/5) (too-many-arguments)
+optuna_optimize.py:213:0: R0917: Too many positional arguments (8/5) (too-many-positional-arguments)
+optuna_optimize.py:213:0: R0914: Too many local variables (36/15) (too-many-locals)
+optuna_optimize.py:233:4: C0103: Variable name "HIGH_VRAM_GPU" doesn't conform to snake_case naming style (invalid-name)
+optuna_optimize.py:291:8: W0612: Unused variable 'train_loss' (unused-variable)
+optuna_optimize.py:292:17: W0612: Unused variable 'val_f1' (unused-variable)
+optuna_optimize.py:320:0: C0116: Missing function or method docstring (missing-function-docstring)
+optuna_optimize.py:320:0: R0914: Too many local variables (26/15) (too-many-locals)
+optuna_optimize.py:342:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+optuna_optimize.py:354:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+optuna_optimize.py:393:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+optuna_optimize.py:398:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+optuna_optimize.py:408:4: C0415: Import outside toplevel (joblib) (import-outside-toplevel)
+optuna_optimize.py:408:4: E0401: Unable to import 'joblib' (import-error)
+optuna_optimize.py:423:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+optuna_optimize.py:446:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+optuna_optimize.py:450:4: C0206: Consider iterating with .items() (consider-using-dict-items)
+optuna_optimize.py:450:15: C0201: Consider iterating the dictionary directly instead of calling .keys() (consider-iterating-dictionary)
+optuna_optimize.py:320:0: R0915: Too many statements (68/50) (too-many-statements)
+optuna_optimize.py:26:0: W0611: Unused tqdm imported from tqdm (unused-import)
+************* Module postfilter_inference_v3
+postfilter_inference_v3.py:23:0: C0301: Line too long (112/100) (line-too-long)
+postfilter_inference_v3.py:29:0: C0301: Line too long (125/100) (line-too-long)
+postfilter_inference_v3.py:30:0: C0301: Line too long (102/100) (line-too-long)
+postfilter_inference_v3.py:31:0: C0301: Line too long (128/100) (line-too-long)
+postfilter_inference_v3.py:48:0: C0301: Line too long (108/100) (line-too-long)
+postfilter_inference_v3.py:141:0: C0301: Line too long (101/100) (line-too-long)
+postfilter_inference_v3.py:142:0: C0301: Line too long (107/100) (line-too-long)
+postfilter_inference_v3.py:143:0: C0301: Line too long (103/100) (line-too-long)
+postfilter_inference_v3.py:156:0: C0301: Line too long (110/100) (line-too-long)
+postfilter_inference_v3.py:167:0: C0301: Line too long (117/100) (line-too-long)
+postfilter_inference_v3.py:168:0: C0301: Line too long (116/100) (line-too-long)
+postfilter_inference_v3.py:171:0: C0301: Line too long (117/100) (line-too-long)
+postfilter_inference_v3.py:172:0: C0301: Line too long (117/100) (line-too-long)
+postfilter_inference_v3.py:19:0: E0401: Unable to import 'numpy' (import-error)
+postfilter_inference_v3.py:20:0: E0401: Unable to import 'pandas' (import-error)
+postfilter_inference_v3.py:22:0: C0116: Missing function or method docstring (missing-function-docstring)
+postfilter_inference_v3.py:51:0: C0116: Missing function or method docstring (missing-function-docstring)
+postfilter_inference_v3.py:54:0: C0116: Missing function or method docstring (missing-function-docstring)
+postfilter_inference_v3.py:56:11: W0718: Catching too general exception Exception (broad-exception-caught)
+postfilter_inference_v3.py:55:9: C0321: More than one statement on a single line (multiple-statements)
+postfilter_inference_v3.py:60:0: C0116: Missing function or method docstring (missing-function-docstring)
+postfilter_inference_v3.py:60:0: R0914: Too many local variables (35/15) (too-many-locals)
+postfilter_inference_v3.py:165:16: E0401: Unable to import 'sklearn.metrics' (import-error)
+postfilter_inference_v3.py:165:16: C0415: Import outside toplevel (sklearn.metrics.confusion_matrix, sklearn.metrics.precision_recall_fscore_support) (import-outside-toplevel)
+postfilter_inference_v3.py:60:0: R0912: Too many branches (14/12) (too-many-branches)
+postfilter_inference_v3.py:60:0: R0915: Too many statements (78/50) (too-many-statements)
+postfilter_inference_v3.py:19:0: W0611: Unused numpy imported as np (unused-import)
+************* Module process_tess_for_testing
+process_tess_for_testing.py:6:0: C0301: Line too long (149/100) (line-too-long)
+process_tess_for_testing.py:25:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:30:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:33:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:38:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:41:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:46:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:50:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:53:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:63:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:65:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:69:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:73:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:76:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:78:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:82:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:85:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:90:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:93:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:96:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:101:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:103:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:107:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:110:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:119:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:122:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:127:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:134:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:142:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:146:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:154:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:157:0: C0303: Trailing whitespace (trailing-whitespace)
+process_tess_for_testing.py:6:52: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+process_tess_for_testing.py:6:106: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+process_tess_for_testing.py:6:138: W1401: Anomalous backslash in string: '\p'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+process_tess_for_testing.py:11:0: E0401: Unable to import 'numpy' (import-error)
+process_tess_for_testing.py:12:0: E0401: Unable to import 'pandas' (import-error)
+process_tess_for_testing.py:15:0: E0401: Unable to import 'scipy.signal' (import-error)
+process_tess_for_testing.py:57:0: C0116: Missing function or method docstring (missing-function-docstring)
+process_tess_for_testing.py:57:0: R0914: Too many local variables (18/15) (too-many-locals)
+process_tess_for_testing.py:123:15: W0718: Catching too general exception Exception (broad-exception-caught)
+process_tess_for_testing.py:98:22: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+process_tess_for_testing.py:121:18: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+process_tess_for_testing.py:57:0: R0915: Too many statements (65/50) (too-many-statements)
+process_tess_for_testing.py:13:0: C0411: standard import "pathlib.Path" should be placed before third party imports "numpy", "pandas" (wrong-import-order)
+process_tess_for_testing.py:16:0: C0411: standard import "warnings" should be placed before third party imports "numpy", "pandas", "tqdm.tqdm", "scipy.signal.medfilt" (wrong-import-order)
+process_tess_for_testing.py:10:0: W0611: Unused import os (unused-import)
+************* Module simulate_training_visual
+simulate_training_visual.py:32:0: C0301: Line too long (115/100) (line-too-long)
+simulate_training_visual.py:35:0: C0301: Line too long (104/100) (line-too-long)
+simulate_training_visual.py:36:0: C0301: Line too long (108/100) (line-too-long)
+simulate_training_visual.py:64:0: C0301: Line too long (107/100) (line-too-long)
+simulate_training_visual.py:97:0: C0301: Line too long (116/100) (line-too-long)
+simulate_training_visual.py:163:0: C0301: Line too long (110/100) (line-too-long)
+simulate_training_visual.py:13:0: C0115: Missing class docstring (missing-class-docstring)
+simulate_training_visual.py:13:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+simulate_training_visual.py:41:4: C0104: Disallowed name "bar" (disallowed-name)
+simulate_training_visual.py:59:8: C0104: Disallowed name "bar" (disallowed-name)
+simulate_training_visual.py:85:8: C0104: Disallowed name "bar" (disallowed-name)
+simulate_training_visual.py:80:4: W0612: Unused variable 'clusters' (unused-variable)
+simulate_training_visual.py:122:8: C0104: Disallowed name "bar" (disallowed-name)
+simulate_training_visual.py:169:4: C0415: Import outside toplevel (os) (import-outside-toplevel)
+simulate_training_visual.py:10:0: W0611: Unused datetime imported from datetime (unused-import)
+************* Module train_bilstm_cluster
+train_bilstm_cluster.py:10:0: C0301: Line too long (293/100) (line-too-long)
+train_bilstm_cluster.py:45:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:50:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:53:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:56:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:66:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:67:67: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:70:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:75:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:78:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:88:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:97:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:101:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:104:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:107:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:112:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:115:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:127:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:188:0: C0301: Line too long (113/100) (line-too-long)
+train_bilstm_cluster.py:259:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:262:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:270:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:279:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:283:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:286:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:306:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:309:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:314:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:318:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:321:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:325:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:327:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:331:0: C0301: Line too long (104/100) (line-too-long)
+train_bilstm_cluster.py:334:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:337:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:339:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:344:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:346:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:350:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:352:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:356:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:359:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:362:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:364:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:370:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:374:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:380:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:385:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:390:0: C0301: Line too long (102/100) (line-too-long)
+train_bilstm_cluster.py:398:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:406:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:409:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:411:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:415:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:431:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:436:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:439:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:441:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:445:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:457:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:461:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:465:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:474:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:482:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:497:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:502:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:514:0: C0301: Line too long (102/100) (line-too-long)
+train_bilstm_cluster.py:545:0: C0301: Line too long (116/100) (line-too-long)
+train_bilstm_cluster.py:556:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:559:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:562:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:585:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:590:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:593:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:604:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:609:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:622:0: C0301: Line too long (126/100) (line-too-long)
+train_bilstm_cluster.py:627:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:634:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:643:0: C0303: Trailing whitespace (trailing-whitespace)
+train_bilstm_cluster.py:10:52: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+train_bilstm_cluster.py:10:68: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+train_bilstm_cluster.py:10:73: W1401: Anomalous backslash in string: '\d'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+train_bilstm_cluster.py:10:78: W1401: Anomalous backslash in string: '\w'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+train_bilstm_cluster.py:10:199: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+train_bilstm_cluster.py:10:215: W1401: Anomalous backslash in string: '\C'. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+train_bilstm_cluster.py:22:0: C0413: Import "import argparse" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:23:0: C0413: Import "import json" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:24:0: C0413: Import "import time" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:25:0: C0413: Import "import warnings" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:27:0: E0401: Unable to import 'numpy' (import-error)
+train_bilstm_cluster.py:27:0: C0413: Import "import numpy as np" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:28:0: E0401: Unable to import 'pandas' (import-error)
+train_bilstm_cluster.py:28:0: C0413: Import "import pandas as pd" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:29:0: E0401: Unable to import 'torch' (import-error)
+train_bilstm_cluster.py:29:0: C0413: Import "import torch" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:30:0: R0402: Use 'from torch import nn' instead (consider-using-from-import)
+train_bilstm_cluster.py:30:0: E0401: Unable to import 'torch.nn' (import-error)
+train_bilstm_cluster.py:30:0: C0413: Import "import torch.nn as nn" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:31:0: E0401: Unable to import 'torch.nn.functional' (import-error)
+train_bilstm_cluster.py:31:0: C0413: Import "import torch.nn.functional as F" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:32:0: E0401: Unable to import 'torch.utils.data' (import-error)
+train_bilstm_cluster.py:32:0: C0413: Import "from torch.utils.data import Dataset, DataLoader" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:33:0: E0401: Unable to import 'torch.optim' (import-error)
+train_bilstm_cluster.py:33:0: C0413: Import "from torch.optim import AdamW" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:34:0: E0401: Unable to import 'torch.optim.lr_scheduler' (import-error)
+train_bilstm_cluster.py:34:0: C0413: Import "from torch.optim.lr_scheduler import CosineAnnealingLR" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:35:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+train_bilstm_cluster.py:35:0: C0413: Import "from sklearn.metrics import roc_auc_score, precision_score, recall_score, f1_score, accuracy_score" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:36:0: E0401: Unable to import 'sklearn.cluster' (import-error)
+train_bilstm_cluster.py:36:0: C0413: Import "from sklearn.cluster import KMeans" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:37:0: E0401: Unable to import 'sklearn.preprocessing' (import-error)
+train_bilstm_cluster.py:37:0: C0413: Import "from sklearn.preprocessing import StandardScaler" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:38:0: C0413: Import "from tqdm import tqdm" should be placed at the top of the module (wrong-import-position)
+train_bilstm_cluster.py:47:8: C0103: Attribute name "X" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:46:23: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:61:0: R0902: Too many instance attributes (13/7) (too-many-instance-attributes)
+train_bilstm_cluster.py:67:4: R0913: Too many arguments (7/5) (too-many-arguments)
+train_bilstm_cluster.py:67:4: R0917: Too many positional arguments (7/5) (too-many-positional-arguments)
+train_bilstm_cluster.py:98:4: C0116: Missing function or method docstring (missing-function-docstring)
+train_bilstm_cluster.py:106:8: W0612: Unused variable 'lstm_out' (unused-variable)
+train_bilstm_cluster.py:106:27: W0612: Unused variable 'cell' (unused-variable)
+train_bilstm_cluster.py:61:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+train_bilstm_cluster.py:131:0: R0914: Too many local variables (28/15) (too-many-locals)
+train_bilstm_cluster.py:131:0: R0912: Too many branches (13/12) (too-many-branches)
+train_bilstm_cluster.py:131:0: R0915: Too many statements (70/50) (too-many-statements)
+train_bilstm_cluster.py:256:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:266:8: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:269:8: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:274:15: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:274:0: R0914: Too many local variables (16/15) (too-many-locals)
+train_bilstm_cluster.py:284:4: C0103: Variable name "X_train" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:285:4: C0103: Variable name "X_val" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:331:0: R0913: Too many arguments (8/5) (too-many-arguments)
+train_bilstm_cluster.py:331:0: R0917: Too many positional arguments (8/5) (too-many-positional-arguments)
+train_bilstm_cluster.py:331:0: R0914: Too many local variables (16/15) (too-many-locals)
+train_bilstm_cluster.py:368:0: C0116: Missing function or method docstring (missing-function-docstring)
+train_bilstm_cluster.py:368:0: R0914: Too many local variables (58/15) (too-many-locals)
+train_bilstm_cluster.py:444:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:454:4: C0103: Variable name "X_train" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:454:38: C0103: Variable name "X_val" doesn't conform to snake_case naming style (invalid-name)
+train_bilstm_cluster.py:472:19: R1719: The if expression can be replaced with 'bool(test)' (simplifiable-if-expression)
+train_bilstm_cluster.py:480:19: R1719: The if expression can be replaced with 'bool(test)' (simplifiable-if-expression)
+train_bilstm_cluster.py:557:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+train_bilstm_cluster.py:649:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+train_bilstm_cluster.py:654:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+train_bilstm_cluster.py:368:0: R0912: Too many branches (25/12) (too-many-branches)
+train_bilstm_cluster.py:368:0: R0915: Too many statements (155/50) (too-many-statements)
+train_bilstm_cluster.py:31:0: W0611: Unused torch.nn.functional imported as F (unused-import)
+************* Module train_sector1
+train_sector1.py:14:0: C0301: Line too long (116/100) (line-too-long)
+train_sector1.py:316:0: C0301: Line too long (104/100) (line-too-long)
+train_sector1.py:8:0: E0401: Unable to import 'torch' (import-error)
+train_sector1.py:9:0: E0401: Unable to import 'numpy' (import-error)
+train_sector1.py:10:0: E0401: Unable to import 'pandas' (import-error)
+train_sector1.py:12:0: E0401: Unable to import 'sklearn.cluster' (import-error)
+train_sector1.py:13:0: E0401: Unable to import 'sklearn.preprocessing' (import-error)
+train_sector1.py:14:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+train_sector1.py:15:0: E0401: Unable to import 'sklearn.model_selection' (import-error)
+train_sector1.py:16:0: E0401: Unable to import 'torch.utils.data' (import-error)
+train_sector1.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
+train_sector1.py:21:0: R0914: Too many local variables (72/15) (too-many-locals)
+train_sector1.py:58:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+train_sector1.py:91:4: C0103: Variable name "X_train" doesn't conform to snake_case naming style (invalid-name)
+train_sector1.py:91:13: C0103: Variable name "X_val" doesn't conform to snake_case naming style (invalid-name)
+train_sector1.py:246:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+train_sector1.py:248:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+train_sector1.py:259:4: C0103: Variable name "X_test" doesn't conform to snake_case naming style (invalid-name)
+train_sector1.py:307:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+train_sector1.py:313:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+train_sector1.py:330:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+train_sector1.py:21:0: R0912: Too many branches (20/12) (too-many-branches)
+train_sector1.py:21:0: R0915: Too many statements (181/50) (too-many-statements)
+train_sector1.py:11:0: C0411: standard import "pathlib.Path" should be placed before third party imports "torch", "numpy", "pandas" (wrong-import-order)
+train_sector1.py:4:0: W0611: Unused import os (unused-import)
+train_sector1.py:5:0: W0611: Unused import sys (unused-import)
+************* Module train_simple_bilstm
+train_simple_bilstm.py:6:0: E0401: Unable to import 'numpy' (import-error)
+train_simple_bilstm.py:7:0: E0401: Unable to import 'pandas' (import-error)
+train_simple_bilstm.py:8:0: E0401: Unable to import 'torch' (import-error)
+train_simple_bilstm.py:9:0: R0402: Use 'from torch import nn' instead (consider-using-from-import)
+train_simple_bilstm.py:9:0: E0401: Unable to import 'torch.nn' (import-error)
+train_simple_bilstm.py:10:0: E0401: Unable to import 'torch.utils.data' (import-error)
+train_simple_bilstm.py:11:0: E0401: Unable to import 'sklearn.model_selection' (import-error)
+train_simple_bilstm.py:12:0: E0401: Unable to import 'sklearn.metrics' (import-error)
+train_simple_bilstm.py:17:0: R0902: Too many instance attributes (8/7) (too-many-instance-attributes)
+train_simple_bilstm.py:43:4: C0116: Missing function or method docstring (missing-function-docstring)
+train_simple_bilstm.py:45:8: W0612: Unused variable 'lstm_out' (unused-variable)
+train_simple_bilstm.py:45:24: W0612: Unused variable 'c_n' (unused-variable)
+train_simple_bilstm.py:17:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+train_simple_bilstm.py:63:0: C0115: Missing class docstring (missing-class-docstring)
+train_simple_bilstm.py:65:8: C0103: Attribute name "X" doesn't conform to snake_case naming style (invalid-name)
+train_simple_bilstm.py:64:23: C0103: Argument name "X" doesn't conform to snake_case naming style (invalid-name)
+train_simple_bilstm.py:116:0: R0913: Too many arguments (8/5) (too-many-arguments)
+train_simple_bilstm.py:116:0: R0917: Too many positional arguments (8/5) (too-many-positional-arguments)
+train_simple_bilstm.py:150:0: C0116: Missing function or method docstring (missing-function-docstring)
+train_simple_bilstm.py:150:0: R0914: Too many local variables (33/15) (too-many-locals)
+train_simple_bilstm.py:196:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+train_simple_bilstm.py:202:4: C0103: Variable name "X" doesn't conform to snake_case naming style (invalid-name)
+train_simple_bilstm.py:209:4: C0103: Variable name "X_train" doesn't conform to snake_case naming style (invalid-name)
+train_simple_bilstm.py:209:13: C0103: Variable name "X_val" doesn't conform to snake_case naming style (invalid-name)
+train_simple_bilstm.py:227:19: R1719: The if expression can be replaced with 'bool(test)' (simplifiable-if-expression)
+train_simple_bilstm.py:235:19: R1719: The if expression can be replaced with 'bool(test)' (simplifiable-if-expression)
+train_simple_bilstm.py:337:10: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+train_simple_bilstm.py:150:0: R0915: Too many statements (85/50) (too-many-statements)
+train_simple_bilstm.py:14:0: C0411: standard import "time" should be placed before third party imports "numpy", "pandas", "torch" (...) "sklearn.model_selection.train_test_split", "sklearn.metrics.roc_auc_score", "tqdm.tqdm" (wrong-import-order)
+train_simple_bilstm.py:7:0: W0611: Unused pandas imported as pd (unused-import)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==benchmark_model:[28:106]
+==optuna_optimize:[31:110]
+class LightCurveDataset(Dataset):
+    """Dataset with cluster information"""
+
+    def __init__(self, X, y, clusters):
+        self.X = torch.from_numpy(X).float()
+        self.y = torch.from_numpy(y).float()
+        self.clusters = torch.from_numpy(clusters).long()
+
+        if len(self.X.shape) == 2:
+            self.X = self.X.unsqueeze(-1)
+
+    def __len__(self):
+        return len(self.y)
+
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx], self.clusters[idx]
+
+
+class ClusterBiLSTM(nn.Module):
+    """BiLSTM with cluster-aware processing"""
+
+    def __init__(self, input_size=1, hidden_size=256, num_layers=3,
+                 dropout=0.4, n_clusters=5, cluster_embed_dim=32):
+        super().__init__()
+
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        self.n_clusters = n_clusters
+
+        # Cluster embedding
+        self.cluster_embed = nn.Embedding(n_clusters, cluster_embed_dim)
+
+        # BiLSTM
+        self.lstm = nn.LSTM(
+            input_size=input_size,
+            hidden_size=hidden_size,
+            num_layers=num_layers,
+            dropout=dropout if num_layers > 1 else 0,
+            batch_first=True,
+            bidirectional=True
+        )
+
+        # Classification head
+        self.dropout = nn.Dropout(dropout)
+        self.fc1 = nn.Linear(hidden_size * 2 + cluster_embed_dim, hidden_size)
+        self.bn1 = nn.BatchNorm1d(hidden_size)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
+        self.bn2 = nn.BatchNorm1d(hidden_size // 2)
+        self.fc3 = nn.Linear(hidden_size // 2, 1)
+
+    def forward(self, x, cluster_ids):
+        cluster_emb = self.cluster_embed(cluster_ids)
+        lstm_out, (hidden, cell) = self.lstm(x)
+
+        hidden_fwd = hidden[-2]
+        hidden_bwd = hidden[-1]
+        hidden_cat = torch.cat([hidden_fwd, hidden_bwd], dim=1)
+
+        combined = torch.cat([hidden_cat, cluster_emb], dim=1)
+
+        out = self.dropout(combined)
+        out = self.fc1(out)
+        out = self.bn1(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc2(out)
+        out = self.bn2(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc3(out)
+
+        return out.squeeze(-1)
+
+
+def cluster_windows(meta_df, n_clusters=5, random_state=42):
+    """Cluster windows based on features"""
+    # Check which features are available (Sector 1 vs legacy dataset) (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==autonomous_training_pipeline:[134:195]
+==train_sector1:[127:186]
+    )
+
+    pos_weight = torch.tensor([config['pos_weight']]).to(device)
+    criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
+
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer, mode='max', factor=0.5, patience=5, verbose=True
+    )
+
+    # Mixed precision
+    scaler_amp = torch.cuda.amp.GradScaler() if device.type == 'cuda' else None
+    amp_dtype = torch.float16 if device.type == 'cuda' else torch.float32
+
+    # Training loop
+    best_auc = 0
+    patience_counter = 0
+    history = {'train_loss': [], 'val_auc': [], 'val_f1': []}
+
+    print(f"\nStarting training for {config['epochs']} epochs...")
+    start_time = time.time()
+
+    for epoch in range(config['epochs']):
+        # Train
+        model.train()
+        train_loss = 0
+        for x_batch, y_batch, c_batch in train_loader:
+            x_batch = x_batch.to(device)
+            y_batch = y_batch.to(device)
+            c_batch = c_batch.to(device)
+
+            optimizer.zero_grad()
+
+            if scaler_amp:
+                with torch.cuda.amp.autocast(dtype=amp_dtype):
+                    logits = model(x_batch, c_batch)
+                    loss = criterion(logits.squeeze(), y_batch.float())
+
+                scaler_amp.scale(loss).backward()
+                scaler_amp.unscale_(optimizer)
+                torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+                scaler_amp.step(optimizer)
+                scaler_amp.update()
+            else:
+                logits = model(x_batch, c_batch)
+                loss = criterion(logits.squeeze(), y_batch.float())
+                loss.backward()
+                torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+                optimizer.step()
+
+            train_loss += loss.item()
+
+        train_loss /= len(train_loader)
+
+        # Validate
+        model.eval()
+        all_probs, all_labels = [], []
+        with torch.no_grad():
+            for x_batch, y_batch, c_batch in val_loader:
+                x_batch = x_batch.to(device) (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==evaluate_old_data:[10:55]
+==evaluate_test:[10:61]
+class ClusterBiLSTM(nn.Module):
+    def __init__(self, input_size=1, hidden_size=256, num_layers=3,
+                 n_clusters=5, cluster_embed_dim=32, dropout=0.4):
+        super().__init__()
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        self.n_clusters = n_clusters
+
+        # Cluster embedding
+        self.cluster_embed = nn.Embedding(n_clusters, cluster_embed_dim)
+
+        # BiLSTM
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers,
+                           batch_first=True, bidirectional=True,
+                           dropout=dropout if num_layers > 1 else 0)
+
+        # Classification head (matching training script exactly)
+        self.dropout = nn.Dropout(dropout)
+        self.fc1 = nn.Linear(hidden_size * 2 + cluster_embed_dim, hidden_size)
+        self.bn1 = nn.BatchNorm1d(hidden_size)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
+        self.bn2 = nn.BatchNorm1d(hidden_size // 2)
+        self.fc3 = nn.Linear(hidden_size // 2, 1)
+
+    def forward(self, x, cluster_ids):
+        cluster_emb = self.cluster_embed(cluster_ids)
+        lstm_out, (hidden, cell) = self.lstm(x)
+
+        hidden_fwd = hidden[-2]
+        hidden_bwd = hidden[-1]
+        hidden_cat = torch.cat([hidden_fwd, hidden_bwd], dim=1)
+
+        combined = torch.cat([hidden_cat, cluster_emb], dim=1)
+
+        out = self.dropout(combined)
+        out = self.fc1(out)
+        out = self.bn1(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc2(out)
+        out = self.bn2(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc3(out)
+        return out.squeeze(-1)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model_path', type=str, required=True) (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==benchmark_model:[56:106]
+==inference_cluster_model:[28:76]
+        self.n_clusters = n_clusters
+
+        # Cluster embedding
+        self.cluster_embed = nn.Embedding(n_clusters, cluster_embed_dim)
+
+        # BiLSTM
+        self.lstm = nn.LSTM(
+            input_size=input_size,
+            hidden_size=hidden_size,
+            num_layers=num_layers,
+            dropout=dropout if num_layers > 1 else 0,
+            batch_first=True,
+            bidirectional=True
+        )
+
+        # Classification head
+        self.dropout = nn.Dropout(dropout)
+        self.fc1 = nn.Linear(hidden_size * 2 + cluster_embed_dim, hidden_size)
+        self.bn1 = nn.BatchNorm1d(hidden_size)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
+        self.bn2 = nn.BatchNorm1d(hidden_size // 2)
+        self.fc3 = nn.Linear(hidden_size // 2, 1)
+
+    def forward(self, x, cluster_ids):
+        cluster_emb = self.cluster_embed(cluster_ids)
+        lstm_out, (hidden, cell) = self.lstm(x)
+
+        hidden_fwd = hidden[-2]
+        hidden_bwd = hidden[-1]
+        hidden_cat = torch.cat([hidden_fwd, hidden_bwd], dim=1)
+
+        combined = torch.cat([hidden_cat, cluster_emb], dim=1)
+
+        out = self.dropout(combined)
+        out = self.fc1(out)
+        out = self.bn1(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc2(out)
+        out = self.bn2(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc3(out)
+
+        return out.squeeze(-1)
+
+
+def load_checkpoint(model_path, device):
+    """Load model checkpoint""" (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==evaluate_old_data:[200:237]
+==evaluate_simple:[127:163]
+    print("="*50)
+
+    if has_labels:
+        auc = roc_auc_score(y, probs)
+        f1 = f1_score(y, preds)
+        precision = precision_score(y, preds, zero_division=0)
+        recall = recall_score(y, preds, zero_division=0)
+        accuracy = accuracy_score(y, preds)
+
+        print(f"  AUC:       {auc:.4f}")
+        print(f"  F1:        {f1:.4f}")
+        print(f"  Precision: {precision:.4f}")
+        print(f"  Recall:    {recall:.4f}")
+        print(f"  Accuracy:  {accuracy:.4f}")
+
+        tn, fp, fn, tp = confusion_matrix(y, preds).ravel()
+        print(f"\n  Confusion Matrix:")
+        print(f"    TP={tp:4d}  FP={fp:4d}")
+        print(f"    FN={fn:4d}  TN={tn:4d}")
+    else:
+        # No labels - show prediction summary
+        print(f"  Total samples: {len(probs)}")
+        print(f"  Predicted planets: {preds.sum()} ({100*preds.sum()/len(preds):.1f}%)")
+        print(f"  Predicted non-planets: {len(preds) - preds.sum()}")
+        print(f"\n  Probability distribution:")
+        print(f"    Mean: {probs.mean():.4f}")
+        print(f"    Median: {np.median(probs):.4f}")
+        print(f"    Min: {probs.min():.4f}")
+        print(f"    Max: {probs.max():.4f}")
+
+    print("="*50)
+
+    # Show top candidates
+    top_k = min(20, len(probs))
+    top_idx = np.argsort(probs)[::-1][:top_k]
+
+    print(f"\n[top {top_k} candidates]") (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==evaluate_old_data:[159:198]
+==evaluate_test:[133:173]
+    print(f"[clustering] Cluster distribution: {np.bincount(cluster_ids, minlength=len(kmeans_centers))}")
+
+    # Build model
+    model = ClusterBiLSTM(
+        input_size=1,
+        hidden_size=config['hidden'],
+        num_layers=config['layers'],
+        n_clusters=config['n_clusters'],
+        cluster_embed_dim=config.get('cluster_embed_dim', 32),
+        dropout=config['dropout']
+    ).to(device)
+
+    model.load_state_dict(checkpoint['model_state_dict'])
+    model.eval()
+
+    print(f"[model] loaded, params={sum(p.numel() for p in model.parameters()):,}")
+
+    # Run inference
+    print("[inference] Running...")
+    X_tensor = torch.tensor(X, dtype=torch.float32).unsqueeze(-1)
+    cluster_tensor = torch.tensor(cluster_ids, dtype=torch.long)
+
+    batch_size = 128
+    all_probs = []
+
+    with torch.no_grad():
+        for i in range(0, len(X), batch_size):
+            x_batch = X_tensor[i:i+batch_size].to(device)
+            c_batch = cluster_tensor[i:i+batch_size].to(device)
+
+            with torch.amp.autocast('cuda', dtype=torch.float16):
+                logits = model(x_batch, c_batch)
+                probs = torch.sigmoid(logits)
+
+            all_probs.extend(probs.cpu().numpy())
+
+    probs = np.array(all_probs)
+    preds = (probs >= 0.5).astype(int)
+
+    # Compute metrics (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==benchmark_model:[72:106]
+==evaluate_old_data:[23:53]
+        self.dropout = nn.Dropout(dropout)
+        self.fc1 = nn.Linear(hidden_size * 2 + cluster_embed_dim, hidden_size)
+        self.bn1 = nn.BatchNorm1d(hidden_size)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
+        self.bn2 = nn.BatchNorm1d(hidden_size // 2)
+        self.fc3 = nn.Linear(hidden_size // 2, 1)
+
+    def forward(self, x, cluster_ids):
+        cluster_emb = self.cluster_embed(cluster_ids)
+        lstm_out, (hidden, cell) = self.lstm(x)
+
+        hidden_fwd = hidden[-2]
+        hidden_bwd = hidden[-1]
+        hidden_cat = torch.cat([hidden_fwd, hidden_bwd], dim=1)
+
+        combined = torch.cat([hidden_cat, cluster_emb], dim=1)
+
+        out = self.dropout(combined)
+        out = self.fc1(out)
+        out = self.bn1(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc2(out)
+        out = self.bn2(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc3(out)
+
+        return out.squeeze(-1)
+
+
+def load_checkpoint(model_path, device):
+    """Load model checkpoint""" (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==evaluate_test:[27:59]
+==inference_cluster_model:[40:76]
+        self.dropout = nn.Dropout(dropout)
+        self.fc1 = nn.Linear(hidden_size * 2 + cluster_embed_dim, hidden_size)
+        self.bn1 = nn.BatchNorm1d(hidden_size)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
+        self.bn2 = nn.BatchNorm1d(hidden_size // 2)
+        self.fc3 = nn.Linear(hidden_size // 2, 1)
+
+    def forward(self, x, cluster_ids):
+        cluster_emb = self.cluster_embed(cluster_ids)
+        lstm_out, (hidden, cell) = self.lstm(x)
+
+        hidden_fwd = hidden[-2]
+        hidden_bwd = hidden[-1]
+        hidden_cat = torch.cat([hidden_fwd, hidden_bwd], dim=1)
+
+        combined = torch.cat([hidden_cat, cluster_emb], dim=1)
+
+        out = self.dropout(combined)
+        out = self.fc1(out)
+        out = self.bn1(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc2(out)
+        out = self.bn2(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc3(out)
+
+        return out.squeeze(-1)
+
+
+def assign_clusters(meta_df, checkpoint):
+    """Assign cluster IDs to windows using saved KMeans"""
+
+    # Get saved cluster info (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==evaluate_simple:[9:40]
+==train_simple_bilstm:[16:52]
+class SimpleBiLSTM(nn.Module):
+    """Simple BiLSTM without clustering"""
+    def __init__(self, input_size=1, hidden_size=256, num_layers=4, dropout=0.3):
+        super().__init__()
+
+        self.lstm = nn.LSTM(
+            input_size=input_size,
+            hidden_size=hidden_size,
+            num_layers=num_layers,
+            dropout=dropout if num_layers > 1 else 0,
+            bidirectional=True,
+            batch_first=True
+        )
+
+        lstm_out_size = hidden_size * 2
+        self.fc1 = nn.Linear(lstm_out_size, hidden_size)
+        self.bn1 = nn.BatchNorm1d(hidden_size)
+        self.dropout1 = nn.Dropout(dropout)
+
+        self.fc2 = nn.Linear(hidden_size, 128)
+        self.bn2 = nn.BatchNorm1d(128)
+        self.dropout2 = nn.Dropout(dropout)
+
+        self.fc3 = nn.Linear(128, 1)
+
+    def forward(self, x):
+        lstm_out, (h_n, c_n) = self.lstm(x)
+        h_fwd = h_n[-2, :, :]
+        h_bwd = h_n[-1, :, :]
+        h = torch.cat([h_fwd, h_bwd], dim=1)
+ (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==autonomous_training_pipeline:[208:233]
+==train_sector1:[198:223]
+        all_probs = np.array(all_probs)
+        all_labels = np.array(all_labels)
+
+        val_auc = roc_auc_score(all_labels, all_probs)
+        val_preds = (all_probs > 0.5).astype(int)
+        val_f1 = f1_score(all_labels, val_preds)
+
+        history['train_loss'].append(train_loss)
+        history['val_auc'].append(val_auc)
+        history['val_f1'].append(val_f1)
+
+        scheduler.step(val_auc)
+
+        if (epoch + 1) % 5 == 0 or epoch == 0:
+            print(f"Epoch {epoch+1:3d}/{config['epochs']}: "
+                  f"Loss={train_loss:.4f}, AUC={val_auc:.4f}, F1={val_f1:.4f}")
+
+        # Save best model
+        if val_auc > best_auc:
+            best_auc = val_auc
+            patience_counter = 0
+
+            checkpoint = {
+                'model_state_dict': model.state_dict(),
+                'config': config, (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==build_windows_infer_v2:[81:101]
+==build_windows_parallel_v6:[78:101]
+    if max_period <= min_period:
+        return None
+
+    durations = np.array([0.02, 0.04, 0.06, 0.08, 0.10], dtype=float)
+    durations = durations[durations < min_period * 0.95]
+    if durations.size == 0:
+        return None
+
+    bls = BoxLeastSquares(t, f)
+    res = bls.autopower(durations, minimum_period=min_period, maximum_period=max_period,
+                        objective="snr", frequency_factor=1.0)
+    i = int(np.nanargmax(res.power))
+    P = float(res.period[i]); dur = float(res.duration[i])
+    depth = float(getattr(res, "depth", np.array([np.nan]))[i])
+    snr = float(res.power[i])
+    t0_arr = getattr(res, "transit_time", getattr(res, "t0", None))
+    t0 = float(t0_arr[i]) if t0_arr is not None else float(t[0])
+    return P, dur, depth, snr, t0
+
+def phase_window(rng: np.random.Generator, time: np.ndarray, flux: np.ndarray,
+                 period: float, t0: float, center_phase: float, width: float,
+                 seq_len: int) -> Optional[np.ndarray]:
+    phase = ((time - t0) % period) / period (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==autonomous_training_pipeline:[102:123]
+==train_sector1:[95:116]
+    print(f"Validation: {len(X_val)} samples")
+
+    # Create datasets and loaders
+    train_dataset = LightCurveDataset(X_train, y_train, c_train)
+    val_dataset = LightCurveDataset(X_val, y_val, c_val)
+
+    train_loader = DataLoader(
+        train_dataset, batch_size=config['batch_size'],
+        shuffle=True, num_workers=0, pin_memory=True
+    )
+    val_loader = DataLoader(
+        val_dataset, batch_size=config['batch_size'],
+        shuffle=False, num_workers=0, pin_memory=True
+    )
+
+    # Create model
+    model = ClusterBiLSTM(
+        input_size=1,
+        hidden_size=config['hidden'],
+        num_layers=config['layers'],
+        n_clusters=config['n_clusters'], (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==generate_bilstm_figures:[20:39]
+==generate_final_figures:[15:34]
+plt.rcParams.update({
+    'font.size': 10,
+    'font.family': 'serif',
+    'axes.labelsize': 10,
+    'axes.titlesize': 11,
+    'xtick.labelsize': 9,
+    'ytick.labelsize': 9,
+    'legend.fontsize': 9,
+    'figure.dpi': 300,
+    'savefig.dpi': 300,
+    'savefig.bbox': 'tight',
+    'axes.linewidth': 0.8,
+})
+
+# Create output directory
+output_dir = Path(r'C:\CS_4280_Project\term_project_files\materials\figures')
+output_dir.mkdir(parents=True, exist_ok=True)
+
+print("=" * 60) (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==balance_dataset_smote:[176:192]
+==balance_with_true_smote:[172:187]
+    if target_size < len(y_neg):
+        indices_neg = resample(
+            np.arange(len(y_neg)),
+            n_samples=target_size,
+            replace=False,
+            random_state=random_state
+        )
+        X_neg_balanced = X_neg[indices_neg]
+        y_neg_balanced = y_neg[indices_neg]
+        meta_neg_balanced = meta_neg.iloc[indices_neg].copy()
+    else:
+        X_neg_balanced = X_neg
+        y_neg_balanced = y_neg
+        meta_neg_balanced = meta_neg
+ (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==train_bilstm_cluster:[466:483]
+==train_simple_bilstm:[221:238]
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=args.batch_size,
+        shuffle=True,
+        num_workers=args.num_workers,
+        pin_memory=True if torch.cuda.is_available() else False
+    )
+
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=args.batch_size,
+        shuffle=False,
+        num_workers=args.num_workers,
+        pin_memory=True if torch.cuda.is_available() else False
+    )
+
+    # Create model (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==build_sector1_dataset_v2:[62:78]
+==build_windows_from_groundtruth:[32:51]
+    if len(flux) < seq_len:
+        # Pad if too short
+        padded = np.pad(flux, (0, seq_len - len(flux)), mode='edge')
+        return [padded]
+
+    # Extract windows at random positions
+    max_start = len(flux) - seq_len
+    if max_start <= 0:
+        return [flux[:seq_len]]
+
+    windows = []
+    if n_windows == 1:
+        # Just take from the middle
+        start = max_start // 2
+        windows.append(flux[start:start + seq_len])
+    else:
+        # Random windows with no overlap
+        step = max(1, max_start // (n_windows + 1))
+        for i in range(n_windows): (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==generate_bilstm_figures:[20:35]
+==generate_sector1_figures:[16:31]
+plt.rcParams.update({
+    'font.size': 10,
+    'font.family': 'serif',
+    'axes.labelsize': 10,
+    'axes.titlesize': 11,
+    'xtick.labelsize': 9,
+    'ytick.labelsize': 9,
+    'legend.fontsize': 9,
+    'figure.dpi': 300,
+    'savefig.dpi': 300,
+    'savefig.bbox': 'tight',
+    'axes.linewidth': 0.8,
+})
+
+# Create output directory (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==autonomous_training_pipeline:[392:405]
+==train_sector1:[35:49]
+        'hidden': 256,
+        'layers': 4,
+        'n_clusters': 5,
+        'cluster_embed_dim': 32,
+        'dropout': 0.311,
+        'lr': 0.000225,
+        'weight_decay': 7.56e-6,
+        'batch_size': 128,
+        'pos_weight': 3.367,
+        'epochs': 80,
+        'patience': 15
+    }
+ (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==balance_dataset_smote:[155:172]
+==balance_with_true_smote:[108:126]
+    pos_mask = y == 1
+    neg_mask = y == 0
+
+    X_pos = X[pos_mask]
+    y_pos = y[pos_mask]
+    meta_pos = meta[pos_mask].copy()
+
+    X_neg = X[neg_mask]
+    y_neg = y[neg_mask]
+    meta_neg = meta[neg_mask].copy()
+
+    # Determine target size
+    if target_size is None:
+        # Default: average of minority and majority
+        target_size = (len(y_pos) + len(y_neg)) // 2
+
+pylint : Traceback (most recent call last):
+At line:1 char:29
++ ... :\CS_4280_Project\Code; pylint *.py --output-format=text 2>&1 | Out-F ...
++                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\reporters\base_reporter.py", line 46, in writeln
+    print(string, file=self.out)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\manch\miniconda3\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 234: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\manch\miniconda3\Scripts\pylint.exe\__main__.py", line 6, in <module>
+    sys.exit(run_pylint())
+             ~~~~~~~~~~^^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\__init__.py", line 34, in run_pylint
+    PylintRun(argv or sys.argv[1:])
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\lint\run.py", line 239, in __init__
+    linter.check(args)
+    ~~~~~~~~~~~~^^^^^^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\lint\pylinter.py", line 720, in check
+    with self._astroid_module_checker() as check_astroid_module:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\manch\miniconda3\Lib\contextlib.py", line 148, in __exit__
+    next(self.gen)
+    ~~~~^^^^^^^^^^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\lint\pylinter.py", line 996, in _astroid_module_checker
+    checker.close()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\checkers\symilar.py", line 857, in close
+    self.add_message("R0801", args=(len(couples), "\n".join(msg)))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\checkers\base_checker.py", line 153, in add_message
+    self.linter.add_message(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        msgid, line, node, args, confidence, col_offset, end_lineno, end_col_offset
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\lint\pylinter.py", line 1310, in add_message
+    self._add_one_message(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        message_definition,
+        ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        end_col_offset,
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\lint\pylinter.py", line 1268, in _add_one_message
+    self.reporter.handle_message(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        Message(
+        ^^^^^^^^
+    ...<14 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\reporters\text.py", line 161, in handle_message
+    self.write_message(msg)
+    ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\reporters\text.py", line 154, in write_message
+    self.writeln(self._fixed_template.format(**self_dict))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\manch\miniconda3\Lib\site-packages\pylint\reporters\base_reporter.py", line 48, in writeln
+    print(self.reencode_output_after_unicode_error(string), file=self.out)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\manch\miniconda3\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 234: character maps to <undefined>
+    print(f"\nTarget size per class: {target_size}") (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==evaluate_old_data:[48:65]
+==evaluate_simple:[50:67]
+        out = self.fc3(out)
+        return out.squeeze(-1)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model_path', type=str, required=True)
+    parser.add_argument('--data_dir', type=str, required=True)
+    parser.add_argument('--output_file', type=str, default=None)
+    args = parser.parse_args()
+
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"[device] {device}")
+
+    # Load checkpoint
+    print(f"[loading model] {args.model_path}")
+    checkpoint = torch.load(args.model_path, map_location=device, weights_only=False) (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==autonomous_training_pipeline:[286:298]
+==evaluate_old_data:[162:174]
+    model = ClusterBiLSTM(
+        input_size=1,
+        hidden_size=config['hidden'],
+        num_layers=config['layers'],
+        n_clusters=config['n_clusters'],
+        cluster_embed_dim=config.get('cluster_embed_dim', 32),
+        dropout=config['dropout']
+    ).to(device)
+
+    model.load_state_dict(checkpoint['model_state_dict'])
+    model.eval()
+ (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==autonomous_training_pipeline:[248:262]
+==train_sector1:[236:250]
+                print(f"Early stopping at epoch {epoch+1}")
+                break
+
+    training_time = time.time() - start_time
+    print(f"\nTraining complete in {training_time/60:.1f} minutes")
+    print(f"Best validation AUC: {best_auc:.4f}")
+
+    # Save final checkpoint and history
+    torch.save(checkpoint, save_dir / 'last.pt')
+    with open(save_dir / 'history.json', 'w') as f:
+        json.dump(history, f)
+    with open(save_dir / 'config.json', 'w') as f:
+        json.dump(config, f, indent=2)
+ (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==evaluate_old_data:[247:259]
+==evaluate_simple:[172:184]
+    if args.output_file:
+        results = meta.copy()
+        results['probability'] = probs
+        results['predicted'] = preds
+        if has_labels:
+            results['actual'] = y
+        results.to_csv(args.output_file, index=False)
+        print(f"\n[saved] {args.output_file}")
+
+
+if __name__ == '__main__':
+    main() (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==train_bilstm_cluster:[627:644]
+==train_simple_bilstm:[320:336]
+            print(f"[best] auc={best_auc:.4f} f1={best_f1:.4f}; saved")
+        else:
+            patience_counter += 1
+            if patience_counter >= patience:
+                print(f"[early stopping] no improvement for {patience} epochs")
+                break
+
+        torch.save({
+            'epoch': epoch,
+            'model_state_dict': model.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
+            'scheduler_state_dict': scheduler.state_dict(),
+            'val_metrics': val_metrics,
+            'config': config
+        }, os.path.join(args.save_dir, 'last.pt'))
+ (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==autonomous_training_pipeline:[324:342]
+==train_sector1:[281:299]
+    with torch.no_grad():
+        for x_batch, _, c_batch in test_loader:
+            x_batch = x_batch.to(device)
+            c_batch = c_batch.to(device)
+
+            if device.type == 'cuda':
+                with torch.cuda.amp.autocast(dtype=amp_dtype):
+                    logits = model(x_batch, c_batch)
+            else:
+                logits = model(x_batch, c_batch)
+
+            probs = torch.sigmoid(logits.squeeze()).cpu().numpy()
+            all_probs.extend(probs)
+
+    all_probs = np.array(all_probs)
+    all_preds = (all_probs > 0.5).astype(int)
+
+    # Metrics (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==evaluate_old_data:[209:219]
+==evaluate_test:[182:193]
+        print(f"  AUC:       {auc:.4f}")
+        print(f"  F1:        {f1:.4f}")
+        print(f"  Precision: {precision:.4f}")
+        print(f"  Recall:    {recall:.4f}")
+        print(f"  Accuracy:  {accuracy:.4f}")
+
+        tn, fp, fn, tp = confusion_matrix(y, preds).ravel()
+        print(f"\n  Confusion Matrix:")
+        print(f"    TP={tp:4d}  FP={fp:4d}")
+        print(f"    FN={fn:4d}  TN={tn:4d}") (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==autonomous_training_pipeline:[118:127]
+==evaluate_old_data:[162:171]
+    model = ClusterBiLSTM(
+        input_size=1,
+        hidden_size=config['hidden'],
+        num_layers=config['layers'],
+        n_clusters=config['n_clusters'],
+        cluster_embed_dim=config.get('cluster_embed_dim', 32),
+        dropout=config['dropout']
+    ).to(device)
+ (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==autonomous_training_pipeline:[196:206]
+==train_sector1:[186:196]
+                c_batch = c_batch.to(device)
+
+                if scaler_amp:
+                    with torch.cuda.amp.autocast(dtype=amp_dtype):
+                        logits = model(x_batch, c_batch)
+                else:
+                    logits = model(x_batch, c_batch)
+
+                probs = torch.sigmoid(logits.squeeze()).cpu().numpy()
+                all_probs.extend(probs) (duplicate-code)
+train_simple_bilstm.py:1:0: R0801: Similar lines in 2 files
+==autonomous_training_pipeline:[237:245]
+==train_sector1:[224:232]
+                'scaler_params': {
+                    'mean': scaler.mean_.tolist() if scaler else None,
+                    'scale': scaler.scale_.tolist() if scaler else None
+                },
+                'kmeans_centers': kmeans.cluster_centers_.tolist() if kmeans else None,
+                'epoch': epoch
+            }
+            torch.save(checkpoint, save_dir / 'best.pt') (duplicate-code)
