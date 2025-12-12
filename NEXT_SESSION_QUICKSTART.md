@@ -1,8 +1,8 @@
 # Next Session Quick Start Guide
 
-## Last Session: December 6, 2025 (Morning + Afternoon)
+## Last Session: December 11, 2025
 
-### Status: READY FOR FINAL SUBMISSION ✅
+### Status: PRESENTATION COMPLETE - FINAL SUBMISSION Dec 18 ✅
 
 ---
 
@@ -64,6 +64,16 @@ D:\CS_4280_Project\FINAL_SUBMISSION\
 
 ---
 
+## What's Complete (Dec 11)
+
+- ✅ **Presentation delivered** (Dec 9-11)
+- ✅ **Kepler fine-tuning experiment** - Tested cross-mission generalization
+  - Result: Fine-tuning made it WORSE (3.7% → 0% detection)
+  - Cause: TESS 2-min vs Kepler 30-min cadence creates incompatible transit shapes
+- ✅ **Paper updated** with fine-tuning findings (`Merged_Proposal_as_of_12.2.2025.tex`)
+
+---
+
 ## What's Left To Do
 
 1. **Teammates complete their sections** of the final report
@@ -74,18 +84,16 @@ D:\CS_4280_Project\FINAL_SUBMISSION\
    Remove-Item Manchester_Josh_RNN_Submission.zip
    Compress-Archive -Path Code, Manchester_Josh_RNN_Final_Report.pdf, Manchester_Josh_RNN_Presentation.pptx -DestinationPath Manchester_Josh_RNN_Submission.zip
    ```
-4. **Embed demo video** in PowerPoint (slide 15 - Demo slide)
-5. **Practice presentation** (5 min + 20 sec demo + 1 min Q&A)
-6. **Submit to Canvas** by Dec 18
+4. **Submit to Canvas** by Dec 18
 
 ---
 
 ## Key Deadlines
 
-| Event | Date |
-|-------|------|
-| **Presentations** | Dec 9-11, 2025 |
-| **Final submission** | Dec 18, 2025 (11:59 PM) |
+| Event | Date | Status |
+|-------|------|--------|
+| Presentations | Dec 9-11, 2025 | ✅ COMPLETE |
+| **Final submission** | **Dec 18, 2025** | ⏳ 7 days |
 
 ---
 
@@ -146,4 +154,4 @@ Last commits:
 
 ---
 
-**Last Updated**: December 6, 2025, 10:30 AM
+**Last Updated**: December 11, 2025

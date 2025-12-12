@@ -135,8 +135,22 @@ This is an exoplanet detection project using deep learning (BiLSTM with K-means 
 - **Model location**: `runs/sector1_final_0918/best.pt`
 - **See**: `PROGRESS_LOG_DEC_6_2025.md` for full session details
 
+**UPDATE December 11, 2025**: **PRESENTATION COMPLETE + KEPLER FINE-TUNING EXPERIMENT**
+- **Presentation delivered**: Dec 9-11 presentations complete ✅
+- **Kepler fine-tuning experiment**: Tested whether fine-tuning on mixed TESS+Kepler data improves cross-mission generalization
+  - Downloaded 398 Kepler light curves, built 1,473 windows from 491 sources
+  - Fine-tuned with 95% TESS + 5% Kepler data
+  - **Result: NEGATIVE** - Fine-tuning made performance WORSE (3.7% → 0% Kepler detection)
+  - Mechanism: Model couldn't reconcile TESS 2-min vs Kepler 30-min cadence differences
+- **Paper updated**: Added fine-tuning results to Cross-Mission Generalization section
+  - New table showing detection rate degradation
+  - Explanation of why fine-tuning failed (cadence-induced transit shape differences)
+  - Updated conclusion with cross-mission limitation
+- **Working paper**: `term_project_files/Merged_Proposal_as_of_12.2.2025.tex`
+- **See**: `FINAL_EXPERIMENT_KEPLER_FINETUNING.md` for full experiment details
+
 **Environment**: Windows 11, NVIDIA GeForce RTX 5070 Ti (16 GB VRAM), conda environment `exo-lstm-gpu`
-**Current Status**: FINAL MODEL COMPLETE - Ready for presentation (Dec 9-11) and final submission (Dec 18)
+**Current Status**: PRESENTATION COMPLETE - Final submission Dec 18
 
 ## Key Commands
 

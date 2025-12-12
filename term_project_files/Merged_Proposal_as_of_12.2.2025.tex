@@ -612,26 +612,29 @@ I compared three class imbalance strategies: loss weighting (pos\_weight=3.367),
     \end{figure}
 \subsubsection{Cross-Mission Generalization Analysis}
 
-To test whether the TESS-trained model generalizes to other missions, I evaluated it on 279 windows from 93 confirmed Kepler exoplanet hosts. Table~\ref{tab:crossmission_results} shows the results. The key challenge: TESS uses 2-minute cadence while Kepler used 30-minute cadence (15$\times$ difference), fundamentally changing transit signal morphology.
+To test whether the TESS-trained model generalizes to other missions, I evaluated it on Kepler exoplanet hosts. The key challenge: TESS uses 2-minute cadence while Kepler used 30-minute cadence (15$\times$ difference), fundamentally changing transit signal morphology.
+
+\textbf{Initial Evaluation.} On 279 windows from 93 confirmed Kepler planets, the TESS-trained model predicted all windows as positive (100\% recall, mean probability 0.978). However, without negative examples, precision and AUC could not be computed.
+
+\textbf{Fine-Tuning Experiment.} Following professor recommendation, I tested whether fine-tuning on mixed TESS+Kepler data would improve cross-mission generalization. I downloaded 398 additional Kepler light curves from MAST, built 1,473 training windows from 491 total Kepler sources, and fine-tuned the model with 95\% TESS + 5\% Kepler data (learning rate $10^{-5}$, 20 epochs).
 
 \begin{table}[h]
 \centering
-\caption{Cross-Mission Generalization: TESS vs Kepler}
-\label{tab:crossmission_results}
-\begin{tabular}{@{}lrr@{}}
+\caption{Fine-Tuning Results on Kepler Planet Detection}
+\label{tab:finetuning_results}
+\begin{tabular}{@{}lrrr@{}}
 \toprule
-\textbf{Metric} & \textbf{TESS Test} & \textbf{Kepler Test} \\
+\textbf{Model} & \textbf{Kepler Mix} & \textbf{Detection Rate} & \textbf{Mean Prob} \\
 \midrule
-Windows & 6,579 & 279 \\
-AUC & \textbf{0.9261} & N/A (no negatives) \\
-Recall & \textbf{100\%} & 100\% \\
-Precision & 39.93\% & Unknown \\
-Mean Probability & --- & 0.978 \\
+Original TESS & 0\% & 55/1473 (3.7\%) & 0.156 \\
+Fine-tuned & 5\% & 0/1473 (0\%) & 0.071 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-On Kepler data, the model predicted all 279 windows as positive (100\% recall, mean probability 0.978). However, since the Kepler test set contains \textit{only} confirmed planets, I cannot compute precision or AUC. The results are \textbf{inconclusive}: either (1) the model learned generalizable transit physics, or (2) it has a high false positive rate (TESS precision was 39.93\%). Creating a balanced Kepler test set with negative examples would require downloading non-planet Kepler targets and vetting them carefully---time constraints prevented this. Future work should explore domain adaptation or multi-mission training.
+\textbf{Key Finding: Fine-tuning made performance worse, not better.} The original TESS model detected 3.7\% of Kepler planets; after fine-tuning with 5\% Kepler data, detection dropped to 0\%. Adding Kepler data caused the model to become more conservative overall, reducing mean probability across all test samples. The likely mechanism: the model learned that Kepler's 30-minute cadence produces smoother, less sharply-defined transit shapes than TESS's 2-minute cadence. When exposed to both during fine-tuning, the model could not reconcile these conflicting representations and instead learned to suppress predictions on data that did not match TESS characteristics precisely.
+
+\textbf{Conclusion.} Simple fine-tuning does not solve the cross-mission generalization problem. The BiLSTM+Clustering architecture learns mission-specific features (cadence patterns, noise characteristics) rather than generalizable transit physics. This is a fundamental limitation requiring architectural changes such as cadence-agnostic preprocessing, domain-adversarial training, or multi-task learning with mission identification.
 
 \subsection{Transformer Approach}
 \subsubsection*{Model Configuration}
@@ -715,7 +718,7 @@ To improve model performance:
 
 This work investigated three deep learning architectures---CNN, RNN (BiLSTM), and Transformer---for automated exoplanet transit detection in TESS light curve data. Each team member developed and optimized a distinct architecture, enabling direct comparison of their strengths and limitations on the same TESS Sector 1 ground truth dataset.
 
-\textbf{RNN Findings.} The BiLSTM architecture with K-means clustering achieved \textbf{AUC 0.9261} on the 6,579-window test set with \textbf{100\% recall}---detecting every planet with zero false negatives. The clustering approach proved effective for handling stellar diversity: by grouping windows with similar statistical properties (variability, noise characteristics), the model learned specialized representations for different stellar types. Hyperparameter optimization via Optuna identified optimal settings of 4 BiLSTM layers, 192 hidden units, 0.334 dropout, and batch size 128. The 50$\times$ dataset expansion from 655 to 33,051 windows enabled training deeper networks without overfitting, resulting in a \textbf{33.3\% improvement} over the baseline model.
+\textbf{RNN Findings.} The BiLSTM architecture with K-means clustering achieved \textbf{AUC 0.9261} on the 6,579-window test set with \textbf{100\% recall}---detecting every planet with zero false negatives. The clustering approach proved effective for handling stellar diversity: by grouping windows with similar statistical properties (variability, noise characteristics), the model learned specialized representations for different stellar types. Hyperparameter optimization via Optuna identified optimal settings of 4 BiLSTM layers, 192 hidden units, 0.334 dropout, and batch size 128. The 50$\times$ dataset expansion from 655 to 33,051 windows enabled training deeper networks without overfitting, resulting in a \textbf{33.3\% improvement} over the baseline model. However, cross-mission generalization remains a significant limitation: fine-tuning on mixed TESS+Kepler data actually degraded Kepler detection from 3.7\% to 0\%, demonstrating that the model learns mission-specific features rather than universal transit physics.
 
 \textbf{CNN Findings.} [TO BE COMPLETED BY TRISTAN]
 
