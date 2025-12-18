@@ -149,8 +149,19 @@ This is an exoplanet detection project using deep learning (BiLSTM with K-means 
 - **Working paper**: `term_project_files/Merged_Proposal_as_of_12.2.2025.tex`
 - **See**: `FINAL_EXPERIMENT_KEPLER_FINETUNING.md` for full experiment details
 
+**UPDATE December 18, 2025**: **PROJECT COMPLETE - FINAL SUBMISSION** ✅
+- **Final submission uploaded to Canvas**: December 18, 2025
+- **Submission contents**:
+  - `CS4280_Final_Report.pdf` - Team final report (AAAI format)
+  - `CS4280_Final_Presentation.pptx` - Team presentation slides with embedded demo video
+  - `Code/` folder with all scripts, pre-trained model, and comprehensive README
+- **Final deliverables location**: `FINAL_SUBMISSION/CS4280_Final_Submission.zip` (50.1 MB)
+- **README completely rewritten**: Step-by-step instructions for environment setup, data acquisition (3 options), inference, and training
+- **All professor requirements met**: Report, slides, code, demo video, run instructions
+- **Project duration**: October 2025 - December 2025 (~3 months)
+
 **Environment**: Windows 11, NVIDIA GeForce RTX 5070 Ti (16 GB VRAM), conda environment `exo-lstm-gpu`
-**Current Status**: PRESENTATION COMPLETE - Final submission Dec 18
+**Current Status**: ✅ PROJECT COMPLETE - Submitted December 18, 2025
 
 ## Key Commands
 
