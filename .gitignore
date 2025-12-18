@@ -1,1 +1,10 @@
 FINAL_SUBMISSION/*.zip
+term_project_files/*.zip
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls

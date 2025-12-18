@@ -1,0 +1,13 @@
+{
+  "tess_model_path": "D:\\CS_4280_Project\\Code\\runs\\sector1_final_0918\\best.pt",
+  "kepler_fraction": 0.05,
+  "lr": 1e-05,
+  "epochs": 15,
+  "batch_size": 128,
+  "best_epoch": 3,
+  "best_auc": 0.8810045376310437,
+  "train_samples": 24075,
+  "val_samples": 2676,
+  "n_tess": 26472,
+  "n_kepler": 279
+}

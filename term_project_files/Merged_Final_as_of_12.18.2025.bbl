@@ -1,0 +1,225 @@
+\begin{thebibliography}{28}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Ansdell et~al.(2018)Ansdell, Ioannou, Osborn, Sasdelli, Smith,
+  Caldwell, Jenkins, Räissi, and Angerhausen}]{ansdell2018scientific}
+Ansdell, M.; Ioannou, Y.; Osborn, H.~P.; Sasdelli, M.; Smith, J.~C.; Caldwell,
+  D.; Jenkins, J.~M.; Räissi, C.; and Angerhausen, D. 2018.
+\newblock Scientific Domain Knowledge Improves Exoplanet Transit Classification
+  with Deep Learning.
+\newblock \emph{The Astrophysical Journal Letters}, 869(1): L7.
+
+\bibitem[{Becker et~al.(2021)Becker, Pichara, Catelan, Protopapas, Aguirre, and
+  Nikzat}]{Becker2021variablestars}
+Becker, I.; Pichara, K.; Catelan, M.; Protopapas, P.; Aguirre, C.; and Nikzat,
+  F. 2021.
+\newblock Classification of Variable Stars Light Curves Using Long Short Term
+  Memory Network.
+\newblock \emph{Frontiers in Astronomy and Space Sciences}, 8: 718139.
+
+\bibitem[{Chaushev et~al.(2019)Chaushev, Raynard, Goad, Eigmüller, Armstrong,
+  Briegal, Burleigh, Casewell, Gill, Jenkins, Nielsen, Watson, West, Wheatley,
+  Udry, and Vines}]{Chaushev2019ngts}
+Chaushev, A.; Raynard, L.; Goad, M.~R.; Eigmüller, P.; Armstrong, D.~J.;
+  Briegal, J.~T.; Burleigh, M.~R.; Casewell, S.~L.; Gill, S.; Jenkins, J.~S.;
+  Nielsen, L.~D.; Watson, C.~A.; West, R.~G.; Wheatley, P.~J.; Udry, S.; and
+  Vines, J.~I. 2019.
+\newblock Classifying exoplanet candidates with convolutional neural networks:
+  application to the Next Generation Transit Survey.
+\newblock \emph{Monthly Notices of the Royal Astronomical Society}, 488(4):
+  5232--5250.
+
+\bibitem[{Chen et~al.(2025)Chen, Ren, Lai, Tan, Liu, and
+  Chan}]{chen2025graphbased}
+Chen, T.; Ren, X.; Lai, J.; Tan, H.; Liu, F.; and Chan, W. K.~V. 2025.
+\newblock Toward Transformer-compatible multivariate time series learning via
+  visibility graph-based structural encoding.
+\newblock \emph{Knowledge-Based Systems}, 329: 114389.
+
+\bibitem[{Dattilo et~al.(2019)Dattilo, Vanderburg, Shallue, Mayo, Berlind,
+  Bieryla, Calkins, Esquerdo, Everett, Howell, Latham, Scott, and
+  Yu}]{Dattilo2019identifyexoplanetsII}
+Dattilo, A.; Vanderburg, A.; Shallue, C.~J.; Mayo, A.~W.; Berlind, P.; Bieryla,
+  A.; Calkins, M.~L.; Esquerdo, G.~A.; Everett, M.~E.; Howell, S.~B.; Latham,
+  D.~W.; Scott, N.~J.; and Yu, L. 2019.
+\newblock Identifying Exoplanets with Deep Learning. II. Two New Super-Earths
+  Uncovered by a Neural Network in K2 Data.
+\newblock \emph{The Astronomical Journal}, 157(5): 169.
+
+\bibitem[{Ding et~al.(2024)Ding, Ji, Xiao, Zheng, Chen, Liang, Liu, Peng, Fan,
+  and Qi}]{Ding2024photometric}
+Ding, Y.; Ji, K.; Xiao, M.; Zheng, X.; Chen, Y.; Liang, J.; Liu, C.; Peng, B.;
+  Fan, Z.; and Qi, Y. 2024.
+\newblock Photometric redshift estimation for CSST survey with LSTM neural
+  networks.
+\newblock \emph{Monthly Notices of the Royal Astronomical Society}, 535(2):
+  1844--1858.
+
+\bibitem[{Du et~al.(2016)Du, Dai, Trivedi, Upadhyay, Gomez-Rodriguez, and
+  Song}]{Du2016markedtemporalpoint}
+Du, N.; Dai, H.; Trivedi, R.; Upadhyay, U.; Gomez-Rodriguez, M.; and Song, L.
+  2016.
+\newblock Recurrent Marked Temporal Point Processes: Embedding Event History to
+  Vector.
+\newblock In \emph{Proceedings of the 22nd ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '16, 1555–1564. New York, NY,
+  USA: Association for Computing Machinery.
+\newblock ISBN 9781450342322.
+
+\bibitem[{Feinstein et~al.(2020)Feinstein, Montet, Ansdell, Nord, Bean,
+  Günther, Gully-Santiago, and Schlieder}]{Feinstein2020stella}
+Feinstein, A.~D.; Montet, B.~T.; Ansdell, M.; Nord, B.; Bean, J.~L.; Günther,
+  M.~N.; Gully-Santiago, M.~A.; and Schlieder, J.~E. 2020.
+\newblock Flare Statistics for Young Stars from a Convolutional Neural Network
+  Analysis of TESS Data.
+\newblock \emph{The Astronomical Journal}, 160(5): 219.
+
+\bibitem[{Kügler, Gianniotis, and
+  Polsterer(2016)}]{kugler2016explorativeapproachkepler}
+Kügler, S.~D.; Gianniotis, N.; and Polsterer, K.~L. 2016.
+\newblock An explorative approach for inspecting Kepler data.
+\newblock \emph{Monthly Notices of the Royal Astronomical Society}, 455(4):
+  4399--4405.
+
+\bibitem[{Lin et~al.(2017)Lin, Goyal, Girshick, He, and Dollar}]{lin2017focal}
+Lin, T.-Y.; Goyal, P.; Girshick, R.; He, K.; and Dollar, P. 2017.
+\newblock Focal Loss for Dense Object Detection.
+\newblock In \emph{2017 IEEE International Conference on Computer Vision
+  (ICCV)}, 2999--3007. IEEE.
+
+\bibitem[{Liu et~al.(2022)Liu, Yu, Liao, Li, Lin, Liu, and
+  Dustdar}]{liu2022pyraformer}
+Liu, S.; Yu, H.; Liao, C.; Li, J.; Lin, W.; Liu, A.~X.; and Dustdar, S. 2022.
+\newblock Pyraformer: Low-Complexity Pyramidal Attention for Long-Range Time
+  Series Modeling and Forecasting.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Luz et~al.(2024)Luz, Reis, Carvalho, Freitas, and
+  Moitinho}]{luz2024assessment}
+Luz, V. J.~F.; Reis, M.; Carvalho, S.; Freitas, N.; and Moitinho, A. 2024.
+\newblock Assessment of Ensemble-Based Machine Learning Algorithms for
+  Detecting Exoplanets.
+\newblock \emph{Applied Sciences}, 14(5): 1732.
+
+\bibitem[{Mahmood et~al.(2025)Mahmood, Lucas, Alvarez, Fidler, and
+  Law}]{2025optimizedata}
+Mahmood, R.; Lucas, J.; Alvarez, J.~M.; Fidler, S.; and Law, M.~T. 2025.
+\newblock Optimizing Data Collection for Machine Learning.
+\newblock \emph{Journal of Machine Learning Research}, 26(38): 1--52.
+
+\bibitem[{Malik, Moster, and Obermeier(2022)}]{Malik2022exoplanetdetection}
+Malik, A.; Moster, B.~P.; and Obermeier, C. 2022.
+\newblock Exoplanet Detection using Machine Learning.
+\newblock \emph{Monthly Notices of the Royal Astronomical Society}, 510(3):
+  5534--5547.
+
+\bibitem[{Morvan et~al.(2022)Morvan, Nikolaou, Yip, and
+  Waldmann}]{morvan2022dontpayattentionnoise}
+Morvan, M.; Nikolaou, N.; Yip, K.~H.; and Waldmann, I. 2022.
+\newblock Don't Pay Attention to the Noise: Learning Self-supervised
+  Representations of Light Curves with a Denoising Time Series Transformer.
+\newblock arXiv:2207.02777.
+
+\bibitem[{Osborn et~al.(2019)Osborn, Ansdell, Ioannou, Sasdelli, Angerhausen,
+  Caldwell, Jenkins, Räissi, and
+  Smith}]{Osborn2019rapidclassificationtesscandidates}
+Osborn, H.~P.; Ansdell, M.; Ioannou, Y.; Sasdelli, M.; Angerhausen, D.;
+  Caldwell, D.; Jenkins, J.~M.; Räissi, C.; and Smith, J.~C. 2019.
+\newblock Rapid classification of TESS planet candidates with convolutional
+  neural networks.
+\newblock \emph{Astronomy \& Astrophysics}, 633: A53.
+
+\bibitem[{Pan, Ting, and Yu(2024)}]{pan2024astroconformer}
+Pan, J.-S.; Ting, Y.-S.; and Yu, J. 2024.
+\newblock Astroconformer: The prospectChaushev2019planettransitsurveys of
+  analysing stellar light curves with transformer-based deep learning models.
+\newblock \emph{Monthly Notices of the Royal Astronomical Society}, 528(4):
+  5890--5903.
+
+\bibitem[{Salinas et~al.(2025)Salinas, Brahm, Olmschenk, Barry, Pichara,
+  Ishitani~Silva, and Araujo}]{salinas2025tessfullframe}
+Salinas, H.; Brahm, R.; Olmschenk, G.; Barry, R.~K.; Pichara, K.;
+  Ishitani~Silva, S.; and Araujo, V. 2025.
+\newblock Exoplanet transit candidate identification in TESS full-frame images
+  via a transformer-based algorithm.
+\newblock \emph{Monthly Notices of the Royal Astronomical Society}, 538(3):
+  2031--2049.
+
+\bibitem[{Salinas et~al.(2023)Salinas, Pichara, Brahm, Pérez-Galarce, and
+  Mery}]{salinas2023distinguishingtransitfalsepositives}
+Salinas, H.; Pichara, K.; Brahm, R.; Pérez-Galarce, F.; and Mery, D. 2023.
+\newblock Distinguishing a planetary transit from false positives: a
+  Transformer-based classification for planetary transit signals.
+\newblock \emph{Monthly Notices of the Royal Astronomical Society}, 522(3):
+  3201--3216.
+
+\bibitem[{Schanche et~al.(2019)Schanche, Collier~Cameron, Hébrard, Nielsen,
+  Triaud, Almenara, Alsubai, Anderson, Armstrong, Barros, Bouchy, Boumis,
+  Brown, Faedi, Hay, Hebb, Kiefer, Mancini, Maxted, Palle, Pollacco, Queloz,
+  Smalley, Udry, West, and Wheatley}]{Schanche2019mlexoplanet}
+Schanche, N.; Collier~Cameron, A.; Hébrard, G.; Nielsen, L.; Triaud, A. H.
+  M.~J.; Almenara, J.~M.; Alsubai, K.~A.; Anderson, D.~R.; Armstrong, D.~J.;
+  Barros, S. C.~C.; Bouchy, F.; Boumis, P.; Brown, D. J.~A.; Faedi, F.; Hay,
+  K.; Hebb, L.; Kiefer, F.; Mancini, L.; Maxted, P. F.~L.; Palle, E.; Pollacco,
+  D.~L.; Queloz, D.; Smalley, B.; Udry, S.; West, R.; and Wheatley, P.~J. 2019.
+\newblock Machine-learning approaches to exoplanet transit detection and
+  candidate validation in wide-field ground-based surveys.
+\newblock \emph{Monthly Notices of the Royal Astronomical Society}, 483(4):
+  5534--5547.
+
+\bibitem[{Shallue and Vanderburg(2018)}]{Shallue2018identifyexoplanetsI}
+Shallue, C.~J.; and Vanderburg, A. 2018.
+\newblock Identifying Exoplanets with Deep Learning: A Five-planet Resonant
+  Chain around Kepler-80 and an Eighth Planet around Kepler-90.
+\newblock \emph{The Astronomical Journal}, 155(2): 94.
+
+\bibitem[{Speiser et~al.(2020)Speiser, Müller, Matti, Obholzer, Legant,
+  Kreshuk, Macke, Ries, and Hufnagel}]{Speiser2020clustering}
+Speiser, A.; Müller, L.-R.; Matti, U.; Obholzer, N.; Legant, W.~R.; Kreshuk,
+  A.; Macke, J.~H.; Ries, J.; and Hufnagel, L. 2020.
+\newblock Machine learning for cluster analysis of localization microscopy
+  data.
+\newblock \emph{Nature Communications}, 11(1): 1493.
+
+\bibitem[{Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones,
+  Gomez, Kaiser, and Polosukhin}]{vaswani2017attentionneed}
+Vaswani, A.; Shazeer, N.; Parmar, N.; Uszkoreit, J.; Jones, L.; Gomez, A.~N.;
+  Kaiser, L.; and Polosukhin, I. 2017.
+\newblock Attention Is All You Need.
+\newblock arXiv:1706.03762.
+
+\bibitem[{Vida et~al.(2021)Vida, Bódi, Szklenár, and
+  Seli}]{Vida2021findingflaresrecurrent}
+Vida, K.; Bódi, A.; Szklenár, T.; and Seli, B. 2021.
+\newblock Finding flares in Kepler and TESS data with recurrent deep neural
+  networks.
+\newblock \emph{Astronomy \& Astrophysics}, 652: A107.
+
+\bibitem[{Vu et~al.(2024)Vu, Vo, Ngo, Pham, Huynh, Nguyen, Nguyen, Duong,
+  Nguyen, and Ly}]{Vu2024LSTM}
+Vu, M.~T.; Vo, N.~D.; Ngo, T.~D.; Pham, T.~D.; Huynh, T. T.~M.; Nguyen, N.~T.;
+  Nguyen, Q.~H.; Duong, T.~H.; Nguyen, P.~B.; and Ly, H.-B. 2024.
+\newblock Harnessing LSTM and XGBoost algorithms for storm prediction.
+\newblock \emph{Scientific Reports}, 14(1): 11516.
+
+\bibitem[{Wang et~al.(2025)Wang, Ma, Ma, Wang, Wang, Dong, Huang, Wang, Xue,
+  Wang, Wu, and Wei}]{bitnet2025}
+Wang, H.; Ma, S.; Ma, L.; Wang, L.; Wang, W.; Dong, L.; Huang, S.; Wang, H.;
+  Xue, J.; Wang, R.; Wu, Y.; and Wei, F. 2025.
+\newblock BitNet: 1-bit Pre-training for Large Language Models.
+\newblock \emph{Journal of Machine Learning Research}, 26(125): 1--29.
+
+\bibitem[{Wang et~al.(2024)Wang, Ge, Willis, Wang, and Zhao}]{Wang2024gpfc}
+Wang, K.; Ge, J.; Willis, K.; Wang, K.; and Zhao, Y. 2024.
+\newblock The GPU Phase Folding and Deep Learning Method for Detecting
+  Exoplanet Transits.
+\newblock \emph{Monthly Notices of the Royal Astronomical Society}.
+\newblock ArXiv:2312.02063v2.
+
+\bibitem[{Wen et~al.(2023)Wen, Zhou, Zhang, Chen, Ma, Yan, and
+  Sun}]{wen2023transformerstimeseriessurvey}
+Wen, Q.; Zhou, T.; Zhang, C.; Chen, W.; Ma, Z.; Yan, J.; and Sun, L. 2023.
+\newblock Transformers in Time Series: A Survey.
+\newblock arXiv:2202.07125.
+
+\end{thebibliography}
